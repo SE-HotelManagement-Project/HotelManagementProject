@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.project.hotelmanagementproject">
+
+    <application
+        android:allowBackup="true"
+        android:debuggable="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="HardcodedDebugMode">
+        <activity android:name=".view.MgrModifyRoomActivity"></activity>
+        <activity android:name=".view.MgrRoomDetailsActivity" />
+        <activity android:name=".view.MgrSearchRoomActivity" />
+        <activity android:name=".view.MgrAvlblRoomsActivity" />
+        <activity
+            android:name=".view.LoginActivity"
+            android:theme="@style/LoginTheme" />
+        <activity android:name=".view.ChangePasswordActivity" />
+        <activity android:name=".view.HomeActivity" />
+        <activity android:name=".view.MainActivity" />
+        <activity
+            android:name=".view.RegisterActivity"
+            android:theme="@style/LoginTheme" />
+        <activity
+            android:name=".view.SplashScreenActivity"
+            android:theme="@style/SplashScreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

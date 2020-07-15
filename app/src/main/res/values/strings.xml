@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">HotelManagementProject</string>
+    <string name="app_name_v1">Hotel Mangement App</string>
+    <string name="user_name">enter user name</string>
+    <string name="password">enter password</string>
+    <string name="register">New User? Create An Account</string>
+    <string name="btn_login">Login</string>
+</resources>

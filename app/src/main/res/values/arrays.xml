@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="room_type">
+        <item>Standard</item>
+        <item>Deluxe</item>
+        <item>Suite</item>
+    </string-array>
+    <string-array name="hotel_name">
+        <item>Maverick</item>
+        <item>Ranger</item>
+        <item>Williams</item>
+        <item>Shard</item>
+        <item>Liberty</item>
+    </string-array>
+    <string-array name="availability_status">
+        <item>Available</item>
+        <item>Unavailable</item>
+    </string-array>
+</resources>
