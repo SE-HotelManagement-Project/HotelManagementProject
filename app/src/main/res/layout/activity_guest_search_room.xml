@@ -1,6 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/llGuestAvlblRoomIp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivAppIcon"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:padding="5dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_room_available" />
+
+
+            <TextView
+                android:id="@+id/tvguestRoomSearch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Search Available Rooms"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+        <LinearLayout style="@style/horz_linear_layout_style">
+
+            <TextView
+                android:id="@+id/tvGuestHotelName"
+                style="@style/text_style"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingRight="15dp"
+                android:text="Hotel name:" />
+
+            <Spinner
+                android:id="@+id/spnrGuestHotelName"
+                style="@style/spinner_style"
+                android:entries="@array/hotel_name" />
+
+        </LinearLayout>
+        <LinearLayout style="@style/horz_linear_layout_style">
+
+            <TextView
+                android:id="@+id/tvGuestStarteData"
+                style="@style/text_style"
+                android:text="Check-in Date:" />
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etGuestDateFrom"
+                style="@style/edit_text_style"
+                android:hint="07/14/2020"
+                android:text="07/14/2020" />
+
+        </LinearLayout>
+        <LinearLayout style="@style/horz_linear_layout_style">
+
+            <TextView
+                android:id="@+id/tvGuestEndDate"
+                style="@style/text_style"
+                android:text="Check-Out Date:" />
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etGuestDateTo"
+                style="@style/edit_text_style"
+                android:hint="07/15/2020"
+                android:text="07/15/2020" />
+
+        </LinearLayout>
+        <LinearLayout style="@style/horz_linear_layout_style">
+
+            <TextView
+                android:id="@+id/tvGuestAdultcount"
+                style="@style/text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Room Type:" />
+
+            <Spinner
+                android:id="@+id/spnrGuestRoomType"
+                style="@style/spinner_style"
+                android:entries="@array/room_type"
+                android:prompt="Standard" />
+
+        </LinearLayout>
+        <LinearLayout style="@style/horz_linear_layout_style">
+
+            <TextView
+                android:id="@+id/tvGuestAdultcount"
+                style="@style/text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Number of Room" />
+
+            <EditText
+                android:id="@+id/edTotalAdult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="number"
+                android:text="2" />
+
+        </LinearLayout>
+        <LinearLayout style="@style/horz_linear_layout_style">
+
+            <TextView
+                android:id="@+id/tvGuestAdultcount"
+                style="@style/text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Number of Adult and Children" />
+
+            <EditText
+                android:id="@+id/edTotalAdult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="number"
+                android:text="2" />
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/btnGuestButtonSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@color/colorPrimary"
+            android:text="Search"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
+    </LinearLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
