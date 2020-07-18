@@ -104,8 +104,7 @@
             <Spinner
                 android:id="@+id/spnrGuestRoomType"
                 style="@style/spinner_style"
-                android:entries="@array/room_type"
-                android:prompt="Standard" />
+                android:entries="@array/room_type" />
 
         </LinearLayout>
         <LinearLayout style="@style/horz_linear_layout_style">
