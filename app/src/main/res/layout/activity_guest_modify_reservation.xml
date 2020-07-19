@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
     android:orientation="vertical"
-    tools:context=".view.MgrModifyRoomActivity">
+    tools:context=".view.GuestReservationDetailsActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -19,18 +19,20 @@
         android:visibility="visible">
 
         <ImageView
-            android:id="@+id/ivAppIcon"
+            android:id="@+id/ivGuestRD"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:paddingRight="15dp"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/ic_edit_room" />
 
         <TextView
+            android:id="@+id/tvGuestRD"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Modify Room Details"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Modify Reservation Details"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="17sp" />
 
@@ -74,17 +76,17 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:paddingRight="15dp"
-                    app:srcCompat="@drawable/ic_baseline_lock_24" />
+                    app:srcCompat="@drawable/ic_baseline_edit" />
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Start Date:" />
+                    android:text="Check-In date:" />
 
 
-                <TextView
-                    android:id="@+id/etDateFrom"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etGuestMrDateFrom"
                     style="@style/edit_text_style"
-                    android:text="07/14/2020" />
+                    android:hint="07/14/2020" />
 
             </LinearLayout>
 
@@ -95,19 +97,20 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:paddingRight="15dp"
-                    app:srcCompat="@drawable/ic_baseline_lock_24" />
+                    app:srcCompat="@drawable/ic_baseline_edit" />
 
                 <TextView
                     style="@style/text_style"
-                    android:text="End Date:" />
+                    android:text="Check-Out date:" />
 
 
-                <TextView
-                    android:id="@+id/etDateTo"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etGuestMrDateTo"
                     style="@style/edit_text_style"
-                    android:text="07/15/2020" />
+                    android:hint="07/15/2020" />
 
             </LinearLayout>
+
 
             <LinearLayout style="@style/horz_linear_layout_style">
 
@@ -116,20 +119,76 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:paddingRight="15dp"
-                    app:srcCompat="@drawable/ic_baseline_lock_24" />
+                    app:srcCompat="@drawable/ic_baseline_edit" />
 
                 <TextView
                     style="@style/text_style"
+                    android:layout_weight="1"
                     android:text="Start Time:" />
 
 
-                <TextView
-                    android:id="@+id/etStartTime"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etGuestMrStartTime"
                     style="@style/edit_text_style"
-                    android:text="12:03" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:hint="12:00" />
+
+                <Spinner
+                    android:id="@+id/spnrGuestMrTime"
+                    style="@style/spinner_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:entries="@array/time" />
 
             </LinearLayout>
 
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_edit" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Number of Rooms:" />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etGuestMrNumRooms"
+                    style="@style/edit_text_style"
+                    android:layout_gravity="center"
+                    android:hint="2" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_edit" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Number of Nights:" />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etGuestMrNumNights"
+                    style="@style/edit_text_style"
+                    android:layout_gravity="center"
+                    android:hint="1" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -148,6 +207,7 @@
                     <TextView
                         style="@style/text_style"
                         android:layout_gravity="center"
+                        android:paddingLeft="10dp"
                         android:text="Room Type:" />
 
                 </LinearLayout>
@@ -155,12 +215,12 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginRight="35dp"
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/rbMgrRdStandard"
+                        android:id="@+id/rbGuestMrStandard"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -168,14 +228,14 @@
                         android:text="Standard " />
 
                     <RadioButton
-                        android:id="@+id/rbMgrRdDeluxe"
+                        android:id="@+id/rbGuestMrDeluxe"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Deluxe " />
 
                     <RadioButton
-                        android:id="@+id/rbMgrRdSuite"
+                        android:id="@+id/rbGuestMrSuite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -195,150 +255,41 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Room Number:" />
+                    android:text="Total price:" />
 
 
                 <TextView
-                    android:id="@+id/etMgrRdRoomNum"
+                    android:id="@+id/etGuestMrTotalPrice"
                     style="@style/edit_text_style"
-                    android:layout_gravity="center"
-                    android:text="21" />
+                    android:text="$150" />
 
-            </LinearLayout>
-
-
-            <LinearLayout style="@style/horz_linear_layout_style">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:paddingRight="15dp"
-                    app:srcCompat="@drawable/ic_baseline_edit" />
-
-                <TextView
-                    style="@style/text_style"
-                    android:text="Room Price per Night (Weekday):" />
-
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etMgrRdRoomPrice"
-                    style="@style/edit_text_style"
-                    android:hint="$100" />
-
-            </LinearLayout>
-
-            <LinearLayout style="@style/horz_linear_layout_style">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:paddingRight="15dp"
-                    app:srcCompat="@drawable/ic_baseline_edit" />
-
-                <TextView
-                    style="@style/text_style"
-                    android:text="Room Price per Night (Weekend):" />
-
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etMgrRdRoomPriceWeekend"
-                    style="@style/edit_text_style"
-                    android:hint="$150" />
-
-            </LinearLayout>
-
-            <LinearLayout style="@style/horz_linear_layout_style">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:paddingRight="15dp"
-                    app:srcCompat="@drawable/ic_baseline_lock_24" />
-
-                <TextView
-                    style="@style/text_style"
-                    android:text="Floor Number:" />
-
-
-                <TextView
-                    android:id="@+id/etFloorNumRd"
-                    style="@style/text_style"
-                    android:layout_gravity="center"
-                    android:paddingLeft="10dp"
-                    android:text="1"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-            <LinearLayout style="@style/horz_linear_layout_style">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:paddingRight="15dp"
-                    app:srcCompat="@drawable/ic_baseline_lock_24" />
-
-                <TextView
-                    style="@style/text_style"
-                    android:text="Occupied Status:" />
-
-
-                <TextView
-                    android:id="@+id/etOccupiedStatus"
-                    style="@style/edit_text_style"
-                    android:layout_gravity="center"
-                    android:text="No" />
-
-            </LinearLayout>
-
-            <LinearLayout style="@style/horz_linear_layout_style">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:paddingRight="15dp"
-                    app:srcCompat="@drawable/ic_baseline_edit" />
-
-                <TextView
-                    style="@style/text_style"
-                    android:text="Availability Status:" />
-
-
-                <Spinner
-                    android:id="@+id/spnrMgrRdAvlblStatus"
-                    style="@style/spinner_style"
-                    android:entries="@array/availability_status" />
             </LinearLayout>
 
         </LinearLayout>
 
     </ScrollView>
 
-    <Button
-        android:id="@+id/btnEditRd"
-        style="@style/btn_style"
-        android:layout_weight="1"
-        android:text="Modify Room Details"
-        android:visibility="gone" />
-
     <LinearLayout
-        android:id="@+id/llEditRoom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="visible">
+        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnMgrRdSave"
+            android:id="@+id/btnGuestModifyReservation"
             style="@style/btn_style"
+            android:layout_margin="15dp"
             android:layout_weight="1"
-            android:text="Save" />
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="15dp"
+            android:text="Save"
+            android:textSize="15sp" />
 
     </LinearLayout>
 
 </LinearLayout>
+
+
+
+

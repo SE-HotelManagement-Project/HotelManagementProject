@@ -7,31 +7,7 @@
     android:orientation="vertical"
     tools:context=".view.MgrSearchRoomActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="vertical"
-        android:visibility="gone">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="5dp"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/ic_search_room" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:gravity="center"
-            android:text="Search Available Rooms"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="17sp" />
-
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llSearchRoomIp"
@@ -41,7 +17,33 @@
         android:layout_marginTop="15dp"
         android:layout_marginRight="25dp"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_search_room" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="Search Room"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="17sp" />
+
+        </LinearLayout>
 
         <LinearLayout style="@style/horz_linear_layout_style">
 
@@ -66,7 +68,7 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etRoomNumRd"
+                android:id="@+id/etMgrSrRoomNum"
                 style="@style/edit_text_style"
                 android:hint="Enter Room Number" />
 
@@ -74,7 +76,7 @@
 
 
         <Button
-            android:id="@+id/btnRegister"
+            android:id="@+id/btnMgrSrSearch"
             style="@style/btn_style"
             android:text="Search" />
 
