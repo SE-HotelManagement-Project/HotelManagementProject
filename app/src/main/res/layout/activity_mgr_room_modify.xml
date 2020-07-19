@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:orientation="vertical"
+    tools:context=".view.MgrModifyRoomActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/ivAppIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="15dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_edit_room" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Modify Room Details"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tvEditRdTitle"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="15dp"-->
+    <!--        android:gravity="center"-->
+    <!--        android:text="Modify Room Details"-->
+    <!--        android:textColor="@color/colorPrimaryDark"-->
+    <!--        android:textSize="18sp"-->
+    <!--        android:visibility="visible" />-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_lock_24" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Hotel Name:" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Maverick" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_lock_24" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="start date:" />
+
+
+                <TextView
+                    android:id="@+id/etDateFrom"
+                    style="@style/edit_text_style"
+                    android:text="07/14/2020" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_lock_24" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="end date:" />
+
+
+                <TextView
+                    android:id="@+id/etDateTo"
+                    style="@style/edit_text_style"
+                    android:text="07/15/2020" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_lock_24" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="start time:" />
+
+
+                <TextView
+                    android:id="@+id/etStartTime"
+                    style="@style/edit_text_style"
+                    android:text="12:03" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout style="@style/horz_linear_layout_style">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingRight="10dp"
+                        app:srcCompat="@drawable/ic_baseline_edit" />
+
+                    <TextView
+                        style="@style/text_style"
+                        android:layout_gravity="center"
+                        android:text="room type:" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/cbStandard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:text="Standard " />
+
+                    <RadioButton
+                        android:id="@+id/cbDeluxe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Deluxe " />
+
+                    <RadioButton
+                        android:id="@+id/cbSuite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Suite" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_lock_24" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Room Number:" />
+
+
+                <TextView
+                    android:id="@+id/etRoomNumRd"
+                    style="@style/edit_text_style"
+                    android:layout_gravity="center"
+                    android:text="21" />
+
+            </LinearLayout>
+
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_edit" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Room price per night (Weekday):" />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etRoomPriceRd"
+                    style="@style/edit_text_style"
+                    android:hint="$100" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_edit" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Room price per night (Weekend):" />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etRoomPriceWeekendRd"
+                    style="@style/edit_text_style"
+                    android:hint="$150" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_lock_24" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Floor Number:" />
+
+
+                <TextView
+                    android:id="@+id/etFloorNumRd"
+                    style="@style/text_style"
+                    android:layout_gravity="center"
+                    android:paddingLeft="10dp"
+                    android:text="1"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_lock_24" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Occupied Status:" />
+
+
+                <TextView
+                    android:id="@+id/etOccupiedStatus"
+                    style="@style/edit_text_style"
+                    android:layout_gravity="center"
+                    android:text="No" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_edit" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Availability Status:" />
+
+
+                <Spinner
+                    android:id="@+id/spnrAvlblStatus"
+                    style="@style/spinner_style"
+                    android:entries="@array/availability_status" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnEditRd"
+        style="@style/btn_style"
+        android:layout_weight="1"
+        android:text="Modify Room Details"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/llEditRoom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <Button
+            android:id="@+id/btnCancel"
+            style="@style/btn_style"
+            android:layout_weight="1"
+            android:text="Cancel" />
+
+        <Button
+            android:id="@+id/btnSave"
+            style="@style/btn_style"
+            android:layout_weight="1"
+            android:text="Save" />
+
+    </LinearLayout>
+
+</LinearLayout>

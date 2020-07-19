@@ -4,53 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"
+    android:layout_marginLeft="25dp"
+    android:layout_marginRight="25dp"
     android:orientation="vertical"
     tools:context=".view.MgrRoomDetailsActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_gravity="center"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_margin="8dp"
+        android:orientation="horizontal"
+        android:visibility="visible">
 
         <ImageView
             android:id="@+id/ivAppIcon"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="5dp"
+            android:layout_gravity="center"
+            android:paddingRight="15dp"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/ic_search_room" />
+            app:srcCompat="@drawable/ic_room_details" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:gravity="center"
-            android:text="Search Available Rooms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Room Details"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="17sp" />
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvEditRdTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:gravity="center"
-        android:text="Modify Room Details"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp"
-        android:visibility="gone" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="4">
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,7 +51,8 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Hotel Name:" />
+                    android:text="Hotel Name:"
+                    android:textColor="@color/colorGrey" />
 
                 <TextView
                     style="@style/text_style"
@@ -75,13 +66,14 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="start date:" />
+                    android:text="start date:"
+                    android:textColor="@color/colorGrey" />
 
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etDateFrom"
+                <TextView
+                    android:id="@+id/tvDateFrom"
                     style="@style/edit_text_style"
-                    android:hint="07/14/2020" />
+                    android:text="07/14/2020" />
 
             </LinearLayout>
 
@@ -89,13 +81,14 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="end date:" />
+                    android:text="end date:"
+                    android:textColor="@color/colorGrey" />
 
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etDateTo"
+                <TextView
+                    android:id="@+id/tvDateTo"
                     style="@style/edit_text_style"
-                    android:hint="07/15/2020" />
+                    android:text="07/15/2020" />
 
             </LinearLayout>
 
@@ -103,13 +96,14 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="start time:" />
+                    android:text="start time:"
+                    android:textColor="@color/colorGrey" />
 
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etStartTime"
+                <TextView
+                    android:id="@+id/tvStartTime"
                     style="@style/edit_text_style"
-                    android:hint="12:03" />
+                    android:text="12:03" />
 
             </LinearLayout>
 
@@ -117,27 +111,13 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:gravity="center"
-                    android:text="room type:" />
-
-                <Spinner
-                    android:id="@+id/spnrRoomType"
-                    style="@style/spinner_style"
-                    android:entries="@array/room_type" />
-
-            </LinearLayout>
-
-            <LinearLayout style="@style/horz_linear_layout_style">
+                    android:text="room type:"
+                    android:textColor="@color/colorGrey" />
 
                 <TextView
-                    style="@style/text_style"
-                    android:text="Room Number:" />
-
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etRoomNumRd"
+                    android:id="@+id/tvRoomType"
                     style="@style/edit_text_style"
-                    android:hint="102" />
+                    android:text="Standard" />
 
             </LinearLayout>
 
@@ -145,13 +125,14 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="price per night:" />
+                    android:text="Room Number:"
+                    android:textColor="@color/colorGrey" />
 
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etRoomPriceRd"
+                <TextView
+                    android:id="@+id/tvRoomNumRd"
                     style="@style/edit_text_style"
-                    android:hint="$100" />
+                    android:text="21" />
 
             </LinearLayout>
 
@@ -159,11 +140,27 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Floor Number:" />
+                    android:text="Room price per night:"
+                    android:textColor="@color/colorGrey" />
 
 
                 <TextView
-                    android:id="@+id/etFloorNumRd"
+                    android:id="@+id/tvRoomPriceRd"
+                    style="@style/edit_text_style"
+                    android:text="$100" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Floor Number:"
+                    android:textColor="@color/colorGrey" />
+
+
+                <TextView
+                    android:id="@+id/tvFloorNumRd"
                     style="@style/text_style"
                     android:layout_width="match_parent"
                     android:paddingLeft="10dp"
@@ -176,13 +173,14 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Occupied Status:" />
+                    android:text="Occupied Status:"
+                    android:textColor="@color/colorGrey" />
 
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etOccupiedStatus"
+                <TextView
+                    android:id="@+id/tvOccupiedStatus"
                     style="@style/edit_text_style"
-                    android:hint="1" />
+                    android:text="No" />
 
             </LinearLayout>
 
@@ -190,13 +188,14 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Availability Status:" />
+                    android:text="Availability Status:"
+                    android:textColor="@color/colorGrey" />
 
 
-                <Spinner
-                    android:id="@+id/spnrAvlblStatus"
-                    style="@style/spinner_style"
-                    android:entries="@array/availability_status" />
+                <TextView
+                    android:id="@+id/tvAvailabilityStatus"
+                    style="@style/edit_text_style"
+                    android:text="Yes" />
             </LinearLayout>
 
         </LinearLayout>
@@ -206,29 +205,7 @@
     <Button
         android:id="@+id/btnEditRd"
         style="@style/btn_style"
-        android:layout_weight="1"
         android:text="Modify Room Details"
         android:visibility="visible" />
-
-    <LinearLayout
-        android:id="@+id/llEditRoom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-        <Button
-            android:id="@+id/btnCancel"
-            style="@style/btn_style"
-            android:layout_weight="1"
-            android:text="Cancel" />
-
-        <Button
-            android:id="@+id/btnSave"
-            style="@style/btn_style"
-            android:layout_weight="1"
-            android:text="Save" />
-
-    </LinearLayout>
 
 </LinearLayout>
