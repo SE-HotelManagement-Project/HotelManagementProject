@@ -95,8 +95,57 @@
                 android:gravity="center"
                 android:text="Users"
                 android:textColor="#0C0C0C"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:visibility="visible" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="2"
+                android:drawableStart="@drawable/ic_sticky_notes"
+                android:drawableLeft="@drawable/ic_sticky_notes"
+                android:drawablePadding="5dp"
+                android:gravity="center|start"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="Select the User \n for more info"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="13sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/colorWhite"
+                android:drawableTop="@drawable/ic_filter"
+                android:drawablePadding="2dp"
+                android:padding="5dp"
+                android:text="sort"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="13dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/colorWhite"
+                android:drawableTop="@drawable/ic_sort_ad"
+                android:drawablePadding="2dp"
+                android:padding="5dp"
+                android:text="direction"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="13dp" />
+
         </LinearLayout>
 
 
@@ -139,6 +188,30 @@
                         android:textSize="16sp" />
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Last Name:" />
+
+                    <TextView
+                        android:id="@+id/etUserrLastName"
+                        style="@style/text_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:text="Walton"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -165,30 +238,7 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="10dp"
-                    android:orientation="horizontal">
 
-                    <TextView
-                        style="@style/text_style"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Last Name:" />
-
-                    <TextView
-                        android:id="@+id/etUserLastName"
-                        style="@style/text_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:text="Walton"
-                        android:textSize="16sp" />
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -295,15 +345,15 @@
                         style="@style/text_style"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="First Name:" />
+                        android:text="Last Name:" />
 
                     <TextView
-                        android:id="@+id/etUserFirstName1"
+                        android:id="@+id/etUserLastName1"
                         style="@style/text_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
-                        android:text="Rachel"
+                        android:text="Walton"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -320,18 +370,20 @@
                         style="@style/text_style"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Last Name:" />
+                        android:text="First Name:" />
 
                     <TextView
-                        android:id="@+id/etUserLastName1"
+                        android:id="@+id/etUserFirstName1"
                         style="@style/text_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
-                        android:text="Walton"
+                        android:text="Rachel"
                         android:textSize="16sp" />
 
                 </LinearLayout>
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
