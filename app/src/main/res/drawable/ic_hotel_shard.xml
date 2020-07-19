@@ -45,12 +45,9 @@
     <path
         android:fillColor="@color/colorSecondary"
         android:pathData="M31.5,23h7v5h-7z" />
-    <path
-        android:fillColor=""
-        android:pathData="M38.5,59l-18,0l2,-11l14,0z" />
-    <path
-        android:fillColor="#D0E8F9"
-        android:pathData="M21.5,34h16v14h-16z" />
+   <path
+       android:fillColor="#D0E8F9"
+       android:pathData="M21.5,34h16v14h-16z" />
     <path
         android:fillColor="#3D324C"
         android:pathData="M37.5,33h-16c-0.552,0 -1,0.448 -1,1v14h18V34C38.5,33.448 38.052,33 37.5,33z" />

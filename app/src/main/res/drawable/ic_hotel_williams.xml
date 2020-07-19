@@ -25,12 +25,6 @@
         android:fillColor="@color/colorPrimary"
         android:pathData="M248,356V68l96,40v248H248z" />
     <path
-        android:fillColor="#"
-        android:pathData="M248,292h96v72h-96V292z" />
-    <path
-        android:fillColor="#"
-        android:pathData="M120,268h128v72H120V268z" />
-    <path
         android:fillColor="@color/colorSecondary"
         android:pathData="M208,228h16v16h-16V228z" />
     <path
