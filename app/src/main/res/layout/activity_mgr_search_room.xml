@@ -11,10 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <ImageView
-            android:id="@+id/ivAppIcon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -37,65 +37,46 @@
         android:id="@+id/llSearchRoomIp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="25dp"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+        <LinearLayout style="@style/horz_linear_layout_style">
 
             <TextView
                 style="@style/text_style"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingRight="15dp"
-                android:text="hotel:" />
+                android:text="Hotel:" />
 
             <Spinner
                 android:id="@+id/spnrHotelName"
                 style="@style/spinner_style"
-                android:entries="@array/hotel_name"
-                android:prompt="Maverick" />
+                android:entries="@array/hotel_name" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            style="@style/horz_linear_layout_style"
+            android:layout_marginBottom="20dp">
 
             <TextView
                 style="@style/text_style"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Room Number:" />
 
+
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etStartTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter Room Number"
-                android:paddingLeft="10dp"
-                android:textSize="16sp" />
+                android:id="@+id/etRoomNumRd"
+                style="@style/edit_text_style"
+                android:hint="Enter Room Number" />
 
         </LinearLayout>
 
 
         <Button
             android:id="@+id/btnRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:background="@color/colorPrimary"
-            android:text="Search"
-            android:textColor="@color/colorWhite"
-            android:textSize="16sp" />
+            style="@style/btn_style"
+            android:text="Search" />
 
 
     </LinearLayout>
@@ -105,7 +86,73 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:background="#eaeaea"
+        android:visibility="visible">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="@style/horz_linear_layout_style"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_room_details" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    android:text="Available Room List"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@color/colorWhite"
+                    android:drawableTop="@drawable/ic_filter"
+                    android:drawablePadding="2dp"
+                    android:padding="5dp"
+                    android:text="sort"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="13dp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@color/colorWhite"
+                    android:drawableTop="@drawable/ic_sort_ad"
+                    android:drawablePadding="2dp"
+                    android:padding="5dp"
+                    android:text="direction"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="13dp" />
+
+            </LinearLayout>
+        </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -124,110 +171,258 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginBottom="5dp">
 
+                    <LinearLayout style="@style/horz_linear_layout_style">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:padding="5dp"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/ic_maverick" />
+
+                            <TextView
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:text="Maverick Hotel"
+                                android:textColor="@color/colorPrimaryDark" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/text_style"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Room Number:" />
+
+                                <TextView
+
+                                    style="@style/text_style"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="10dp"
+                                    android:text="2"
+                                    android:textSize="16sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/text_style"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Room Type:" />
+
+                                <TextView
+
+                                    style="@style/text_style"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="10dp"
+                                    android:text="Standard"
+                                    android:textSize="16sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/text_style"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Start Date:" />
+
+                                <TextView
+
+                                    style="@style/text_style"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="10dp"
+                                    android:text="07/14/2020"
+                                    android:textSize="16sp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="horizontal">
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:background="@color/colorLightPrimary"
+                            android:orientation="vertical">
 
-                            <TextView
-                                style="@style/text_style"
+                            <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Hotel Name:" />
+                                android:layout_gravity="center"
+                                android:padding="5dp"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/ic_maverick" />
 
                             <TextView
-                                android:id="@+id/etOpHotel"
-                                style="@style/text_style"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:paddingLeft="10dp"
-                                android:text="Maverick"
-                                android:textSize="16sp" />
+                                android:paddingLeft="3dp"
+                                android:paddingRight="3dp"
+                                android:text="Maverick Hotel"
+                                android:textColor="@color/colorPrimaryDark" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingRight="25dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/text_style"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Room Number:" />
+
+                                <TextView
+
+                                    style="@style/text_style"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="10dp"
+                                    android:text="2"
+                                    android:textSize="16sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/text_style"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Room Type:" />
+
+                                <TextView
+
+                                    style="@style/text_style"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="10dp"
+                                    android:text="Standard"
+                                    android:textSize="16sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/text_style"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Start Date:" />
+
+                                <TextView
+
+                                    style="@style/text_style"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="10dp"
+                                    android:text="07/14/2020"
+                                    android:textSize="16sp" />
+
+                            </LinearLayout>
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="horizontal">
+                            android:layout_height="match_parent"
+                            android:background="@color/color_light_accent"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
                             <TextView
-                                style="@style/text_style"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Room Number:" />
-
-                            <TextView
-                                android:id="@+id/etOpRoomNum"
-                                style="@style/text_style"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:paddingLeft="10dp"
-                                android:text="102"
-                                android:textSize="16sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="horizontal">
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:text="1"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="28dp" />
 
                             <TextView
-                                style="@style/text_style"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Room Type:" />
-
-                            <TextView
-                                android:id="@+id/etOpRoomType"
-                                style="@style/text_style"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:paddingLeft="10dp"
-                                android:text="Standard"
-                                android:textSize="16sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/text_style"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Price per Night:" />
-
-                            <TextView
-                                android:id="@+id/etOpRoomPrice"
-                                style="@style/text_style"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="10dp"
-                                android:text="$100"
-                                android:textSize="16sp" />
+                                android:gravity="center_horizontal|top"
+                                android:text="Floor"
+                                android:textColor="@color/colorPrimaryDark" />
 
                         </LinearLayout>
 
@@ -243,467 +438,133 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginBottom="5dp">
 
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:orientation="vertical">
+                    <LinearLayout style="@style/horz_linear_layout_style">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
                             android:layout_marginRight="10dp"
-                            android:orientation="horizontal">
+                            android:orientation="vertical">
 
-                            <TextView
-                                style="@style/text_style"
+                            <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Hotel Name:" />
+                                android:layout_gravity="center"
+                                android:padding="5dp"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/ic_maverick" />
 
                             <TextView
-                                android:id="@+id/etOpHotel"
-                                style="@style/text_style"
-                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:paddingLeft="10dp"
-                                android:text="Maverick"
-                                android:textSize="16sp" />
+                                android:layout_width="wrap_content"
+                                android:text="Maverick Hotel"
+                                android:textColor="@color/colorPrimaryDark" />
+
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="horizontal">
+                            android:orientation="vertical">
 
-                            <TextView
-                                style="@style/text_style"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Room Number:" />
-
-                            <TextView
-                                android:id="@+id/etOpRoomNum"
-                                style="@style/text_style"
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:paddingLeft="10dp"
-                                android:text="102"
-                                android:textSize="16sp" />
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:orientation="horizontal">
 
-                        </LinearLayout>
+                                <TextView
+                                    style="@style/text_style"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Room Number:" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="horizontal">
+                                <TextView
 
-                            <TextView
-                                style="@style/text_style"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Room Type:" />
+                                    style="@style/text_style"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="10dp"
+                                    android:text="20"
+                                    android:textSize="16sp" />
 
-                            <TextView
-                                android:id="@+id/etOpRoomType"
-                                style="@style/text_style"
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:paddingLeft="10dp"
-                                android:text="Standard"
-                                android:textSize="16sp" />
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:orientation="horizontal">
 
-                        </LinearLayout>
+                                <TextView
+                                    style="@style/text_style"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Room Type:" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="horizontal">
+                                <TextView
 
-                            <TextView
-                                style="@style/text_style"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Price per Night:" />
+                                    style="@style/text_style"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="10dp"
+                                    android:text="Standard"
+                                    android:textSize="16sp" />
 
-                            <TextView
-                                android:id="@+id/etOpRoomPrice"
-                                style="@style/text_style"
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:paddingLeft="10dp"
-                                android:text="$100"
-                                android:textSize="16sp" />
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:orientation="horizontal">
 
-                        </LinearLayout>
+                                <TextView
+                                    style="@style/text_style"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Price per Night:" />
 
-                    </LinearLayout>
+                                <TextView
 
-                </androidx.cardview.widget.CardView>
+                                    style="@style/text_style"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="10dp"
+                                    android:text="$100(weekday)/"
+                                    android:textSize="16sp" />
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="5dp">
+                            </LinearLayout>
 
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/text_style"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Hotel Name:" />
-
-                            <TextView
-                                android:id="@+id/etOpHotel"
-                                style="@style/text_style"
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:paddingLeft="10dp"
-                                android:text="Maverick"
-                                android:textSize="16sp" />
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:orientation="horizontal">
 
-                        </LinearLayout>
+                                <TextView
+                                    style="@style/text_style"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="                             " />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="horizontal">
+                                <TextView
 
-                            <TextView
-                                style="@style/text_style"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Room Number:" />
+                                    style="@style/text_style"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="10dp"
+                                    android:text="$185 (weekend)"
+                                    android:textSize="16sp" />
 
-                            <TextView
-                                android:id="@+id/etOpRoomNum"
-                                style="@style/text_style"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="10dp"
-                                android:text="102"
-                                android:textSize="16sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/text_style"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Room Type:" />
-
-                            <TextView
-                                android:id="@+id/etOpRoomType"
-                                style="@style/text_style"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="10dp"
-                                android:text="Standard"
-                                android:textSize="16sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/text_style"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Price per Night:" />
-
-                            <TextView
-                                android:id="@+id/etOpRoomPrice"
-                                style="@style/text_style"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="10dp"
-                                android:text="$100"
-                                android:textSize="16sp" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="5dp">
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/text_style"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Hotel Name:" />
-
-                            <TextView
-                                android:id="@+id/etOpHotel"
-                                style="@style/text_style"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="10dp"
-                                android:text="Maverick"
-                                android:textSize="16sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/text_style"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Room Number:" />
-
-                            <TextView
-                                android:id="@+id/etOpRoomNum"
-                                style="@style/text_style"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="10dp"
-                                android:text="102"
-                                android:textSize="16sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/text_style"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Room Type:" />
-
-                            <TextView
-                                android:id="@+id/etOpRoomType"
-                                style="@style/text_style"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="10dp"
-                                android:text="Standard"
-                                android:textSize="16sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/text_style"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Price per Night:" />
-
-                            <TextView
-                                android:id="@+id/etOpRoomPrice"
-                                style="@style/text_style"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="10dp"
-                                android:text="$100"
-                                android:textSize="16sp" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="5dp">
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/text_style"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Hotel Name:" />
-
-                            <TextView
-                                android:id="@+id/etOpHotel"
-                                style="@style/text_style"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="10dp"
-                                android:text="Maverick"
-                                android:textSize="16sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/text_style"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Room Number:" />
-
-                            <TextView
-                                android:id="@+id/etOpRoomNum"
-                                style="@style/text_style"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="10dp"
-                                android:text="102"
-                                android:textSize="16sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/text_style"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Room Type:" />
-
-                            <TextView
-                                android:id="@+id/etOpRoomType"
-                                style="@style/text_style"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="10dp"
-                                android:text="Standard"
-                                android:textSize="16sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                style="@style/text_style"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Price per Night:" />
-
-                            <TextView
-                                android:id="@+id/etOpRoomPrice"
-                                style="@style/text_style"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="10dp"
-                                android:text="$100"
-                                android:textSize="16sp" />
+                            </LinearLayout>
 
                         </LinearLayout>
 
