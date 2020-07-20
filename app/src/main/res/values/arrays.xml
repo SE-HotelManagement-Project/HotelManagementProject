@@ -12,6 +12,14 @@
         <item>Shard</item>
         <item>Liberty</item>
     </string-array>
+    <string-array name="hotel_name_guest">
+        <item>All</item>
+        <item>Maverick</item>
+        <item>Ranger</item>
+        <item>Williams</item>
+        <item>Shard</item>
+        <item>Liberty</item>
+    </string-array>
     <string-array name="availability_status">
         <item>Yes</item>
         <item>No</item>
