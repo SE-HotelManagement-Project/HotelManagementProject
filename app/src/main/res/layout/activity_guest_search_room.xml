@@ -51,12 +51,10 @@
                 android:paddingRight="15dp"
                 android:text="Hotel Name:" />
 
-            <TextView
-                style="@style/text_style"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingRight="15dp"
-                android:text="ALL" />
+            <Spinner
+                android:id="@+id/spnrGuestSrHotelName"
+                style="@style/spinner_style"
+                android:entries="@array/hotel_name_guest" />
 
         </LinearLayout>
 
@@ -68,7 +66,7 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etCheckInFrom"
+                android:id="@+id/etGuestSrCheckInFrom"
                 style="@style/edit_text_style"
                 android:hint="07/14/2020"
                 android:text="07/14/2020"/>
@@ -83,7 +81,7 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etCheckOutDateTo"
+                android:id="@+id/etGuestSrCheckOutDateTo"
                 style="@style/edit_text_style"
                 android:hint="07/15/2020"
                 android:text="07/15/2020"/>
@@ -113,7 +111,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/cbGuestStandard"
+                    android:id="@+id/cbGuestSrStandard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -121,7 +119,7 @@
                     android:text="Standard " />
 
                 <CheckBox
-                    android:id="@+id/cbGuestDeluxe"
+                    android:id="@+id/cbGuestSrDeluxe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -129,7 +127,7 @@
                     android:text="Deluxe " />
 
                 <CheckBox
-                    android:id="@+id/cbGuestSuite"
+                    android:id="@+id/cbGuestSrSuite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -145,7 +143,7 @@
                 android:text="Number of Rooms: " />
 
             <EditText
-                android:id="@+id/edGuestNumberOfRoom"
+                android:id="@+id/etGuestSrtNumberOfRoom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -156,7 +154,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnGuestSearchRoom"
+            android:id="@+id/btnGuestSrSearchRoom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
