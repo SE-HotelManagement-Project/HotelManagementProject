@@ -4,9 +4,12 @@
     <color name="colorPrimary2">#0E2A47</color>
     <color name="colorPrimaryDark">#0E2A47</color>
     <color name="colorAccent">#F27668</color>
-    <color name="colorGreen">#00AF80</color>
+    <color name="colorGreen">@color/color_light_accent</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorSecondary">#FFB229</color>
-    <color name="colorAccent2">#03DAC5</color>
+    <color name="colorAccent2">@color/colorLightPrimary</color>
+    <color name="colorGrey">#5c5c5c</color>
+    <color name="color_light_accent">#FBB9B3</color>
+    <color name="colorLightPrimary">#CDE6FF</color>
 
 </resources>

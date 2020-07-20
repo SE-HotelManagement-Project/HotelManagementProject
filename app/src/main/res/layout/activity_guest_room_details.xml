@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="25dp"
     android:layout_marginRight="25dp"
-    android:orientation="vertical"
-    tools:context=".view.MgrRoomDetailsActivity">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -66,7 +65,7 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="start date:"
+                    android:text="Check In Date:"
                     android:textColor="@color/colorGrey" />
 
 
@@ -81,7 +80,7 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="end date:"
+                    android:text="Check Out Date:"
                     android:textColor="@color/colorGrey" />
 
 
@@ -125,14 +124,14 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Room Number:"
+                    android:text="Number of Rooms:"
                     android:textColor="@color/colorGrey" />
 
 
                 <TextView
                     android:id="@+id/tvRoomNumRd"
                     style="@style/edit_text_style"
-                    android:text="21" />
+                    android:text="1" />
 
             </LinearLayout>
 
@@ -147,7 +146,7 @@
                 <TextView
                     android:id="@+id/tvRoomPriceRd"
                     style="@style/edit_text_style"
-                    android:text="$100" />
+                    android:text="$135" />
 
             </LinearLayout>
 
@@ -155,7 +154,7 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Floor Number:"
+                    android:text="Number of Nights:"
                     android:textColor="@color/colorGrey" />
 
 
@@ -173,29 +172,15 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Occupied Status:"
+                    android:text="Total Price:"
                     android:textColor="@color/colorGrey" />
 
 
                 <TextView
                     android:id="@+id/tvOccupiedStatus"
                     style="@style/edit_text_style"
-                    android:text="No" />
+                    android:text="$135" />
 
-            </LinearLayout>
-
-            <LinearLayout style="@style/horz_linear_layout_style">
-
-                <TextView
-                    style="@style/text_style"
-                    android:text="Availability Status:"
-                    android:textColor="@color/colorGrey" />
-
-
-                <TextView
-                    android:id="@+id/tvAvailabilityStatus"
-                    style="@style/edit_text_style"
-                    android:text="Yes" />
             </LinearLayout>
 
         </LinearLayout>
@@ -203,9 +188,9 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/btnEditRd"
+        android:id="@+id/btnGuestContinue"
         style="@style/btn_style"
-        android:text="Modify Room Details"
+        android:text="Continue"
         android:visibility="visible" />
 
 </LinearLayout>

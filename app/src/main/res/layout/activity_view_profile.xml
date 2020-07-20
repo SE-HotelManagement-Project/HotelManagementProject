@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="25dp"
-    android:layout_marginRight="25dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
     android:orientation="vertical"
-    tools:context=".view.MgrRoomDetailsActivity">
+    tools:context=".view.ViewProfileActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_weight="1"
         android:layout_margin="8dp"
+        android:layout_weight="1"
         android:orientation="horizontal"
         android:visibility="visible">
 
@@ -25,13 +25,13 @@
             android:layout_gravity="center"
             android:paddingRight="15dp"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/ic_room_details" />
+            app:srcCompat="@drawable/ic_profile" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Room Details"
+            android:text="View Profile"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="17sp" />
 
@@ -40,7 +40,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_weight="4">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,14 +51,14 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Hotel Name:"
-                    android:textColor="@color/colorGrey" />
+                    android:text="User Name:" />
 
                 <TextView
+                    android:id="@+id/tvAdminVpUserId"
                     style="@style/text_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" Maverick" />
+                    android:text=" samar_admin" />
 
             </LinearLayout>
 
@@ -66,14 +66,55 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="start date:"
-                    android:textColor="@color/colorGrey" />
+                    android:text="Password:" />
 
 
                 <TextView
-                    android:id="@+id/tvDateFrom"
+                    android:id="@+id/tvAdminVpPassword"
+                    style="@style/text_style"
+                    android:text=" admin123" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Role:" />
+
+
+                <TextView
+                    android:id="@+id/tvAdminVpRole"
+                    style="@style/text_style"
+                    android:text=" Admin" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Last Name:" />
+
+
+                <TextView
+                    android:id="@+id/tvAdminVpLastName"
+                    style="@style/text_style"
+                    android:text=" Hills" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="First Name:" />
+
+
+                <TextView
+                    android:id="@+id/tvAdminVpFirstName"
                     style="@style/edit_text_style"
-                    android:text="07/14/2020" />
+                    android:text="Samar" />
 
             </LinearLayout>
 
@@ -81,14 +122,14 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="end date:"
-                    android:textColor="@color/colorGrey" />
-
+                    android:gravity="center"
+                    android:text="Phone:" />
 
                 <TextView
-                    android:id="@+id/tvDateTo"
+                    android:id="@+id/tvAdminVpPhone"
                     style="@style/edit_text_style"
-                    android:text="07/15/2020" />
+                    android:text="8088290912" />
+
 
             </LinearLayout>
 
@@ -96,14 +137,13 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="start time:"
-                    android:textColor="@color/colorGrey" />
+                    android:text="E-mail:" />
 
 
                 <TextView
-                    android:id="@+id/tvStartTime"
+                    android:id="@+id/tvAdminVpEmail"
                     style="@style/edit_text_style"
-                    android:text="12:03" />
+                    android:text="sagargearsup@gmail.com" />
 
             </LinearLayout>
 
@@ -111,13 +151,13 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="room type:"
-                    android:textColor="@color/colorGrey" />
+                    android:text="Street Address:" />
+
 
                 <TextView
-                    android:id="@+id/tvRoomType"
+                    android:id="@+id/tvAdminVpStrAddr"
                     style="@style/edit_text_style"
-                    android:text="Standard" />
+                    android:text="Vintage Pad" />
 
             </LinearLayout>
 
@@ -125,14 +165,13 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Room Number:"
-                    android:textColor="@color/colorGrey" />
+                    android:text="City:" />
 
 
                 <TextView
-                    android:id="@+id/tvRoomNumRd"
+                    android:id="@+id/tvAdminVpCity"
                     style="@style/edit_text_style"
-                    android:text="21" />
+                    android:text="Arlington" />
 
             </LinearLayout>
 
@@ -140,14 +179,13 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Room price per night:"
-                    android:textColor="@color/colorGrey" />
+                    android:text="State:" />
 
 
                 <TextView
-                    android:id="@+id/tvRoomPriceRd"
+                    android:id="@+id/tvAdminVpState"
                     style="@style/edit_text_style"
-                    android:text="$100" />
+                    android:text="Texas" />
 
             </LinearLayout>
 
@@ -155,32 +193,13 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Floor Number:"
-                    android:textColor="@color/colorGrey" />
+                    android:text="Zip Code:" />
 
 
                 <TextView
-                    android:id="@+id/tvFloorNumRd"
-                    style="@style/text_style"
-                    android:layout_width="match_parent"
-                    android:paddingLeft="10dp"
-                    android:text="1"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-            <LinearLayout style="@style/horz_linear_layout_style">
-
-                <TextView
-                    style="@style/text_style"
-                    android:text="Occupied Status:"
-                    android:textColor="@color/colorGrey" />
-
-
-                <TextView
-                    android:id="@+id/tvOccupiedStatus"
+                    android:id="@+id/tcAdminVpZip"
                     style="@style/edit_text_style"
-                    android:text="No" />
+                    android:text="76010" />
 
             </LinearLayout>
 
@@ -188,14 +207,29 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Availability Status:"
-                    android:textColor="@color/colorGrey" />
+                    android:text="Credit Card Number:" />
 
 
                 <TextView
-                    android:id="@+id/tvAvailabilityStatus"
+                    android:id="@+id/tvCrCdNumVp"
                     style="@style/edit_text_style"
-                    android:text="Yes" />
+                    android:inputType="number"
+                    android:maxLength="16"
+                    android:text="1053608910536921" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Card Expiry Number:" />
+
+                <TextView
+                    android:id="@+id/etRoomPriceRd"
+                    style="@style/edit_text_style"
+                    android:text="02/24" />
+
             </LinearLayout>
 
         </LinearLayout>
@@ -203,9 +237,11 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/btnEditRd"
+        android:id="@+id/btnAdminVpModify"
         style="@style/btn_style"
-        android:text="Modify Room Details"
+        android:layout_margin="10dp"
+        android:text="Update Profile"
+        android:textSize="15sp"
         android:visibility="visible" />
 
 </LinearLayout>
