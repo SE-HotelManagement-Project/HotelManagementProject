@@ -6,8 +6,6 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
-
-
     <LinearLayout
         android:id="@+id/llGuestRrInput"
         android:layout_width="match_parent"
@@ -32,10 +30,9 @@
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_room_available" />
 
-
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Request Hotel Reservation"
@@ -55,8 +52,16 @@
 
             <Spinner
                 android:id="@+id/spnrGuestSrHotelName"
-                style="@style/spinner_style"
-                android:entries="@array/hotel_name_guest" />
+                style="@style/Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/hotel_name_guest"
+                android:padding="12dp" />
+
+            <!--            <Spinner-->
+            <!--                android:id="@+id/spnrGuestSrHotelName2"-->
+            <!--                style="@style/spinner_style"-->
+            <!--                android:entries="@array/hotel_name" />-->
 
         </LinearLayout>
 
