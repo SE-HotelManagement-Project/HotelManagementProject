@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
-        <activity android:name=".view.UpdateProfileActivity"></activity>
+        <activity android:name=".view.AdminSearchUserActivity"></activity>
+        <activity android:name=".view.GuestRequestReservationActivity" />
+        <activity android:name=".view.UpdateProfileActivity" />
         <activity android:name=".view.ViewProfileActivity" />
         <activity android:name=".view.GuestModifyReservationActivity" />
         <activity android:name=".view.GuestReservationSummActivity" />

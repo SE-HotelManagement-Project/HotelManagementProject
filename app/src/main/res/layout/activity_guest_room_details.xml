@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="25dp"
@@ -54,6 +53,7 @@
                     android:textColor="@color/colorGrey" />
 
                 <TextView
+                    android:id="@+id/tvGuestRmDHotel"
                     style="@style/text_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvDateFrom"
+                    android:id="@+id/tvGuestRmDDateFrom"
                     style="@style/edit_text_style"
                     android:text="07/14/2020" />
 
@@ -85,7 +85,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvDateTo"
+                    android:id="@+id/tvGuestRmDDateTo"
                     style="@style/edit_text_style"
                     android:text="07/15/2020" />
 
@@ -100,7 +100,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvStartTime"
+                    android:id="@+id/tvGuestRmDStartTime"
                     style="@style/edit_text_style"
                     android:text="12:03" />
 
@@ -114,7 +114,7 @@
                     android:textColor="@color/colorGrey" />
 
                 <TextView
-                    android:id="@+id/tvRoomType"
+                    android:id="@+id/tvGuestRmDRoomType"
                     style="@style/edit_text_style"
                     android:text="Standard" />
 
@@ -129,7 +129,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvRoomNumRd"
+                    android:id="@+id/tvGuestRmDRoomNumRd"
                     style="@style/edit_text_style"
                     android:text="1" />
 
@@ -144,7 +144,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvRoomPriceRd"
+                    android:id="@+id/tvGuestRmDRoomPriceRd"
                     style="@style/edit_text_style"
                     android:text="$135" />
 
@@ -159,7 +159,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvFloorNumRd"
+                    android:id="@+id/tvGuestRmDFloorNumRd"
                     style="@style/text_style"
                     android:layout_width="match_parent"
                     android:paddingLeft="10dp"
@@ -177,7 +177,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvOccupiedStatus"
+                    android:id="@+id/tvGuestRmDOccupiedStatus"
                     style="@style/edit_text_style"
                     android:text="$135" />
 
@@ -188,7 +188,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/btnGuestContinue"
+        android:id="@+id/btnGuestRmDContinue"
         style="@style/btn_style"
         android:text="Continue"
         android:visibility="visible" />
