@@ -38,23 +38,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void initView() {
-        gvBookHotel = findViewById(R.id.gvbookHotel);
-        gvChangePw = findViewById(R.id.changePw);
-        gvViewReservation = findViewById(R.id.gvViewReservations);
-        gvViewProfile = findViewById(R.id.gvViewProfile);
-
-        mvViewProfile = findViewById(R.id.mvViewProfile);
-        mvSearchRoom = findViewById(R.id.mvSearchRoom);
-        mvReservationList = findViewById(R.id.mvReservationList);
-        mvAvailableRoom = findViewById(R.id.mvViewReservations);
-
-        avViewProfile = findViewById(R.id.avViewProfile);
-        avSearchUser = findViewById(R.id.avSearchUser);
-
         guestView = findViewById(R.id.GuestView);
         managerView = findViewById(R.id.ManagerView);
         adminView = findViewById(R.id.AdminView);
-
 
         String userRole = session.getUserRole();
 
@@ -70,17 +56,41 @@ public class HomeActivity extends AppCompatActivity {
             guestView.setVisibility(View.VISIBLE);
             adminView.setVisibility(View.GONE);
             managerView.setVisibility(View.GONE);
-
         }
 
+        adminFunctions();
+        managerFunctions();
+        guestFunctions();
+    }
 
-        gvChangePw.setOnClickListener(new View.OnClickListener() {
+    public void adminFunctions() {
+        avViewProfile = findViewById(R.id.avViewProfile);
+        avSearchUser = findViewById(R.id.avSearchUser);
+
+        //AdminFunctions
+        avSearchUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
+                showToastMessage("Feature Under Construction");
+                startActivity(new Intent(HomeActivity.this, AdminSearchUserActivity.class));
             }
         });
+        avViewProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showToastMessage("Feature Under Construction");
+                startActivity(new Intent(HomeActivity.this, ViewProfileActivity.class));
+            }
+        });
+    }
 
+    public void guestFunctions() {
+        gvBookHotel = findViewById(R.id.gvbookHotel);
+        gvChangePw = findViewById(R.id.changePw);
+        gvViewReservation = findViewById(R.id.gvViewReservations);
+        gvViewProfile = findViewById(R.id.gvViewProfile);
+
+        ///GuestFunctions
         gvBookHotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,6 +115,16 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    public void managerFunctions() {
+        mvViewProfile = findViewById(R.id.mvViewProfile);
+        mvSearchRoom = findViewById(R.id.mvSearchRoom);
+        mvReservationList = findViewById(R.id.mvReservationList);
+        mvAvailableRoom = findViewById(R.id.mvViewReservations);
+
+        //ManagerFunctions
         mvAvailableRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,22 +150,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         mvViewProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showToastMessage("Feature Under Construction");
-                startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
-
-            }
-        });
-        avSearchUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showToastMessage("Feature Under Construction");
-                startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
-
-            }
-        });
-        avViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showToastMessage("Feature Under Construction");
