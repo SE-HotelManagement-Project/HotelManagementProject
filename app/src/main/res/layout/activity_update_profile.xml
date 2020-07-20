@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.1"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/ivAppIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingRight="15dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_profile" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Update Profile"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/horz_linear_layout_style2">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_edit" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Username:" />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tvGuestUpUserName"
+                    style="@style/edit_text_style"
+                    android:layout_gravity="center"
+                    android:hint="Alay_guest" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style2">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_edit" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Password:" />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etGuestUpPassword"
+                    style="@style/edit_text_style"
+                    android:hint="alay123" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style2">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_lock_24" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Role:" />
+
+                <TextView
+                    android:id="@+id/tvGuestUpRole"
+                    style="@style/edit_text_style"
+                    android:layout_gravity="center"
+                    android:text="Guest" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style2">
+
+                <LinearLayout
+                    style="@style/horz_linear_layout_style2"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingRight="10dp"
+                        app:srcCompat="@drawable/ic_baseline_edit" />
+
+                    <TextView
+                        style="@style/text_style"
+                        android:text="LastName:" />
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etGuestLastNameUp"
+                        style="@style/edit_text_style"
+                        android:hint="Parikh" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/horz_linear_layout_style2"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        app:srcCompat="@drawable/ic_baseline_edit" />
+
+                    <TextView
+                        style="@style/text_style"
+                        android:text="FirstName:" />
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etGuestFirstNameUp"
+                        style="@style/edit_text_style"
+                        android:hint="Alay" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style2">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_edit" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Phone:" />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etGuestPhoneUp"
+                    style="@style/edit_text_style"
+                    android:hint="4084831223" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style2">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_edit" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="E-mail:" />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etGuestE-mailUp"
+                    style="@style/edit_text_style"
+                    android:hint="alay.parikh@mavs.uta.edu" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style2">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_edit" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Street Address:" />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etGuestStreetAddressUp"
+                    style="@style/edit_text_style"
+                    android:hint="404 border" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style2">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_edit" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="City:" />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etGuestCityUp"
+                    style="@style/edit_text_style"
+                    android:hint="arlington" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style2">
+
+                <LinearLayout
+                    style="@style/horz_linear_layout_style2"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingRight="15dp"
+                        app:srcCompat="@drawable/ic_baseline_edit" />
+
+                    <TextView
+                        style="@style/text_style"
+                        android:text="State:" />
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etGuestStateUp"
+                        style="@style/edit_text_style"
+                        android:hint="texas" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/horz_linear_layout_style2"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="15dp"
+                        app:srcCompat="@drawable/ic_baseline_edit" />
+
+                    <TextView
+                        style="@style/text_style"
+                        android:text="Zip Code:" />
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etGuestZipCodeUp"
+                        style="@style/edit_text_style"
+                        android:hint="76010" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style2">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_edit" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Credit Card Number:" />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etGuestCreditCardNumberUp"
+                    style="@style/edit_text_style"
+                    android:hint="1053608910536921" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style2">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_edit" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Credit Card Expiry:" />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etGuestCreditCardExpiryUp"
+                    style="@style/edit_text_style"
+                    android:hint="02/24" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/llEditRoom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <Button
+            android:id="@+id/btnUpCancel"
+            style="@style/btn_style"
+            android:layout_weight="1"
+            android:text="Cancel" />
+
+        <Button
+            android:id="@+id/btnUpSave"
+            style="@style/btn_style"
+            android:layout_weight="1"
+            android:text="Save" />
+
+    </LinearLayout>
+
+</LinearLayout>
