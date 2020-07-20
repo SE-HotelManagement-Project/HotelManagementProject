@@ -12,7 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
-        <activity android:name=".view.MgrModifyRoomActivity"></activity>
+        <activity android:name=".view.UpdateProfileActivity"></activity>
+        <activity android:name=".view.ViewProfileActivity" />
+        <activity android:name=".view.GuestModifyReservationActivity" />
+        <activity android:name=".view.GuestReservationSummActivity" />
+        <activity android:name=".view.GuestReservationDetailsActivity" />
+        <activity android:name=".view.MgrModifyRoomActivity" />
         <activity android:name=".view.MgrRoomDetailsActivity" />
         <activity android:name=".view.MgrSearchRoomActivity" />
         <activity android:name=".view.MgrAvlblRoomsActivity" />
