@@ -85,18 +85,23 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showToastMessage("Feature is under development");
+                startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
             }
         });
         gvViewReservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showToastMessage("Feature Under Construction");
+                startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
+
             }
         });
         gvViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showToastMessage("Feature Under Construction");
+                startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
+
             }
         });
 
@@ -104,36 +109,48 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showToastMessage("Feature Under Construction");
+                startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
+
             }
         });
         mvReservationList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showToastMessage("Feature Under Construction");
+                startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
+
             }
         });
         mvSearchRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showToastMessage("Feature Under Construction");
+                startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
+
             }
         });
         mvViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showToastMessage("Feature Under Construction");
+                startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
+
             }
         });
         avSearchUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showToastMessage("Feature Under Construction");
+                startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
+
             }
         });
         avViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showToastMessage("Feature Under Construction");
+                startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
+
             }
         });
     }

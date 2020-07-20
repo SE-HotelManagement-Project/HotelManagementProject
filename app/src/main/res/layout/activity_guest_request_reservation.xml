@@ -6,41 +6,43 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:visibility="gone"
-        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/ivAppIcon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/ic_room_available" />
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Request Hotel Reservation"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp" />
-
-    </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llAvlblGuestRoom"
+        android:id="@+id/llGuestRrInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/ivAppIcon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_room_available" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Request Hotel Reservation"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp" />
+
+        </LinearLayout>
 
         <LinearLayout style="@style/horz_linear_layout_style">
 
@@ -66,10 +68,9 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etGuestSrCheckInFrom"
+                android:id="@+id/etGuestRrCheckInFrom"
                 style="@style/edit_text_style"
-                android:hint="07/14/2020"
-                android:text="07/14/2020"/>
+                android:hint="07/14/2020" />
 
         </LinearLayout>
 
@@ -81,10 +82,9 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etGuestSrCheckOutDateTo"
+                android:id="@+id/etGuestRrCheckOutDateTo"
                 style="@style/edit_text_style"
-                android:hint="07/15/2020"
-                android:text="07/15/2020"/>
+                android:hint="07/15/2020" />
 
         </LinearLayout>
 
@@ -111,7 +111,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/cbGuestSrStandard"
+                    android:id="@+id/cbGuestRrStandard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -119,7 +119,7 @@
                     android:text="Standard " />
 
                 <CheckBox
-                    android:id="@+id/cbGuestSrDeluxe"
+                    android:id="@+id/cbGuestRrDeluxe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -127,7 +127,7 @@
                     android:text="Deluxe " />
 
                 <CheckBox
-                    android:id="@+id/cbGuestSrSuite"
+                    android:id="@+id/cbGuestRrSuite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -143,18 +143,18 @@
                 android:text="Number of Rooms: " />
 
             <EditText
-                android:id="@+id/etGuestSrtNumberOfRoom"
+                android:id="@+id/etGuestRrtNumberOfRoom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="number"
-                android:text="1" />
+                android:hint="1" />
 
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnGuestSrSearchRoom"
+            android:id="@+id/btnGuestRrSearchRoom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
@@ -162,15 +162,16 @@
             android:text="Search"
             android:textColor="@color/colorWhite"
             android:textSize="16sp" />
+
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llAvlblRoomOp"
+        android:id="@+id/llGuestRrOutput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="#eaeaea"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <LinearLayout
             style="@style/horz_linear_layout_style"
@@ -200,7 +201,9 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:orientation="horizontal">
+
             <TextView
+                android:id="@+id/tvGuestRrNote"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
@@ -218,6 +221,7 @@
                 android:textSize="13sp" />
 
             <Button
+                android:id="@+id/btnGuestRrSort"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -231,6 +235,7 @@
                 android:textSize="13dp" />
 
             <Button
+                android:id="@+id/btnGuestRrDirection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -272,6 +277,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
+                            android:gravity="center"
                             android:background="@color/colorLightPrimary"
                             android:orientation="vertical">
 
@@ -322,7 +328,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:paddingLeft="10dp"
-                                    android:text="Suite"
+                                    android:text="Standard"
                                     android:textSize="16sp" />
 
                             </LinearLayout>
@@ -369,7 +375,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:paddingLeft="10dp"
-                                    android:text="$225"
+                                    android:text="$100"
                                     android:textSize="16sp" />
 
                             </LinearLayout>
@@ -421,6 +427,7 @@
                             android:layout_width="100dp"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
+                            android:gravity="center"
                             android:background="@color/colorLightPrimary"
                             android:orientation="vertical">
 
@@ -570,6 +577,7 @@
                             android:layout_width="102dp"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
+                            android:gravity="center"
                             android:background="@color/colorLightPrimary"
                             android:orientation="vertical">
 
@@ -690,7 +698,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:paddingLeft="10dp"
-                                    android:text="07/14/2020"
+                                    android:text="07/18/2020"
                                     android:textSize="16sp" />
 
                             </LinearLayout>
@@ -701,6 +709,159 @@
 
 
                 </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="5dp">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="102dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:background="@color/colorLightPrimary"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:padding="5dp"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/ic_hotel_maverick" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="3dp"
+                                android:paddingRight="3dp"
+                                android:paddingBottom="5dp"
+                                android:text="Maverick Hotel"
+                                android:textColor="@color/colorPrimaryDark" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingRight="25dp">
+
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/text_style"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Room Type:" />
+
+                                <TextView
+
+                                    style="@style/text_style"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="10dp"
+                                    android:text="Suite"
+                                    android:textSize="16sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/text_style"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Number of Rooms" />
+
+                                <TextView
+
+                                    style="@style/text_style"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="10dp"
+                                    android:text="1"
+                                    android:textSize="16sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/text_style"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Price Per Night" />
+
+                                <TextView
+
+                                    style="@style/text_style"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="10dp"
+                                    android:text="$225"
+                                    android:textSize="16sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/text_style"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Check In Date" />
+
+                                <TextView
+
+                                    style="@style/text_style"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="10dp"
+                                    android:text="07/19/2020"
+                                    android:textSize="16sp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
             </LinearLayout>
 
         </ScrollView>

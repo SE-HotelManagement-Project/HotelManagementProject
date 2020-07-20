@@ -68,7 +68,7 @@
 
         </LinearLayout>
 
-        <LinearLayout style="@style/horz_linear_layout_style">
+        <LinearLayout style="@style/horz_linear_layout_style2">
 
             <TextView
                 style="@style/text_style"
@@ -94,7 +94,6 @@
 
         </LinearLayout>
 
-
         <Button
             android:id="@+id/btnGuestRsSearch"
             android:layout_width="match_parent"
@@ -104,7 +103,6 @@
             android:text="Search"
             android:textColor="@color/colorWhite"
             android:textSize="16sp" />
-
 
     </LinearLayout>
 
@@ -123,7 +121,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                style="@style/horz_linear_layout_style"
+                style="@style/horz_linear_layout_style2"
                 android:layout_margin="15dp"
                 android:gravity="center">
 
