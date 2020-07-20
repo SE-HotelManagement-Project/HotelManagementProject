@@ -13,7 +13,16 @@
         <item>Liberty</item>
     </string-array>
     <string-array name="availability_status">
-        <item>Available</item>
-        <item>Unavailable</item>
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string-array name="occupied_status">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="time">
+        <item>PM</item>
+        <item>AM</item>
     </string-array>
 </resources>

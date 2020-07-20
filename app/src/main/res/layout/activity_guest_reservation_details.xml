@@ -4,22 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="25dp"
-    android:layout_marginRight="25dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
     android:orientation="vertical"
-    tools:context=".view.MgrRoomDetailsActivity">
+    tools:context=".view.GuestReservationDetailsActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_weight="1"
         android:layout_margin="8dp"
+        android:layout_weight="1"
         android:orientation="horizontal"
         android:visibility="visible">
 
         <ImageView
-            android:id="@+id/ivAppIcon"
+            android:id="@+id/ivGuestRD"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -28,10 +28,11 @@
             app:srcCompat="@drawable/ic_room_details" />
 
         <TextView
+            android:id="@+id/tvGuestRD"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Room Details"
+            android:text="Reservation Details"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="17sp" />
 
@@ -51,14 +52,14 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Hotel Name:"
+                    android:text="Reservation Id:"
                     android:textColor="@color/colorGrey" />
 
                 <TextView
+                    android:id="@+id/tvGuestRdReservId"
                     style="@style/text_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" Maverick" />
+                    android:paddingLeft="10dp"
+                    android:text="HM-6582" />
 
             </LinearLayout>
 
@@ -66,57 +67,98 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="start date:"
+                    android:text="Hotel Name: "
                     android:textColor="@color/colorGrey" />
 
+                <TextView
+                    android:id="@+id/tvGuestRdHotelName"
+                    style="@style/edit_text_style"
+                    android:text="Mavericks" />
+
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
 
                 <TextView
-                    android:id="@+id/tvDateFrom"
-                    style="@style/edit_text_style"
+                    style="@style/text_style"
+                    android:text="CheckIn Date"
+                    android:textColor="@color/colorGrey" />
+
+                <TextView
+                    android:id="@+id/tvGuestRdCheckIn"
+                    style="@style/text_style"
+                    android:paddingLeft="10dp"
                     android:text="07/14/2020" />
-
             </LinearLayout>
 
             <LinearLayout style="@style/horz_linear_layout_style">
 
                 <TextView
                     style="@style/text_style"
-                    android:text="end date:"
+                    android:text="CheckOut Date: "
                     android:textColor="@color/colorGrey" />
 
-
                 <TextView
-                    android:id="@+id/tvDateTo"
-                    style="@style/edit_text_style"
-                    android:text="07/15/2020" />
-
+                    android:id="@+id/tvGuestRdCheckOut"
+                    style="@style/text_style"
+                    android:paddingLeft="10dp"
+                    android:text="07/16/2020" />
             </LinearLayout>
 
             <LinearLayout style="@style/horz_linear_layout_style">
 
                 <TextView
                     style="@style/text_style"
-                    android:text="start time:"
+                    android:text="Start Time:"
                     android:textColor="@color/colorGrey" />
 
-
                 <TextView
-                    android:id="@+id/tvStartTime"
-                    style="@style/edit_text_style"
-                    android:text="12:03" />
-
+                    android:id="@+id/tvGuestRdStartTime"
+                    style="@style/text_style"
+                    android:paddingLeft="10dp"
+                    android:text="12:00 PM" />
             </LinearLayout>
 
             <LinearLayout style="@style/horz_linear_layout_style">
 
                 <TextView
                     style="@style/text_style"
-                    android:text="room type:"
+                    android:text="Number Of Rooms"
                     android:textColor="@color/colorGrey" />
 
                 <TextView
-                    android:id="@+id/tvRoomType"
-                    style="@style/edit_text_style"
+                    android:id="@+id/tvGuestRdNumRooms"
+                    style="@style/text_style"
+                    android:paddingLeft="10dp"
+                    android:text="2"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Number Of Nights: "
+                    android:textColor="@color/colorGrey" />
+
+                <TextView
+                    android:id="@+id/tvGuestRdNumNights"
+                    style="@style/text_style"
+                    android:text="1" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Room Type: "
+                    android:textColor="@color/colorGrey" />
+
+                <TextView
+                    android:id="@+id/tvGuestRdRoomType"
+                    style="@style/text_style"
+                    android:paddingLeft="10dp"
                     android:text="Standard" />
 
             </LinearLayout>
@@ -125,87 +167,55 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Room Number:"
+                    android:text="Total Price: "
                     android:textColor="@color/colorGrey" />
 
-
                 <TextView
-                    android:id="@+id/tvRoomNumRd"
-                    style="@style/edit_text_style"
-                    android:text="21" />
-
-            </LinearLayout>
-
-            <LinearLayout style="@style/horz_linear_layout_style">
-
-                <TextView
+                    android:id="@+id/tvGuestRdRoomPrice"
                     style="@style/text_style"
-                    android:text="Room price per night:"
-                    android:textColor="@color/colorGrey" />
-
-
-                <TextView
-                    android:id="@+id/tvRoomPriceRd"
-                    style="@style/edit_text_style"
-                    android:text="$100" />
-
-            </LinearLayout>
-
-            <LinearLayout style="@style/horz_linear_layout_style">
-
-                <TextView
-                    style="@style/text_style"
-                    android:text="Floor Number:"
-                    android:textColor="@color/colorGrey" />
-
-
-                <TextView
-                    android:id="@+id/tvFloorNumRd"
-                    style="@style/text_style"
-                    android:layout_width="match_parent"
                     android:paddingLeft="10dp"
-                    android:text="1"
-                    android:textSize="16sp" />
+                    android:text="$200" />
 
-            </LinearLayout>
-
-            <LinearLayout style="@style/horz_linear_layout_style">
-
-                <TextView
-                    style="@style/text_style"
-                    android:text="Occupied Status:"
-                    android:textColor="@color/colorGrey" />
-
-
-                <TextView
-                    android:id="@+id/tvOccupiedStatus"
-                    style="@style/edit_text_style"
-                    android:text="No" />
-
-            </LinearLayout>
-
-            <LinearLayout style="@style/horz_linear_layout_style">
-
-                <TextView
-                    style="@style/text_style"
-                    android:text="Availability Status:"
-                    android:textColor="@color/colorGrey" />
-
-
-                <TextView
-                    android:id="@+id/tvAvailabilityStatus"
-                    style="@style/edit_text_style"
-                    android:text="Yes" />
             </LinearLayout>
 
         </LinearLayout>
 
     </ScrollView>
 
-    <Button
-        android:id="@+id/btnEditRd"
-        style="@style/btn_style"
-        android:text="Modify Room Details"
-        android:visibility="visible" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnGuestCancelReservation"
+            style="@style/btn_style"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="10dp"
+            android:text="Cancel Reservation"
+            android:textSize="15sp" />
+
+
+        <Button
+            android:id="@+id/btnGuestModifyReservation"
+            style="@style/btn_style"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="10dp"
+            android:text="Modify Reservation"
+            android:textSize="15sp" />
+
+    </LinearLayout>
 
 </LinearLayout>
+
+
+
+
