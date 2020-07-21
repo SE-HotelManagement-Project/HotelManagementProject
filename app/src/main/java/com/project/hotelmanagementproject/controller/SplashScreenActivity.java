@@ -1,4 +1,4 @@
-package com.project.hotelmanagementproject.view;
+package com.project.hotelmanagementproject.controller;
 
 import android.content.Intent;
 import android.os.Bundle;

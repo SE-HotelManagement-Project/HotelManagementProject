@@ -1,6 +1,6 @@
 package com.project.hotelmanagementproject.model;
 
-public class UserModel {
+public class User {
     String userName;
     String firstName;
     String lastName;
@@ -16,7 +16,7 @@ public class UserModel {
     String creditCardExp;
     String creditCardtype;
 
-    public UserModel(String userName, String firstName, String lastName, String password, String userRole, String email, String phone, String streetAddress, String city, String state, String zipCode, String creditCardNum, String creditCardExp, String creditCardtype) {
+    public User(String userName, String firstName, String lastName, String password, String userRole, String email, String phone, String streetAddress, String city, String state, String zipCode, String creditCardNum, String creditCardExp, String creditCardtype) {
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -144,4 +144,6 @@ public class UserModel {
     public void setCreditCardtype(String creditCardtype) {
         this.creditCardtype = creditCardtype;
     }
+
+
 }

@@ -7,7 +7,7 @@
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
     android:orientation="vertical"
-    tools:context=".view.MgrModifyRoomActivity">
+    tools:context=".controller.MgrModifyRoomActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -164,7 +164,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:checked="true"
+
                         android:text="Standard " />
 
                     <RadioButton
@@ -172,6 +172,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:checked="true"
                         android:text="Deluxe " />
 
                     <RadioButton
@@ -202,7 +203,7 @@
                     android:id="@+id/etMgrRdRoomNum"
                     style="@style/edit_text_style"
                     android:layout_gravity="center"
-                    android:text="21" />
+                    android:text="121" />
 
             </LinearLayout>
 
@@ -243,9 +244,30 @@
 
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etMgrRdRoomPriceWeekend"
+                    android:id="@+id/etMgrRdTax"
                     style="@style/edit_text_style"
                     android:hint="$150" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_edit" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Tax:" />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMgrRdRoomPriceWeekend"
+                    style="@style/edit_text_style"
+                    android:hint="8.25%" />
 
             </LinearLayout>
 
@@ -335,9 +357,10 @@
 
         <Button
             android:id="@+id/btnMgrRdSave"
+            android:layout_margin="10dp"
             style="@style/btn_style"
             android:layout_weight="1"
-            android:text="Save" />
+            android:text="Save Room Details" />
 
     </LinearLayout>
 

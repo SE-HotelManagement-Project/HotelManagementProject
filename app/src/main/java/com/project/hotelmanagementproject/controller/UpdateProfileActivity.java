@@ -1,4 +1,4 @@
-package com.project.hotelmanagementproject.view;
+package com.project.hotelmanagementproject.controller;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -16,21 +16,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.hotelmanagementproject.R;
 import com.project.hotelmanagementproject.model.Session;
-import com.project.hotelmanagementproject.model.UserDBHelper;
+import com.project.hotelmanagementproject.model.UserDbMgr;
 
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_CITY;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_CREDIT_CARD_EXP;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_CREDIT_CARD_NUM;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_EMAIL;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_FIRST_NAME;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_LAST_NAME;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_PASSWORD;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_PHONE;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_STATE;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_STREET_ADDRESS;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_USER_NAME;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_USER_ROLE;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_ZIP_CODE;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_CITY;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_CREDIT_CARD_EXP;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_CREDIT_CARD_NUM;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_EMAIL;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_FIRST_NAME;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_LAST_NAME;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_PASSWORD;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_PHONE;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_STATE;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_STREET_ADDRESS;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_USER_NAME;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_USER_ROLE;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_ZIP_CODE;
 
 public class UpdateProfileActivity extends AppCompatActivity {
 
@@ -44,7 +44,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
     String ccn = "", ccexp = "";
     LinearLayout llCCN, llCCExp;
 
-    UserDBHelper userDbHelper;
+    UserDbMgr userDbMgr;
     Cursor c;
 
     @Override
@@ -52,13 +52,13 @@ public class UpdateProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
 
-        userDbHelper = new UserDBHelper(UpdateProfileActivity.this);
+        userDbMgr = UserDbMgr.getInstance(getApplicationContext());
         getUserData();
         initUi();
     }
 
     public void getUserData() {
-        c = userDbHelper.getUserProfile(new Session(getApplicationContext()).getUserName());
+        c = userDbMgr.getUserProfile(new Session(getApplicationContext()).getUserName());
         while (c.moveToNext()) {
             role = c.getString(c.getColumnIndex(COL_USER_ROLE));
             password = c.getString(c.getColumnIndex(COL_PASSWORD));
@@ -139,7 +139,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
                             public void onClick(DialogInterface arg0, int arg1) {
                                 getUpdatedUserData();
-                                boolean isUpdated = userDbHelper.updateProfile(userName, firstName, password, lastName, phone, email, streetAddress, city, state, zipcode, ccn, ccexp);
+                                boolean isUpdated = userDbMgr.updateProfile(userName, firstName, password, lastName, phone, email, streetAddress, city, state, zipcode, ccn, ccexp);
                                 if (isUpdated) {
                                     Toast.makeText(getApplicationContext(), "profile Updated Successfully!", Toast.LENGTH_LONG).show();
                                     startActivity(new Intent(UpdateProfileActivity.this, ViewProfileActivity.class));
@@ -163,23 +163,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
         city = tvCity.getText().toString();
         state = tvState.getText().toString();
         zipcode = tvZipcode.getText().toString();
-
-        if (role.equalsIgnoreCase("Guest")) {
-            ccn = tvCreditCardNum.getText().toString();
-            ccexp = tvCreditCardExpiry.getText().toString();
-        }
-    }
-
-    public void getUpdatedUserData1() {
-        firstName = tvFirstName.getText().toString();
-        lastName = "giri";
-        password = "manager123";
-        phone = "8178290923";
-        email = "sagar.giri3@mavs.uta.edu";
-        streetAddress = "meadow run";
-        city = "arlington";
-        state = "texas";
-        zipcode = "76010";
 
         if (role.equalsIgnoreCase("Guest")) {
             ccn = tvCreditCardNum.getText().toString();
