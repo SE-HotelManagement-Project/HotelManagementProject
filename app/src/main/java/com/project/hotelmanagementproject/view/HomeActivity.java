@@ -71,14 +71,14 @@ public class HomeActivity extends AppCompatActivity {
         avSearchUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showToastMessage("Feature Under Construction");
+              //  showToastMessage("Feature Under Construction");
                 startActivity(new Intent(HomeActivity.this, AdminSearchUserActivity.class));
             }
         });
         avViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showToastMessage("Feature Under Construction");
+                //   showToastMessage("Feature Under Construction");
                 startActivity(new Intent(HomeActivity.this, ViewProfileActivity.class));
             }
         });
@@ -94,14 +94,12 @@ public class HomeActivity extends AppCompatActivity {
         gvBookHotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showToastMessage("Feature is under development");
                 startActivity(new Intent(HomeActivity.this, GuestRequestReservationActivity.class));
             }
         });
         gvViewReservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showToastMessage("Feature Under Construction");
                 startActivity(new Intent(HomeActivity.this, GuestReservationSummActivity.class));
 
             }
@@ -109,7 +107,6 @@ public class HomeActivity extends AppCompatActivity {
         gvViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showToastMessage("Feature Under Construction");
                 startActivity(new Intent(HomeActivity.this, ViewProfileActivity.class));
 
             }
@@ -128,15 +125,13 @@ public class HomeActivity extends AppCompatActivity {
         mvAvailableRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showToastMessage("Feature Under Construction");
-                startActivity(new Intent(HomeActivity.this, MgrAvlblRoomsActivity.class));
+             startActivity(new Intent(HomeActivity.this, MgrAvlblRoomsActivity.class));
 
             }
         });
         mvReservationList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showToastMessage("Feature Under Construction");
                 startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
 
             }
@@ -144,16 +139,13 @@ public class HomeActivity extends AppCompatActivity {
         mvSearchRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showToastMessage("Feature Under Construction");
                 startActivity(new Intent(HomeActivity.this, MgrSearchRoomActivity.class));
-
             }
         });
         mvViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showToastMessage("Feature Under Construction");
-                startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
+                startActivity(new Intent(HomeActivity.this, ViewProfileActivity.class));
 
             }
         });

@@ -2,20 +2,20 @@ package com.project.hotelmanagementproject.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import com.project.hotelmanagementproject.R;
 
 public class GuestRequestReservationActivity extends AppCompatActivity {
 
     LinearLayout llSearchRoomIp, llSearchRoomOp;
+
     LinearLayout llGuestRrInput,llGuestRrOutput;
     CardView cvRoomCard;
+
     Button btnSearchHotel;
     Button btnGuestRrSearchRoom;
     CardView cvGuestRoomSearchList;
@@ -25,9 +25,10 @@ public class GuestRequestReservationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_request_reservation);
         init();
+
     }
 
-    public void initUi(View v) {
+    public void initUi() {
 
         llSearchRoomIp = findViewById(R.id.llGuestRrInput);
         llSearchRoomOp = findViewById(R.id.llGuestRrOutput);

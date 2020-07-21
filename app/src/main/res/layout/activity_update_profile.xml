@@ -54,18 +54,18 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:paddingRight="15dp"
-                    app:srcCompat="@drawable/ic_baseline_edit" />
+                    app:srcCompat="@drawable/ic_baseline_lock_24" />
 
                 <TextView
                     style="@style/text_style"
                     android:text="Username:" />
 
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tvGuestUpUserName"
+                <TextView
+                    android:id="@+id/tvUpUserName"
                     style="@style/edit_text_style"
                     android:layout_gravity="center"
-                    android:hint="Alay_guest" />
+                    android:text="Alay_guest" />
 
             </LinearLayout>
 
@@ -84,7 +84,7 @@
 
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etGuestUpPassword"
+                    android:id="@+id/etUpPassword"
                     style="@style/edit_text_style"
                     android:hint="alay123" />
 
@@ -104,7 +104,7 @@
                     android:text="Role:" />
 
                 <TextView
-                    android:id="@+id/tvGuestUpRole"
+                    android:id="@+id/tvUpRole"
                     style="@style/edit_text_style"
                     android:layout_gravity="center"
                     android:text="Guest" />
@@ -130,7 +130,7 @@
 
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etGuestLastNameUp"
+                        android:id="@+id/etUpLastName"
                         style="@style/edit_text_style"
                         android:hint="Parikh" />
 
@@ -154,7 +154,7 @@
 
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etGuestFirstNameUp"
+                        android:id="@+id/etUpFirstName"
                         style="@style/edit_text_style"
                         android:hint="Alay" />
 
@@ -177,7 +177,7 @@
 
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etGuestPhoneUp"
+                    android:id="@+id/etUpPhone"
                     style="@style/edit_text_style"
                     android:hint="4084831223" />
 
@@ -198,7 +198,7 @@
 
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etGuestE-mailUp"
+                    android:id="@+id/etUpEmail"
                     style="@style/edit_text_style"
                     android:hint="alay.parikh@mavs.uta.edu" />
 
@@ -219,7 +219,7 @@
 
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etGuestStreetAddressUp"
+                    android:id="@+id/etUpStreetAddress"
                     style="@style/edit_text_style"
                     android:hint="404 border" />
 
@@ -240,7 +240,7 @@
 
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etGuestCityUp"
+                    android:id="@+id/etUpCity"
                     style="@style/edit_text_style"
                     android:hint="arlington" />
 
@@ -265,7 +265,7 @@
 
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etGuestStateUp"
+                        android:id="@+id/etUpState"
                         style="@style/edit_text_style"
                         android:hint="texas" />
 
@@ -289,7 +289,7 @@
 
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etGuestZipCodeUp"
+                        android:id="@+id/etUpZipCode"
                         style="@style/edit_text_style"
                         android:hint="76010" />
 
@@ -297,7 +297,9 @@
 
             </LinearLayout>
 
-            <LinearLayout style="@style/horz_linear_layout_style2">
+            <LinearLayout
+                android:id="@+id/llUpCCN"
+                style="@style/horz_linear_layout_style2">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -312,13 +314,15 @@
 
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etGuestCreditCardNumberUp"
+                    android:id="@+id/etUpCreditCardNumber"
                     style="@style/edit_text_style"
                     android:hint="1053608910536921" />
 
             </LinearLayout>
 
-            <LinearLayout style="@style/horz_linear_layout_style2">
+            <LinearLayout
+                android:id="@+id/llUpCCEx"
+                style="@style/horz_linear_layout_style2">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -333,7 +337,7 @@
 
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etGuestCreditCardExpiryUp"
+                    android:id="@+id/etUpCreditCardExpiry"
                     style="@style/edit_text_style"
                     android:hint="02/24" />
 
@@ -350,17 +354,17 @@
         android:orientation="horizontal"
         android:visibility="visible">
 
-        <Button
-            android:id="@+id/btnUpCancel"
-            style="@style/btn_style"
-            android:layout_weight="1"
-            android:text="Cancel" />
+        <!--        <Button-->
+        <!--            android:id="@+id/btnUpCancel"-->
+        <!--            style="@style/btn_style"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:text="Cancel" />-->
 
         <Button
             android:id="@+id/btnUpSave"
             style="@style/btn_style"
             android:layout_weight="1"
-            android:text="Save" />
+            android:text="Save Changes" />
 
     </LinearLayout>
 

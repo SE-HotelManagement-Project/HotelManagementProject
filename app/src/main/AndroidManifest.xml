@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
-        <activity android:name=".view.AdminSearchUserActivity"></activity>
+        <activity android:name=".view.AdminSearchUserActivity" />
         <activity android:name=".view.GuestRequestReservationActivity" />
         <activity android:name=".view.GuestRequestHotelActivity" />
         <activity android:name=".view.UpdateProfileActivity" />
