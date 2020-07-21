@@ -86,10 +86,19 @@ public class UserDBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public void updateProfile(String username, String firstname, String lastname, String phone, String email, String address, String city, String state, String zipCode) {
+    public Cursor getUserProfile(String username) {
+        String role = null;
+        SQLiteDatabase sqldb = this.getReadableDatabase();
+        String queryForCheckingPassword = "Select * from " + TABLE_USER_ACCT + " where " + COL_USER_NAME + " = '" + username + "'";
+        Cursor c = sqldb.rawQuery(queryForCheckingPassword, null);
+        return c;
+    }
+
+    public boolean updateProfile(String username, String firstname, String password, String lastname, String phone, String email, String address, String city, String state, String zipCode, String creditCardNum, String cardExpiry) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COL_FIRST_NAME, firstname);
+        cv.put(COL_PASSWORD, password);
         cv.put(COL_LAST_NAME, lastname);
         cv.put(COL_EMAIL, email);
         cv.put(COL_PHONE, phone);
@@ -97,7 +106,10 @@ public class UserDBHelper extends SQLiteOpenHelper {
         cv.put(COL_CITY, city);
         cv.put(COL_STATE, state);
         cv.put(COL_ZIP_CODE, zipCode);
-        db.update(TABLE_USER_ACCT, cv, COL_USER_NAME + " = '" + username + "'", null);
+        cv.put(COL_CREDIT_CARD_NUM, creditCardNum);
+        cv.put(COL_CREDIT_CARD_EXP, cardExpiry);
+        int update = db.update(TABLE_USER_ACCT, cv, COL_USER_NAME + " = '" + username + "'", null);
+        return update == 1;
     }
 
     public boolean checkPassword(String username, String password) {

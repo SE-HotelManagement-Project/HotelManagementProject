@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone">
+
         <LinearLayout
             android:id="@+id/llAdminSearchUser"
             android:layout_width="match_parent"
@@ -45,6 +47,7 @@
                     android:textSize="18sp" />
 
             </LinearLayout>
+
             <LinearLayout style="@style/horz_linear_layout_style">
 
                 <TextView
@@ -54,15 +57,15 @@
                     android:gravity="center"
                     android:paddingRight="15dp"
                     android:text="Last Name:" />
+
                 <EditText
-                    android:id="@+id/edUserLastName"
+                    android:id="@+id/etAdminSuLastName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="text"
                     android:text="Walton" />
-
 
 
             </LinearLayout>
@@ -88,6 +91,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_profile" />
+
             <TextView
                 android:id="@+id/tvAdminSearchResults"
                 android:layout_width="match_parent"
@@ -103,6 +113,8 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:orientation="horizontal">
+
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
