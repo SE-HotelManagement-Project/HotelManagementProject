@@ -3,6 +3,7 @@ package com.project.hotelmanagementproject.view;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -163,23 +165,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
         city = tvCity.getText().toString();
         state = tvState.getText().toString();
         zipcode = tvZipcode.getText().toString();
-
-        if (role.equalsIgnoreCase("Guest")) {
-            ccn = tvCreditCardNum.getText().toString();
-            ccexp = tvCreditCardExpiry.getText().toString();
-        }
-    }
-
-    public void getUpdatedUserData1() {
-        firstName = tvFirstName.getText().toString();
-        lastName = "giri";
-        password = "manager123";
-        phone = "8178290923";
-        email = "sagar.giri3@mavs.uta.edu";
-        streetAddress = "meadow run";
-        city = "arlington";
-        state = "texas";
-        zipcode = "76010";
 
         if (role.equalsIgnoreCase("Guest")) {
             ccn = tvCreditCardNum.getText().toString();

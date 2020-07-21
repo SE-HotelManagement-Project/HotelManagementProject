@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginLeft="25dp"
     android:layout_marginRight="25dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".view.GuestRequestHotelActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"

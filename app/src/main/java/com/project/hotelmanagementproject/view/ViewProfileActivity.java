@@ -1,6 +1,11 @@
 package com.project.hotelmanagementproject.view;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,6 +36,7 @@ import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_USER_RO
 import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_ZIP_CODE;
 
 public class ViewProfileActivity extends AppCompatActivity {
+    private Button btnAdminVpModify;
 
     TextView tvUserName, tvPassword, tvRole, tvLastName, tvFirstName, tvPhone, tvEmail;
     TextView tvStreetAddress, tvCity, tvState, tvZipcode;

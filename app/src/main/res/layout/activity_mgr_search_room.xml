@@ -15,7 +15,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginRight="25dp"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -189,6 +189,7 @@
 
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cvAdminSearchRoomResult"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -221,8 +222,8 @@
                                 android:layout_height="wrap_content"
                                 android:paddingLeft="3dp"
                                 android:paddingRight="3dp"
-                                android:text="Maverick Hotel"
                                 android:paddingBottom="5dp"
+                                android:text="Maverick Hotel"
                                 android:textColor="@color/colorPrimaryDark" />
 
 

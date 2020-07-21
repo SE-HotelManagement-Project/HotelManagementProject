@@ -14,6 +14,7 @@
         tools:ignore="HardcodedDebugMode">
         <activity android:name=".view.AdminSearchUserActivity" />
         <activity android:name=".view.GuestRequestReservationActivity" />
+        <activity android:name=".view.GuestRequestHotelActivity" />
         <activity android:name=".view.UpdateProfileActivity" />
         <activity android:name=".view.ViewProfileActivity" />
         <activity android:name=".view.GuestModifyReservationActivity" />
