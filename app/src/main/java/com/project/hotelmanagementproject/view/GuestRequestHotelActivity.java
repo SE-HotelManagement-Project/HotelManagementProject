@@ -1,6 +1,5 @@
 package com.project.hotelmanagementproject.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,23 +9,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.hotelmanagementproject.R;
 
-public class ViewProfileActivity extends AppCompatActivity {
-    private Button btnAdminVpModify;
+public class GuestRequestHotelActivity extends AppCompatActivity {
+    private Button btnGuestRmDContinue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_profile);
+        setContentView(R.layout.activity_guest_room_details);
         init();
     }
 
     public void init(){
-        btnAdminVpModify = findViewById(R.id.btnAdminVpModify);
-        btnAdminVpModify.setOnClickListener(new View.OnClickListener() {
+        btnGuestRmDContinue = findViewById(R.id.btnGuestRmDContinue);
+        btnGuestRmDContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showToastMessage("Feature Under Construction");
-                startActivity(new Intent(ViewProfileActivity.this, UpdateProfileActivity.class));
             }
         });
     }

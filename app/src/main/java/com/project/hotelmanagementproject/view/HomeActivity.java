@@ -95,14 +95,14 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showToastMessage("Feature is under development");
-                startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
+                startActivity(new Intent(HomeActivity.this, GuestRequestReservationActivity.class));
             }
         });
         gvViewReservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showToastMessage("Feature Under Construction");
-                startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
+                startActivity(new Intent(HomeActivity.this, GuestReservationSummActivity.class));
 
             }
         });
@@ -110,7 +110,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showToastMessage("Feature Under Construction");
-                startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
+                startActivity(new Intent(HomeActivity.this, ViewProfileActivity.class));
 
             }
         });
@@ -129,7 +129,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showToastMessage("Feature Under Construction");
-                startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
+                startActivity(new Intent(HomeActivity.this, MgrAvlblRoomsActivity.class));
 
             }
         });
@@ -145,7 +145,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showToastMessage("Feature Under Construction");
-                startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
+                startActivity(new Intent(HomeActivity.this, MgrSearchRoomActivity.class));
 
             }
         });
