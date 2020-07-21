@@ -1,22 +1,26 @@
-package com.project.hotelmanagementproject.view;
+package com.project.hotelmanagementproject.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.hotelmanagementproject.R;
-import com.project.hotelmanagementproject.model.UserDBHelper;
-import com.project.hotelmanagementproject.model.UserModel;
+import com.project.hotelmanagementproject.model.DbMgr;
+import com.project.hotelmanagementproject.model.User;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText etUserName, etPassword, etEmail, etFirstName, etLastName, etPhone, etStreetAddress, etCity, etState, etZipcode, etCCN, etCCExpiry;
-    Button btnRegister;
+    String ccType;
+    private EditText etUserName, etPassword, etEmail, etFirstName, etLastName, etPhone, etStreetAddress, etCity, etState, etZipcode, etCCN, etCCExpiry;
+    private Button btnRegister;
+    private Spinner spnrCardType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,18 @@ public class RegisterActivity extends AppCompatActivity {
         etZipcode = findViewById(R.id.etZipCode);
         etCCN = findViewById(R.id.etCreditCardNumber);
         etCCExpiry = findViewById(R.id.etCCExpiry);
+        spnrCardType = findViewById(R.id.spnrRegCreditCardType);
+        spnrCardType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ccType = spnrCardType.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                ccType = "VISA";
+            }
+        });
 
         btnRegister = findViewById(R.id.btnRegister);
 
@@ -45,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    UserModel newUserDetails = new UserModel(
+                    User newUserDetails = new User(
                             etUserName.getText().toString(),
                             etFirstName.getText().toString(),
                             etLastName.getText().toString(),
@@ -59,9 +75,10 @@ public class RegisterActivity extends AppCompatActivity {
                             etZipcode.getText().toString(),
                             etCCN.getText().toString(),
                             etCCExpiry.getText().toString(),
-                            "VISA");
-                    UserDBHelper userDbHelper = new UserDBHelper(RegisterActivity.this);
-                    boolean isDataInserted = userDbHelper.addNewGuest(newUserDetails);
+                            ccType
+                    );
+                    DbMgr userDbMgr = DbMgr.getInstance(getApplicationContext());
+                    boolean isDataInserted = userDbMgr.addNewGuest(newUserDetails);
                     if (isDataInserted) {
                         startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                         Toast.makeText(RegisterActivity.this, "guest account created succesfully ", Toast.LENGTH_LONG).show();

@@ -1,4 +1,4 @@
-package com.project.hotelmanagementproject.view;
+package com.project.hotelmanagementproject.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.project.hotelmanagementproject.R;
+import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.Session;
-import com.project.hotelmanagementproject.model.UserDBHelper;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -46,8 +46,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 boolean isLogin = false;
                 try {
-                    UserDBHelper userDbHelper = new UserDBHelper(LoginActivity.this);
-                    isLogin = userDbHelper.checkPassword(etUserName.getText().toString(), etPassword.getText().toString());
+                    DbMgr userDbMgr = DbMgr.getInstance(getApplicationContext());
+                    isLogin = userDbMgr.checkPassword(etUserName.getText().toString(), etPassword.getText().toString());
 
                 } catch (Exception e) {
                     e.printStackTrace();

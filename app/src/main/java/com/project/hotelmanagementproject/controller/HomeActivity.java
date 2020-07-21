@@ -1,4 +1,4 @@
-package com.project.hotelmanagementproject.view;
+package com.project.hotelmanagementproject.controller;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,8 +15,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.hotelmanagementproject.R;
+import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.Session;
-import com.project.hotelmanagementproject.model.UserDBHelper;
 
 public class HomeActivity extends AppCompatActivity {
     LinearLayout gvBookHotel, gvChangePw, gvViewReservation, gvViewProfile;
@@ -32,8 +32,8 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         session = new Session(getApplicationContext());
-        UserDBHelper userDbHelper = new UserDBHelper(HomeActivity.this);
-        session.setUserRole(userDbHelper.userRole(session.getUserName()));
+        DbMgr userDbMgr = DbMgr.getInstance(getApplicationContext());
+        session.setUserRole(userDbMgr.userRole(session.getUserName()));
         initView();
     }
 
@@ -94,29 +94,25 @@ public class HomeActivity extends AppCompatActivity {
         gvBookHotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // showToastMessage("Feature is under development");
                 startActivity(new Intent(HomeActivity.this, GuestRequestReservationActivity.class));
             }
         });
         gvViewReservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // showToastMessage("Feature Under Construction");
-                startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
+                startActivity(new Intent(HomeActivity.this, GuestReservationSummActivity.class));
 
             }
         });
         gvViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //showToastMessage("Feature Under Construction");
                 startActivity(new Intent(HomeActivity.this, ViewProfileActivity.class));
 
             }
         });
 
     }
-
 
     public void managerFunctions() {
         mvViewProfile = findViewById(R.id.mvViewProfile);
@@ -128,15 +124,13 @@ public class HomeActivity extends AppCompatActivity {
         mvAvailableRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // showToastMessage("Feature Under Construction");
-                startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
+             startActivity(new Intent(HomeActivity.this, MgrAvlblRoomsActivity.class));
 
             }
         });
         mvReservationList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // showToastMessage("Feature Under Construction");
                 startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
 
             }
@@ -144,15 +138,12 @@ public class HomeActivity extends AppCompatActivity {
         mvSearchRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // showToastMessage("Feature Under Construction");
-                startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
-
+                startActivity(new Intent(HomeActivity.this, MgrSearchRoomActivity.class));
             }
         });
         mvViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //showToastMessage("Feature Under Construction");
                 startActivity(new Intent(HomeActivity.this, ViewProfileActivity.class));
 
             }

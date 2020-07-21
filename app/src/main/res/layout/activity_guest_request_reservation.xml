@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".controller.GuestRequestReservationActivity">
 
     <LinearLayout
         android:id="@+id/llGuestRrInput"
@@ -13,7 +14,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,11 +59,6 @@
                 android:entries="@array/hotel_name_guest"
                 android:padding="12dp" />
 
-            <!--            <Spinner-->
-            <!--                android:id="@+id/spnrGuestSrHotelName2"-->
-            <!--                style="@style/spinner_style"-->
-            <!--                android:entries="@array/hotel_name" />-->
-
         </LinearLayout>
 
         <LinearLayout style="@style/horz_linear_layout_style">
@@ -75,7 +71,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etGuestRrCheckInFrom"
                 style="@style/edit_text_style"
-                android:hint="07/14/2020" />
+                android:hint="07/14/2020"
+                android:text="07/14/2020" />
 
         </LinearLayout>
 
@@ -89,7 +86,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etGuestRrCheckOutDateTo"
                 style="@style/edit_text_style"
-                android:hint="07/15/2020" />
+                android:text="07/15/2020" />
 
         </LinearLayout>
 
@@ -141,6 +138,7 @@
 
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout style="@style/horz_linear_layout_style">
 
             <TextView
@@ -153,8 +151,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="number"
-                android:hint="1" />
+                android:hint="1"
+                android:inputType="number" />
 
         </LinearLayout>
 
@@ -176,7 +174,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="#eaeaea"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             style="@style/horz_linear_layout_style"
@@ -265,6 +263,7 @@
                 android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cvGuestRoomSearchList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -274,6 +273,7 @@
 
 
                     <LinearLayout
+                        android:id="@+id/llGuestRoomSearchList"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -283,7 +283,6 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:background="@color/colorLightPrimary"
                             android:orientation="vertical">
 
                             <ImageView
@@ -313,7 +312,6 @@
                             android:paddingRight="25dp">
 
 
-
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -337,6 +335,7 @@
                                     android:textSize="16sp" />
 
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -384,6 +383,7 @@
                                     android:textSize="16sp" />
 
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -630,10 +630,10 @@
                                 <TextView
 
                                     style="@style/text_style"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="75dp"
                                     android:layout_height="wrap_content"
                                     android:paddingLeft="10dp"
-                                    android:text="Standard"
+                                    android:text="Suite"
                                     android:textSize="16sp" />
 
                             </LinearLayout>

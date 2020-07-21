@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.LoginActivity">
+    tools:context=".controller.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -71,7 +71,7 @@
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
+                android:inputType="textWebPassword"
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
