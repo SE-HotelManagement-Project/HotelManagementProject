@@ -67,7 +67,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="text"
-                    android:text="Walton" />
+                    android:text="son" />
 
 
             </LinearLayout>
@@ -89,7 +89,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -108,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Users"
+                android:text="Search User Result List"
                 android:textColor="#0C0C0C"
                 android:textSize="20sp"
                 android:visibility="visible" />
@@ -227,7 +227,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
-                        android:text="Walton"
+                        android:text="Watson"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -348,7 +348,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
-                        android:text="rachelwalton"
+                        android:text="johnson24"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -373,7 +373,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
-                        android:text="Walton"
+                        android:text="Johnson"
                         android:textSize="16sp" />
 
                 </LinearLayout>
