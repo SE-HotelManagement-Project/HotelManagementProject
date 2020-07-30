@@ -14,7 +14,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,6 +74,17 @@
                 android:hint="07/14/2020"
                 android:text="07/14/2020" />
 
+        </LinearLayout>
+        <LinearLayout style="@style/horz_linear_layout_style">
+            <TextView
+                style="@style/text_style"
+                android:text="Start Time:" />
+
+
+            <TextView
+                android:id="@+id/etStartTime"
+                style="@style/edit_text_style"
+                android:text="12:03" />
         </LinearLayout>
 
         <LinearLayout style="@style/horz_linear_layout_style">
@@ -192,7 +203,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:paddingRight="15dp"
-                android:text="Available Room List"
+                android:text="Reservation Search Result"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp" />
 

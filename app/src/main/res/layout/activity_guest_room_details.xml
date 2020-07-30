@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Room Details"
+            android:text="View Room Details Summary"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="17sp" />
 
@@ -141,7 +141,7 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Room price per night:"
+                    android:text="Room price per night(Weekday):"
                     android:textColor="@color/colorGrey" />
 
 
@@ -149,6 +149,20 @@
                     android:id="@+id/tvGuestRmDRoomPriceRd"
                     style="@style/edit_text_style"
                     android:text="$135" />
+
+            </LinearLayout>
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Room price per night(Weekend):"
+                    android:textColor="@color/colorGrey" />
+
+
+                <TextView
+                    android:id="@+id/tvGuestRmDRoomPriceWeekend"
+                    style="@style/edit_text_style"
+                    android:text="$185" />
 
             </LinearLayout>
 
@@ -174,14 +188,29 @@
 
                 <TextView
                     style="@style/text_style"
+                    android:text="Tax - 8.2% : "
+                    android:textColor="@color/colorGrey" />
+
+
+                <TextView
+                    android:id="@+id/tvGuestTax"
+                    style="@style/edit_text_style"
+                    android:text="$11.07" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
                     android:text="Total Price:"
                     android:textColor="@color/colorGrey" />
 
 
                 <TextView
-                    android:id="@+id/tvGuestRmDOccupiedStatus"
+                    android:id="@+id/tvGuestRmTotalPrice"
                     style="@style/edit_text_style"
-                    android:text="$135" />
+                    android:text="$146.07" />
 
             </LinearLayout>
 
