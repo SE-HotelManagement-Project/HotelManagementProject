@@ -1,4 +1,4 @@
-package com.project.hotelmanagementproject.view;
+package com.project.hotelmanagementproject.controller;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.hotelmanagementproject.R;
 import com.project.hotelmanagementproject.model.Session;
-import com.project.hotelmanagementproject.model.UserDBHelper;
+import com.project.hotelmanagementproject.model.UserDbMgr;
 
 public class HomeActivity extends AppCompatActivity {
     LinearLayout gvBookHotel, gvChangePw, gvViewReservation, gvViewProfile;
@@ -32,8 +32,8 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         session = new Session(getApplicationContext());
-        UserDBHelper userDbHelper = new UserDBHelper(HomeActivity.this);
-        session.setUserRole(userDbHelper.userRole(session.getUserName()));
+        UserDbMgr userDbMgr = UserDbMgr.getInstance(getApplicationContext());
+        session.setUserRole(userDbMgr.userRole(session.getUserName()));
         initView();
     }
 
@@ -113,7 +113,6 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
-
 
     public void managerFunctions() {
         mvViewProfile = findViewById(R.id.mvViewProfile);

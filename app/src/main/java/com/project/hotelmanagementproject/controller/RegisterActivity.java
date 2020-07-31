@@ -1,4 +1,4 @@
-package com.project.hotelmanagementproject.view;
+package com.project.hotelmanagementproject.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +10,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.hotelmanagementproject.R;
-import com.project.hotelmanagementproject.model.UserDBHelper;
-import com.project.hotelmanagementproject.model.UserModel;
+import com.project.hotelmanagementproject.model.User;
+import com.project.hotelmanagementproject.model.UserDbMgr;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -45,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    UserModel newUserDetails = new UserModel(
+                    User newUserDetails = new User(
                             etUserName.getText().toString(),
                             etFirstName.getText().toString(),
                             etLastName.getText().toString(),
@@ -60,8 +60,8 @@ public class RegisterActivity extends AppCompatActivity {
                             etCCN.getText().toString(),
                             etCCExpiry.getText().toString(),
                             "VISA");
-                    UserDBHelper userDbHelper = new UserDBHelper(RegisterActivity.this);
-                    boolean isDataInserted = userDbHelper.addNewGuest(newUserDetails);
+                    UserDbMgr userDbMgr = UserDbMgr.getInstance(getApplicationContext());
+                    boolean isDataInserted = userDbMgr.addNewGuest(newUserDetails);
                     if (isDataInserted) {
                         startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                         Toast.makeText(RegisterActivity.this, "guest account created succesfully ", Toast.LENGTH_LONG).show();

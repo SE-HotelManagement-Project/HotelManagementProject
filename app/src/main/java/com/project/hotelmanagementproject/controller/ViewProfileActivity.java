@@ -1,11 +1,6 @@
-package com.project.hotelmanagementproject.view;
+package com.project.hotelmanagementproject.controller;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,26 +9,25 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.hotelmanagementproject.R;
 import com.project.hotelmanagementproject.model.Session;
-import com.project.hotelmanagementproject.model.UserDBHelper;
+import com.project.hotelmanagementproject.model.UserDbMgr;
 
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_CITY;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_CREDIT_CARD_EXP;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_CREDIT_CARD_NUM;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_EMAIL;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_FIRST_NAME;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_LAST_NAME;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_PASSWORD;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_PHONE;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_STATE;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_STREET_ADDRESS;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_USER_NAME;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_USER_ROLE;
-import static com.project.hotelmanagementproject.utils.ConstantUtils.COL_ZIP_CODE;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_CITY;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_CREDIT_CARD_EXP;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_CREDIT_CARD_NUM;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_EMAIL;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_FIRST_NAME;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_LAST_NAME;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_PASSWORD;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_PHONE;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_STATE;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_STREET_ADDRESS;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_USER_NAME;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_USER_ROLE;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_ZIP_CODE;
 
 public class ViewProfileActivity extends AppCompatActivity {
     private Button btnAdminVpModify;
@@ -54,8 +48,8 @@ public class ViewProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
 
-        UserDBHelper userDbHelper = new UserDBHelper(ViewProfileActivity.this);
-        Cursor c = userDbHelper.getUserProfile(new Session(getApplicationContext()).getUserName());
+        UserDbMgr userDbMgr = UserDbMgr.getInstance(getApplicationContext());
+        Cursor c = userDbMgr.getUserProfile(new Session(getApplicationContext()).getUserName());
         while (c.moveToNext()) {
             role = c.getString(c.getColumnIndex(COL_USER_ROLE));
             password = c.getString(c.getColumnIndex(COL_PASSWORD));

@@ -33,4 +33,9 @@
         <item>PM</item>
         <item>AM</item>
     </string-array>
+    <string-array name="card_type">
+        <item>VISA</item>
+        <item>MASTERCARD</item>
+        <item>DISCOVEr</item>
+    </string-array>
 </resources>

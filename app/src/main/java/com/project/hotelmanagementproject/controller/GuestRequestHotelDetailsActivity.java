@@ -1,4 +1,4 @@
-package com.project.hotelmanagementproject.view;
+package com.project.hotelmanagementproject.controller;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.hotelmanagementproject.R;
 
-public class GuestRequestHotelActivity extends AppCompatActivity {
+public class GuestRequestHotelDetailsActivity extends AppCompatActivity {
     private Button btnGuestRmDContinue;
 
     @Override
@@ -19,7 +19,7 @@ public class GuestRequestHotelActivity extends AppCompatActivity {
         init();
     }
 
-    public void init(){
+    public void init() {
         btnGuestRmDContinue = findViewById(R.id.btnGuestRmDContinue);
         btnGuestRmDContinue.setOnClickListener(new View.OnClickListener() {
             @Override

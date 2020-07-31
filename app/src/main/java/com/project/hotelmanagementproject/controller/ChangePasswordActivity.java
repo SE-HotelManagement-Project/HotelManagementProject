@@ -1,4 +1,4 @@
-package com.project.hotelmanagementproject.view;
+package com.project.hotelmanagementproject.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,9 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.project.hotelmanagementproject.R;
 import com.project.hotelmanagementproject.model.Session;
-import com.project.hotelmanagementproject.model.UserDBHelper;
+import com.project.hotelmanagementproject.model.UserDbMgr;
 
-import static com.project.hotelmanagementproject.utils.ConstantUtils.APP_TAG;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
 
 public class ChangePasswordActivity extends AppCompatActivity {
 
@@ -52,8 +52,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
         //check if oldPw is correct
         boolean isOldPwCorrect = false;
         try {
-            UserDBHelper userDbHelper = new UserDBHelper(this);
-            isOldPwCorrect = userDbHelper.checkPassword(session.getUserName(), oldPw);
+            UserDbMgr userDbMgr = UserDbMgr.getInstance(getApplicationContext());
+            isOldPwCorrect = userDbMgr.checkPassword(session.getUserName(), oldPw);
             Log.i(APP_TAG, "old password status: " + isOldPwCorrect);
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,8 +64,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
             if (newPw.equalsIgnoreCase(confirmPw)) {
                 try {
                     // update pw in db
-                    UserDBHelper userDbHelper = new UserDBHelper(ChangePasswordActivity.this);
-                    boolean pwUpdateStatus = userDbHelper.changePassword(session.getUserName(), newPw);
+                    UserDbMgr userDbMgr = UserDbMgr.getInstance(getApplicationContext());
+                    boolean pwUpdateStatus = userDbMgr.changePassword(session.getUserName(), newPw);
                     Log.i(APP_TAG, "new password is updated");
 
                     // save and land into login page

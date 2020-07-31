@@ -1,11 +1,11 @@
-package com.project.hotelmanagementproject.view;
+package com.project.hotelmanagementproject.controller;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +18,7 @@ public class MgrModifyRoomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mgr_room_modify);
+        View parentLayout = findViewById(android.R.id.content);
         init();
     }
 
@@ -29,15 +30,15 @@ public class MgrModifyRoomActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MgrModifyRoomActivity.this);
-
                 builder
-                        .setTitle("Update Room")
-                        .setMessage("Are you sure you want save the changes?")
+                        .setTitle("Modify Room Details!")
+                        .setMessage("Are you sure you want modify the room details?")
                         .setNegativeButton("No", null)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
 
                             public void onClick(DialogInterface arg0, int arg1) {
-                                startActivity(new Intent(MgrModifyRoomActivity.this, HomeActivity.class));
+                                Toast.makeText(getApplicationContext(), "Room Details Modified Successfully", Toast.LENGTH_LONG).show();
+                                // startActivity(new Intent(MgrModifyRoomActivity.this, HomeActivity.class));
                             }
                         }).create().show();
             }
