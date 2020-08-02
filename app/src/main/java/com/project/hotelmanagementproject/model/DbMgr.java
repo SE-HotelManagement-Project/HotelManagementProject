@@ -274,4 +274,36 @@ public class DbMgr extends SQLiteOpenHelper {
         return roomList;
     }
 
+    public ArrayList<User> getAdminSearchUser(String lastname) {
+
+        ArrayList<User> userList = new ArrayList<>();
+        String userName = null, password = null, role = null, lastName = null, firstName = null, phone = null, email = null;
+        String streetAddress = null, city = null, state = null, zipcode = null, ccn = null, ccexp = null, cctype = null;
+
+        SQLiteDatabase sqldb = this.getReadableDatabase();
+
+        String searchUser = " Select * from " + TABLE_USER_DATA + " where " + COL_LAST_NAME + " like '%" + lastname + "%'";
+
+        try {
+            Cursor c = sqldb.rawQuery(searchUser, null);
+            if (c.getCount() == 0) {
+                Log.e(APP_TAG, "search user Query Err: No data");
+            } else {
+                while (c.moveToNext()) {
+                     userName = c.getString(c.getColumnIndex(COL_USER_NAME));
+                     lastName = c.getString(c.getColumnIndex(COL_LAST_NAME));
+                     firstName = c.getString(c.getColumnIndex(COL_FIRST_NAME));
+                     phone = c.getString(c.getColumnIndex(COL_PHONE));
+                     email = c.getString(c.getColumnIndex(COL_EMAIL));
+
+                    User user = new User(userName, firstName, lastName, password, role, email, phone, streetAddress, city, state, zipcode, ccn, ccexp, cctype);
+                    userList.add(user);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return userList;
+    }
+
 }
