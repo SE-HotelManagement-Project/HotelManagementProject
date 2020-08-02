@@ -7,7 +7,7 @@
     android:layout_marginLeft="25dp"
     android:layout_marginRight="25dp"
     android:orientation="vertical"
-    tools:context=".view.GuestRequestHotelActivity">
+    tools:context=".controller.GuestRequestHotelDetailsActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"

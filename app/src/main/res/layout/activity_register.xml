@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.RegisterActivity">
+    tools:context=".controller.RegisterActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,6 +45,27 @@
             android:layout_marginRight="10dp"
             android:orientation="vertical">
 
+            <LinearLayout style="@style/horz_linear_layout_style2">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_lock_24" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Role:" />
+
+                <TextView
+                    android:id="@+id/tvRegisterRole"
+                    style="@style/edit_text_style"
+                    android:layout_gravity="center"
+                    android:text="Guest" />
+
+            </LinearLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilUserName"
                 android:layout_width="match_parent"
@@ -64,42 +85,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:hint="enter password">
+                android:hint="enter password"
+                app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword|numberPassword"
-                    android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:hint="enter email">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilConfirmEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:hint="confirm email"
-                android:visibility="gone">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etConfirmEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:inputType="textWebPassword"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -138,6 +131,21 @@
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:hint="enter email">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textWebEmailAddress"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilPhone"
@@ -240,7 +248,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
-                        android:maxLength="12"
+                        android:maxLength="16"
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -250,14 +258,34 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="3"
-                    android:hint="expiry date">
+                    android:hint="mm/yy">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etCCExpiry"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="expiry date"
+                        android:maxLength="5"
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llRegCCType"
+                style="@style/horz_linear_layout_style2"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="credit card type:"
+                    android:textColor="@color/colorGrey"
+                    android:textSize="14sp" />
+
+                <Spinner
+                    android:id="@+id/spnrRegCreditCardType"
+                    style="@style/spinner_style"
+                    android:entries="@array/card_type" />
 
             </LinearLayout>
 

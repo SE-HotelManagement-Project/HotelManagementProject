@@ -7,7 +7,7 @@
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
     android:orientation="vertical"
-    tools:context=".view.UpdateProfileActivity">
+    tools:context=".controller.UpdateProfileActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -82,11 +82,36 @@
                     style="@style/text_style"
                     android:text="Password:" />
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilUpPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etUpPassword"
-                    style="@style/edit_text_style"
-                    android:hint="alay123" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etUpPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textWebPassword"
+                        android:paddingLeft="15dp"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <!--                <com.google.android.material.textfield.TextInputLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    app:passwordToggleEnabled="true">-->
+
+                <!--                    <com.google.android.material.textfield.TextInputEditText-->
+                <!--                        android:id="@+id/etUpPassword"-->
+                <!--                        style="@style/edit_text_style"-->
+                <!--                        android:padding="10dp"-->
+                <!--                        android:text="password"-->
+                <!--                        android:inputType="textWebPassword" />-->
+
+                <!--                </com.google.android.material.textfield.TextInputLayout>-->
+
 
             </LinearLayout>
 
@@ -179,7 +204,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etUpPhone"
                     style="@style/edit_text_style"
-                    android:hint="4084831223" />
+                    android:hint="4084831223"
+                    android:inputType="number"
+                    android:maxLength="10" />
 
             </LinearLayout>
 
@@ -200,7 +227,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etUpEmail"
                     style="@style/edit_text_style"
-                    android:hint="alay.parikh@mavs.uta.edu" />
+                    android:hint="alay.parikh@mavs.uta.edu"
+                    android:inputType="textEmailAddress" />
 
             </LinearLayout>
 
@@ -291,7 +319,9 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etUpZipCode"
                         style="@style/edit_text_style"
-                        android:hint="76010" />
+                        android:hint="76010"
+                        android:inputType="number"
+                        android:maxLength="6" />
 
                 </LinearLayout>
 
@@ -316,7 +346,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etUpCreditCardNumber"
                     style="@style/edit_text_style"
-                    android:hint="1053608910536921" />
+                    android:hint="1053608910536921"
+                    android:inputType="number"
+                    android:maxLength="16" />
 
             </LinearLayout>
 
@@ -339,9 +371,33 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etUpCreditCardExpiry"
                     style="@style/edit_text_style"
-                    android:hint="02/24" />
+                    android:hint="02/24"
+                    android:maxLength="5" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llUpCCType"
+                style="@style/horz_linear_layout_style2">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    app:srcCompat="@drawable/ic_baseline_edit" />
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Credit Card Type:" />
+
+                <Spinner
+                    android:id="@+id/spnrUpCreditCardType"
+                    style="@style/spinner_style"
+                    android:entries="@array/card_type" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
 

@@ -7,7 +7,7 @@
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
     android:orientation="vertical"
-    tools:context=".view.ViewProfileActivity">
+    tools:context=".controller.ViewProfileActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -231,6 +231,21 @@
                     android:id="@+id/tvVpCardExpiryDate"
                     style="@style/edit_text_style"
                     android:text="02/24" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llVpCCType"
+                style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Credit Card Type:" />
+
+                <TextView
+                    android:id="@+id/tvVpCardType"
+                    style="@style/edit_text_style"
+                    android:text="VISA" />
 
             </LinearLayout>
 

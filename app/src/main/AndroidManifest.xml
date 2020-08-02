@@ -12,29 +12,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
-        <activity android:name=".view.AdminSearchUserActivity" />
-        <activity android:name=".view.GuestRequestReservationActivity" />
-        <activity android:name=".view.GuestRequestHotelActivity" />
-        <activity android:name=".view.UpdateProfileActivity" />
-        <activity android:name=".view.ViewProfileActivity" />
-        <activity android:name=".view.GuestModifyReservationActivity" />
-        <activity android:name=".view.GuestReservationSummActivity" />
-        <activity android:name=".view.GuestReservationDetailsActivity" />
-        <activity android:name=".view.MgrModifyRoomActivity" />
-        <activity android:name=".view.MgrRoomDetailsActivity" />
-        <activity android:name=".view.MgrSearchRoomActivity" />
-        <activity android:name=".view.MgrAvlblRoomsActivity" />
+        <activity android:name=".controller.AdminSearchUserActivity" />
+        <activity android:name=".controller.GuestRequestReservationActivity" />
+        <activity android:name=".controller.GuestRequestHotelDetailsActivity" />
+        <activity android:name=".controller.UpdateProfileActivity" />
+        <activity android:name=".controller.ViewProfileActivity" />
+        <activity android:name=".controller.GuestModifyReservationActivity" />
+        <activity android:name=".controller.GuestReservationSummActivity" />
+        <activity android:name=".controller.GuestReservationDetailsActivity" />
+        <activity android:name=".controller.MgrModifyRoomActivity" />
+        <activity android:name=".controller.MgrRoomDetailsActivity" />
+        <activity android:name=".controller.MgrSearchRoomActivity" />
+        <activity android:name=".controller.MgrAvlblRoomsActivity" />
         <activity
-            android:name=".view.LoginActivity"
+            android:name=".controller.LoginActivity"
             android:theme="@style/LoginTheme" />
-        <activity android:name=".view.ChangePasswordActivity" />
-        <activity android:name=".view.HomeActivity" />
-        <activity android:name=".view.MainActivity" />
+        <activity android:name=".controller.ChangePasswordActivity" />
+        <activity android:name=".controller.HomeActivity" />
+        <activity android:name=".controller.MainActivity" />
         <activity
-            android:name=".view.RegisterActivity"
+            android:name=".controller.RegisterActivity"
             android:theme="@style/LoginTheme" />
         <activity
-            android:name=".view.SplashScreenActivity"
+            android:name=".controller.SplashScreenActivity"
             android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
