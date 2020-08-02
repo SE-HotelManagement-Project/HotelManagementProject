@@ -26,7 +26,7 @@ import com.project.hotelmanagementproject.model.Session;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
+//
 public class MgrSearchRoomActivity extends AppCompatActivity {
     Button btnMgrSrSearch;
     LinearLayout llSearchRoomIp;
