@@ -18,7 +18,7 @@ import com.project.hotelmanagementproject.R;
 import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.Session;
 import com.project.hotelmanagementproject.model.User;
-//
+
 public class ViewProfileActivity extends AppCompatActivity {
     private Button btnAdminVpModify;
 
