@@ -15,8 +15,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.hotelmanagementproject.R;
+import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.Session;
-import com.project.hotelmanagementproject.model.UserDbMgr;
 
 public class HomeActivity extends AppCompatActivity {
     LinearLayout gvBookHotel, gvChangePw, gvViewReservation, gvViewProfile;
@@ -32,7 +32,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         session = new Session(getApplicationContext());
-        UserDbMgr userDbMgr = UserDbMgr.getInstance(getApplicationContext());
+        DbMgr userDbMgr = DbMgr.getInstance(getApplicationContext());
         session.setUserRole(userDbMgr.userRole(session.getUserName()));
         initView();
     }

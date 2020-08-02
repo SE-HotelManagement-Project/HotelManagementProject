@@ -12,11 +12,15 @@ public class HotelRoom {
     String hotelTax;
     String availabilityStatus;
     String occupiedStatus;
+    String startDate;
+    String endDate;
+    String startTime;
+
 
     public HotelRoom(String hotelRoomId, String hotelName,
                      String roomNum, String roomType, String floorNum,
                      String roomPriceWeekDay, String roomPriceWeekend, String hotelTax,
-                     String availabilityStatus, String occupiedStatus) {
+                     String availabilityStatus, String occupiedStatus, String startDate, String endDate, String startTime) {
         this.hotelRoomId = hotelRoomId;
         this.hotelName = hotelName;
         this.roomNum = roomNum;
@@ -27,6 +31,9 @@ public class HotelRoom {
         this.hotelTax = hotelTax;
         this.availabilityStatus = availabilityStatus;
         this.occupiedStatus = occupiedStatus;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.startTime = startTime;
     }
 
     public String getHotelRoomId() {
@@ -107,6 +114,30 @@ public class HotelRoom {
 
     public void setOccupiedStatus(String occupiedStatus) {
         this.occupiedStatus = occupiedStatus;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
 }

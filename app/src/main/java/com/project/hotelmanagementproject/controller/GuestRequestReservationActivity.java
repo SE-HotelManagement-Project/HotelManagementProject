@@ -16,6 +16,7 @@ import androidx.cardview.widget.CardView;
 import com.project.hotelmanagementproject.R;
 import com.project.hotelmanagementproject.model.Session;
 
+//This is test commit
 public class GuestRequestReservationActivity extends AppCompatActivity {
 
     LinearLayout llGuestRrInput,llGuestRrOutput;

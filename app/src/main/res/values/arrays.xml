@@ -6,11 +6,11 @@
         <item>Suite</item>
     </string-array>
     <string-array name="hotel_name">
-        <item>Maverick</item>
-        <item>Ranger</item>
-        <item>Williams</item>
-        <item>Shard</item>
-        <item>Liberty</item>
+        <item>MAVERICK</item>
+        <item>LIBERTY</item>
+        <item>RANGER</item>
+        <item>SHARD</item>
+        <item>WILLIAMS</item>
     </string-array>
     <string-array name="hotel_name_guest">
         <item>All</item>
@@ -36,6 +36,6 @@
     <string-array name="card_type">
         <item>VISA</item>
         <item>MASTERCARD</item>
-        <item>DISCOVEr</item>
+        <item>DISCOVER</item>
     </string-array>
 </resources>

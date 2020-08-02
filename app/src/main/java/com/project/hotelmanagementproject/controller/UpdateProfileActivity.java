@@ -3,80 +3,58 @@ package com.project.hotelmanagementproject.controller;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.hotelmanagementproject.R;
+import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.Session;
-import com.project.hotelmanagementproject.model.UserDbMgr;
+import com.project.hotelmanagementproject.model.User;
 
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_CITY;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_CREDIT_CARD_EXP;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_CREDIT_CARD_NUM;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_EMAIL;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_FIRST_NAME;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_LAST_NAME;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_PASSWORD;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_PHONE;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_STATE;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_STREET_ADDRESS;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_USER_NAME;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_USER_ROLE;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_ZIP_CODE;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
 
 public class UpdateProfileActivity extends AppCompatActivity {
 
     TextView tvUserName, tvPassword, tvRole, tvLastName, tvFirstName, tvPhone, tvEmail;
     TextView tvStreetAddress, tvCity, tvState, tvZipcode;
     TextView tvCreditCardNum, tvCreditCardExpiry;
+    Spinner spnrCCType;
     Button btnSave, btnCancel;
 
     String userName, password, role, lastName, firstName, phone, email;
     String streetAddress, city, state, zipcode;
-    String ccn = "", ccexp = "";
-    LinearLayout llCCN, llCCExp;
+    String ccn, ccexp, cctype;
+    LinearLayout llCCN, llCCExp, llCCType;
 
-    UserDbMgr userDbMgr;
-    Cursor c;
+    DbMgr userDbMgr;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
-
-        userDbMgr = UserDbMgr.getInstance(getApplicationContext());
-        getUserData();
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        userDbMgr = DbMgr.getInstance(getApplicationContext());
+        userName = new Session(getApplicationContext()).getUserName();
+        user = userDbMgr.getUserDetails(userName);
+        role = user.getUserRole();
         initUi();
-    }
-
-    public void getUserData() {
-        c = userDbMgr.getUserProfile(new Session(getApplicationContext()).getUserName());
-        while (c.moveToNext()) {
-            role = c.getString(c.getColumnIndex(COL_USER_ROLE));
-            password = c.getString(c.getColumnIndex(COL_PASSWORD));
-            userName = c.getString(c.getColumnIndex(COL_USER_NAME));
-            email = c.getString(c.getColumnIndex(COL_EMAIL));
-            phone = c.getString(c.getColumnIndex(COL_PHONE));
-            lastName = c.getString(c.getColumnIndex(COL_LAST_NAME));
-            firstName = c.getString(c.getColumnIndex(COL_FIRST_NAME));
-            streetAddress = c.getString(c.getColumnIndex(COL_STREET_ADDRESS));
-            city = c.getString(c.getColumnIndex(COL_CITY));
-            state = c.getString(c.getColumnIndex(COL_STATE));
-            zipcode = c.getString(c.getColumnIndex(COL_ZIP_CODE));
-            if (role.equalsIgnoreCase("Guest")) {
-                ccn = c.getString(c.getColumnIndex(COL_CREDIT_CARD_NUM));
-                ccexp = c.getString(c.getColumnIndex(COL_CREDIT_CARD_EXP));
-            }
-        }
-        c.close();
     }
 
     public void initUi() {
@@ -96,30 +74,47 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
         llCCN = findViewById(R.id.llUpCCN);
         llCCExp = findViewById(R.id.llUpCCEx);
+        llCCType = findViewById(R.id.llVpCCType);
+
         tvCreditCardExpiry = findViewById(R.id.etUpCreditCardExpiry);
         tvCreditCardNum = findViewById(R.id.etUpCreditCardNumber);
+        spnrCCType = findViewById(R.id.spnrUpCreditCardType);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.card_type, android.R.layout.simple_spinner_item);
 
-        tvUserName.setText(userName);
-        tvRole.setText(role);
-        tvPassword.setText(password);
-        tvEmail.setText(email);
-        tvPhone.setText(phone);
-        tvFirstName.setText(firstName);
-        tvLastName.setText(lastName);
+        spnrCCType.setSelection(adapter.getPosition(user.getCreditCardtype()));
 
-        tvStreetAddress.setText(streetAddress);
-        tvState.setText(state);
-        tvCity.setText(city);
-        tvZipcode.setText(zipcode);
+        spnrCCType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                cctype = spnrCCType.getSelectedItem().toString();
+            }
 
-        Log.i("Role: ", role);
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                cctype = user.getCreditCardtype();
+            }
+        });
+        tvUserName.setText(user.getUserName());
+        tvRole.setText(user.getUserRole());
+        tvPassword.setText(user.getPassword());
+        tvEmail.setText(user.getEmail());
+        tvPhone.setText(user.getPhone());
+        tvFirstName.setText(user.getFirstName());
+        tvLastName.setText(user.getLastName());
 
-        if (role.equalsIgnoreCase("Guest")) {
-            Log.i("ccn: ", ccn);
+        tvStreetAddress.setText(user.getStreetAddress());
+        tvState.setText(user.getState());
+        tvCity.setText(user.getCity());
+        tvZipcode.setText(user.getZipCode());
+
+        Log.i("Role: ", user.getUserRole());
+
+        if (user.getUserRole().equalsIgnoreCase("Guest")) {
             llCCExp.setVisibility(View.VISIBLE);
             llCCN.setVisibility(View.VISIBLE);
-            tvCreditCardExpiry.setText(ccexp);
-            tvCreditCardNum.setText(ccn);
+            tvCreditCardExpiry.setText(user.getCreditCardExp());
+            tvCreditCardNum.setText(user.getCreditCardNum());
 
         } else {
             llCCN.setVisibility(View.GONE);
@@ -139,7 +134,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
                             public void onClick(DialogInterface arg0, int arg1) {
                                 getUpdatedUserData();
-                                boolean isUpdated = userDbMgr.updateProfile(userName, firstName, password, lastName, phone, email, streetAddress, city, state, zipcode, ccn, ccexp);
+                                user = new User(userName, firstName, lastName, password, role, email, phone, streetAddress, city, state, zipcode, ccn, ccexp, cctype);
+                                boolean isUpdated = userDbMgr.updateProfile(user);
                                 if (isUpdated) {
                                     Toast.makeText(getApplicationContext(), "profile Updated Successfully!", Toast.LENGTH_LONG).show();
                                     startActivity(new Intent(UpdateProfileActivity.this, ViewProfileActivity.class));
@@ -167,6 +163,43 @@ public class UpdateProfileActivity extends AppCompatActivity {
         if (role.equalsIgnoreCase("Guest")) {
             ccn = tvCreditCardNum.getText().toString();
             ccexp = tvCreditCardExpiry.getText().toString();
+            cctype = spnrCCType.getSelectedItem().toString();
+            Log.i(APP_TAG, "role: notGuest; " + cctype);
+        } else {
+            Log.i(APP_TAG, "role: notGuest; " + role);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_logout) {
+            logout();
+            return true;
+        } else if (id == android.R.id.home) {
+            Intent intent = new Intent(this, ViewProfileActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void logout() {
+        Intent i = new Intent(UpdateProfileActivity.this, LoginActivity.class);
+        new Session(getApplicationContext()).setLoginStatus(false);
+        startActivity(i);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

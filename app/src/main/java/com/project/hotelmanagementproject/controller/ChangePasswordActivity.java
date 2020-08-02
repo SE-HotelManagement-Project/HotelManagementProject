@@ -14,8 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.project.hotelmanagementproject.R;
+import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.Session;
-import com.project.hotelmanagementproject.model.UserDbMgr;
 
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
 
@@ -52,7 +52,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         //check if oldPw is correct
         boolean isOldPwCorrect = false;
         try {
-            UserDbMgr userDbMgr = UserDbMgr.getInstance(getApplicationContext());
+            DbMgr userDbMgr = DbMgr.getInstance(getApplicationContext());
             isOldPwCorrect = userDbMgr.checkPassword(session.getUserName(), oldPw);
             Log.i(APP_TAG, "old password status: " + isOldPwCorrect);
         } catch (Exception e) {
@@ -64,7 +64,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
             if (newPw.equalsIgnoreCase(confirmPw)) {
                 try {
                     // update pw in db
-                    UserDbMgr userDbMgr = UserDbMgr.getInstance(getApplicationContext());
+                    DbMgr userDbMgr = DbMgr.getInstance(getApplicationContext());
                     boolean pwUpdateStatus = userDbMgr.changePassword(session.getUserName(), newPw);
                     Log.i(APP_TAG, "new password is updated");
 

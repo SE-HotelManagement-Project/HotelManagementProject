@@ -234,6 +234,21 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/llVpCCType"
+                style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Credit Card Type:" />
+
+                <TextView
+                    android:id="@+id/tvVpCardType"
+                    style="@style/edit_text_style"
+                    android:text="VISA" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </ScrollView>

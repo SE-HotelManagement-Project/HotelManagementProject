@@ -11,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.project.hotelmanagementproject.R;
+import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.Session;
-import com.project.hotelmanagementproject.model.UserDbMgr;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 boolean isLogin = false;
                 try {
-                    UserDbMgr userDbMgr = UserDbMgr.getInstance(getApplicationContext());
+                    DbMgr userDbMgr = DbMgr.getInstance(getApplicationContext());
                     isLogin = userDbMgr.checkPassword(etUserName.getText().toString(), etPassword.getText().toString());
 
                 } catch (Exception e) {
