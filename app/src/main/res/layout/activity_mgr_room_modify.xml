@@ -60,6 +60,7 @@
                     android:text="Hotel Name:" />
 
                 <TextView
+                    android:id="@+id/tvMgrMRDHotel"
                     style="@style/text_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -82,7 +83,7 @@
 
 
                 <TextView
-                    android:id="@+id/etDateFrom"
+                    android:id="@+id/tvMgrMRDStartDate"
                     style="@style/edit_text_style"
                     android:text="07/14/2020" />
 
@@ -103,7 +104,7 @@
 
 
                 <TextView
-                    android:id="@+id/etDateTo"
+                    android:id="@+id/tvMgrMRDEndDate"
                     style="@style/edit_text_style"
                     android:text="07/15/2020" />
 
@@ -124,7 +125,7 @@
 
 
                 <TextView
-                    android:id="@+id/etStartTime"
+                    android:id="@+id/tvMgrMRDStartTime"
                     style="@style/edit_text_style"
                     android:text="12:03" />
 
@@ -159,29 +160,33 @@
                     android:layout_marginRight="25dp"
                     android:orientation="horizontal">
 
-                    <RadioButton
-                        android:id="@+id/rbMgrRdStandard"
-                        android:layout_width="wrap_content"
+                    <RadioGroup
+                        android:id="@+id/rgMgrMRdRoomTypes"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
-                        android:text="Standard " />
+                        <RadioButton
+                            android:id="@+id/rbMgrMRdStandard"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Standard " />
 
-                    <RadioButton
-                        android:id="@+id/rbMgrRdDeluxe"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:checked="true"
-                        android:text="Deluxe " />
+                        <RadioButton
+                            android:id="@+id/rbMgrMRdDeluxe"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Deluxe " />
 
-                    <RadioButton
-                        android:id="@+id/rbMgrRdSuite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Suite" />
-
+                        <RadioButton
+                            android:id="@+id/rbMgrMRdSuite"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Suite" />
+                    </RadioGroup>
                 </LinearLayout>
             </LinearLayout>
 
@@ -200,7 +205,7 @@
 
 
                 <TextView
-                    android:id="@+id/etMgrRdRoomNum"
+                    android:id="@+id/tvMgrMRDRoomNum"
                     style="@style/edit_text_style"
                     android:layout_gravity="center"
                     android:text="121" />
@@ -223,7 +228,7 @@
 
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etMgrRdRoomPrice"
+                    android:id="@+id/etMgrRdRoomPriceWeekday"
                     style="@style/edit_text_style"
                     android:hint="$100" />
 
@@ -244,7 +249,7 @@
 
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etMgrRdTax"
+                    android:id="@+id/etMgrMRdPriceWeekend"
                     style="@style/edit_text_style"
                     android:hint="$150" />
 
@@ -261,11 +266,11 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Tax:" />
+                    android:text="Tax(percent):" />
 
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etMgrRdRoomPriceWeekend"
+                    android:id="@+id/etMgrMRdRoomTax"
                     style="@style/edit_text_style"
                     android:hint="8.25%" />
 
@@ -286,7 +291,7 @@
 
 
                 <TextView
-                    android:id="@+id/etFloorNumRd"
+                    android:id="@+id/tvMgrMRDFloorNum"
                     style="@style/text_style"
                     android:layout_gravity="center"
                     android:paddingLeft="10dp"
@@ -310,7 +315,7 @@
 
 
                 <TextView
-                    android:id="@+id/etOccupiedStatus"
+                    android:id="@+id/tvMgrMRDOccupiedStatus"
                     style="@style/edit_text_style"
                     android:layout_gravity="center"
                     android:text="No" />
@@ -332,7 +337,7 @@
 
 
                 <Spinner
-                    android:id="@+id/spnrMgrRdAvlblStatus"
+                    android:id="@+id/spnrMgrMRdAvlblStatus"
                     style="@style/spinner_style"
                     android:entries="@array/availability_status" />
             </LinearLayout>
@@ -357,8 +362,8 @@
 
         <Button
             android:id="@+id/btnMgrRdSave"
-            android:layout_margin="10dp"
             style="@style/btn_style"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:text="Save Room Details" />
 

@@ -2,6 +2,7 @@ package com.project.hotelmanagementproject.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,7 +19,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.hotelmanagementproject.R;
-import com.project.hotelmanagementproject.controller.adapters.SearchRoomAdpater;
+import com.project.hotelmanagementproject.controller.adapters.ManagerRoomListAdpater;
 import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.HotelRoom;
 import com.project.hotelmanagementproject.model.Session;
@@ -26,6 +27,20 @@ import com.project.hotelmanagementproject.model.Session;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ACTIVITY_RETURN_STATE;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_END_DATE;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOME_ACTIVITY;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOTEL_NAME;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_OCCUPIED_STATUS;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ROOM_ID;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_SEARCH_ROOM_ACTIVITY;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_SEARCH_ROOM_IP;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_START_DATE;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_START_TIME;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.OCCUPANCY_NOT_CHECKED;
+
 //
 public class MgrSearchRoomActivity extends AppCompatActivity {
     Button btnMgrSrSearch;
@@ -35,7 +50,8 @@ public class MgrSearchRoomActivity extends AppCompatActivity {
     Spinner spnrSrHotel;
     ListView lvRoomList;
     ArrayList<HotelRoom> roomList;
-    SearchRoomAdpater searchRoomAdapter;
+    ManagerRoomListAdpater searchRoomAdapter;
+    String returnIntent, startDate, endDate, startTime, searchRoomIp;
     String hotelName;
 
     @Override
@@ -46,8 +62,25 @@ public class MgrSearchRoomActivity extends AppCompatActivity {
         assert actionBar != null;
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-
         init();
+        getReturnState();
+    }
+
+    private void getReturnState() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            returnIntent = bundle.getString(MGR_ACTIVITY_RETURN_STATE);
+            if (!returnIntent.equalsIgnoreCase(MGR_HOME_ACTIVITY)) {
+                searchRoomIp = bundle.getString(MGR_SEARCH_ROOM_IP);
+                hotelName = bundle.getString(MGR_HOTEL_NAME);
+                startDate = bundle.getString(MGR_START_DATE);
+                endDate = bundle.getString(MGR_END_DATE);
+                startTime = bundle.getString(MGR_START_TIME);
+                viewDataInList();
+            }
+        }
+
+        Log.i(APP_TAG, "return state: " + returnIntent);
     }
 
     public void init() {
@@ -79,21 +112,49 @@ public class MgrSearchRoomActivity extends AppCompatActivity {
                 viewDataInList();
             }
         });
+
+        lvRoomList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent roomDetailsIntent = new Intent(MgrSearchRoomActivity.this, MgrRoomDetailsActivity.class);
+                HotelRoom item = (HotelRoom) adapterView.getItemAtPosition(i);
+                Log.i(APP_TAG, "RoomID: " + item.getHotelRoomId());
+                roomDetailsIntent.putExtra(MGR_ROOM_ID, item.getHotelRoomId());
+                roomDetailsIntent.putExtra(MGR_SEARCH_ROOM_IP, searchRoomIp);
+                roomDetailsIntent.putExtra(MGR_HOTEL_NAME, item.getHotelName());
+                roomDetailsIntent.putExtra(MGR_START_DATE, item.getStartDate());
+                roomDetailsIntent.putExtra(MGR_END_DATE, item.getEndDate());
+                roomDetailsIntent.putExtra(MGR_START_TIME, item.getStartTime());
+                roomDetailsIntent.putExtra(MGR_OCCUPIED_STATUS, OCCUPANCY_NOT_CHECKED);
+                roomDetailsIntent.putExtra(MGR_ACTIVITY_RETURN_STATE, MGR_SEARCH_ROOM_ACTIVITY);
+                startActivity(roomDetailsIntent);
+            }
+        });
     }
 
     private void viewDataInList() {
         DbMgr hotelRoomDbMgr = DbMgr.getInstance(getApplicationContext());
-        String roomNum = etNumRooms.getText().toString();
-        String startDate = new SimpleDateFormat("MM/dd/yyyy").format(new Date());
+        Date startDateFormat = new Date(System.currentTimeMillis());
+        startDate = new SimpleDateFormat("yyyy-MM-dd").format(startDateFormat);
+        Date endDateFormat = new Date(System.currentTimeMillis() + (1000 * 60 * 60 * 24));
+        endDate = new SimpleDateFormat("yyyy-MM-dd").format(endDateFormat);
+        if (returnIntent.equalsIgnoreCase(MGR_HOME_ACTIVITY)) {
+            searchRoomIp = etNumRooms.getText().toString();
+        } else {
+            Log.i(APP_TAG, "srip: " + searchRoomIp);
+        }
 
-        if (null == roomNum || roomNum.isEmpty() || roomNum.equalsIgnoreCase("")) {
+        Log.i(APP_TAG, startDate + " to " + endDate);
+
+
+        if (null == searchRoomIp || searchRoomIp.isEmpty() || searchRoomIp.equalsIgnoreCase("")) {
             etNumRooms.setError("enter valid input");
             Toast.makeText(getApplicationContext(), "invalid room number", Toast.LENGTH_LONG).show();
         } else {
             llSearchRoomIp.setVisibility(View.GONE);
             llSearchRoomOp.setVisibility(View.VISIBLE);
-            roomList = hotelRoomDbMgr.getSearchRoomList(roomNum, startDate, hotelName);
-            searchRoomAdapter = new SearchRoomAdpater(this, roomList);
+            roomList = hotelRoomDbMgr.getSearchRoomList(hotelName, searchRoomIp, startDate, endDate, "12:00 PM");
+            searchRoomAdapter = new ManagerRoomListAdpater(this, roomList);
             lvRoomList.setAdapter(searchRoomAdapter);
             searchRoomAdapter.notifyDataSetChanged();
         }
@@ -113,9 +174,14 @@ public class MgrSearchRoomActivity extends AppCompatActivity {
             logout();
             return true;
         } else if (id == android.R.id.home) {
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
-            return true;
+            if (llSearchRoomOp.getVisibility() == View.VISIBLE) {
+                llSearchRoomIp.setVisibility(View.VISIBLE);
+                llSearchRoomOp.setVisibility(View.GONE);
+            } else {
+                Intent intent = new Intent(this, HomeActivity.class);
+                startActivity(intent);
+                return true;
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -129,7 +195,13 @@ public class MgrSearchRoomActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        if (llSearchRoomOp.getVisibility() == View.VISIBLE) {
+            llSearchRoomIp.setVisibility(View.VISIBLE);
+            llSearchRoomOp.setVisibility(View.GONE);
+        } else {
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+        }
     }
 
 //    private void viewDataInList(){

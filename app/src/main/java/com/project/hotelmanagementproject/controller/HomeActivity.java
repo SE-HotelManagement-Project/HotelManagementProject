@@ -18,6 +18,9 @@ import com.project.hotelmanagementproject.R;
 import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.Session;
 
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ACTIVITY_RETURN_STATE;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOME_ACTIVITY;
+
 public class HomeActivity extends AppCompatActivity {
     LinearLayout gvBookHotel, gvChangePw, gvViewReservation, gvViewProfile;
     LinearLayout avSearchUser, avViewProfile;
@@ -71,7 +74,7 @@ public class HomeActivity extends AppCompatActivity {
         avSearchUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  showToastMessage("Feature Under Construction");
+                //  showToastMessage("Feature Under Construction");
                 startActivity(new Intent(HomeActivity.this, AdminSearchUserActivity.class));
             }
         });
@@ -124,21 +127,27 @@ public class HomeActivity extends AppCompatActivity {
         mvAvailableRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             startActivity(new Intent(HomeActivity.this, MgrAvlblRoomsActivity.class));
+                Intent i = new Intent(HomeActivity.this, MgrAvlblRoomsActivity.class);
+                i.putExtra(MGR_ACTIVITY_RETURN_STATE, MGR_HOME_ACTIVITY);
+                startActivity(i);
 
             }
         });
         mvReservationList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HomeActivity.this, ChangePasswordActivity.class));
+                Intent i = new Intent(HomeActivity.this, ChangePasswordActivity.class);
+                i.putExtra(MGR_ACTIVITY_RETURN_STATE, MGR_HOME_ACTIVITY);
+                startActivity(i);
 
             }
         });
         mvSearchRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HomeActivity.this, MgrSearchRoomActivity.class));
+                Intent i = new Intent(HomeActivity.this, MgrSearchRoomActivity.class);
+                i.putExtra(MGR_ACTIVITY_RETURN_STATE, MGR_HOME_ACTIVITY);
+                startActivity(i);
             }
         });
         mvViewProfile.setOnClickListener(new View.OnClickListener() {

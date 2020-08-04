@@ -1,7 +1,6 @@
 package com.project.hotelmanagementproject.controller.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +13,11 @@ import com.project.hotelmanagementproject.model.HotelRoom;
 
 import java.util.ArrayList;
 
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
-
-public class SearchRoomAdpater extends BaseAdapter {
+public class ManagerRoomListAdpater extends BaseAdapter {
     Context context;
     ArrayList<HotelRoom> roomList;
 
-    public SearchRoomAdpater(Context context, ArrayList<HotelRoom> roomList) {
+    public ManagerRoomListAdpater(Context context, ArrayList<HotelRoom> roomList) {
         this.context = context;
         this.roomList = roomList;
     }
@@ -53,7 +50,7 @@ public class SearchRoomAdpater extends BaseAdapter {
 
         HotelRoom hrSrl = roomList.get(i);
 
-        Log.i(APP_TAG, "hotelName: " + hrSrl.getHotelName() + "    ||||||  roomId: " + hrSrl.getHotelRoomId());
+        //  Log.i(APP_TAG, "hotelName: " + hrSrl.getHotelName() + "    ||||||  roomId: " + hrSrl.getHotelRoomId());
         tvSrlHotelName.setText(hrSrl.getHotelName());
         tvSrlRoomNum.setText(hrSrl.getRoomNum());
         tvSrlRoomType.setText(hrSrl.getRoomType());
