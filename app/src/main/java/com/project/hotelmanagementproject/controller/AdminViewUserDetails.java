@@ -64,14 +64,19 @@ public class AdminViewUserDetails  extends AppCompatActivity {
         tvAvpState.setText(userDetails.getState());
         tvAvpZipCode.setText(userDetails.getZipCode());
 
-        /*btnAvpUpdateProfile = findViewById(R.id.btnAvpUpdateProfile);
+        btnAvpUpdateProfile = findViewById(R.id.btnAvpUpdateProfile);
 
         btnAvpUpdateProfile.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                startActivity(new Intent(AdminRemoveGuestOrManager.this, UpdateProfileActivity.class));
+                Intent userNameIntent = new Intent(AdminViewUserDetails.this, AdminEditUserDetails.class);
+
+                userNameIntent.putExtra(userName,userName);
+
+                startActivity(userNameIntent);
+                startActivity(new Intent(AdminViewUserDetails.this, AdminEditUserDetails.class));
             }
-        });*/
+        });
 
         btnAvpRemoveProfile = findViewById(R.id.btnAvpRemoveProfile);
 

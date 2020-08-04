@@ -87,10 +87,7 @@ public class AdminSearchUserActivity extends AppCompatActivity {
                 User item = (User) adapterView.getItemAtPosition(i);
                 userNameIntent.putExtra(userName,item.getUserName());
 
-                String hh = item.getLastName();
-
                 startActivity(userNameIntent);
-                Toast.makeText(getApplicationContext(), "Name for Next Page" + hh, Toast.LENGTH_LONG).show();
             }
         });
 

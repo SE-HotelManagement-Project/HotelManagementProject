@@ -219,7 +219,7 @@
             android:paddingTop="10dp"
             android:paddingRight="15dp"
             android:paddingBottom="10dp"
-            android:text="Remove        Profile"
+            android:text="Remove           Profile"
             android:textSize="15sp" />
 
     </LinearLayout>
