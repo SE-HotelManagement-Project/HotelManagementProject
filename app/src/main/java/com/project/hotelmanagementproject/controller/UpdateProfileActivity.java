@@ -79,6 +79,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         tvCreditCardExpiry = findViewById(R.id.etUpCreditCardExpiry);
         tvCreditCardNum = findViewById(R.id.etUpCreditCardNumber);
         spnrCCType = findViewById(R.id.spnrUpCreditCardType);
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this, R.array.card_type, android.R.layout.simple_spinner_item);
 

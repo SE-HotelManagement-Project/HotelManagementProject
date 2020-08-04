@@ -2,6 +2,7 @@ package com.project.hotelmanagementproject.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,6 +27,16 @@ import com.project.hotelmanagementproject.model.Session;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_END_DATE;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOTEL_NAME;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_OCCUPIED_STATUS;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ROOM_ID;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_START_DATE;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_START_TIME;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.OCCUPANCY_NOT_CHECKED;
+
 //
 public class MgrSearchRoomActivity extends AppCompatActivity {
     Button btnMgrSrSearch;
@@ -79,20 +90,40 @@ public class MgrSearchRoomActivity extends AppCompatActivity {
                 viewDataInList();
             }
         });
+
+        lvRoomList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent roomDetailsIntent = new Intent(MgrSearchRoomActivity.this, MgrRoomDetailsActivity.class);
+                HotelRoom item = (HotelRoom) adapterView.getItemAtPosition(i);
+                Log.i(APP_TAG, "RoomID: " + item.getHotelRoomId());
+                roomDetailsIntent.putExtra(MGR_ROOM_ID, item.getHotelRoomId());
+                roomDetailsIntent.putExtra(MGR_HOTEL_NAME, item.getHotelName());
+                roomDetailsIntent.putExtra(MGR_START_DATE, item.getStartDate());
+                roomDetailsIntent.putExtra(MGR_END_DATE, item.getEndDate());
+                roomDetailsIntent.putExtra(MGR_START_TIME, item.getStartTime());
+                roomDetailsIntent.putExtra(MGR_OCCUPIED_STATUS, OCCUPANCY_NOT_CHECKED);
+                startActivity(roomDetailsIntent);
+            }
+        });
     }
 
     private void viewDataInList() {
         DbMgr hotelRoomDbMgr = DbMgr.getInstance(getApplicationContext());
         String roomNum = etNumRooms.getText().toString();
-        String startDate = new SimpleDateFormat("MM/dd/yyyy").format(new Date());
-
+        // String startDate = new SimpleDateFormat("MM/dd/yyyy").format(new Date());
+        Date startDate = new Date(System.currentTimeMillis());
+        String startDateString = new SimpleDateFormat("yyyy-MM-dd").format(startDate);
+        Date endDate = new Date(System.currentTimeMillis() + (1000 * 60 * 60 * 24));
+        String endDateString = new SimpleDateFormat("yyyy-MM-dd").format(endDate);
+        Log.i(APP_TAG, startDateString + " to " + endDateString);
         if (null == roomNum || roomNum.isEmpty() || roomNum.equalsIgnoreCase("")) {
             etNumRooms.setError("enter valid input");
             Toast.makeText(getApplicationContext(), "invalid room number", Toast.LENGTH_LONG).show();
         } else {
             llSearchRoomIp.setVisibility(View.GONE);
             llSearchRoomOp.setVisibility(View.VISIBLE);
-            roomList = hotelRoomDbMgr.getSearchRoomList(roomNum, startDate, hotelName);
+            roomList = hotelRoomDbMgr.getSearchRoomList(hotelName, roomNum, startDateString, endDateString, "12:00PM");
             searchRoomAdapter = new SearchRoomAdpater(this, roomList);
             lvRoomList.setAdapter(searchRoomAdapter);
             searchRoomAdapter.notifyDataSetChanged();

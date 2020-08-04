@@ -171,7 +171,7 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Tax:"
+                    android:text="Tax(percent):"
                     android:textColor="@color/colorGrey" />
 
 
