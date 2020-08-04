@@ -23,7 +23,11 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="2629fd1e-0ef8-4a0e-8fa7-566a1f5c028c">
+        <schema name="main" object-types="index, table, constraint, view, column, dataset trigger" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="2629fd1e-0ef8-4a0e-8fa7-566a1f5c028c">
@@ -36,8 +40,14 @@
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="2629fd1e-0ef8-4a0e-8fa7-566a1f5c028c" />
   </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="2629fd1e-0ef8-4a0e-8fa7-566a1f5c028c" dataset="main.hm_hotel_data" active-filter-id="" />
+  </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
+  </component>
+  <component name="DBNavigator.Project.FileConnectionMappingManager">
+    <mapping file-url="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/Pixel_3a_XL_API_30 [emulator-5554]/data/data/com.project.hotelmanagementproject/databases/HotelManagementProject.db-journal" connection-id="2629fd1e-0ef8-4a0e-8fa7-566a1f5c028c" session-id="MAIN" current-schema="main" />
   </component>
   <component name="DBNavigator.Project.MethodExecutionManager">
     <method-browser />

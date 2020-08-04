@@ -21,6 +21,10 @@ public class Reservation {
     String resvStartTime;
 
 
+    public Reservation() {
+
+    }
+
     public Reservation(String reservationId, String resvRoomId, String resvRoomNum, String resvUserName, String resvFirstName, String resvLastName,
                        String resvHotelName, String resvRoomType, String resvNumAdultsChildren, String resvNumNights, String resvNumOfRooms,
                        String totalPrice, String resvCheckInDate, String resevCheckOutDate, String resvStartTime) {
@@ -161,4 +165,12 @@ public class Reservation {
         this.resvNumOfRooms = resvNumOfRooms;
     }
 
+
+    public boolean isValidStartTime(String startTime) {
+        return (startTime.contains("AM") || startTime.contains("PM")) && startTime.contains(":") && !startTime.matches("[0-9]");
+    }
+
+    public void areDatesValid(String startDate, String endDate) {
+        // return (startTime.contains("AM") || startTime.contains("PM")) && startTime.contains(":") && !startTime.matches("[0-9]");
+    }
 }
