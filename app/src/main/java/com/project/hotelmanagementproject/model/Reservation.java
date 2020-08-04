@@ -2,6 +2,8 @@ package com.project.hotelmanagementproject.model;
 
 public class Reservation {
     String reservationId;
+    String resvRoomNum;
+    String resvRoomId;
     String resvUserName;
     String resvFirstName;
     String resvLastName;
@@ -10,17 +12,21 @@ public class Reservation {
     String resvRoomType;
     String resvNumAdultsChildren;
     String resvNumNights;
-    String resvNumRooms;
+
+    String resvNumOfRooms;
 
     String totalPrice;
     String resvCheckInDate;
     String resevCheckOutDate;
     String resvStartTime;
 
-    public Reservation(String reservationId, String resvUserName, String resvFirstName, String resvLastName,
-                       String resvHotelName, String resvRoomType, String resvNumAdultsChildren, String resvNumNights, String resvNumRooms,
+
+    public Reservation(String reservationId, String resvRoomId, String resvRoomNum, String resvUserName, String resvFirstName, String resvLastName,
+                       String resvHotelName, String resvRoomType, String resvNumAdultsChildren, String resvNumNights, String resvNumOfRooms,
                        String totalPrice, String resvCheckInDate, String resevCheckOutDate, String resvStartTime) {
         this.reservationId = reservationId;
+        this.resvRoomId = resvRoomId;
+        this.resvRoomNum = resvRoomNum;
         this.resvUserName = resvUserName;
         this.resvFirstName = resvFirstName;
         this.resvLastName = resvLastName;
@@ -28,11 +34,27 @@ public class Reservation {
         this.resvRoomType = resvRoomType;
         this.resvNumAdultsChildren = resvNumAdultsChildren;
         this.resvNumNights = resvNumNights;
-        this.resvNumRooms = resvNumRooms;
+        this.resvNumOfRooms = resvNumOfRooms;
         this.totalPrice = totalPrice;
         this.resvCheckInDate = resvCheckInDate;
         this.resevCheckOutDate = resevCheckOutDate;
         this.resvStartTime = resvStartTime;
+    }
+
+    public String getResvRoomNum() {
+        return resvRoomNum;
+    }
+
+    public void setResvRoomNum(String resvRoomNum) {
+        this.resvRoomNum = resvRoomNum;
+    }
+
+    public String getResvRoomId() {
+        return resvRoomId;
+    }
+
+    public void setResvRoomId(String resvRoomId) {
+        this.resvRoomId = resvRoomId;
     }
 
     public String getReservationId() {
@@ -99,14 +121,6 @@ public class Reservation {
         this.resvNumNights = resvNumNights;
     }
 
-    public String getResvNumRooms() {
-        return resvNumRooms;
-    }
-
-    public void setResvNumRooms(String resvNumRooms) {
-        this.resvNumRooms = resvNumRooms;
-    }
-
     public String getTotalPrice() {
         return totalPrice;
     }
@@ -137,6 +151,14 @@ public class Reservation {
 
     public void setResvStartTime(String resvStartTime) {
         this.resvStartTime = resvStartTime;
+    }
+
+    public String getResvNumOfRooms() {
+        return resvNumOfRooms;
+    }
+
+    public void setResvNumOfRooms(String resvNumOfRooms) {
+        this.resvNumOfRooms = resvNumOfRooms;
     }
 
 }
