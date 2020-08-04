@@ -306,4 +306,10 @@ public class DbMgr extends SQLiteOpenHelper {
         return userList;
     }
 
+    public int deleteUserProfile(String username) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] columns = new String[]{COL_USER_NAME};
+        return db.delete(TABLE_USER_DATA, COL_USER_NAME + " = ?", new String[]{username});
+    }
+
 }

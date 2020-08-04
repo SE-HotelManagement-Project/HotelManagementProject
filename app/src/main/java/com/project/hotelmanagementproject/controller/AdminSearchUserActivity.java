@@ -2,10 +2,12 @@ package com.project.hotelmanagementproject.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -24,12 +26,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
+
 public class AdminSearchUserActivity extends AppCompatActivity {
     LinearLayout  adminSearchUser,adminSearchUserResult;
     EditText etAdminSuLastName;
     ArrayList<User> userList;
     ListView lvAdSrUserList;
     AdminSearchUserAdapter adminSearchUserAdpater;
+    String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +77,24 @@ public class AdminSearchUserActivity extends AppCompatActivity {
             lvAdSrUserList.setAdapter(adminSearchUserAdpater);
             adminSearchUserAdpater.notifyDataSetChanged();
         }
+
+
+
+        lvAdSrUserList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent userNameIntent = new Intent(AdminSearchUserActivity.this, AdminViewUserDetails.class);
+                User item = (User) adapterView.getItemAtPosition(i);
+                userNameIntent.putExtra(userName,item.getUserName());
+
+                String hh = item.getLastName();
+
+                startActivity(userNameIntent);
+                Toast.makeText(getApplicationContext(), "Name for Next Page" + hh, Toast.LENGTH_LONG).show();
+            }
+        });
+
+
 
     }
 
