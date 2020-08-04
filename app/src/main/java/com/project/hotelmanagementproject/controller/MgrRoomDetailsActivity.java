@@ -25,12 +25,7 @@ import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_AVL
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_END_DATE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOTEL_NAME;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_OCCUPIED_STATUS;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ROOM_DELUXE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ROOM_ID;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ROOM_STD;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ROOM_SUITE;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_SEARCH_ROOM_ACTIVITY;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_SEARCH_ROOM_IP;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_START_DATE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_START_TIME;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.OCCUPANCY_NOT_CHECKED;
@@ -65,15 +60,15 @@ public class MgrRoomDetailsActivity extends AppCompatActivity {
             startTime = bundle.getString(MGR_START_TIME);
             occupiedStatus = bundle.getString(MGR_OCCUPIED_STATUS);
             returnIntent = bundle.getString(MGR_ACTIVITY_RETURN_STATE);
-            if (returnIntent.equalsIgnoreCase(MGR_SEARCH_ROOM_ACTIVITY)) {
-                searchRoomIp = bundle.getString(MGR_SEARCH_ROOM_IP);
-            } else if (returnIntent.equalsIgnoreCase(MGR_AVLBL_ROOM_ACTIVITY)) {
-                stdRoom = bundle.getString(MGR_ROOM_STD);
-                deluxeRoom = bundle.getString(MGR_ROOM_DELUXE);
-                suiteRoom = bundle.getString(MGR_ROOM_SUITE);
-                Log.i(APP_TAG, "return state-1: " + returnIntent + deluxeRoom + suiteRoom + startDate + startTime);
-
-            }
+//            if (returnIntent.equalsIgnoreCase(MGR_SEARCH_ROOM_ACTIVITY)) {
+//                searchRoomIp = bundle.getString(MGR_SEARCH_ROOM_IP);
+//            } else if (returnIntent.equalsIgnoreCase(MGR_AVLBL_ROOM_ACTIVITY)) {
+//                stdRoom = bundle.getString(MGR_ROOM_STD);
+//                deluxeRoom = bundle.getString(MGR_ROOM_DELUXE);
+//                suiteRoom = bundle.getString(MGR_ROOM_SUITE);
+//                Log.i(APP_TAG, "return state-1: " + returnIntent + deluxeRoom + suiteRoom + startDate + startTime);
+//
+//            }
             Log.i(APP_TAG, roomId + hotelName + startDate + returnIntent);
         }
         DbMgr dbMgr = DbMgr.getInstance(getApplicationContext());
@@ -135,14 +130,14 @@ public class MgrRoomDetailsActivity extends AppCompatActivity {
                 mgrModifyRoomIntent.putExtra(MGR_START_TIME, startTime);
                 mgrModifyRoomIntent.putExtra(MGR_OCCUPIED_STATUS, occupiedStatus);
                 mgrModifyRoomIntent.putExtra(MGR_ACTIVITY_RETURN_STATE, returnIntent);
-                if (returnIntent.equalsIgnoreCase(MGR_AVLBL_ROOM_ACTIVITY)) {
-                    mgrModifyRoomIntent.putExtra(MGR_ROOM_STD, stdRoom);
-                    mgrModifyRoomIntent.putExtra(MGR_ROOM_DELUXE, deluxeRoom);
-                    mgrModifyRoomIntent.putExtra(MGR_ROOM_SUITE, suiteRoom);
-                    Log.i(APP_TAG, "return state2: " + returnIntent + deluxeRoom + suiteRoom + startDate + startTime);
-                } else {
-                    mgrModifyRoomIntent.putExtra(MGR_SEARCH_ROOM_IP, searchRoomIp);
-                }
+//                if (returnIntent.equalsIgnoreCase(MGR_AVLBL_ROOM_ACTIVITY)) {
+//                    mgrModifyRoomIntent.putExtra(MGR_ROOM_STD, stdRoom);
+//                    mgrModifyRoomIntent.putExtra(MGR_ROOM_DELUXE, deluxeRoom);
+//                    mgrModifyRoomIntent.putExtra(MGR_ROOM_SUITE, suiteRoom);
+//                    Log.i(APP_TAG, "return state2: " + returnIntent + deluxeRoom + suiteRoom + startDate + startTime);
+//                } else {
+//                    mgrModifyRoomIntent.putExtra(MGR_SEARCH_ROOM_IP, searchRoomIp);
+//                }
                 startActivity(mgrModifyRoomIntent);
             }
         });
@@ -166,14 +161,14 @@ public class MgrRoomDetailsActivity extends AppCompatActivity {
             Intent backIntent;
             if (returnIntent.equalsIgnoreCase(MGR_AVLBL_ROOM_ACTIVITY)) {
                 backIntent = new Intent(this, MgrAvlblRoomsActivity.class);
-                backIntent.putExtra(MGR_ROOM_STD, stdRoom);
-                backIntent.putExtra(MGR_ROOM_DELUXE, deluxeRoom);
-                backIntent.putExtra(MGR_ROOM_SUITE, suiteRoom);
-                Log.i(APP_TAG, "return state-2: " + returnIntent + deluxeRoom + suiteRoom + startDate + startTime);
+//                backIntent.putExtra(MGR_ROOM_STD, stdRoom);
+//                backIntent.putExtra(MGR_ROOM_DELUXE, deluxeRoom);
+//                backIntent.putExtra(MGR_ROOM_SUITE, suiteRoom);
+//                Log.i(APP_TAG, "return state-2: " + returnIntent + deluxeRoom + suiteRoom + startDate + startTime);
 
             } else {
                 backIntent = new Intent(this, MgrSearchRoomActivity.class);
-                backIntent.putExtra(MGR_SEARCH_ROOM_IP, searchRoomIp);
+                //  backIntent.putExtra(MGR_SEARCH_ROOM_IP, searchRoomIp);
             }
             backIntent.putExtra(MGR_HOTEL_NAME, hotelName);
             backIntent.putExtra(MGR_START_DATE, startDate);
@@ -197,14 +192,14 @@ public class MgrRoomDetailsActivity extends AppCompatActivity {
         Intent backIntent;
         if (returnIntent.equalsIgnoreCase(MGR_AVLBL_ROOM_ACTIVITY)) {
             backIntent = new Intent(this, MgrAvlblRoomsActivity.class);
-            backIntent.putExtra(MGR_ROOM_STD, stdRoom);
-            backIntent.putExtra(MGR_ROOM_DELUXE, deluxeRoom);
-            backIntent.putExtra(MGR_ROOM_SUITE, suiteRoom);
-            Log.i(APP_TAG, "return state-2: " + returnIntent + deluxeRoom + suiteRoom + startDate + startTime);
+//            backIntent.putExtra(MGR_ROOM_STD, stdRoom);
+//            backIntent.putExtra(MGR_ROOM_DELUXE, deluxeRoom);
+//            backIntent.putExtra(MGR_ROOM_SUITE, suiteRoom);
+//            Log.i(APP_TAG, "return state-2: " + returnIntent + deluxeRoom + suiteRoom + startDate + startTime);
 
         } else {
             backIntent = new Intent(this, MgrSearchRoomActivity.class);
-            backIntent.putExtra(MGR_SEARCH_ROOM_IP, searchRoomIp);
+            //  backIntent.putExtra(MGR_SEARCH_ROOM_IP, searchRoomIp);
         }
         backIntent.putExtra(MGR_HOTEL_NAME, hotelName);
         backIntent.putExtra(MGR_START_DATE, startDate);

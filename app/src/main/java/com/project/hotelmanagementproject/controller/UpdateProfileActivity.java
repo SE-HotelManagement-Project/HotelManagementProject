@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.project.hotelmanagementproject.R;
 import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.Session;
@@ -29,9 +30,10 @@ import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG
 
 public class UpdateProfileActivity extends AppCompatActivity {
 
-    TextView tvUserName, tvPassword, tvRole, tvLastName, tvFirstName, tvPhone, tvEmail;
-    TextView tvStreetAddress, tvCity, tvState, tvZipcode;
-    TextView tvCreditCardNum, tvCreditCardExpiry;
+    TextView tvUserName, tvRole;
+    TextInputEditText etPassword, etLastName, etFirstName, etPhone, etEmail;
+    TextInputEditText etStreetAddress, etCity, etState, etZipcode;
+    TextInputEditText etCreditCardNum, etCreditCardExpiry;
     Spinner spnrCCType;
     Button btnSave, btnCancel;
 
@@ -59,25 +61,25 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
     public void initUi() {
         tvUserName = findViewById(R.id.tvUpUserName);
-        tvPassword = findViewById(R.id.etUpPassword);
+        etPassword = findViewById(R.id.etUpPassword);
         tvRole = findViewById(R.id.tvUpRole);
 
-        tvLastName = findViewById(R.id.etUpLastName);
-        tvFirstName = findViewById(R.id.etUpFirstName);
-        tvPhone = findViewById(R.id.etUpPhone);
-        tvEmail = findViewById(R.id.etUpEmail);
+        etLastName = findViewById(R.id.etUpLastName);
+        etFirstName = findViewById(R.id.etUpFirstName);
+        etPhone = findViewById(R.id.etUpPhone);
+        etEmail = findViewById(R.id.etUpEmail);
 
-        tvState = findViewById(R.id.etUpState);
-        tvStreetAddress = findViewById(R.id.etUpStreetAddress);
-        tvCity = findViewById(R.id.etUpCity);
-        tvZipcode = findViewById(R.id.etUpZipCode);
+        etState = findViewById(R.id.etUpState);
+        etStreetAddress = findViewById(R.id.etUpStreetAddress);
+        etCity = findViewById(R.id.etUpCity);
+        etZipcode = findViewById(R.id.etUpZipCode);
 
         llCCN = findViewById(R.id.llUpCCN);
         llCCExp = findViewById(R.id.llUpCCEx);
         llCCType = findViewById(R.id.llVpCCType);
 
-        tvCreditCardExpiry = findViewById(R.id.etUpCreditCardExpiry);
-        tvCreditCardNum = findViewById(R.id.etUpCreditCardNumber);
+        etCreditCardExpiry = findViewById(R.id.etUpCreditCardExpiry);
+        etCreditCardNum = findViewById(R.id.etUpCreditCardNumber);
         spnrCCType = findViewById(R.id.spnrUpCreditCardType);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -98,24 +100,24 @@ public class UpdateProfileActivity extends AppCompatActivity {
         });
         tvUserName.setText(user.getUserName());
         tvRole.setText(user.getUserRole());
-        tvPassword.setText(user.getPassword());
-        tvEmail.setText(user.getEmail());
-        tvPhone.setText(user.getPhone());
-        tvFirstName.setText(user.getFirstName());
-        tvLastName.setText(user.getLastName());
+        etPassword.setText(user.getPassword());
+        etEmail.setText(user.getEmail());
+        etPhone.setText(user.getPhone());
+        etFirstName.setText(user.getFirstName());
+        etLastName.setText(user.getLastName());
 
-        tvStreetAddress.setText(user.getStreetAddress());
-        tvState.setText(user.getState());
-        tvCity.setText(user.getCity());
-        tvZipcode.setText(user.getZipCode());
+        etStreetAddress.setText(user.getStreetAddress());
+        etState.setText(user.getState());
+        etCity.setText(user.getCity());
+        etZipcode.setText(user.getZipCode());
 
         Log.i("Role: ", user.getUserRole());
 
         if (user.getUserRole().equalsIgnoreCase("Guest")) {
             llCCExp.setVisibility(View.VISIBLE);
             llCCN.setVisibility(View.VISIBLE);
-            tvCreditCardExpiry.setText(user.getCreditCardExp());
-            tvCreditCardNum.setText(user.getCreditCardNum());
+            etCreditCardExpiry.setText(user.getCreditCardExp());
+            etCreditCardNum.setText(user.getCreditCardNum());
 
         } else {
             llCCN.setVisibility(View.GONE);
@@ -151,19 +153,19 @@ public class UpdateProfileActivity extends AppCompatActivity {
     }
 
     public void getUpdatedUserData() {
-        firstName = tvFirstName.getText().toString();
-        lastName = tvLastName.getText().toString();
-        password = tvPassword.getText().toString();
-        phone = tvPhone.getText().toString();
-        email = tvEmail.getText().toString();
-        streetAddress = tvStreetAddress.getText().toString();
-        city = tvCity.getText().toString();
-        state = tvState.getText().toString();
-        zipcode = tvZipcode.getText().toString();
+        firstName = etFirstName.getText().toString();
+        lastName = etLastName.getText().toString();
+        password = etPassword.getText().toString();
+        phone = etPhone.getText().toString();
+        email = etEmail.getText().toString();
+        streetAddress = etStreetAddress.getText().toString();
+        city = etCity.getText().toString();
+        state = etState.getText().toString();
+        zipcode = etZipcode.getText().toString();
 
         if (role.equalsIgnoreCase("Guest")) {
-            ccn = tvCreditCardNum.getText().toString();
-            ccexp = tvCreditCardExpiry.getText().toString();
+            ccn = etCreditCardNum.getText().toString();
+            ccexp = etCreditCardExpiry.getText().toString();
             cctype = spnrCCType.getSelectedItem().toString();
             Log.i(APP_TAG, "role: notGuest; " + cctype);
         } else {

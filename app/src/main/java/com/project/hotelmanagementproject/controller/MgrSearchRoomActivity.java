@@ -31,7 +31,6 @@ import java.util.Date;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ACTIVITY_RETURN_STATE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_END_DATE;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOME_ACTIVITY;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOTEL_NAME;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_OCCUPIED_STATUS;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ROOM_ID;
@@ -63,25 +62,25 @@ public class MgrSearchRoomActivity extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         init();
-        getReturnState();
+        //  getReturnState();
     }
 
-    private void getReturnState() {
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            returnIntent = bundle.getString(MGR_ACTIVITY_RETURN_STATE);
-            if (!returnIntent.equalsIgnoreCase(MGR_HOME_ACTIVITY)) {
-                searchRoomIp = bundle.getString(MGR_SEARCH_ROOM_IP);
-                hotelName = bundle.getString(MGR_HOTEL_NAME);
-                startDate = bundle.getString(MGR_START_DATE);
-                endDate = bundle.getString(MGR_END_DATE);
-                startTime = bundle.getString(MGR_START_TIME);
-                viewDataInList();
-            }
-        }
-
-        Log.i(APP_TAG, "return state: " + returnIntent);
-    }
+//    private void getReturnState() {
+//        Bundle bundle = getIntent().getExtras();
+//        if (bundle != null) {
+//            returnIntent = bundle.getString(MGR_ACTIVITY_RETURN_STATE);
+//            if (!returnIntent.equalsIgnoreCase(MGR_HOME_ACTIVITY)) {
+//                searchRoomIp = bundle.getString(MGR_SEARCH_ROOM_IP);
+//                hotelName = bundle.getString(MGR_HOTEL_NAME);
+//                startDate = bundle.getString(MGR_START_DATE);
+//                endDate = bundle.getString(MGR_END_DATE);
+//                startTime = bundle.getString(MGR_START_TIME);
+//                viewDataInList();
+//            }
+//        }
+//
+//        Log.i(APP_TAG, "return state: " + returnIntent);
+//    }
 
     public void init() {
         etNumRooms = findViewById(R.id.etMgrSrRoomNum);
@@ -138,11 +137,7 @@ public class MgrSearchRoomActivity extends AppCompatActivity {
         startDate = new SimpleDateFormat("yyyy-MM-dd").format(startDateFormat);
         Date endDateFormat = new Date(System.currentTimeMillis() + (1000 * 60 * 60 * 24));
         endDate = new SimpleDateFormat("yyyy-MM-dd").format(endDateFormat);
-        if (returnIntent.equalsIgnoreCase(MGR_HOME_ACTIVITY)) {
-            searchRoomIp = etNumRooms.getText().toString();
-        } else {
-            Log.i(APP_TAG, "srip: " + searchRoomIp);
-        }
+        searchRoomIp = etNumRooms.getText().toString();
 
         Log.i(APP_TAG, startDate + " to " + endDate);
 
