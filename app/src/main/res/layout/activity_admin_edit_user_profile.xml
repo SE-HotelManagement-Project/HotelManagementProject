@@ -86,6 +86,10 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etUgpPassword"
                     style="@style/edit_text_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:paddingLeft="15dp"
                     android:hint="Alay123"/>
 
             </LinearLayout>
@@ -318,7 +322,7 @@
             android:id="@+id/btnUpSave"
             style="@style/btn_style"
             android:layout_weight="1"
-            android:text="Save Changes" />
+            android:text="Update Profile" />
 
     </LinearLayout>
 

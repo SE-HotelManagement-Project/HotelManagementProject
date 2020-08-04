@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.hotelmanagementproject.R;
@@ -35,11 +36,15 @@ public class AdminSearchUserActivity extends AppCompatActivity {
     ListView lvAdSrUserList;
     AdminSearchUserAdapter adminSearchUserAdpater;
     String userName;
+    String ADM_EDIT_USER= "adm_edit_user";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_search_users);
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
         initView();
     }
 
@@ -66,6 +71,7 @@ public class AdminSearchUserActivity extends AppCompatActivity {
         DbMgr UserDbMgr = DbMgr.getInstance(getApplicationContext());
         String AdminSuLastName = etAdminSuLastName.getText().toString();
 
+
         if (null == AdminSuLastName || AdminSuLastName.isEmpty() || AdminSuLastName.equalsIgnoreCase("")) {
             etAdminSuLastName.setError("enter valid input");
             Toast.makeText(getApplicationContext(), "invalid last name", Toast.LENGTH_LONG).show();
@@ -85,7 +91,7 @@ public class AdminSearchUserActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent userNameIntent = new Intent(AdminSearchUserActivity.this, AdminViewUserDetails.class);
                 User item = (User) adapterView.getItemAtPosition(i);
-                userNameIntent.putExtra(userName,item.getUserName());
+                userNameIntent.putExtra(ADM_EDIT_USER,item.getUserName());
 
                 startActivity(userNameIntent);
             }
@@ -118,5 +124,15 @@ public class AdminSearchUserActivity extends AppCompatActivity {
         Intent i = new Intent(AdminSearchUserActivity.this, LoginActivity.class);
         new Session(getApplicationContext()).setLoginStatus(false);
         startActivity(i);
+    }
+    @Override
+    public void onBackPressed() {
+        if (adminSearchUserResult.getVisibility() == View.VISIBLE) {
+            adminSearchUser.setVisibility(View.VISIBLE);
+            adminSearchUserResult.setVisibility(View.GONE);
+        } else {
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+        }
     }
 }
