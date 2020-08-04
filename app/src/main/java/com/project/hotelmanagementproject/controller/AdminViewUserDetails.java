@@ -9,11 +9,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.hotelmanagementproject.R;
 import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.User;
+
 
 public class AdminViewUserDetails  extends AppCompatActivity {
     TextView tvAvpUserName, tvAvpRole, tvAvpLastName, tvAvpFirstName, tvAvpPhone, tvAvpEmail;
@@ -25,14 +27,18 @@ public class AdminViewUserDetails  extends AppCompatActivity {
     User userDetails;
 
     String userName, role, lastName, firstName, phone, email, streetAddress, city, state, zipCode;
+    String ADM_EDIT_USER= "adm_edit_user";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_user_details);
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
-            userName = bundle.getString(userName);
+            userName = bundle.getString(ADM_EDIT_USER);
         }
 
          DbManager =  DbMgr.getInstance(getApplicationContext());
@@ -69,12 +75,12 @@ public class AdminViewUserDetails  extends AppCompatActivity {
         btnAvpUpdateProfile.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent userNameIntent = new Intent(AdminViewUserDetails.this, AdminEditUserDetails.class);
 
-                userNameIntent.putExtra(userName,userName);
+                Intent userNameIntent = new Intent(AdminViewUserDetails.this, AdminEditUserDetails.class);
+                userNameIntent.putExtra(ADM_EDIT_USER,userName);
 
                 startActivity(userNameIntent);
-                startActivity(new Intent(AdminViewUserDetails.this, AdminEditUserDetails.class));
+
             }
         });
 
@@ -104,5 +110,12 @@ public class AdminViewUserDetails  extends AppCompatActivity {
                         }).create().show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent backIntent = new Intent(AdminViewUserDetails.this, AdminSearchUserActivity.class);
+        backIntent.putExtra(ADM_EDIT_USER, userName);
+        startActivity(backIntent);
     }
 }
