@@ -58,11 +58,23 @@ public class ConstantUtils {
 
     //INTENT_TAGS
     public static final String MGR_ROOM_ID = "mgr_room_id";
+    public static final String MGR_SEARCH_ROOM_IP = "mgr_search_room_ip";
     public static final String MGR_HOTEL_NAME = "mgr_hotel_name";
     public static final String MGR_START_DATE = "mgr_start_date";
     public static final String MGR_START_TIME = "mgr_start_time";
     public static final String MGR_END_DATE = "mgr_end_date";
     public static final String MGR_OCCUPIED_STATUS = "mgr_occupied_status";
+    public static final String MGR_ACTIVITY_RETURN_STATE = "mgr_activity_return_status";
+
+    public static final String MGR_ROOM_STD = "mgr_room_std";
+    public static final String MGR_ROOM_DELUXE = "mgr_room_deluxe";
+    public static final String MGR_ROOM_SUITE = "mgr_room_suite";
+
+    //ACTIVITY RETURN STATE
+    public static final String MGR_AVLBL_ROOM_ACTIVITY = "mgr_avlbl_room_state";
+    public static final String MGR_SEARCH_ROOM_ACTIVITY = "mgr_search_room_state";
+    public static final String MGR_RESV_LIST_ACTIVITY = "mgr_resv_list_state";
+    public static final String MGR_HOME_ACTIVITY = "mgr_home_state";
 
     //ROOM_OCCUPIED_STATUS
     public static final String ROOM_OCCUPIED = "Yes";

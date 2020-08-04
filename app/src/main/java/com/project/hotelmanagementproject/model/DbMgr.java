@@ -365,4 +365,44 @@ public class DbMgr extends SQLiteOpenHelper {
         return update == 1;
     }
 
+    public ArrayList<HotelRoom> mgrGetAvailableRoomList(String hotelNameIp, String stdRoom, String deluxeRoom, String suiteRoom, String startDate, String endDate, String startTime) {
+        ArrayList<HotelRoom> roomList = new ArrayList<>();
+
+        SQLiteDatabase sqldb = this.getReadableDatabase();
+        String searchAvlblRoom = "Select * from " + TABLE_HOTEL_DATA + " where " + COL_HOTEL_NAME + " = '" + hotelNameIp
+                + "' and " + COL_ROOM_TYPE + " in ('" + stdRoom + "', '" + deluxeRoom + "', '" + suiteRoom + "')"
+                + " and " + COL_HOTEL_ROOM_ID + " not in ( Select " + COL_RESERV_ROOM_ID + " from " + TABLE_RESERV_DATA + " where " + COL_CHECKIN_DATE
+                + " between '" + startDate + "' and '" + endDate + "')";
+
+        //SELECT * From hm_hotel_data WHERE hotel_name = 'MAVERICK' AND hotel_room_id not in
+        // (SELECT reservation_room_id FROM hm_reservation_data WHERE check_n_date BETWEEN '2020-08-03'  AND  '2020-08-14');
+
+        Log.i(APP_TAG, "search room Query: " + searchAvlblRoom);
+        try {
+            Cursor c = sqldb.rawQuery(searchAvlblRoom, null);
+            if (c.getCount() == 0) {
+                Log.e(APP_TAG, "search room Query Err: No data");
+                return roomList;
+            } else {
+                while (c.moveToNext()) {
+                    String roomId = c.getString(c.getColumnIndex(COL_HOTEL_ROOM_ID));
+                    String roomNumber = c.getString(c.getColumnIndex(COL_ROOM_NUM));
+                    String roomType = c.getString(c.getColumnIndex(COL_ROOM_TYPE));
+                    String hotelName = c.getString(c.getColumnIndex(COL_HOTEL_NAME));
+                    String floorNum = c.getString(c.getColumnIndex(COL_FLOOR_NUM));
+                    String price = c.getString(c.getColumnIndex(COL_PRICE_WEEKDAY));
+
+                    HotelRoom hotelRoom = new HotelRoom(roomId, hotelName, roomNumber, roomType, floorNum, price,
+                            null, null, null
+                            , null, startDate, endDate, startTime);
+                    roomList.add(hotelRoom);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return roomList;
+    }
+
+
 }
