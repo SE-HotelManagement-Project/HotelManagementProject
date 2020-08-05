@@ -152,7 +152,27 @@ public class AdminEditUserDetails extends AppCompatActivity {
         zipcode = etUgpZipCode.getText().toString();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_logout) {
+            logout();
+            return true;
+        } else if (id == android.R.id.home) {
+            Intent backIntent = new Intent(AdminEditUserDetails.this, AdminViewUserDetails.class);
+            backIntent.putExtra(ADM_EDIT_USER, userName);
+            startActivity(backIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     public void logout() {
         Intent i = new Intent(AdminEditUserDetails.this, LoginActivity.class);

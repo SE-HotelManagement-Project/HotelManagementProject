@@ -115,6 +115,15 @@ public class AdminSearchUserActivity extends AppCompatActivity {
         if (id == R.id.action_logout) {
             logout();
             return true;
+        } else if (id == android.R.id.home) {
+            if (adminSearchUserResult.getVisibility() == View.VISIBLE) {
+                adminSearchUser.setVisibility(View.VISIBLE);
+                adminSearchUserResult.setVisibility(View.GONE);
+            } else {
+                Intent intent = new Intent(this, HomeActivity.class);
+                startActivity(intent);
+                return true;
+            }
         }
 
         return super.onOptionsItemSelected(item);
