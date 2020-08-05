@@ -6,18 +6,48 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.project.hotelmanagementproject.R;
+import com.project.hotelmanagementproject.controller.adapters.AdminSearchUserAdapter;
+import com.project.hotelmanagementproject.controller.adapters.GuestReservationSummaryAdapter;
+import com.project.hotelmanagementproject.controller.adapters.ManagerRoomListAdpater;
+import com.project.hotelmanagementproject.model.DbMgr;
+import com.project.hotelmanagementproject.model.HotelRoom;
+import com.project.hotelmanagementproject.model.Reservation;
 import com.project.hotelmanagementproject.model.Session;
+import com.project.hotelmanagementproject.model.User;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class GuestReservationSummActivity extends AppCompatActivity {
     CardView cvGuestReservationSummary;
-    Button btnGuestCancelReservation;
+    LinearLayout llGuestRsIp;
+    LinearLayout llGuestRsOp;
+
+    String returnIntent,  endDate, startTime, searchRoomIp,startDate;
+    String etGuestRsStartDateStr,etGuestRsStartTimeStr;
+    TextInputEditText etGuestRsStartDate,etGuestRsStartTime;
+    ArrayList<Reservation> reservationList;
+    ListView lvReservationList;
+    GuestReservationSummaryAdapter guestReservationSummaryAdapter;
+    String Guest_Rsr_Summary= "guest_rsr";
+    User userInfo;
+    DbMgr DbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +60,67 @@ public class GuestReservationSummActivity extends AppCompatActivity {
 
     public void init() {
         cvGuestReservationSummary = findViewById(R.id.cvGuestReservationSummary);
-        cvGuestReservationSummary.setOnClickListener(new View.OnClickListener() {
+        llGuestRsIp = findViewById(R.id.llGuestRsIp);
+        llGuestRsOp = findViewById(R.id.llGuestRsOp);
+        llGuestRsIp.setVisibility(View.VISIBLE);
+        llGuestRsOp.setVisibility(View.GONE);
+        etGuestRsStartDate = findViewById(R.id.etGuestRsStartDate);
+        etGuestRsStartTime = findViewById(R.id.etGuestRsStartTime);
+        reservationList = new ArrayList<>();
+        populateDetaultSearchValues();
+        lvReservationList = findViewById(R.id.lvGuestAvlblRoomList);
+        DbManager = DbMgr.getInstance(getApplicationContext());
+        userInfo = DbManager.getUserDetails(new Session(getApplicationContext()).getUserName());
+
+        Button btnGuestRsSearch = findViewById(R.id.btnGuestRsSearch);
+        btnGuestRsSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GuestReservationSummActivity.this, GuestReservationDetailsActivity.class));
-
+                searchGuestReservation();
             }
         });
+    }
+
+    public void populateDetaultSearchValues() {
+        Date startDateFormat = new Date(System.currentTimeMillis());
+        startDate = new SimpleDateFormat("yyyy-MM-dd").format(startDateFormat);
+        startTime = new SimpleDateFormat("hh:mm", Locale.US).format(startDateFormat);
+
+        etGuestRsStartDate.setText(startDate);
+        etGuestRsStartTime.setText(startTime);
+    }
+
+    public void searchGuestReservation(){
+
+        String etGuestRsStartDateStr = etGuestRsStartDate.getText().toString();
+        String etGuestRsStartTimeStr = etGuestRsStartTime.getText().toString();
 
 
+
+        if (null == etGuestRsStartDateStr || etGuestRsStartDateStr.isEmpty() || etGuestRsStartDateStr.equalsIgnoreCase("")) {
+            etGuestRsStartDate.setError("enter valid input");
+            Toast.makeText(getApplicationContext(), "invalid start date", Toast.LENGTH_LONG).show();
+        }else if(null == etGuestRsStartTimeStr || etGuestRsStartTimeStr.isEmpty() || etGuestRsStartTimeStr.equalsIgnoreCase("")){
+            etGuestRsStartDate.setError("enter valid input");
+            Toast.makeText(getApplicationContext(), "invalid start time", Toast.LENGTH_LONG).show();
+        } else {
+            llGuestRsIp.setVisibility(View.GONE);
+            llGuestRsOp.setVisibility(View.VISIBLE);
+            reservationList = DbManager.guestGetReservationSummaryList(userInfo.getUserName(),etGuestRsStartDateStr,etGuestRsStartTimeStr);
+            guestReservationSummaryAdapter = new GuestReservationSummaryAdapter(this, reservationList);
+            lvReservationList.setAdapter(guestReservationSummaryAdapter);
+            guestReservationSummaryAdapter.notifyDataSetChanged();
+        }
+
+        lvReservationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent guestRsvSummaryIntent = new Intent(GuestReservationSummActivity.this, AdminViewUserDetails.class);
+                Reservation item = (Reservation) adapterView.getItemAtPosition(i);
+                guestRsvSummaryIntent.putExtra(Guest_Rsr_Summary,item.getResvRoomId());
+                startActivity(guestRsvSummaryIntent);
+            }
+        });
     }
 
     public void actionBarHandler() {
@@ -64,10 +146,14 @@ public class GuestReservationSummActivity extends AppCompatActivity {
             logout();
             return true;
         } else if (id == android.R.id.home) {
-            // app icon in action bar clicked; go home
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
-            return true;
+            if (llGuestRsOp.getVisibility() == View.VISIBLE) {
+                llGuestRsIp.setVisibility(View.VISIBLE);
+                llGuestRsOp.setVisibility(View.GONE);
+            } else {
+                Intent intent = new Intent(this, HomeActivity.class);
+                startActivity(intent);
+                return true;
+            }
         }
         return super.onOptionsItemSelected(item);
     }

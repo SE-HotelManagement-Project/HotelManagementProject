@@ -548,4 +548,46 @@ public class DbMgr extends SQLiteOpenHelper {
         return hotelResv;
     }
 
+    public ArrayList<Reservation> guestGetReservationSummaryList(String userName,
+                                                                 String startDate, String startTime) {
+        ArrayList<Reservation> resvList = new ArrayList<>();
+        Map<String, Integer> resvIdList = new HashMap<>();
+        SQLiteDatabase sqldb = this.getReadableDatabase();
+        String searchResv = "Select * from " + TABLE_RESERV_DATA
+                + " where " + COL_GUEST_USER_NAME + " = '" + userName
+                + "' and " + COL_PAYMENT_STATUS + " = 'PAID'"
+                + " and " + COL_CHECKIN_DATE + " >= '" + startDate
+                + "' and " + COL_START_TIME + " >= '" + startTime + "'";
+
+        Log.i(APP_TAG, "search resv Query: " + searchResv);
+
+        try {
+            Cursor c = sqldb.rawQuery(searchResv, null);
+            if (c.getCount() == 0) {
+                Log.e(APP_TAG, "search room Query Err: No data");
+            } else {
+                while (c.moveToNext()) {
+                    String resvId = c.getString(c.getColumnIndex(COL_RESERV_ID));
+                    String numOfRooms = c.getString(c.getColumnIndex(COL_NUM_OF_ROOMS));
+                    String numOfNights = c.getString(c.getColumnIndex(COL_NUM_OF_NIGHTS));
+                    String hotelName = c.getString(c.getColumnIndex(COL_RESERV_HOTEL_NAME));
+                    String checkInDate = c.getString(c.getColumnIndex(COL_CHECKIN_DATE));
+                    String roomType = c.getString(c.getColumnIndex(COL_ROOM_TYPE));
+                    String resvStartTime = c.getString(c.getColumnIndex(COL_START_TIME));
+                    if (!resvIdList.containsKey(resvId)) {
+                        resvIdList.put(resvId, 1);
+                        Reservation reservation = new Reservation(resvId, null, null, null, null, null, hotelName, roomType,
+                                null, numOfNights, numOfRooms, null, checkInDate, null, resvStartTime, startDate);
+                        resvList.add(reservation);
+                    }
+                }
+                resvIdList.clear();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resvList;
+    }
+
+
 }
