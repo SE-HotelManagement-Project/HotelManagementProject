@@ -535,8 +535,8 @@ public class DbMgr extends SQLiteOpenHelper {
                     String resvHotelName = c.getString(c.getColumnIndex(COL_RESERV_HOTEL_NAME));
 
                     return new Reservation(reservationId, null, resvRoomId, userName,
-                            firstName, lastName, resvHotelName, numAdults,
-                            roomType, numNights, numRooms, resvPrice,
+                            firstName, lastName, resvHotelName, roomType,
+                            numAdults, numNights, numRooms, resvPrice,
                             resvCheckInDate, resvCheckOutDate, resvTime, startDate);
 
                 }
