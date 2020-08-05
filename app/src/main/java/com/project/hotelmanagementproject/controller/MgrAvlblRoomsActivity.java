@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -64,7 +64,7 @@ public class MgrAvlblRoomsActivity extends AppCompatActivity {
     private LinearLayout llAvlblRoomOp;
     private TextInputEditText etStartDate, etEndDate, etStartTime;
     private CheckBox cbStandard, cbDeluxe, cbSuite;
-    private Spinner spnrHotelName;
+    private TextView tvHotelName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,11 +76,10 @@ public class MgrAvlblRoomsActivity extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         init();
-        getReturnState();
-
+        retainActivityState();
     }
 
-    private void getReturnState() {
+    private void retainActivityState() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             returnIntent = bundle.getString(MGR_ACTIVITY_RETURN_STATE);
@@ -92,10 +91,12 @@ public class MgrAvlblRoomsActivity extends AppCompatActivity {
                 stdRoom = bundle.getString(MGR_ROOM_STD);
                 deluxeRoom = bundle.getString(MGR_ROOM_DELUXE);
                 suiteRoom = bundle.getString(MGR_ROOM_SUITE);
-
                 Log.i(APP_TAG, "return state: " + returnIntent + deluxeRoom + startDate + startTime);
 
                 viewDataInList();
+                llAvlblRoomIp.setVisibility(View.GONE);
+                llAvlblRoomOp.setVisibility(View.VISIBLE);
+
             }
             Log.i(APP_TAG, "return state: " + returnIntent);
         }
@@ -115,98 +116,107 @@ public class MgrAvlblRoomsActivity extends AppCompatActivity {
         cbDeluxe = findViewById(R.id.cbMgrArDeluxe);
         cbSuite = findViewById(R.id.cbMgrArSuite);
 
-        spnrHotelName = findViewById(R.id.spnrMgrArHotelName);
-
+        tvHotelName = findViewById(R.id.tvMgrArHotelName);
         btnMgrArSearch = findViewById(R.id.btnMgrArSearch);
-        btnMgrArSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                llAvlblRoomIp.setVisibility(View.GONE);
-                llAvlblRoomOp.setVisibility(View.VISIBLE);
-            }
-        });
 
-        hotelName = spnrHotelName.getSelectedItem().toString();
         lvAvlblRoomList = findViewById(R.id.lvMgrAvlblRoomList);
-
         roomList = new ArrayList<>();
-        initializeData();
+        populateInputFields();
 
         btnMgrArSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewDataInList();
+                if (!reservation.isValidStartTime(startTime)) {
+                    Toast.makeText(getApplicationContext(), "Invalid Search Params", Toast.LENGTH_LONG).show();
+                } else {
+                    viewDataInList();
+                    llAvlblRoomIp.setVisibility(View.GONE);
+                    llAvlblRoomOp.setVisibility(View.VISIBLE);
+                }
             }
         });
 
         lvAvlblRoomList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent roomDetailsIntent = new Intent(MgrAvlblRoomsActivity.this, MgrRoomDetailsActivity.class);
                 HotelRoom item = (HotelRoom) adapterView.getItemAtPosition(i);
-                Log.i(APP_TAG, "RoomID: " + item.getHotelRoomId());
-                roomDetailsIntent.putExtra(MGR_ROOM_ID, item.getHotelRoomId());
-                roomDetailsIntent.putExtra(MGR_HOTEL_NAME, item.getHotelName());
-                roomDetailsIntent.putExtra(MGR_START_DATE, item.getStartDate());
-                roomDetailsIntent.putExtra(MGR_END_DATE, item.getEndDate());
-                roomDetailsIntent.putExtra(MGR_START_TIME, item.getStartTime());
-
-                roomDetailsIntent.putExtra(MGR_ROOM_STD, stdRoom);
-                roomDetailsIntent.putExtra(MGR_ROOM_DELUXE, deluxeRoom);
-                roomDetailsIntent.putExtra(MGR_ROOM_SUITE, suiteRoom);
-
-                roomDetailsIntent.putExtra(MGR_OCCUPIED_STATUS, ROOM_NOT_OCCUPIED);
-                roomDetailsIntent.putExtra(MGR_ACTIVITY_RETURN_STATE, MGR_AVLBL_ROOM_ACTIVITY);
-                startActivity(roomDetailsIntent);
+                startRoomDetailsActivity(item);
             }
         });
     }
 
-    public void initializeData() {
+    private void startRoomDetailsActivity(HotelRoom item) {
+        Intent roomDetailsIntent = new Intent(MgrAvlblRoomsActivity.this, MgrRoomDetailsActivity.class);
+
+        Log.i(APP_TAG, "RoomID: " + item.getHotelRoomId());
+        roomDetailsIntent.putExtra(MGR_ROOM_ID, item.getHotelRoomId());
+        roomDetailsIntent.putExtra(MGR_HOTEL_NAME, item.getHotelName());
+        roomDetailsIntent.putExtra(MGR_START_DATE, item.getStartDate());
+        roomDetailsIntent.putExtra(MGR_END_DATE, item.getEndDate());
+        roomDetailsIntent.putExtra(MGR_START_TIME, item.getStartTime());
+
+        roomDetailsIntent.putExtra(MGR_ROOM_STD, stdRoom);
+        roomDetailsIntent.putExtra(MGR_ROOM_DELUXE, deluxeRoom);
+        roomDetailsIntent.putExtra(MGR_ROOM_SUITE, suiteRoom);
+
+        roomDetailsIntent.putExtra(MGR_OCCUPIED_STATUS, ROOM_NOT_OCCUPIED);
+        roomDetailsIntent.putExtra(MGR_ACTIVITY_RETURN_STATE, MGR_AVLBL_ROOM_ACTIVITY);
+        startActivity(roomDetailsIntent);
+    }
+
+    public void populateInputFields() {
         Date startDateFormat = new Date(System.currentTimeMillis());
         startDate = new SimpleDateFormat("yyyy-MM-dd").format(startDateFormat);
         Date endDateFormat = new Date(System.currentTimeMillis() + (1000 * 60 * 60 * 24));
         endDate = new SimpleDateFormat("yyyy-MM-dd").format(endDateFormat);
-        startTime = new SimpleDateFormat("hh:mm aa", Locale.US).format(startDateFormat);
+        startTime = new SimpleDateFormat("hh:mm", Locale.US).format(startDateFormat);
 
         etStartDate.setText(startDate);
         etEndDate.setText(endDate);
         etStartTime.setText(startTime);
+        hotelName = new Session(getApplicationContext()).getHotelAssigned();
+        tvHotelName.setText(hotelName);
 
         Log.i(APP_TAG, "time format: " + new Reservation().isValidStartTime(startTime));
         Log.i(APP_TAG, "time format: " + startTime);
         Log.i(APP_TAG, "ci format: " + startDate);
         Log.i(APP_TAG, "co format: " + endDate);
+        Log.i(APP_TAG, "hotel assigned: " + new Session(getApplicationContext()).getHotelAssigned());
     }
 
-    private void viewDataInList() {
-        DbMgr hotelRoomDbMgr = DbMgr.getInstance(getApplicationContext());
-        if (returnIntent.equalsIgnoreCase(MGR_HOME_ACTIVITY)) {
+    private void getInputData() {
+        if (llAvlblRoomIp.getVisibility() == View.VISIBLE) {
             if (cbStandard.isChecked()) {
                 stdRoom = STANDARD_ROOM;
+            } else {
+                stdRoom = null;
             }
             if (cbDeluxe.isChecked()) {
                 deluxeRoom = DELUXE_ROOM;
+            } else {
+                deluxeRoom = null;
             }
             if (cbSuite.isChecked()) {
                 suiteRoom = SUITE_ROOM;
+            } else {
+                suiteRoom = null;
             }
 
             startDate = etStartDate.getText().toString();
             endDate = etEndDate.getText().toString();
             startTime = etStartTime.getText().toString();
         }
+    }
 
-        if (!reservation.isValidStartTime(startTime)) {
-            Toast.makeText(getApplicationContext(), "Invalid Search Params", Toast.LENGTH_LONG).show();
-        } else {
-            llAvlblRoomIp.setVisibility(View.GONE);
-            llAvlblRoomOp.setVisibility(View.VISIBLE);
-            roomList = hotelRoomDbMgr.mgrGetAvailableRoomList(hotelName, stdRoom, deluxeRoom, suiteRoom, startDate, endDate, startTime);
-            roomListAdpater = new ManagerRoomListAdpater(this, roomList);
-            lvAvlblRoomList.setAdapter(roomListAdpater);
-            roomListAdpater.notifyDataSetChanged();
-        }
+    private void viewDataInList() {
+        DbMgr hotelRoomDbMgr = DbMgr.getInstance(getApplicationContext());
+        getInputData();
+        Log.i(APP_TAG, "list params: " + stdRoom + " " + deluxeRoom + " " + suiteRoom);
+        Log.i(APP_TAG, "list params: " + startDate + " " + endDate + " " + startTime);
+        roomList = hotelRoomDbMgr.mgrGetAvailableRoomList(hotelName, stdRoom, deluxeRoom, suiteRoom, startDate, endDate, startTime);
+        roomListAdpater = new ManagerRoomListAdpater(this, roomList);
+        lvAvlblRoomList.setAdapter(roomListAdpater);
+        roomListAdpater.notifyDataSetChanged();
     }
 
     @Override
@@ -244,7 +254,6 @@ public class MgrAvlblRoomsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
         if (llAvlblRoomOp.getVisibility() == View.VISIBLE) {
             llAvlblRoomIp.setVisibility(View.VISIBLE);
             llAvlblRoomOp.setVisibility(View.GONE);
@@ -252,7 +261,6 @@ public class MgrAvlblRoomsActivity extends AppCompatActivity {
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
         }
-
         //super.onBackPressed();
     }
 }

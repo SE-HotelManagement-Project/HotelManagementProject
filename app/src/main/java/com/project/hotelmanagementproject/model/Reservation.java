@@ -16,6 +16,8 @@ public class Reservation {
     String resvNumOfRooms;
 
     String totalPrice;
+
+    String startDate;
     String resvCheckInDate;
     String resevCheckOutDate;
     String resvStartTime;
@@ -27,8 +29,9 @@ public class Reservation {
 
     public Reservation(String reservationId, String resvRoomId, String resvRoomNum, String resvUserName, String resvFirstName, String resvLastName,
                        String resvHotelName, String resvRoomType, String resvNumAdultsChildren, String resvNumNights, String resvNumOfRooms,
-                       String totalPrice, String resvCheckInDate, String resevCheckOutDate, String resvStartTime) {
+                       String totalPrice, String resvCheckInDate, String resevCheckOutDate, String resvStartTime, String startDate) {
         this.reservationId = reservationId;
+
         this.resvRoomId = resvRoomId;
         this.resvRoomNum = resvRoomNum;
         this.resvUserName = resvUserName;
@@ -40,6 +43,7 @@ public class Reservation {
         this.resvNumNights = resvNumNights;
         this.resvNumOfRooms = resvNumOfRooms;
         this.totalPrice = totalPrice;
+        this.startDate = startDate;
         this.resvCheckInDate = resvCheckInDate;
         this.resevCheckOutDate = resevCheckOutDate;
         this.resvStartTime = resvStartTime;
@@ -133,6 +137,14 @@ public class Reservation {
         this.totalPrice = totalPrice;
     }
 
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
     public String getResvCheckInDate() {
         return resvCheckInDate;
     }
@@ -167,10 +179,12 @@ public class Reservation {
 
 
     public boolean isValidStartTime(String startTime) {
-        return (startTime.contains("AM") || startTime.contains("PM")) && startTime.contains(":") && !startTime.matches("[0-9]");
+        return (startTime.contains(":") && !startTime.matches("[0-9]"));
     }
 
     public void areDatesValid(String startDate, String endDate) {
         // return (startTime.contains("AM") || startTime.contains("PM")) && startTime.contains(":") && !startTime.matches("[0-9]");
     }
+
+
 }

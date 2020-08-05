@@ -7,7 +7,7 @@
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
     android:orientation="vertical"
-    tools:context=".">
+    tools:context=".controller.AdminViewUserDetails">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Admin View Profile"
+            android:text="View Selected User Profile"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="17sp" />
 
@@ -192,34 +192,26 @@
 
     </ScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnAvpUpdateProfile"
-            style="@style/btn_style"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="10dp"
-            android:text="Update          Profile"
-            android:textSize="15sp" />
-
+    <LinearLayout style="@style/horz_linear_layout_style">
 
         <Button
             android:id="@+id/btnAvpRemoveProfile"
             style="@style/btn_style"
-            android:layout_margin="10dp"
+            android:layout_margin="8dp"
             android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="10dp"
-            android:text="Remove           Profile"
+            android:drawableRight="@drawable/ic_delete"
+            android:drawablePadding="8dp"
+            android:text="Remove Profile"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btnAvpUpdateProfile"
+            style="@style/btn_style"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:drawableRight="@drawable/ic_edit"
+            android:drawablePadding="8dp"
+            android:text="Update Profile"
             android:textSize="15sp" />
 
     </LinearLayout>

@@ -47,15 +47,12 @@
 
             <TextView
                 style="@style/text_style"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingRight="15dp"
                 android:text="Hotel:" />
 
-            <Spinner
-                android:id="@+id/spnrMgrArHotelName"
-                style="@style/spinner_style"
-                android:entries="@array/hotel_name" />
+            <TextView
+                android:id="@+id/tvMgrArHotelName"
+                style="@style/edit_text_style"
+                android:text="MAVERICK" />
 
         </LinearLayout>
 
@@ -106,13 +103,13 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_weight="5"
                 style="@style/edit_text_style"
-                android:hint="HH:MM PM">
+                android:hint="HH:MM (24 Hour format)">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etMgrArStartTime"
                     style="@style/edit_text_style"
                     android:layout_weight="5"
-                    android:text="12:00 PM" />
+                    android:text="23:59" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -175,13 +172,11 @@
 
         <Button
             android:id="@+id/btnMgrArSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:background="@color/colorPrimary"
+            style="@style/btn_style2"
+            android:layout_marginTop="35dp"
             android:text="Search Available Rooms"
-            android:textColor="@color/colorWhite"
-            android:textSize="16sp" />
+            android:drawableRight="@drawable/ic_search" />
+
     </LinearLayout>
 
     <LinearLayout

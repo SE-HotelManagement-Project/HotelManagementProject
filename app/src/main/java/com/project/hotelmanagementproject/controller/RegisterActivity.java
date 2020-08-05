@@ -66,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
                             etFirstName.getText().toString(),
                             etLastName.getText().toString(),
                             etPassword.getText().toString(),
-                            "Guest",
+                            "Guest", "ALL",
                             etEmail.getText().toString(),
                             etPhone.getText().toString(),
                             etStreetAddress.getText().toString(),

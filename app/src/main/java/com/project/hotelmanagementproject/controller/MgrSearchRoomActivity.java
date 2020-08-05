@@ -9,15 +9,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.project.hotelmanagementproject.R;
 import com.project.hotelmanagementproject.controller.adapters.ManagerRoomListAdpater;
 import com.project.hotelmanagementproject.model.DbMgr;
@@ -46,8 +46,8 @@ public class MgrSearchRoomActivity extends AppCompatActivity {
     Button btnMgrSrSearch;
     LinearLayout llSearchRoomIp;
     LinearLayout llSearchRoomOp;
-    EditText etNumRooms;
-    Spinner spnrSrHotel;
+    TextInputEditText etNumRooms;
+    TextView tvSrHotel;
     ListView lvRoomList;
     ArrayList<HotelRoom> roomList;
     ManagerRoomListAdpater searchRoomAdapter;
@@ -77,9 +77,11 @@ public class MgrSearchRoomActivity extends AppCompatActivity {
                 endDate = bundle.getString(MGR_END_DATE);
                 startTime = bundle.getString(MGR_START_TIME);
                 viewDataInList();
+                llSearchRoomIp.setVisibility(View.GONE);
+                llSearchRoomOp.setVisibility(View.VISIBLE);
+
             }
         }
-
         Log.i(APP_TAG, "return state: " + returnIntent);
     }
 
@@ -91,25 +93,26 @@ public class MgrSearchRoomActivity extends AppCompatActivity {
         llSearchRoomOp.setVisibility(View.GONE);
         lvRoomList = findViewById(R.id.lvRoomList);
         btnMgrSrSearch = findViewById(R.id.btnMgrSrSearch);
-        spnrSrHotel = findViewById(R.id.spnrMgrSrHotelName);
-        spnrSrHotel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                hotelName = spnrSrHotel.getSelectedItem().toString();
-            }
+        tvSrHotel = findViewById(R.id.tvMgrSrHotelName);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                hotelName = "MAVERICK";
-            }
-        });
+        hotelName = new Session(getApplicationContext()).getHotelAssigned();
+        tvSrHotel.setText(hotelName);
 
         roomList = new ArrayList<>();
 
         btnMgrSrSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewDataInList();
+                searchRoomIp = etNumRooms.getText().toString();
+                if (null == searchRoomIp || searchRoomIp.isEmpty()
+                        || searchRoomIp.equalsIgnoreCase("")) {
+                    etNumRooms.setError("enter valid input");
+                    Toast.makeText(getApplicationContext(), "invalid room number", Toast.LENGTH_LONG).show();
+                } else {
+                    viewDataInList();
+                    llSearchRoomIp.setVisibility(View.GONE);
+                    llSearchRoomOp.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -134,30 +137,18 @@ public class MgrSearchRoomActivity extends AppCompatActivity {
 
     private void viewDataInList() {
         DbMgr hotelRoomDbMgr = DbMgr.getInstance(getApplicationContext());
-        Date startDateFormat = new Date(System.currentTimeMillis());
-        startDate = new SimpleDateFormat("yyyy-MM-dd").format(startDateFormat);
-        Date endDateFormat = new Date(System.currentTimeMillis() + (1000 * 60 * 60 * 24));
-        endDate = new SimpleDateFormat("yyyy-MM-dd").format(endDateFormat);
-        if (returnIntent.equalsIgnoreCase(MGR_HOME_ACTIVITY)) {
-            searchRoomIp = etNumRooms.getText().toString();
-        } else {
-            Log.i(APP_TAG, "srip: " + searchRoomIp);
+        if (llSearchRoomIp.getVisibility() == View.VISIBLE) {
+            Date startDateFormat = new Date(System.currentTimeMillis());
+            startDate = new SimpleDateFormat("yyyy-MM-dd").format(startDateFormat);
+            Date endDateFormat = new Date(System.currentTimeMillis() + (1000 * 60 * 60 * 24));
+            endDate = new SimpleDateFormat("yyyy-MM-dd").format(endDateFormat);
         }
-
         Log.i(APP_TAG, startDate + " to " + endDate);
+        roomList = hotelRoomDbMgr.getSearchRoomList(hotelName, searchRoomIp, startDate, endDate, "12:00 PM");
+        searchRoomAdapter = new ManagerRoomListAdpater(this, roomList);
+        lvRoomList.setAdapter(searchRoomAdapter);
+        searchRoomAdapter.notifyDataSetChanged();
 
-
-        if (null == searchRoomIp || searchRoomIp.isEmpty() || searchRoomIp.equalsIgnoreCase("")) {
-            etNumRooms.setError("enter valid input");
-            Toast.makeText(getApplicationContext(), "invalid room number", Toast.LENGTH_LONG).show();
-        } else {
-            llSearchRoomIp.setVisibility(View.GONE);
-            llSearchRoomOp.setVisibility(View.VISIBLE);
-            roomList = hotelRoomDbMgr.getSearchRoomList(hotelName, searchRoomIp, startDate, endDate, "12:00 PM");
-            searchRoomAdapter = new ManagerRoomListAdpater(this, roomList);
-            lvRoomList.setAdapter(searchRoomAdapter);
-            searchRoomAdapter.notifyDataSetChanged();
-        }
     }
 
     @Override

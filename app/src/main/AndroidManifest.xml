@@ -12,6 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
+        <activity android:name=".controller.MgrResvDetailsActivity"></activity>
+        <activity android:name=".controller.MgrSearchResvActivity" />
         <activity android:name=".controller.AdminSearchUserActivity" />
         <activity android:name=".controller.AdminEditUserDetails" />
         <activity android:name=".controller.AdminViewUserDetails" />

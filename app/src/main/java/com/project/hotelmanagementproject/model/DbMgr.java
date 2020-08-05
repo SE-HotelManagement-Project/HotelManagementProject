@@ -8,7 +8,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
 
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_AVAILABILITY_STATUS;
@@ -24,6 +33,7 @@ import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_FLO
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_GUEST_FIRST_NAME;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_GUEST_LAST_NAME;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_GUEST_USER_NAME;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_HOTEL_ACCESS;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_HOTEL_NAME;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_HOTEL_ROOM_ID;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_HOTEL_ROOM_TYPE;
@@ -32,6 +42,7 @@ import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_NUM
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_NUM_OF_NIGHTS;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_NUM_OF_ROOMS;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_PASSWORD;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_PAYMENT_STATUS;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_PHONE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_PRICE_WEEKDAY;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_PRICE_WEEKEND;
@@ -86,7 +97,7 @@ public class DbMgr extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String userTblQry = "create table " + TABLE_USER_DATA + "(" + COL_FIRST_NAME + " text, " +
                 COL_LAST_NAME + " text, " + COL_USER_NAME + " text primary key," + COL_PASSWORD + " text,"
-                + COL_USER_ROLE + " text," + COL_EMAIL + " text," + COL_PHONE + " text," + COL_STREET_ADDRESS + " text,"
+                + COL_USER_ROLE + " text," + COL_HOTEL_ACCESS + " text," + COL_EMAIL + " text," + COL_PHONE + " text," + COL_STREET_ADDRESS + " text,"
                 + COL_CITY + " text," + COL_STATE + " text," + COL_ZIP_CODE + " text," + COL_CREDIT_CARD_NUM + " text, "
                 + COL_CREDIT_CARD_EXP + " text," + COL_CARD_TYPE + " text)";
         db.execSQL(userTblQry);
@@ -101,7 +112,8 @@ public class DbMgr extends SQLiteOpenHelper {
                 + COL_GUEST_FIRST_NAME + " text, " + COL_GUEST_LAST_NAME + " text," + COL_GUEST_USER_NAME + " text, "
                 + COL_RESERV_ID + " text," + COL_RESERV_HOTEL_NAME + " text," + COL_ROOM_TYPE + " text," + COL_NUM_OF_ROOMS + " text,"
                 + COL_NUM_OF_ADULTS_AND_CHILDREN + " text," + COL_NUM_OF_NIGHTS + " text," + COL_CHECKIN_DATE + " date,"
-                + COL_CHECKOUT_DATE + " date, " + COL_START_TIME + " text," + COL_TOTAL_PRICE + " text, " + COL_RESERV_ROOM_ID + " text,"
+                + COL_CHECKOUT_DATE + " date, " + COL_START_TIME + " text," + COL_TOTAL_PRICE + " text, " + COL_RESERV_ROOM_ID + " text, "
+                + COL_PAYMENT_STATUS + " text,"
                 + "foreign key(" + COL_RESERV_ROOM_ID + ") references " + TABLE_HOTEL_DATA + " (" + COL_HOTEL_ROOM_ID + "))";
         db.execSQL(reservationTblQry);
     }
@@ -141,7 +153,7 @@ public class DbMgr extends SQLiteOpenHelper {
     }
 
     public User getUserDetails(String username) {
-        String userName = null, password = null, role = null, lastName = null, firstName = null, phone = null, email = null;
+        String userName = null, password = null, role = null, hotelAccess = null, lastName = null, firstName = null, phone = null, email = null;
         String streetAddress = null, city = null, state = null, zipcode = null, ccn = null, ccexp = null, cctype = null;
 
         SQLiteDatabase sqldb = this.getReadableDatabase();
@@ -150,6 +162,7 @@ public class DbMgr extends SQLiteOpenHelper {
 
         while (c.moveToNext()) {
             role = c.getString(c.getColumnIndex(COL_USER_ROLE));
+            hotelAccess = c.getString(c.getColumnIndex(COL_HOTEL_ACCESS));
             password = c.getString(c.getColumnIndex(COL_PASSWORD));
             userName = c.getString(c.getColumnIndex(COL_USER_NAME));
             email = c.getString(c.getColumnIndex(COL_EMAIL));
@@ -167,7 +180,7 @@ public class DbMgr extends SQLiteOpenHelper {
             }
         }
         c.close();
-        return new User(userName, firstName, lastName, password, role, email, phone, streetAddress, city, state, zipcode, ccn, ccexp, cctype);
+        return new User(userName, firstName, lastName, password, role, hotelAccess, email, phone, streetAddress, city, state, zipcode, ccn, ccexp, cctype);
     }
 
     public boolean updateProfile(User user) {
@@ -279,19 +292,20 @@ public class DbMgr extends SQLiteOpenHelper {
     public Reservation getResvDates(String hotelName, String startDate, String roomId) {
         Reservation hotelResv = null;
         SQLiteDatabase sqldb = this.getReadableDatabase();
-        String searchRoom = "Select * from " + TABLE_RESERV_DATA
+        String searchResvDates = "Select * from " + TABLE_RESERV_DATA
                 + " where " + COL_RESERV_HOTEL_NAME + " = '" + hotelName
                 + "' and " + COL_RESERV_ROOM_ID + " = '" + roomId + "' and "
-                + COL_CHECKIN_DATE + " <= '" + startDate + "' and " + COL_CHECKOUT_DATE + " >= '" + startDate + "'";
-        Log.i(APP_TAG, "search Dates exist Query : " + searchRoom);
+                + COL_CHECKIN_DATE + " <= '" + startDate
+                + "' and " + COL_CHECKOUT_DATE + " >= '" + startDate + "'";
+        Log.i(APP_TAG, "search Resv Dates exist Query : " + searchResvDates);
         try {
-            Cursor c = sqldb.rawQuery(searchRoom, null);
+            Cursor c = sqldb.rawQuery(searchResvDates, null);
             if (c.getCount() == 0) {
                 Log.e(APP_TAG, "search room Query Err: No data");
             } else {
                 while (c.moveToNext()) {
-                    String resvStartDate = c.getString(c.getColumnIndex(COL_CHECKIN_DATE));
-                    String resvEndDate = c.getString(c.getColumnIndex(COL_CHECKOUT_DATE));
+                    String resvCheckInDate = c.getString(c.getColumnIndex(COL_CHECKIN_DATE));
+                    String resvCheckOutDate = c.getString(c.getColumnIndex(COL_CHECKOUT_DATE));
                     String resvId = c.getString(c.getColumnIndex(COL_RESERV_ID));
                     String resvPrice = c.getString(c.getColumnIndex(COL_TOTAL_PRICE));
                     String resvTime = c.getString(c.getColumnIndex(COL_START_TIME));
@@ -301,7 +315,7 @@ public class DbMgr extends SQLiteOpenHelper {
                     hotelResv = new Reservation(resvId, resvRoomId, resvRoomId, null,
                             null, null, resvHotelName, null,
                             null, null, null,
-                            resvPrice, resvStartDate, resvEndDate, resvTime);
+                            resvPrice, resvCheckInDate, resvCheckOutDate, resvTime, startDate);
 
                     Log.i(APP_TAG, "hotelResv: " + hotelResv.toString() + " "
                             + hotelResv.getResvCheckInDate() + " " + hotelResv.getResvRoomId());
@@ -349,7 +363,7 @@ public class DbMgr extends SQLiteOpenHelper {
         return hotelRoom;
     }
 
-    public boolean updateRoomDetails(HotelRoom hotelRoom) {
+    public boolean mgrUpdateRoomDetails(HotelRoom hotelRoom) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COL_HOTEL_NAME, hotelRoom.getHotelName());
@@ -365,14 +379,15 @@ public class DbMgr extends SQLiteOpenHelper {
         return update == 1;
     }
 
-    public ArrayList<HotelRoom> mgrGetAvailableRoomList(String hotelNameIp, String stdRoom, String deluxeRoom, String suiteRoom, String startDate, String endDate, String startTime) {
+    public ArrayList<HotelRoom> mgrGetAvailableRoomList(String hotelNameIp, String stdRoom, String deluxeRoom, String suiteRoom,
+                                                        String startDate, String endDate, String startTime) {
         ArrayList<HotelRoom> roomList = new ArrayList<>();
 
         SQLiteDatabase sqldb = this.getReadableDatabase();
         String searchAvlblRoom = "Select * from " + TABLE_HOTEL_DATA + " where " + COL_HOTEL_NAME + " = '" + hotelNameIp
                 + "' and " + COL_ROOM_TYPE + " in ('" + stdRoom + "', '" + deluxeRoom + "', '" + suiteRoom + "')"
-                + " and " + COL_HOTEL_ROOM_ID + " not in ( Select " + COL_RESERV_ROOM_ID + " from " + TABLE_RESERV_DATA + " where " + COL_CHECKIN_DATE
-                + " between '" + startDate + "' and '" + endDate + "')";
+                + " and " + COL_HOTEL_ROOM_ID + " not in ( Select " + COL_RESERV_ROOM_ID + " from " + TABLE_RESERV_DATA + " where "
+                + COL_CHECKIN_DATE + " between '" + startDate + "' and '" + endDate + "')";
 
         //SELECT * From hm_hotel_data WHERE hotel_name = 'MAVERICK' AND hotel_room_id not in
         // (SELECT reservation_room_id FROM hm_reservation_data WHERE check_n_date BETWEEN '2020-08-03'  AND  '2020-08-14');
@@ -407,7 +422,7 @@ public class DbMgr extends SQLiteOpenHelper {
     public ArrayList<User> getAdminSearchUser(String lastname) {
 
         ArrayList<User> userList = new ArrayList<>();
-        String userName = null, password = null, role = null, lastName = null, firstName = null, phone = null, email = null;
+        String userName = null, password = null, role = null, hotelAccess = null, lastName = null, firstName = null, phone = null, email = null;
         String streetAddress = null, city = null, state = null, zipcode = null, ccn = null, ccexp = null, cctype = null;
 
         SQLiteDatabase sqldb = this.getReadableDatabase();
@@ -420,13 +435,14 @@ public class DbMgr extends SQLiteOpenHelper {
                 Log.e(APP_TAG, "search user Query Err: No data");
             } else {
                 while (c.moveToNext()) {
-                     userName = c.getString(c.getColumnIndex(COL_USER_NAME));
-                     lastName = c.getString(c.getColumnIndex(COL_LAST_NAME));
-                     firstName = c.getString(c.getColumnIndex(COL_FIRST_NAME));
-                     phone = c.getString(c.getColumnIndex(COL_PHONE));
-                     email = c.getString(c.getColumnIndex(COL_EMAIL));
+                    userName = c.getString(c.getColumnIndex(COL_USER_NAME));
+                    lastName = c.getString(c.getColumnIndex(COL_LAST_NAME));
+                    firstName = c.getString(c.getColumnIndex(COL_FIRST_NAME));
+                    phone = c.getString(c.getColumnIndex(COL_PHONE));
+                    email = c.getString(c.getColumnIndex(COL_EMAIL));
 
-                    User user = new User(userName, firstName, lastName, password, role, email, phone, streetAddress, city, state, zipcode, ccn, ccexp, cctype);
+                    User user = new User(userName, firstName, lastName, password, role, hotelAccess,
+                            email, phone, streetAddress, city, state, zipcode, ccn, ccexp, cctype);
                     userList.add(user);
                 }
             }
@@ -440,6 +456,96 @@ public class DbMgr extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = new String[]{COL_USER_NAME};
         return db.delete(TABLE_USER_DATA, COL_USER_NAME + " = ?", new String[]{username});
+    }
+
+    public int deleteReservation(String reservationId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_RESERV_DATA, COL_RESERV_ID + " = ?", new String[]{reservationId});
+    }
+
+    public ArrayList<Reservation> mgrGetReservationList(String hotelNameIp,
+                                                        String startDate, String startTime) {
+        ArrayList<Reservation> resvList = new ArrayList<>();
+
+        Map<String, Integer> resvIdList = new HashMap<>();
+        SQLiteDatabase sqldb = this.getReadableDatabase();
+        String searchResv = "Select * from " + TABLE_RESERV_DATA
+                + " where " + COL_RESERV_HOTEL_NAME + " = '" + hotelNameIp
+                + "' and " + COL_PAYMENT_STATUS + " = 'PAID'"
+                + " and " + COL_CHECKIN_DATE + " >= '" + startDate
+                + "' and " + COL_START_TIME + " >= '" + startTime + "'";
+
+        Log.i(APP_TAG, "search resv Query: " + searchResv);
+
+        try {
+            Cursor c = sqldb.rawQuery(searchResv, null);
+            if (c.getCount() == 0) {
+                Log.e(APP_TAG, "search room Query Err: No data");
+            } else {
+                while (c.moveToNext()) {
+                    String resvId = c.getString(c.getColumnIndex(COL_RESERV_ID));
+                    String numOfRooms = c.getString(c.getColumnIndex(COL_NUM_OF_ROOMS));
+                    String numOfNights = c.getString(c.getColumnIndex(COL_NUM_OF_NIGHTS));
+                    String hotelName = c.getString(c.getColumnIndex(COL_RESERV_HOTEL_NAME));
+                    String checkInDate = c.getString(c.getColumnIndex(COL_CHECKIN_DATE));
+                    String roomType = c.getString(c.getColumnIndex(COL_ROOM_TYPE));
+                    String resvStartTime = c.getString(c.getColumnIndex(COL_START_TIME));
+                    if (!resvIdList.containsKey(resvId)) {
+                        resvIdList.put(resvId, 1);
+                        Reservation reservation = new Reservation(resvId, null, null, null, null, null, hotelName, roomType,
+                                null, numOfNights, numOfRooms, null, checkInDate, null, resvStartTime, startDate);
+                        resvList.add(reservation);
+                    }
+                }
+                resvIdList.clear();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resvList;
+    }
+
+    public Reservation mgrGetResvDetails(String hotelName, String startDate, String resvId) {
+        Reservation hotelResv = null;
+        SQLiteDatabase sqldb = this.getReadableDatabase();
+        String searchRoom = "Select * from " + TABLE_RESERV_DATA
+                + " where " + COL_RESERV_HOTEL_NAME + " = '" + hotelName
+                + "' and " + COL_RESERV_ID + " = '" + resvId + "'";
+        Log.i(APP_TAG, "search Dates exist Query : " + searchRoom);
+        try {
+            Cursor c = sqldb.rawQuery(searchRoom, null);
+            if (c.getCount() == 0) {
+                Log.e(APP_TAG, "search room Query Err: No data");
+            } else {
+                while (c.moveToNext()) {
+                    String resvCheckInDate = c.getString(c.getColumnIndex(COL_CHECKIN_DATE));
+                    String resvCheckOutDate = c.getString(c.getColumnIndex(COL_CHECKOUT_DATE));
+                    String userName = c.getString(c.getColumnIndex(COL_GUEST_USER_NAME));
+                    String firstName = c.getString(c.getColumnIndex(COL_GUEST_FIRST_NAME));
+                    String lastName = c.getString(c.getColumnIndex(COL_GUEST_LAST_NAME));
+                    String roomType = c.getString(c.getColumnIndex(COL_ROOM_TYPE));
+                    String numAdults = c.getString(c.getColumnIndex(COL_NUM_OF_ADULTS_AND_CHILDREN));
+                    String numRooms = c.getString(c.getColumnIndex(COL_NUM_OF_ROOMS));
+                    String numNights = c.getString(c.getColumnIndex(COL_NUM_OF_NIGHTS));
+
+                    String reservationId = c.getString(c.getColumnIndex(COL_RESERV_ID));
+                    String resvPrice = c.getString(c.getColumnIndex(COL_TOTAL_PRICE));
+                    String resvTime = c.getString(c.getColumnIndex(COL_START_TIME));
+                    String resvRoomId = c.getString(c.getColumnIndex(COL_RESERV_ROOM_ID));
+                    String resvHotelName = c.getString(c.getColumnIndex(COL_RESERV_HOTEL_NAME));
+
+                    return new Reservation(reservationId, null, resvRoomId, userName,
+                            firstName, lastName, resvHotelName, roomType,
+                            numAdults, numNights, numRooms, resvPrice,
+                            resvCheckInDate, resvCheckOutDate, resvTime, startDate);
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return hotelResv;
     }
 
 }

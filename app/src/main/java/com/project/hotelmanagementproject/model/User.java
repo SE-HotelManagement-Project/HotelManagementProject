@@ -6,6 +6,7 @@ public class User {
     String lastName;
     String password;
     String userRole;
+    String hotelAssigned;
     String email;
     String phone;
     String streetAddress;
@@ -16,12 +17,13 @@ public class User {
     String creditCardExp;
     String creditCardtype;
 
-    public User(String userName, String firstName, String lastName, String password, String userRole, String email, String phone, String streetAddress, String city, String state, String zipCode, String creditCardNum, String creditCardExp, String creditCardtype) {
+    public User(String userName, String firstName, String lastName, String password, String userRole, String hotelAssigned, String email, String phone, String streetAddress, String city, String state, String zipCode, String creditCardNum, String creditCardExp, String creditCardtype) {
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.userRole = userRole;
+        this.hotelAssigned = hotelAssigned;
         this.email = email;
         this.phone = phone;
         this.streetAddress = streetAddress;
@@ -31,6 +33,14 @@ public class User {
         this.creditCardNum = creditCardNum;
         this.creditCardExp = creditCardExp;
         this.creditCardtype = creditCardtype;
+    }
+
+    public String getHotelAssigned() {
+        return hotelAssigned;
+    }
+
+    public void setHotelAssigned(String hotelAssigned) {
+        this.hotelAssigned = hotelAssigned;
     }
 
     public String getUserName() {

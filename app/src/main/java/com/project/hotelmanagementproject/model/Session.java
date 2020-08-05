@@ -32,6 +32,15 @@ public class Session {
         editor.putString("UserName", userName).commit();
     }
 
+    public String getHotelAssigned() {
+        return prefs.getString("HotelAccess", null);
+    }
+
+    public void setHotelAssigned(String hotelAssigned) {
+        editor.putString("HotelAccess", hotelAssigned).commit();
+    }
+
+
     public String getUserRole() {
         return prefs.getString("UserRole", null);
     }
