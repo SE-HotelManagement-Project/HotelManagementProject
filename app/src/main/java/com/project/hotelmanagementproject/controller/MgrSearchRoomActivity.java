@@ -103,6 +103,7 @@ public class MgrSearchRoomActivity extends AppCompatActivity {
         btnMgrSrSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                searchRoomIp = etNumRooms.getText().toString();
                 if (null == searchRoomIp || searchRoomIp.isEmpty()
                         || searchRoomIp.equalsIgnoreCase("")) {
                     etNumRooms.setError("enter valid input");
@@ -141,7 +142,6 @@ public class MgrSearchRoomActivity extends AppCompatActivity {
             startDate = new SimpleDateFormat("yyyy-MM-dd").format(startDateFormat);
             Date endDateFormat = new Date(System.currentTimeMillis() + (1000 * 60 * 60 * 24));
             endDate = new SimpleDateFormat("yyyy-MM-dd").format(endDateFormat);
-            searchRoomIp = etNumRooms.getText().toString();
         }
         Log.i(APP_TAG, startDate + " to " + endDate);
         roomList = hotelRoomDbMgr.getSearchRoomList(hotelName, searchRoomIp, startDate, endDate, "12:00 PM");
