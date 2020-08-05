@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.project.hotelmanagementproject.R;
 import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.Session;
+import com.project.hotelmanagementproject.model.User;
 
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ACTIVITY_RETURN_STATE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOME_ACTIVITY;
@@ -36,7 +37,9 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         session = new Session(getApplicationContext());
         DbMgr userDbMgr = DbMgr.getInstance(getApplicationContext());
-        session.setUserRole(userDbMgr.userRole(session.getUserName()));
+        User user = userDbMgr.getUserDetails(session.getUserName());
+        session.setUserRole(user.getUserRole());
+        session.setHotelAssigned(user.getHotelAssigned());
         initView();
     }
 
@@ -47,18 +50,20 @@ public class HomeActivity extends AppCompatActivity {
 
         String userRole = session.getUserRole();
 
-        if (userRole.equalsIgnoreCase("Manager")) {
-            managerView.setVisibility(View.VISIBLE);
-            adminView.setVisibility(View.GONE);
-            guestView.setVisibility(View.GONE);
-        } else if (userRole.equalsIgnoreCase("Admin")) {
-            adminView.setVisibility(View.VISIBLE);
-            guestView.setVisibility(View.GONE);
-            managerView.setVisibility(View.GONE);
-        } else {
-            guestView.setVisibility(View.VISIBLE);
-            adminView.setVisibility(View.GONE);
-            managerView.setVisibility(View.GONE);
+        if (userRole != null) {
+            if (userRole.equalsIgnoreCase("Manager")) {
+                managerView.setVisibility(View.VISIBLE);
+                adminView.setVisibility(View.GONE);
+                guestView.setVisibility(View.GONE);
+            } else if (userRole.equalsIgnoreCase("Admin")) {
+                adminView.setVisibility(View.VISIBLE);
+                guestView.setVisibility(View.GONE);
+                managerView.setVisibility(View.GONE);
+            } else {
+                guestView.setVisibility(View.VISIBLE);
+                adminView.setVisibility(View.GONE);
+                managerView.setVisibility(View.GONE);
+            }
         }
 
         adminFunctions();
@@ -136,7 +141,7 @@ public class HomeActivity extends AppCompatActivity {
         mvReservationList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(HomeActivity.this, ChangePasswordActivity.class);
+                Intent i = new Intent(HomeActivity.this, MgrSearchResvActivity.class);
                 i.putExtra(MGR_ACTIVITY_RETURN_STATE, MGR_HOME_ACTIVITY);
                 startActivity(i);
 

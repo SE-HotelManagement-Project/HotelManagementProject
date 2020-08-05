@@ -110,7 +110,7 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Start Time:"
+                    android:text="Start Time(24-Hour Format):"
                     android:textColor="@color/colorGrey" />
 
                 <TextView

@@ -121,7 +121,7 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Start Time:" />
+                    android:text="Start Time(24-Hour Format):" />
 
 
                 <TextView
@@ -362,8 +362,8 @@
 
         <Button
             android:id="@+id/btnMgrRdSave"
-            style="@style/btn_style"
-            android:layout_margin="10dp"
+            style="@style/btn_style2"
+            android:drawableRight="@drawable/ic_tick"
             android:layout_weight="1"
             android:text="Save Room Details" />
 

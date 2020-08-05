@@ -10,9 +10,9 @@
     <LinearLayout
         android:id="@+id/adminSearchUser"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:id="@+id/llAdminSearchUser"
@@ -74,13 +74,10 @@
 
             <Button
                 android:id="@+id/btnAdminUserSearch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:background="@color/colorPrimary"
+                style="@style/btn_style2"
+                android:layout_marginTop="35dp"
                 android:text="Search"
-                android:textColor="@color/colorWhite"
-                android:textSize="16sp" />
+                android:drawableRight="@drawable/ic_search" />
         </LinearLayout>
     </LinearLayout>
 
@@ -89,7 +86,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -109,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Search User Result List"
-                android:textColor="#0C0C0C"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
                 android:visibility="visible" />
         </LinearLayout>

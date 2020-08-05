@@ -46,9 +46,6 @@
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
   </component>
-  <component name="DBNavigator.Project.FileConnectionMappingManager">
-    <mapping file-url="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/Pixel_3a_XL_API_30 [emulator-5554]/data/data/com.project.hotelmanagementproject/databases/HotelManagementProject.db-journal" connection-id="2629fd1e-0ef8-4a0e-8fa7-566a1f5c028c" session-id="MAIN" current-schema="main" />
-  </component>
   <component name="DBNavigator.Project.MethodExecutionManager">
     <method-browser />
     <execution-history>
