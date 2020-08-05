@@ -418,8 +418,9 @@
 
         <Button
             android:id="@+id/btnUpSave"
-            style="@style/btn_style"
+            style="@style/btn_style2"
             android:layout_weight="1"
+            android:drawableRight="@drawable/ic_save_profile"
             android:text="Save Changes" />
 
     </LinearLayout>

@@ -14,6 +14,7 @@ public class ConstantUtils {
     public static final String COL_LAST_NAME = "last_name";
     public static final String COL_PASSWORD = "password";
     public static final String COL_USER_ROLE = "user_role";
+    public static final String COL_HOTEL_ACCESS = "hotel_access";
     public static final String COL_EMAIL = "email";
     public static final String COL_PHONE = "phone";
     public static final String COL_STREET_ADDRESS = "street_address";
@@ -29,7 +30,7 @@ public class ConstantUtils {
     public static final String COL_RESERV_ID = "reservation_id";
     public static final String COL_RID = "rt_id";
     public static final String COL_RESERV_ROOM_ID = "reservation_room_id";
-    public static final String COL_RESERV_ROOM_NUM = "reservation_room_num";
+    public static final String COL_PAYMENT_STATUS = "payment_status";
     public static final String COL_GUEST_USER_NAME = "guest_user_name";
     public static final String COL_GUEST_FIRST_NAME = "guest_first_name";
     public static final String COL_GUEST_LAST_NAME = "guest_last_name";
@@ -42,6 +43,7 @@ public class ConstantUtils {
     public static final String COL_START_TIME = "start_time";
     public static final String COL_NUM_OF_ADULTS_AND_CHILDREN = "num_of_adults_and_children";
     public static final String COL_NUM_OF_NIGHTS = "num_of_nights";
+
 
     //HOTEL_DATA_TABLE_KEY_COLUMN_NAMES
     public static final String TABLE_HOTEL_DATA = "hm_hotel_data";
@@ -69,6 +71,8 @@ public class ConstantUtils {
     public static final String MGR_ROOM_STD = "mgr_room_std";
     public static final String MGR_ROOM_DELUXE = "mgr_room_deluxe";
     public static final String MGR_ROOM_SUITE = "mgr_room_suite";
+
+    public static final String MGR_RESV_ID = "mgr_resv_id";
 
     //ACTIVITY RETURN STATE
     public static final String MGR_AVLBL_ROOM_ACTIVITY = "mgr_avlbl_room_state";

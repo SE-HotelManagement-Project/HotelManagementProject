@@ -110,7 +110,7 @@ public class AdminEditUserDetails extends AppCompatActivity {
 //        Log.i("Role: ", user.getUserRole());
 
         btnUpSave = findViewById(R.id.btnUpSave);
-
+        final String hotelAssigned = new Session(getApplicationContext()).getHotelAssigned();
         btnUpSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,7 +122,7 @@ public class AdminEditUserDetails extends AppCompatActivity {
 
                             public void onClick(DialogInterface arg0, int arg1) {
                                 getUpdatedUserData();
-                                user = new User(userName, firstName, lastName, password, role, email, phone, streetAddress, city, state, zipcode, ccn, ccexp, cctype);
+                                user = new User(userName, firstName, lastName, password, role, hotelAssigned, email, phone, streetAddress, city, state, zipcode, ccn, ccexp, cctype);
                                 boolean isUpdated = userDbMgr.updateProfile(user);
                                 if (isUpdated) {
                                     Toast.makeText(getApplicationContext(), "profile Updated Successfully!", Toast.LENGTH_LONG).show();

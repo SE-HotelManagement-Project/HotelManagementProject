@@ -15,13 +15,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_hotel" />
+        app:srcCompat="@drawable/ic_hotel_ranger" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_margin="15dp"
         android:text="Hotel Management App"
         android:textColor="@color/colorWhite"
         android:textSize="18sp"
