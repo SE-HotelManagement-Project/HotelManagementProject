@@ -2,6 +2,7 @@ package com.project.hotelmanagementproject.model;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+//import com.google.gson.Gson;
 
 public class Session {
 
@@ -52,4 +53,23 @@ public class Session {
     public void clear() {
         editor.clear();
     }
+//    // ankit code changes starts
+//    public void setObjectInSession( String key , Object obj) {
+//        gson = new Gson();
+//        String json = gson.toJson(obj);
+//        editor.putString(key, json);
+//        editor.apply();
+//    }
+//
+//    //    Type type = new TypeToken<UserModel>() {}.getType();
+////    Type typeOfObjectsList = new TypeToken<ArrayList<UserModel>>() {}.getType();
+////    UserModel userModel = gson.fromJson( session.getObjectFromSession("loggedInUserModel" , HomeActivity.this) , type);
+//    //invoke this code using the above two lines for list
+//    public String getObjectFromSession(String key ) {
+//        gson = new Gson();
+//        String json = prefs.getString(key, null);
+//        return json;
+//    }
+//
+    // ankit code changes ends
 }

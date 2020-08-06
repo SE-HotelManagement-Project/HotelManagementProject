@@ -1,5 +1,7 @@
 package com.project.hotelmanagementproject.utilities;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -64,7 +66,8 @@ public class UtilityFunctions {
 //        return numOfDays;
 //    }
 
-    public static String calculateTotalReservationPrice( String startDate, String startTime, String endDate, String endTime, String weekDayPricePerDay, String WeekednPricePerDay ,String taxPercent){
+    public static String calculateTotalReservationPrice( String startDate, String startTime, String endDate,
+                                  String endTime, String weekDayPricePerDay, String WeekednPricePerDay ,String taxPercent , String numOfRooms){
         double totalReservationPrice = 0;
 //        TO DO the computation of total room price
         Date date1 = DateTimeGenerator.getDateWithTimeForDateString(startDate, startTime);
@@ -86,15 +89,48 @@ public class UtilityFunctions {
             c.add(Calendar.DATE, 1);
         }
 
-        String total_price =  (totalReservationPrice + totalReservationPrice * ((new Double(taxPercent))/100) )+ "";
-        String[] total_price_split = total_price.split(".");
-        if(total_price_split.length==2 && total_price_split[1].length()>1){
-            total_price ="$ "+  total_price_split[0]+"."+ total_price_split[1].substring(0,1);
+        double total_priceDouble = (totalReservationPrice + (totalReservationPrice * ((new Double(taxPercent)) / 100))) * (Integer.parseInt(numOfRooms))  ;
+
+        DecimalFormat df = new DecimalFormat("#.##");
+        String formattedPrice = df.format(total_priceDouble);
+        System.out.println("formatted ="  + formattedPrice);
+        String total_price = "$ "+ formattedPrice;
+//        String[] total_price_split = total_price.split(".");
+//        if(total_price_split.length==2 && total_price_split[1].length()>1){
+//            total_price ="$ "+  total_price_split[0]+"."+ total_price_split[1].substring(0,2);
+//        }
+//        else{
+//            total_price ="$ "+total_price;
+//        }
+        return total_price;
+    }
+
+    public static List<String> populateHotelNamesList(String search_hotel_name){
+        List<String> hotelNamesList = new ArrayList<String>();
+        if(ConstantUtils.ALL.equals(search_hotel_name)){
+            hotelNamesList.add(ConstantUtils.HM_MAVERICK);
+            hotelNamesList.add(ConstantUtils.HM_RANGER);
+            hotelNamesList.add(ConstantUtils.HM_WILLIAMS);
+            hotelNamesList.add(ConstantUtils.HM_SHARD);
+            hotelNamesList.add(ConstantUtils.HM_LIBERTY);
         }
         else{
-            total_price ="$ "+total_price;
+            hotelNamesList.add(search_hotel_name.trim().toUpperCase());
         }
-        return total_price;
+        return hotelNamesList;
+    }
 
+    public static List<String> populateRoomsTypeList(String search_room_type_standard , String search_room_type_deluxe, String search_room_type_suite){
+        List<String> roomTypesList = new ArrayList<String>();
+        if( UtilityFunctions.isNotNullAndEmpty(search_room_type_standard)){
+            roomTypesList.add(search_room_type_standard);
+        }
+        if(UtilityFunctions.isNotNullAndEmpty(search_room_type_deluxe) ){
+            roomTypesList.add(search_room_type_deluxe);
+        }
+        if( UtilityFunctions.isNotNullAndEmpty(search_room_type_suite)){
+            roomTypesList.add(search_room_type_suite);
+        }
+        return roomTypesList;
     }
 }
