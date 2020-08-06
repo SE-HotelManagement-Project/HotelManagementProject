@@ -111,4 +111,43 @@ public class ConstantUtils {
     public static final String HM_SHARD = "SHARD";
     public static final String HM_WILLIAMS = "WILLIAMS";
 
+public static final String ALL="ALL";
+    public static final String EMPTY="";
+//    intent constanats for request reservation flow
+    public static final String GUEST_REQ_RESV_SEARCH_HOTEL_NAME = "search_hotel_name";
+    public static final String GUEST_REQ_RESV_SEARCH_CHECK_IN_DATE = "check_in_date";
+    public static final String GUEST_REQ_RESV_SEARCH_START_TIME = "start_time";
+    public static final String GUEST_REQ_RESV_SEARCH_END_TIME = "end_time";
+    public static final String GUEST_REQ_RESV_SEARCH_END_TIME_VALUE = "23:59";
+    public static final String GUEST_REQ_RESV_SEARCH_CHECK_OUT_DATE = "check_out_date";
+    public static final String GUEST_REQ_RESV_SEARCH_NUM_ADULT_AND_CHLD = "num_of_adult_and_child";
+    public static final String GUEST_REQ_RESV_SEARCH_TYPE_STANDARD = "search_room_type_standard";
+    public static final String GUEST_REQ_RESV_SEARCH_ROOM_TYPE_DELUXE = "search_room_type_deluxe";
+    public static final String GUEST_REQ_RESV_SEARCH_ROOM_TYPE_SUITE = "search_room_type_suite";
+    public static final String GUEST_REQ_RESV_SEARCH_NUM_OF_ROOMS = "num_of_rooms";
+
+
+    public static final String GUEST_REQ_RESV_SELECTED_HOTEL_NAME = "selected_hotel_name";
+    public static final String GUEST_REQ_RESV_SELECTED_ROOM_TYPE ="selected_room_type";
+    public static final String GUEST_REQ_RESV_PRICE_WK_DAY = "selected_room_type";
+    public static final String GUEST_REQ_RESV_PRICE_WK_END = "selected_room_type";
+    public static final String GUEST_REQ_RESV_SELECTED_NUM_OF_NIGHTS = "num_of_nights";
+    public static final String GUEST_REQ_RESV_TOTAL_PRICE = "total_price";
+    public static final String GUEST_REQ_RESV_CARD_TYPE = "card_type";
+    public static final String GUEST_REQ_RESV_card_NUM = "card_num";
+    public static final String GUEST_REQ_RESV_CARD_EXPIRY_DT = "card_expiry_dt";
+    public static final String GUEST_REQ_RESV_CARD_CVV = "card_cvv";
+    public static final String GUEST_REQ_RESV_RESERVID = "reserv_id";
+
+
+
+//    public static final String GUEST_REQ_RESV_SELECTED_CHECK_IN_DATE = "guest_req_resv_selected_check_in_data";
+//    public static final String GUEST_REQ_RESV_SELECTED_CHECK_OUT_DATE = "guest_req_resv_selected_check_out_date";
+//    public static final String GUEST_REQ_RESV_SELECTED_START_TIME = "guest_req_resv_selected_start_time";
+//    public static final String GUEST_REQ_RESV_SELECTED_NUM_OF_ROOMS = "guest_req_resv_selected_num_of_rooms";
+//    public static final String GUEST_REQ_RESV_SELECTED_NUM_OF_NIGHTS = "guest_req_resv_selected_num_of_nights";
+
+
+
+    public static final String GUEST_REQ_RESV_SELECTED_TOTAL_PRICE = "guest_req_resv_selected_total_price";
 }

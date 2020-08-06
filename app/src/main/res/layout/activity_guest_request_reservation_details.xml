@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:orientation="vertical"
+    tools:context=".controller.GuestRequestReservationDetailsActivity">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/ivGuestReqResvDetailsIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingRight="15dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_room_details" />
+
+        <TextView
+            android:id="@+id/tvGuestReqResvDetailsHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Pending Reservation Details"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--<LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Reservation Id:"
+                    android:textColor="@color/colorGrey" />
+
+                <TextView
+                    android:id="@+id/tvGuestReqResvDetailsReservId"
+                    style="@style/text_style"
+                    android:paddingLeft="10dp"
+                    android:text="HM-6582" />
+
+            </LinearLayout>-->
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Hotel Name: "
+                    android:textColor="@color/colorGrey" />
+
+                <TextView
+                    android:id="@+id/tvGuestReqResvDetailsHotelName"
+                    style="@style/edit_text_style"
+                    android:text="" />
+
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="CheckIn Date"
+                    android:textColor="@color/colorGrey" />
+
+                <TextView
+                    android:id="@+id/tvGuestReqResvDetailsCheckIn"
+                    style="@style/text_style"
+                    android:paddingLeft="10dp"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="CheckOut Date: "
+                    android:textColor="@color/colorGrey" />
+
+                <TextView
+                    android:id="@+id/tvGuestReqResvDetailsCheckOut"
+                    style="@style/text_style"
+                    android:paddingLeft="10dp"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Start Time:"
+                    android:textColor="@color/colorGrey" />
+
+                <TextView
+                    android:id="@+id/tvGuestReqResvDetailsStartTime"
+                    style="@style/text_style"
+                    android:paddingLeft="10dp"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Number Of Rooms"
+                    android:textColor="@color/colorGrey" />
+
+                <TextView
+                    android:id="@+id/tvGuestReqResvDetailsNumRooms"
+                    style="@style/text_style"
+                    android:paddingLeft="10dp"
+                    android:text=""
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Number Of Nights: "
+                    android:textColor="@color/colorGrey" />
+
+                <TextView
+                    android:id="@+id/tvGuestReqResvDetailsNumOfNights"
+                    style="@style/text_style"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Room Type: "
+                    android:textColor="@color/colorGrey" />
+
+                <TextView
+                    android:id="@+id/tvGuestReqResvDetailsRoomType"
+                    style="@style/text_style"
+                    android:paddingLeft="10dp"
+                    android:text="" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Total Price: "
+                    android:textColor="@color/colorGrey" />
+
+                <TextView
+                    android:id="@+id/tvGuestReqResvDetailsRoomPrice"
+                    style="@style/text_style"
+                    android:paddingLeft="10dp"
+                    android:text="" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnReq_Resv_GuestPayReservation"
+            style="@style/btn_style"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:text="Proceed To Pay"
+            android:textSize="15sp" />
+
+
+<!--        <Button-->
+<!--            android:id="@+id/btnGuestModifyReservation"-->
+<!--            style="@style/btn_style"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:paddingLeft="15dp"-->
+<!--            android:paddingTop="10dp"-->
+<!--            android:paddingRight="15dp"-->
+<!--            android:paddingBottom="10dp"-->
+<!--            android:text="Modify Reservation"-->
+<!--            android:textSize="15sp" />-->
+
+    </LinearLayout>
+</LinearLayout>

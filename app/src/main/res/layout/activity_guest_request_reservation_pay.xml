@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:orientation="vertical"
+    tools:context=".controller.GuestRequestReservationPayActivity">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/ivGuestReqRsvPayHotelIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingRight="15dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_room_details" />
+
+        <TextView
+            android:id="@+id/tvGuestReqRsvPayHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Hotel Payment"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+
+                    android:layout_gravity="center"
+                    style="@style/text_style"
+                    android:text="card Number: "
+                    android:textColor="@color/colorGrey" />
+
+
+                <EditText
+                    android:id="@+id/tvGuestReqRsvPayCardNum"
+                    android:layout_gravity="center"
+                    style="@style/edit_text_style"
+                    android:hint="card number"
+                    android:text="" />
+                <!--<TextView
+                    android:id="@+id/tvGuestReqRsvPayCvvNum"
+                    android:layout_gravity="center"
+                    style="@style/edit_text_style"
+                    android:text="" />-->
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+
+                    android:layout_gravity="center"
+                    style="@style/text_style"
+                    android:text="Card Expiry Date: "
+                    android:textColor="@color/colorGrey" />
+
+
+                <EditText
+                    android:id="@+id/tvGuestReqRsvPayCardExpiry"
+                    android:layout_gravity="center"
+                    style="@style/edit_text_style"
+                    android:hint="card expiry date"
+                    android:text="" />
+                <!--<TextView
+                    android:id="@+id/tvGuestReqRsvPayCvvNum"
+                    android:layout_gravity="center"
+                    style="@style/edit_text_style"
+                    android:text="" />-->
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+
+                    android:layout_gravity="center"
+                    style="@style/text_style"
+                    android:text="cvv Number: "
+                    android:textColor="@color/colorGrey" />
+
+
+                <EditText
+                    android:id="@+id/tvGuestReqRsvPayCardType"
+                    android:layout_gravity="center"
+                    style="@style/edit_text_style"
+                    android:hint="card cvv number"
+                    android:text="" />
+                <!--<TextView
+                    android:id="@+id/tvGuestReqRsvPayCvvNum"
+                    android:layout_gravity="center"
+                    style="@style/edit_text_style"
+                    android:text="" />-->
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    android:id="@+id/tvGuestReqRsvPayCvvNumLabel"
+                    android:layout_gravity="center"
+                    style="@style/text_style"
+                    android:text="cvv Number: "
+                    android:textColor="@color/colorGrey" />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tvGuestReqRsvPayCvvNum"
+                    android:layout_gravity="center"
+                    style="@style/edit_text_style"
+                    android:hint="card cvv number"
+                    android:text="" />
+                <!--<TextView
+                    android:id="@+id/tvGuestReqRsvPayCvvNum"
+                    android:layout_gravity="center"
+                    style="@style/edit_text_style"
+                    android:text="" />-->
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnGuestReqRsvPayReservation"
+            style="@style/btn_style"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:text="Pay Reservation"
+            android:textSize="15sp" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

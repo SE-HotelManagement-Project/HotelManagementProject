@@ -15,6 +15,34 @@ public class HotelRoom {
     String startDate;
     String endDate;
     String startTime;
+    int countOfavailableRooms;
+	 String NumOfRooms;
+
+//    public String getCheckInDate() {
+//        return checkInDate;
+//    }
+//
+//    public void setCheckInDate(String checkInDate) {
+//        this.checkInDate = checkInDate;
+//    }
+//
+//    String checkInDate;
+public String getNumOfRooms() {
+        return NumOfRooms;
+    }
+    public void setNumOfRooms(String numOfRooms) {
+        NumOfRooms = numOfRooms;
+    }
+   
+public int getCountOfavailableRooms() {
+        return countOfavailableRooms;
+    }
+    public void setCountOfavailableRooms(int countOfavailableRooms) {
+        this.countOfavailableRooms = countOfavailableRooms;
+    }
+
+    public HotelRoom() {
+    }
 
 
     public HotelRoom(String hotelRoomId, String hotelName,
@@ -140,4 +168,5 @@ public class HotelRoom {
         this.startTime = startTime;
     }
 
+    
 }
