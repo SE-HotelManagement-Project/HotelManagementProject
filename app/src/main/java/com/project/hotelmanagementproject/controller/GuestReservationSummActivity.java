@@ -115,7 +115,7 @@ public class GuestReservationSummActivity extends AppCompatActivity {
         lvReservationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent guestRsvSummaryIntent = new Intent(GuestReservationSummActivity.this, AdminViewUserDetails.class);
+                Intent guestRsvSummaryIntent = new Intent(GuestReservationSummActivity.this, GuestReservationDetailsActivity.class);
                 Reservation item = (Reservation) adapterView.getItemAtPosition(i);
                 guestRsvSummaryIntent.putExtra(Guest_Rsr_Summary,item.getResvRoomId());
                 startActivity(guestRsvSummaryIntent);

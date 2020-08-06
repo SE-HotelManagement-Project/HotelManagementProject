@@ -45,34 +45,34 @@ public class GuestReservationSummaryAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.list_view_guest_reservation_summary, null);
-        TextView tvGstSumNoOfRooms = view.findViewById(R.id.tvGstSumNoOfRooms);
-        TextView tvGstSumCheckInDate = view.findViewById(R.id.tvGstSumCheckInDate);
-        TextView tvGstSumStartTime = view.findViewById(R.id.tvGstSumStartTime);
-        TextView tvGstSumNoOfNights = view.findViewById(R.id.tvGstSumNoOfNights);
-        ImageView ivGstSumHotel = view.findViewById(R.id.ivGstSumHotel);
+        TextView tvHotelName = view.findViewById(R.id.tvLvGstSRsvLHotel);
+        TextView tvNumRooms = view.findViewById(R.id.tvLvGstSRsvLNumRooms);
+        TextView tvNumNights = view.findViewById(R.id.tvLvGstSRsvLNumNights);
+        TextView tvResvID = view.findViewById(R.id.tvLvGstSRsvLResvId);
+        TextView tvStartDate = view.findViewById(R.id.tvLvGstSRsvLStartDate);
+        TextView tvCheckInDate = view.findViewById(R.id.tvLvGstSRsvLCheckInDate);
+        ImageView ivHotelName = view.findViewById(R.id.ivLvGstSRsvLHotel);
 
         Reservation reservation = reservationList.get(i);
-
-
-        Log.i(APP_TAG, "Username: " + reservation.getResvHotelName() + "    ||||||  UserLastName: " + reservation.getResvHotelName() );
-        tvGstSumNoOfRooms.setText(reservation.getResvNumOfRooms());
-        tvGstSumCheckInDate.setText(reservation.getResvCheckInDate());
-        tvGstSumStartTime.setText(reservation.getResvStartTime());
-        tvGstSumNoOfNights.setText(reservation.getResvNumNights());
+        //  Log.i(APP_TAG, "hotelName: " + hrSrl.getHotelName() + "    ||||||  roomId: " + hrSrl.getHotelRoomId());
+        tvHotelName.setText(reservation.getResvHotelName());
+        tvNumRooms.setText(reservation.getResvNumOfRooms());
+        tvNumNights.setText(reservation.getResvNumNights());
+        tvResvID.setText(reservation.getReservationId());
+        tvStartDate.setText(reservation.getStartDate());
+        tvCheckInDate.setText(reservation.getResvCheckInDate());
 
         if (reservation.getResvHotelName().equalsIgnoreCase("MAVERICK")) {
-            ivGstSumHotel.setImageResource(R.drawable.ic_hotel_maverick);
+            ivHotelName.setImageResource(R.drawable.ic_hotel_maverick);
         } else if (reservation.getResvHotelName().equalsIgnoreCase("LIBERTY")) {
-            ivGstSumHotel.setImageResource(R.drawable.ic_hotel_liberty);
+            ivHotelName.setImageResource(R.drawable.ic_hotel_liberty);
         } else if (reservation.getResvHotelName().equalsIgnoreCase("SHARD")) {
-            ivGstSumHotel.setImageResource(R.drawable.ic_hotel_shard);
+            ivHotelName.setImageResource(R.drawable.ic_hotel_shard);
         } else if (reservation.getResvHotelName().equalsIgnoreCase("RANGER")) {
-            ivGstSumHotel.setImageResource(R.drawable.ic_hotel_ranger);
+            ivHotelName.setImageResource(R.drawable.ic_hotel_ranger);
         } else if (reservation.getResvHotelName().equalsIgnoreCase("WILLIAMS")) {
-            ivGstSumHotel.setImageResource(R.drawable.ic_hotel_williams);
+            ivHotelName.setImageResource(R.drawable.ic_hotel_williams);
         }
-
-
         return view;
     }
 }
