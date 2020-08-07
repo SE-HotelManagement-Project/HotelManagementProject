@@ -1,5 +1,7 @@
 package com.project.hotelmanagementproject.controller;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,6 +16,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.hotelmanagementproject.R;
+import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.Session;
 import com.project.hotelmanagementproject.utilities.ConstantUtils;
 
@@ -22,8 +25,9 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
     TextView tvGuestReqResvDetailsHeader, tvGuestReqResvDetailsHotelName , tvGuestReqResvDetailsCheckIn ;
     TextView tvGuestReqResvDetailsCheckOut , tvGuestReqResvDetailsStartTime ,tvGuestReqResvDetailsNumRooms ;
     TextView tvGuestReqResvDetailsNumOfNights,tvGuestReqResvDetailsRoomType , tvGuestReqResvDetailsRoomPrice ;
-    Button btnReq_Resv_GuestPayReservation;
+    Button btnReq_Resv_GuestPayReservation,btnReq_Resv_GuestViewPendingRsv;
     ImageView ivGuestReqResvDetailsIcon;
+    DbMgr DbManager;
 
 
 
@@ -54,6 +58,8 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
         tvGuestReqResvDetailsRoomPrice = findViewById(R.id.tvGuestReqResvDetailsRoomPrice);
         ivGuestReqResvDetailsIcon = findViewById(R.id.ivGuestReqResvDetailsIcon);
         btnReq_Resv_GuestPayReservation = findViewById(R.id.btnReq_Resv_GuestPayReservation);
+        btnReq_Resv_GuestViewPendingRsv = findViewById(R.id.btnReq_Resv_GuestViewPendingRsv);
+        DbManager = DbMgr.getInstance(getApplicationContext());
         init();
     }
 
@@ -133,6 +139,25 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        btnReq_Resv_GuestViewPendingRsv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent userNameIntent = new Intent(GuestRequestReservationDetailsActivity.this, GuestPendingReservations.class);
+                startActivity(userNameIntent);
+
+            }
+        });
+    }
+
+    public void addToPendingReservation(){
+//        DbManager.
+        //TODO ADD TRANSACTION TO PENDING HERE
+
+
+
     }
 
     @Override
@@ -145,13 +170,32 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         int id = item.getItemId();
         if (id == R.id.action_logout) {
             logout();
             return true;
         } else if (id == android.R.id.home) {
-            Intent intent = new Intent(GuestRequestReservationDetailsActivity.this, GuestRequestReservationResultActivity.class);
-            startActivity(intent);
+
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(GuestRequestReservationDetailsActivity.this);
+            builder.setTitle("Add to future pending transaction?")
+                    .setMessage("Do you want to save transaction for future?")
+                    .setNegativeButton("No",  new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            Intent backIntent = new Intent(GuestRequestReservationDetailsActivity.this, GuestRequestReservationResultActivity.class);
+                            //TODO redirect to Search result list page
+                            startActivity(backIntent);
+                        }
+                    })
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            addToPendingReservation();
+                        }
+                    }).create().show();
+
             return true;
         }
         return super.onOptionsItemSelected(item);
