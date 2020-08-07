@@ -49,20 +49,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!--<LinearLayout style="@style/horz_linear_layout_style">
-
-                <TextView
-                    style="@style/text_style"
-                    android:text="Reservation Id:"
-                    android:textColor="@color/colorGrey" />
-
-                <TextView
-                    android:id="@+id/tvGuestReqResvDetailsReservId"
-                    style="@style/text_style"
-                    android:paddingLeft="10dp"
-                    android:text="HM-6582" />
-
-            </LinearLayout>-->
 
             <LinearLayout style="@style/horz_linear_layout_style">
 
@@ -147,6 +133,20 @@
                     android:id="@+id/tvGuestReqResvDetailsNumOfNights"
                     style="@style/text_style"
                     android:text="" />
+            </LinearLayout>
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Number of Adults And Children: "
+                    android:textColor="@color/colorGrey" />
+
+                <TextView
+                    android:id="@+id/tvGuestReqResvDetailsNumAdultAndChild"
+                    style="@style/text_style"
+                    android:paddingLeft="10dp"
+                    android:text="" />
+
             </LinearLayout>
 
             <LinearLayout style="@style/horz_linear_layout_style">

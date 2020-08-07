@@ -39,138 +39,74 @@
 
     </LinearLayout>
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
             <LinearLayout style="@style/horz_linear_layout_style">
 
                 <TextView
-
-                    android:layout_gravity="center"
                     style="@style/text_style"
-                    android:text="card Number: "
+                    android:text="Card Number: "
                     android:textColor="@color/colorGrey" />
 
-
-                <EditText
+                <TextView
                     android:id="@+id/tvGuestReqRsvPayCardNum"
-                    android:layout_gravity="center"
                     style="@style/edit_text_style"
-                    android:hint="card number"
                     android:text="" />
-                <!--<TextView
-                    android:id="@+id/tvGuestReqRsvPayCvvNum"
-                    android:layout_gravity="center"
-                    style="@style/edit_text_style"
-                    android:text="" />-->
 
 
             </LinearLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
             <LinearLayout style="@style/horz_linear_layout_style">
 
                 <TextView
-
-                    android:layout_gravity="center"
                     style="@style/text_style"
-                    android:text="Card Expiry Date: "
+                    android:text="Card Expiry Date:"
                     android:textColor="@color/colorGrey" />
 
-
-                <EditText
+                <TextView
                     android:id="@+id/tvGuestReqRsvPayCardExpiry"
-                    android:layout_gravity="center"
-                    style="@style/edit_text_style"
-                    android:hint="card expiry date"
+                    style="@style/text_style"
+                    android:paddingLeft="10dp"
                     android:text="" />
-                <!--<TextView
-                    android:id="@+id/tvGuestReqRsvPayCvvNum"
-                    android:layout_gravity="center"
-                    style="@style/edit_text_style"
-                    android:text="" />-->
-
-
             </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
             <LinearLayout style="@style/horz_linear_layout_style">
 
                 <TextView
-
-                    android:layout_gravity="center"
                     style="@style/text_style"
-                    android:text="cvv Number: "
+                    android:text="Card Type: "
                     android:textColor="@color/colorGrey" />
 
-
-                <EditText
+                <TextView
                     android:id="@+id/tvGuestReqRsvPayCardType"
-                    android:layout_gravity="center"
-                    style="@style/edit_text_style"
-                    android:hint="card cvv number"
+                    style="@style/text_style"
+                    android:paddingLeft="10dp"
                     android:text="" />
-                <!--<TextView
-                    android:id="@+id/tvGuestReqRsvPayCvvNum"
-                    android:layout_gravity="center"
-                    style="@style/edit_text_style"
-                    android:text="" />-->
-
-
             </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
             <LinearLayout style="@style/horz_linear_layout_style">
 
                 <TextView
-                    android:id="@+id/tvGuestReqRsvPayCvvNumLabel"
-                    android:layout_gravity="center"
                     style="@style/text_style"
-                    android:text="cvv Number: "
+                    android:text="cvv number:"
                     android:textColor="@color/colorGrey" />
-
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/tvGuestReqRsvPayCvvNum"
-                    android:layout_gravity="center"
                     style="@style/edit_text_style"
-                    android:hint="card cvv number"
+                    android:paddingLeft="10dp"
                     android:text="" />
-                <!--<TextView
-                    android:id="@+id/tvGuestReqRsvPayCvvNum"
-                    android:layout_gravity="center"
-                    style="@style/edit_text_style"
-                    android:text="" />-->
-
-
             </LinearLayout>
+
 
         </LinearLayout>
 

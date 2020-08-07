@@ -21,7 +21,20 @@ public class Reservation {
     String resvCheckInDate;
     String resevCheckOutDate;
     String resvStartTime;
+    String paymentStatus;
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+
+
+
     String resvPaymentStatus;
+
 
 
     public Reservation() {
