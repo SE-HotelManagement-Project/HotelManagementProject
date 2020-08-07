@@ -1,5 +1,7 @@
 package com.project.hotelmanagementproject.controller;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,6 +16,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.hotelmanagementproject.R;
+import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.Session;
 import com.project.hotelmanagementproject.utilities.ConstantUtils;
 
@@ -21,9 +24,11 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
 
     TextView tvGuestReqResvDetailsHeader, tvGuestReqResvDetailsHotelName , tvGuestReqResvDetailsCheckIn ;
     TextView tvGuestReqResvDetailsCheckOut , tvGuestReqResvDetailsStartTime ,tvGuestReqResvDetailsNumRooms ;
+    Button btnReq_Resv_GuestPayReservation,btnReq_Resv_GuestViewPendingRsv;
+
     TextView tvGuestReqResvDetailsNumOfNights,tvGuestReqResvDetailsRoomType , tvGuestReqResvDetailsRoomPrice, tvGuestReqResvDetailsNumAdultAndChild;
-    Button btnReq_Resv_GuestPayReservation;
     ImageView ivGuestReqResvDetailsIcon;
+    DbMgr DbManager;
 
 
 
@@ -57,6 +62,8 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
         ivGuestReqResvDetailsIcon = findViewById(R.id.ivGuestReqResvDetailsIcon);
         tvGuestReqResvDetailsNumAdultAndChild = findViewById(R.id.tvGuestReqResvDetailsNumAdultAndChild);
         btnReq_Resv_GuestPayReservation = findViewById(R.id.btnReq_Resv_GuestPayReservation);
+        btnReq_Resv_GuestViewPendingRsv = findViewById(R.id.btnReq_Resv_GuestViewPendingRsv);
+        DbManager = DbMgr.getInstance(getApplicationContext());
         init();
     }
 
@@ -139,6 +146,25 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        btnReq_Resv_GuestViewPendingRsv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent userNameIntent = new Intent(GuestRequestReservationDetailsActivity.this, GuestPendingReservations.class);
+                startActivity(userNameIntent);
+
+            }
+        });
+    }
+
+    public void addToPendingReservation(){
+//        DbManager.
+        //TODO ADD TRANSACTION TO PENDING HERE
+
+
+
     }
 
     @Override
@@ -151,12 +177,21 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         int id = item.getItemId();
         if (id == R.id.action_logout) {
             logout();
             return true;
         } else if (id == android.R.id.home) {
-            Intent intent = new Intent(GuestRequestReservationDetailsActivity.this, GuestRequestReservationResultActivity.class);
+
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(GuestRequestReservationDetailsActivity.this);
+            builder.setTitle("Save for future pending transaction?")
+                    .setMessage("Do you want to save transaction for future?")
+                    .setNegativeButton("No",  new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface arg0, int arg1) {
+                          Intent intent = new Intent(GuestRequestReservationDetailsActivity.this, GuestRequestReservationResultActivity.class);
             intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_HOTEL_NAME, search_hotel_name );
             intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_IN_DATE, check_in_date );
             intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_START_TIME, start_time );
@@ -180,6 +215,16 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
             intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_CVV  , cardCvvNum );
             intent.putExtra(ConstantUtils.GUEST_REQ_RESV_RESERVID   , joint_room_reservation_id );
             startActivity(intent);
+                            
+                        }
+                    })
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            addToPendingReservation();
+                        }
+                    }).create().show();
+
             return true;
         }
         return super.onOptionsItemSelected(item);
