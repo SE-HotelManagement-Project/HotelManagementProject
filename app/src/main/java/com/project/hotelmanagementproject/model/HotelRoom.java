@@ -15,6 +15,44 @@ public class HotelRoom {
     String startDate;
     String endDate;
     String startTime;
+    int countOfavailableRooms;
+    String NumOfRooms;
+	String numOfAdultChildren;
+
+//    public String getCheckInDate() {
+//        return checkInDate;
+//    }
+//
+//    public void setCheckInDate(String checkInDate) {
+//        this.checkInDate = checkInDate;
+//    }
+//
+//    String checkInDate;
+    public String getNumOfRooms() {
+        return NumOfRooms;
+    }
+
+    public void setNumOfRooms(String numOfRooms) {
+        this.NumOfRooms = numOfRooms;
+    }
+
+    public String getNumOfAdultChildren() {
+        return numOfAdultChildren;
+    }
+
+    public void setNumOfAdultChildren(String numOfAdultChildren) {
+        this.numOfAdultChildren = numOfAdultChildren;
+    }
+   
+public int getCountOfavailableRooms() {
+        return countOfavailableRooms;
+    }
+    public void setCountOfavailableRooms(int countOfavailableRooms) {
+        this.countOfavailableRooms = countOfavailableRooms;
+    }
+
+    public HotelRoom() {
+    }
 
 
     public HotelRoom(String hotelRoomId, String hotelName,
@@ -140,4 +178,24 @@ public class HotelRoom {
         this.startTime = startTime;
     }
 
+    @Override
+    public String toString() {
+        return "HotelRoom{" +
+                "hotelRoomId='" + hotelRoomId + '\'' +
+                ", hotelName='" + hotelName + '\'' +
+                ", roomNum='" + roomNum + '\'' +
+                ", roomType='" + roomType + '\'' +
+                ", floorNum='" + floorNum + '\'' +
+                ", roomPriceWeekDay='" + roomPriceWeekDay + '\'' +
+                ", roomPriceWeekend='" + roomPriceWeekend + '\'' +
+                ", hotelTax='" + hotelTax + '\'' +
+                ", availabilityStatus='" + availabilityStatus + '\'' +
+                ", occupiedStatus='" + occupiedStatus + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", countOfavailableRooms=" + countOfavailableRooms +
+                ", NumOfRooms='" + NumOfRooms + '\'' +
+                '}';
+    }
 }
