@@ -115,6 +115,7 @@ public class ConstantUtils {
 public static final String ALL="ALL";
     public static final String EMPTY="";
     public static final String PAID="PAID";
+    public static final String PENDING="PENDING";
 //    intent constanats for request reservation flow
     public static final String GUEST_REQ_RESV_SEARCH_HOTEL_NAME = "search_hotel_name";
     public static final String GUEST_REQ_RESV_SEARCH_CHECK_IN_DATE = "check_in_date";

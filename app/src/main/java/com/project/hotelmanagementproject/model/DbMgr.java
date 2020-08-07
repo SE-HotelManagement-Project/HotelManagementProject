@@ -765,11 +765,16 @@ public class DbMgr extends SQLiteOpenHelper {
                     String floorNum = c.getString(c.getColumnIndex(COL_FLOOR_NUM));
                     String price = c.getString(c.getColumnIndex(COL_PRICE_WEEKDAY));
                     String numOfRooms = c.getString(c.getColumnIndex(COL_NUM_OF_ROOMS));
+                    String endDate = c.getString(c.getColumnIndex(COL_CHECKOUT_DATE));
+                    String numOfAdultsChildren = c.getString(c.getColumnIndex(COL_NUM_OF_ADULTS_AND_CHILDREN));
+                    String startTime = c.getString(c.getColumnIndex(COL_START_TIME));
+                    String hotelTax = c.getString(c.getColumnIndex(COL_TAX));
 
                     HotelRoom hotelRoom = new HotelRoom(null, hotelName, roomNumber, roomType, floorNum, price,
-                            null, null, null
-                            , null, startDate, null, null);
+                            null, hotelTax, null
+                            , null, startDate, endDate, startTime);
                     hotelRoom.setNumOfRooms(numOfRooms);
+                    hotelRoom.setNumOfAdultChildren(numOfAdultsChildren);
                     pendingRsvHotelRoom.add(hotelRoom);
                 }
             }

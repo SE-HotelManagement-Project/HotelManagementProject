@@ -16,7 +16,8 @@ public class HotelRoom {
     String endDate;
     String startTime;
     int countOfavailableRooms;
-	 String NumOfRooms;
+    String NumOfRooms;
+	String numOfAdultChildren;
 
 //    public String getCheckInDate() {
 //        return checkInDate;
@@ -27,11 +28,20 @@ public class HotelRoom {
 //    }
 //
 //    String checkInDate;
-public String getNumOfRooms() {
+    public String getNumOfRooms() {
         return NumOfRooms;
     }
+
     public void setNumOfRooms(String numOfRooms) {
-        NumOfRooms = numOfRooms;
+        this.NumOfRooms = numOfRooms;
+    }
+
+    public String getNumOfAdultChildren() {
+        return numOfAdultChildren;
+    }
+
+    public void setNumOfAdultChildren(String numOfAdultChildren) {
+        this.numOfAdultChildren = numOfAdultChildren;
     }
    
 public int getCountOfavailableRooms() {
