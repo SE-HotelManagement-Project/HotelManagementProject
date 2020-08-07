@@ -24,8 +24,9 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
 
     TextView tvGuestReqResvDetailsHeader, tvGuestReqResvDetailsHotelName , tvGuestReqResvDetailsCheckIn ;
     TextView tvGuestReqResvDetailsCheckOut , tvGuestReqResvDetailsStartTime ,tvGuestReqResvDetailsNumRooms ;
-    TextView tvGuestReqResvDetailsNumOfNights,tvGuestReqResvDetailsRoomType , tvGuestReqResvDetailsRoomPrice ;
     Button btnReq_Resv_GuestPayReservation,btnReq_Resv_GuestViewPendingRsv;
+
+    TextView tvGuestReqResvDetailsNumOfNights,tvGuestReqResvDetailsRoomType , tvGuestReqResvDetailsRoomPrice, tvGuestReqResvDetailsNumAdultAndChild;
     ImageView ivGuestReqResvDetailsIcon;
     DbMgr DbManager;
 
@@ -36,6 +37,8 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
     String  numOfNights;
     String totalPrice;
     String selectedHotelName, selectedRoomType;
+    String cardType , cardNum , cardExpiryDate , cardCvvNum ;
+    String joint_room_reservation_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,7 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
         tvGuestReqResvDetailsRoomType = findViewById(R.id.tvGuestReqResvDetailsRoomType);
         tvGuestReqResvDetailsRoomPrice = findViewById(R.id.tvGuestReqResvDetailsRoomPrice);
         ivGuestReqResvDetailsIcon = findViewById(R.id.ivGuestReqResvDetailsIcon);
+        tvGuestReqResvDetailsNumAdultAndChild = findViewById(R.id.tvGuestReqResvDetailsNumAdultAndChild);
         btnReq_Resv_GuestPayReservation = findViewById(R.id.btnReq_Resv_GuestPayReservation);
         btnReq_Resv_GuestViewPendingRsv = findViewById(R.id.btnReq_Resv_GuestViewPendingRsv);
         DbManager = DbMgr.getInstance(getApplicationContext());
@@ -81,20 +85,20 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
             selectedHotelName   = extras.getString(ConstantUtils.GUEST_REQ_RESV_SELECTED_HOTEL_NAME );
             selectedRoomType  = extras.getString(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TYPE );
 
-            if (search_hotel_name.equalsIgnoreCase(ConstantUtils.HM_MAVERICK)) {
+            if (selectedHotelName.equalsIgnoreCase(ConstantUtils.HM_MAVERICK)) {
                 ivGuestReqResvDetailsIcon.setImageResource(R.drawable.ic_hotel_maverick);
-            } else if (search_hotel_name.equalsIgnoreCase(ConstantUtils.HM_LIBERTY)) {
+            } else if (selectedHotelName.equalsIgnoreCase(ConstantUtils.HM_LIBERTY)) {
                 ivGuestReqResvDetailsIcon.setImageResource(R.drawable.ic_hotel_liberty);
-            } else if (search_hotel_name.equalsIgnoreCase(ConstantUtils.HM_SHARD)) {
+            } else if (selectedHotelName.equalsIgnoreCase(ConstantUtils.HM_SHARD)) {
                 ivGuestReqResvDetailsIcon.setImageResource(R.drawable.ic_hotel_shard);
-            } else if (search_hotel_name.equalsIgnoreCase(ConstantUtils.HM_RANGER)) {
+            } else if (selectedHotelName.equalsIgnoreCase(ConstantUtils.HM_RANGER)) {
                 ivGuestReqResvDetailsIcon.setImageResource(R.drawable.ic_hotel_ranger);
-            } else if (search_hotel_name.equalsIgnoreCase(ConstantUtils.HM_WILLIAMS)) {
+            } else if (selectedHotelName.equalsIgnoreCase(ConstantUtils.HM_WILLIAMS)) {
                 ivGuestReqResvDetailsIcon.setImageResource(R.drawable.ic_hotel_williams);
             }
 
-            if (search_hotel_name != null && !ConstantUtils.ALL.equals(search_hotel_name)) {
-                tvGuestReqResvDetailsHotelName.setText(search_hotel_name);
+            if (selectedHotelName != null && !ConstantUtils.EMPTY.equals(selectedHotelName)) {
+                tvGuestReqResvDetailsHotelName.setText(selectedHotelName);
             }
             if (check_in_date != null && !ConstantUtils.EMPTY.equals(check_in_date)) {
                 tvGuestReqResvDetailsCheckIn.setText(check_in_date);
@@ -105,11 +109,14 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
             if (check_out_date != null && !ConstantUtils.EMPTY.equals(check_out_date)) {
                 tvGuestReqResvDetailsCheckOut.setText(check_out_date);
             }
-            if (num_of_adult_and_child != null && !ConstantUtils.EMPTY.equals(num_of_adult_and_child)) {
-                tvGuestReqResvDetailsNumRooms.setText(num_of_adult_and_child);
-            }
             if (num_of_rooms != null && !ConstantUtils.EMPTY.equals(num_of_rooms)) {
-                tvGuestReqResvDetailsNumOfNights.setText(num_of_rooms);
+                tvGuestReqResvDetailsNumRooms.setText(num_of_rooms);
+            }
+            if (num_of_adult_and_child != null && !ConstantUtils.EMPTY.equals(num_of_adult_and_child)) {
+                tvGuestReqResvDetailsNumAdultAndChild.setText(num_of_adult_and_child);
+            }
+            if (numOfNights != null && !ConstantUtils.EMPTY.equals(numOfNights)) {
+                tvGuestReqResvDetailsNumOfNights.setText(numOfNights);
             }
             if (selectedRoomType != null && !ConstantUtils.EMPTY.equals(selectedRoomType)) {
                 tvGuestReqResvDetailsRoomType.setText(selectedRoomType);
@@ -131,7 +138,7 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
                 intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_TYPE_STANDARD , search_room_type_standard  );
                 intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_DELUXE , search_room_type_deluxe );
                 intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_SUITE , search_room_type_suite );
-                intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_OF_ROOMS, num_of_rooms.toString());
+                intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_OF_ROOMS, num_of_rooms);
                 intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_HOTEL_NAME, selectedHotelName);
                 intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TYPE, selectedRoomType);
                 intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_NUM_OF_NIGHTS , numOfNights );
@@ -179,14 +186,36 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
 
 
             AlertDialog.Builder builder = new AlertDialog.Builder(GuestRequestReservationDetailsActivity.this);
-            builder.setTitle("Add to future pending transaction?")
+            builder.setTitle("Save for future pending transaction?")
                     .setMessage("Do you want to save transaction for future?")
                     .setNegativeButton("No",  new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface arg0, int arg1) {
-                            Intent backIntent = new Intent(GuestRequestReservationDetailsActivity.this, GuestRequestReservationResultActivity.class);
-                            //TODO redirect to Search result list page
-                            startActivity(backIntent);
+                          Intent intent = new Intent(GuestRequestReservationDetailsActivity.this, GuestRequestReservationResultActivity.class);
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_HOTEL_NAME, search_hotel_name );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_IN_DATE, check_in_date );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_START_TIME, start_time );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_OUT_DATE, check_out_date);
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_ADULT_AND_CHLD , num_of_adult_and_child);
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_TYPE_STANDARD , search_room_type_standard  );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_DELUXE , search_room_type_deluxe );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_SUITE , search_room_type_suite );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_OF_ROOMS, num_of_rooms);
+
+
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_HOTEL_NAME, selectedHotelName);
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TYPE, selectedRoomType);
+
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_NUM_OF_NIGHTS , numOfNights );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_TOTAL_PRICE , totalPrice );
+
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_TYPE   , cardType );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_NUM  , cardNum );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_EXPIRY_DT  , cardExpiryDate  );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_CVV  , cardCvvNum );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_RESERVID   , joint_room_reservation_id );
+            startActivity(intent);
+                            
                         }
                     })
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
