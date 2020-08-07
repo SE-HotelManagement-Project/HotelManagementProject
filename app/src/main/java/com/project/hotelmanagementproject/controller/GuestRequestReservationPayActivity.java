@@ -112,7 +112,7 @@ public class GuestRequestReservationPayActivity extends AppCompatActivity {
             cardExpiryDate = user.getCreditCardExp();
             cardNum= user.getCreditCardNum();
             cardType = user.getCreditCardtype();
-            guest_first_name = user.getUserName();
+            guest_user_name = user.getUserName();
             guest_first_name = user.getFirstName();
             guest_last_name = user.getLastName();
         }
