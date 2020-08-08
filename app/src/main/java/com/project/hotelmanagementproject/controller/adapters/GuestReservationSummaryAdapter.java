@@ -52,23 +52,11 @@ public class GuestReservationSummaryAdapter extends BaseAdapter {
         TextView tvStartDate = view.findViewById(R.id.tvLvGstSRsvLStartDate);
         TextView tvCheckInDate = view.findViewById(R.id.tvLvGstSRsvLCheckInDate);
         ImageView ivHotelName = view.findViewById(R.id.ivLvGstSRsvLHotel);
-      TextView tvGstSumNoOfRooms = view.findViewById(R.id.tvGstSumNoOfRooms);
-        TextView tvGstSumCheckInDate = view.findViewById(R.id.tvGstSumCheckInDate);
-        TextView tvGstSumStartTime = view.findViewById(R.id.tvGstSumStartTime);
-        TextView tvGstSumNoOfNights = view.findViewById(R.id.tvGstSumNoOfNights);
-        ImageView ivGstSumHotel = view.findViewById(R.id.ivGstSumHotel);
 
         Reservation reservation = reservationList.get(i);
-
-
-
 //        Log.i(APP_TAG, "Username: " + reservation.getResvHotelName() + "    ||||||  UserLastName: " + reservation.getResvHotelName() );
-        tvGstSumNoOfRooms.setText(reservation.getResvNumOfRooms());
-        tvGstSumCheckInDate.setText(reservation.getResvCheckInDate());
-        tvGstSumStartTime.setText(reservation.getResvStartTime());
-        tvGstSumNoOfNights.setText(reservation.getResvNumNights());
-
         //  Log.i(APP_TAG, "hotelName: " + hrSrl.getHotelName() + "    ||||||  roomId: " + hrSrl.getHotelRoomId());
+
         tvHotelName.setText(reservation.getResvHotelName());
         tvNumRooms.setText(reservation.getResvNumOfRooms());
         tvNumNights.setText(reservation.getResvNumNights());

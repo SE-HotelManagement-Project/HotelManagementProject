@@ -75,6 +75,13 @@ public class ConstantUtils {
 
     public static final String MGR_RESV_ID = "mgr_resv_id";
 
+    //Intent_guest_tags
+    public static final String GUEST_RESV_ID = "guest_resv_id";
+    public static final String GUEST_RESV_START_DATE = "guest_resv_start_date";
+    public static final String GUEST_RESV_START_TIME = "guest_resv_start_time";
+    public static final String GUEST_ACTIVITY_RETURN_STATE = "guest_activity_return_status";
+
+
     //ACTIVITY RETURN STATE
     public static final String MGR_AVLBL_ROOM_ACTIVITY = "mgr_avlbl_room_state";
     public static final String MGR_SEARCH_ROOM_ACTIVITY = "mgr_search_room_state";
