@@ -74,7 +74,7 @@ public class GuestRequestReservationResultActivity extends AppCompatActivity {
         llGuestRrOutput.setVisibility(View.VISIBLE);
         lvToReserveRoomList = findViewById(R.id.lvToReserveRoomList);
         ivGuestRrImageHeaderIcon = findViewById(R.id.ivGuestRrImageHeaderIcon);
-        ivGuestRrImageHeaderIcon.setImageResource(R.drawable.hotel);
+//        ivGuestRrImageHeaderIcon.setImageResource(R.drawable.hotel);
         tvGuestReqResvDetailsHeader = (TextView) findViewById(R.id.tvGuestReqResvDetailsHeader);
 //        tvGuestReqResvDetailsHeader.setText(ConstantUtils.GUEST_REQ_RESV_SELECTED_RESERV_DETAILS_TEXT);
         List<String> hotelNamesList = new ArrayList<String>();
