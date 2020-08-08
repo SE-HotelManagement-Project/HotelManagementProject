@@ -310,11 +310,12 @@ public class DbMgr extends SQLiteOpenHelper {
                     String resvTime = c.getString(c.getColumnIndex(COL_START_TIME));
                     String resvRoomId = c.getString(c.getColumnIndex(COL_RESERV_ROOM_ID));
                     String resvHotelName = c.getString(c.getColumnIndex(COL_RESERV_HOTEL_NAME));
+                    String resvPaymentStatus = c.getString(c.getColumnIndex(COL_RESERV_HOTEL_NAME));
 
                     hotelResv = new Reservation(resvId, resvRoomId, resvRoomId, null,
                             null, null, resvHotelName, null,
                             null, null, null,
-                            resvPrice, resvCheckInDate, resvCheckOutDate, resvTime, startDate);
+                            resvPrice, resvCheckInDate, resvCheckOutDate, resvTime, startDate,resvPaymentStatus);
 
                     Log.i(APP_TAG, "hotelResv: " + hotelResv.toString() + " "
                             + hotelResv.getResvCheckInDate() + " " + hotelResv.getResvRoomId());
@@ -489,10 +490,11 @@ public class DbMgr extends SQLiteOpenHelper {
                     String checkInDate = c.getString(c.getColumnIndex(COL_CHECKIN_DATE));
                     String roomType = c.getString(c.getColumnIndex(COL_ROOM_TYPE));
                     String resvStartTime = c.getString(c.getColumnIndex(COL_START_TIME));
+                    String resvPaymentStatus = c.getString(c.getColumnIndex(COL_RESERV_HOTEL_NAME));
                     if (!resvIdList.containsKey(resvId)) {
                         resvIdList.put(resvId, 1);
                         Reservation reservation = new Reservation(resvId, null, null, null, null, null, hotelName, roomType,
-                                null, numOfNights, numOfRooms, null, checkInDate, null, resvStartTime, startDate);
+                                null, numOfNights, numOfRooms, null, checkInDate, null, resvStartTime, startDate,resvPaymentStatus);
                         resvList.add(reservation);
                     }
                 }
@@ -532,11 +534,12 @@ public class DbMgr extends SQLiteOpenHelper {
                     String resvTime = c.getString(c.getColumnIndex(COL_START_TIME));
                     String resvRoomId = c.getString(c.getColumnIndex(COL_RESERV_ROOM_ID));
                     String resvHotelName = c.getString(c.getColumnIndex(COL_RESERV_HOTEL_NAME));
+                    String resvPaymentStatus = c.getString(c.getColumnIndex(COL_RESERV_HOTEL_NAME));
 
                     return new Reservation(reservationId, null, resvRoomId, userName,
                             firstName, lastName, resvHotelName, roomType,
                             numAdults, numNights, numRooms, resvPrice,
-                            resvCheckInDate, resvCheckOutDate, resvTime, startDate);
+                            resvCheckInDate, resvCheckOutDate, resvTime, startDate,resvPaymentStatus);
 
                 }
             }
@@ -573,10 +576,11 @@ public class DbMgr extends SQLiteOpenHelper {
                     String checkInDate = c.getString(c.getColumnIndex(COL_CHECKIN_DATE));
                     String roomType = c.getString(c.getColumnIndex(COL_ROOM_TYPE));
                     String resvStartTime = c.getString(c.getColumnIndex(COL_START_TIME));
+                    String resvPaymentStatus = c.getString(c.getColumnIndex(COL_RESERV_HOTEL_NAME));
                     if (!resvIdList.containsKey(resvId)) {
                         resvIdList.put(resvId, 1);
                         Reservation reservation = new Reservation(resvId, null, null, null, null, null, hotelName, roomType,
-                                null, numOfNights, numOfRooms, null, checkInDate, null, resvStartTime, startDate);
+                                null, numOfNights, numOfRooms, null, checkInDate, null, resvStartTime, startDate,resvPaymentStatus);
                         resvList.add(reservation);
                     }
                 }
@@ -772,7 +776,45 @@ Log.i("0809L627","searchRoomGroupBy"+searchRoomGroupBy);
     }
 
 
-    //Ankit changes for request reservation ends
+    public ArrayList<HotelRoom> getGuestPendingResevationList(String userName){
+        ArrayList<HotelRoom> pendingRsvHotelRoom = new ArrayList<HotelRoom>();
+        SQLiteDatabase sqldb = this.getReadableDatabase();
+        String qry = "select a.* , b.* from "  + TABLE_RESERV_DATA +  " as a inner JOIN " + TABLE_HOTEL_DATA + " as b on a.reservation_room_id = b.hotel_room_id \n" +
+                " where a.guest_user_name ='" + userName + "' and  a.payment_status ='PENDING' group by a.reservation_id  order by a.check_in_date";
+
+        Log.i(APP_TAG, "search pending reservation Query: " + qry);
+        try {
+            Cursor c = sqldb.rawQuery(qry, null);
+            if (c.getCount() == 0) {
+                Log.e(APP_TAG, "search room Query Err: No data");
+                return pendingRsvHotelRoom;
+            } else {
+                while (c.moveToNext()) {
+                    String startDate = c.getString(c.getColumnIndex(COL_CHECKIN_DATE));
+                    String roomNumber = c.getString(c.getColumnIndex(COL_ROOM_NUM));
+                    String roomType = c.getString(c.getColumnIndex(COL_ROOM_TYPE));
+                    String hotelName = c.getString(c.getColumnIndex(COL_HOTEL_NAME));
+                    String floorNum = c.getString(c.getColumnIndex(COL_FLOOR_NUM));
+                    String price = c.getString(c.getColumnIndex(COL_PRICE_WEEKDAY));
+                    String numOfRooms = c.getString(c.getColumnIndex(COL_NUM_OF_ROOMS));
+                    String endDate = c.getString(c.getColumnIndex(COL_CHECKOUT_DATE));
+                    String numOfAdultsChildren = c.getString(c.getColumnIndex(COL_NUM_OF_ADULTS_AND_CHILDREN));
+                    String startTime = c.getString(c.getColumnIndex(COL_START_TIME));
+                    String hotelTax = c.getString(c.getColumnIndex(COL_TAX));
+
+                    HotelRoom hotelRoom = new HotelRoom(null, hotelName, roomNumber, roomType, floorNum, price,
+                            null, hotelTax, null
+                            , null, startDate, endDate, startTime);
+                    hotelRoom.setNumOfRooms(numOfRooms);
+                    hotelRoom.setNumOfAdultChildren(numOfAdultsChildren);
+                    pendingRsvHotelRoom.add(hotelRoom);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return pendingRsvHotelRoom;
+    }
 
 
 }

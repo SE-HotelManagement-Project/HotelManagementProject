@@ -241,7 +241,20 @@
             android:paddingTop="10dp"
             android:paddingRight="10dp"
             android:paddingBottom="10dp"
-            android:text="Proceed To Pay"
+            android:singleLine="false"
+            android:text="Proceed                    To Pay"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btnReq_Resv_GuestViewPendingRsv"
+            style="@style/btn_style"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:text="View Pending Reservation"
             android:textSize="15sp" />
 
 

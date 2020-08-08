@@ -115,7 +115,10 @@ public class ConstantUtils {
 public static final String ALL="ALL";
     public static final String EMPTY="";
     public static final String PAID="PAID";
+
     public static final String GUEST_REQ_RESV_SELECTED_RESERV_DETAILS_TEXT = "Selected Reservation Details";
+    public static final String PENDING="PENDING";
+
 //    intent constanats for request reservation flow
     public static final String GUEST_REQ_RESV_SEARCH_HOTEL_NAME = "search_hotel_name";
     public static final String GUEST_REQ_RESV_SEARCH_CHECK_IN_DATE = "check_in_date";
@@ -146,13 +149,6 @@ public static final String ALL="ALL";
     public static final String GUEST_REQ_RESV_GUEST_FIRST_NAME = "guestFirstName";
     public static final String GUEST_REQ_RESV_GUEST_LAST_NAME = "guestLastName";
 
-
-
-//    public static final String GUEST_REQ_RESV_SELECTED_CHECK_IN_DATE = "guest_req_resv_selected_check_in_data";
-//    public static final String GUEST_REQ_RESV_SELECTED_CHECK_OUT_DATE = "guest_req_resv_selected_check_out_date";
-//    public static final String GUEST_REQ_RESV_SELECTED_START_TIME = "guest_req_resv_selected_start_time";
-//    public static final String GUEST_REQ_RESV_SELECTED_NUM_OF_ROOMS = "guest_req_resv_selected_num_of_rooms";
-//    public static final String GUEST_REQ_RESV_SELECTED_NUM_OF_NIGHTS = "guest_req_resv_selected_num_of_nights";
 
 
 

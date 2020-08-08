@@ -16,6 +16,7 @@ public class HotelRoom {
     String endDate;
     String startTime;
     int countOfavailableRooms;
+
 	 String NumOfRooms;
     String totalPrice;
 
@@ -39,6 +40,10 @@ public class HotelRoom {
 
     String numOfNights;
 
+    
+	String numOfAdultChildren;
+
+
 //    public String getCheckInDate() {
 //        return checkInDate;
 //    }
@@ -48,11 +53,20 @@ public class HotelRoom {
 //    }
 //
 //    String checkInDate;
-public String getNumOfRooms() {
+    public String getNumOfRooms() {
         return NumOfRooms;
     }
+
     public void setNumOfRooms(String numOfRooms) {
-        NumOfRooms = numOfRooms;
+        this.NumOfRooms = numOfRooms;
+    }
+
+    public String getNumOfAdultChildren() {
+        return numOfAdultChildren;
+    }
+
+    public void setNumOfAdultChildren(String numOfAdultChildren) {
+        this.numOfAdultChildren = numOfAdultChildren;
     }
    
 public int getCountOfavailableRooms() {
@@ -189,24 +203,5 @@ public int getCountOfavailableRooms() {
         this.startTime = startTime;
     }
 
-    @Override
-    public String toString() {
-        return "HotelRoom{" +
-                "hotelRoomId='" + hotelRoomId + '\'' +
-                ", hotelName='" + hotelName + '\'' +
-                ", roomNum='" + roomNum + '\'' +
-                ", roomType='" + roomType + '\'' +
-                ", floorNum='" + floorNum + '\'' +
-                ", roomPriceWeekDay='" + roomPriceWeekDay + '\'' +
-                ", roomPriceWeekend='" + roomPriceWeekend + '\'' +
-                ", hotelTax='" + hotelTax + '\'' +
-                ", availabilityStatus='" + availabilityStatus + '\'' +
-                ", occupiedStatus='" + occupiedStatus + '\'' +
-                ", startDate='" + startDate + '\'' +
-                ", endDate='" + endDate + '\'' +
-                ", startTime='" + startTime + '\'' +
-                ", countOfavailableRooms=" + countOfavailableRooms +
-                ", NumOfRooms='" + NumOfRooms + '\'' +
-                '}';
-    }
+    
 }
