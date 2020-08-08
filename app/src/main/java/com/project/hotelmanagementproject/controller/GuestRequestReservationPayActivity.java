@@ -1,5 +1,7 @@
 package com.project.hotelmanagementproject.controller;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,11 +44,15 @@ public class GuestRequestReservationPayActivity extends AppCompatActivity {
 
     String search_hotel_name , check_in_date , start_time , check_out_date , num_of_adult_and_child , num_of_rooms ;
     String search_room_type_standard , search_room_type_deluxe , search_room_type_suite ;
-    String numOfNights ,  totalPrice;
+    String  numOfNights;
+    String totalPrice;
     String selectedHotelName, selectedRoomType;
-    String cardType, cardNum, cardExpiryDate , cardCvvNum;
-    String guest_user_name, guest_first_name, guest_last_name;
+    String cardType , cardNum , cardExpiryDate , cardCvvNum ;
     String joint_room_reservation_id;
+    String selectedRoomTax ;
+    String guest_user_name , guest_first_name , guest_last_name ;
+    String selected_room_price_weekDay , selectedRoomPriceWeekend  ;
+
     Session session ;
 
     List<String> hotelNamesList = new ArrayList<String>();
@@ -92,6 +99,13 @@ public class GuestRequestReservationPayActivity extends AppCompatActivity {
             cardExpiryDate  = extras.getString(ConstantUtils.GUEST_REQ_RESV_CARD_EXPIRY_DT   );
             cardCvvNum = extras.getString(ConstantUtils.GUEST_REQ_RESV_CARD_CVV  );
             joint_room_reservation_id = extras.getString(ConstantUtils.GUEST_REQ_RESV_RESERVID   );
+
+            selectedRoomTax = extras.getString(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TAX   );
+            guest_user_name  = extras.getString(ConstantUtils.GUEST_REQ_RESV_GUEST_USER_NAME   );
+            guest_first_name  = extras.getString(ConstantUtils.GUEST_REQ_RESV_GUEST_FIRST_NAME    );
+            guest_last_name  = extras.getString(ConstantUtils.GUEST_REQ_RESV_GUEST_LAST_NAME    );
+            selected_room_price_weekDay = extras.getString(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_DAY    );
+            selectedRoomPriceWeekend= extras.getString(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_END    );
         }
 
         if (search_hotel_name.equalsIgnoreCase(ConstantUtils.HM_MAVERICK)) {
@@ -132,62 +146,89 @@ public class GuestRequestReservationPayActivity extends AppCompatActivity {
         btnGuestReqRsvPayReservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 joint_room_reservation_id  = reserveRoom( guest_user_name,  guest_first_name,  guest_last_name);
-                Bundle extras = getIntent().getExtras();
-                Intent intent = new Intent(GuestRequestReservationPayActivity.this, GuestReqResvPayConfirmRoomDetailsActivity.class);
-                if (extras != null) {
-                    intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_HOTEL_NAME, search_hotel_name );
-                    intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_IN_DATE, check_in_date );
-                    intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_START_TIME, start_time );
-                    intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_OUT_DATE, check_out_date);
-                    intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_ADULT_AND_CHLD , num_of_adult_and_child);
-                    intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_TYPE_STANDARD , search_room_type_standard  );
-                    intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_DELUXE , search_room_type_deluxe );
-                    intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_SUITE , search_room_type_suite );
-                    intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_OF_ROOMS, num_of_rooms);
+                AlertDialog.Builder builder = new AlertDialog.Builder(GuestRequestReservationPayActivity.this);
+                builder.setTitle("MakeReservation!")
+                        .setMessage("Are you sure you want to make the reservation?")
+                        .setNegativeButton("No", null)
+                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
 
-
-                    intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_HOTEL_NAME, selectedHotelName);
-                    intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TYPE, selectedRoomType);
-
-                    intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_NUM_OF_NIGHTS , numOfNights );
-                    intent.putExtra(ConstantUtils.GUEST_REQ_RESV_TOTAL_PRICE , totalPrice );
-
-                    intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_TYPE   , cardType );
-                    intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_NUM  , cardNum );
-                    intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_EXPIRY_DT  , cardExpiryDate  );
-                    intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_CVV  , cardCvvNum );
-                    intent.putExtra(ConstantUtils.GUEST_REQ_RESV_RESERVID   , joint_room_reservation_id );
-                    startActivity(intent);
-                }
-
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                makeReservation();
+                            }
+                        }).create().show();
             }
         });
     }
+public void makeReservation(){
+    boolean   makeReserveSucess  = reserveRoom( guest_user_name,  guest_first_name,  guest_last_name);
+    Bundle extras = getIntent().getExtras();
+    Intent intent = new Intent(GuestRequestReservationPayActivity.this, GuestReqResvPayConfirmRoomDetailsActivity.class);
+    if (extras != null) {
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_HOTEL_NAME, search_hotel_name );
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_IN_DATE, check_in_date );
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_START_TIME, start_time );
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_OUT_DATE, check_out_date);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_ADULT_AND_CHLD , num_of_adult_and_child);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_TYPE_STANDARD , search_room_type_standard  );
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_DELUXE , search_room_type_deluxe );
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_SUITE , search_room_type_suite );
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_OF_ROOMS, num_of_rooms);
 
-    public String reserveRoom(String guestUserName, String guestFirstName, String guestLastName){
-//        String resvId = createReservationId(selectedHotelName);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_HOTEL_NAME, selectedHotelName);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TYPE, selectedRoomType);
+
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_NUM_OF_NIGHTS , numOfNights );
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_TOTAL_PRICE , totalPrice );
+
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_TYPE   , cardType );
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_NUM  , cardNum );
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_EXPIRY_DT  , cardExpiryDate  );
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_CVV  , cardCvvNum );
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_RESERVID   , joint_room_reservation_id );
+
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TAX   , selectedRoomTax );
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_GUEST_USER_NAME   , guest_user_name  );
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_GUEST_FIRST_NAME   , guest_first_name );
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_GUEST_LAST_NAME    , guest_last_name  );
+
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_DAY    , selected_room_price_weekDay  );
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_END     , selectedRoomPriceWeekend   );
+
+        if(makeReserveSucess){
+            startActivity(intent);
+            Toast.makeText(GuestRequestReservationPayActivity.this, "Reservation created sucessfully ", Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(GuestRequestReservationPayActivity.this, "Failed To create reservation", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+}
+
+    public boolean reserveRoom(String guestUserName, String guestFirstName, String guestLastName){
+
 
         DbMgr DbMgr = com.project.hotelmanagementproject.model.DbMgr.getInstance(getApplication());
-//        hotelNamesList = UtilityFunctions.populateHotelNamesList(search_hotel_name);
-//        roomTypesList = UtilityFunctions.populateRoomsTypeList(search_room_type_standard, search_room_type_deluxe, search_room_type_suite);
+
         List<HotelRoom> hotelRoomsList = DbMgr.getRoomsForReqResv( selectedHotelName ,  selectedRoomType,  check_in_date,  check_out_date,  start_time) ;
         Reservation reservation;
         HotelRoom hotelRoom;
         String reservationId = ConstantUtils.EMPTY;
         int numOfRoomsInt = Integer.parseInt(num_of_rooms);
-        Log.i("0809 161 PayActivity", "hotelRoomsList.size()="+ hotelRoomsList.size());
-        Log.i("0809 161 PayActivity", "numOfrooms ="+ num_of_rooms);
+
+        boolean makeReserveSucess = false;
         if(UtilityFunctions.isNotNullAndEmpty(hotelRoomsList) && numOfRoomsInt <= hotelRoomsList.size()){
             for(int i = 0;i < numOfRoomsInt; i++){
                  hotelRoom = hotelRoomsList.get(i);
-//                reservationId = createReservationId(selectedHotelName);
+
                 if(ConstantUtils.EMPTY.equals(reservationId)){
                     reservationId = createReservationId(hotelRoom.getHotelName());
+                    joint_room_reservation_id = reservationId;
                 }
-                Log.i("0809 174 ", "PayActivity reservationId"+ reservationId);
+
                 reservation = new Reservation();
-                reservation.setReservationId(reservationId);
+                reservation.setReservationId(joint_room_reservation_id);
                 reservation.setResvRoomId(hotelRoom.getHotelRoomId());
                 reservation.setResvNumNights(numOfNights);
                 reservation.setResvNumAdultsChildren(num_of_adult_and_child);
@@ -202,11 +243,11 @@ public class GuestRequestReservationPayActivity extends AppCompatActivity {
                 reservation.setResvLastName(guestLastName);
                 reservation.setResvNumOfRooms(num_of_rooms);
                 reservation.setPaymentStatus(ConstantUtils.PAID);
-                Log.i("0809 187 PayActivity", "reservation ="+ reservation.toString());
-                DbMgr.addNewReserv(reservation);
+
+                makeReserveSucess = DbMgr.addNewReserv(reservation);
             }
         }
-        return reservationId;
+        return makeReserveSucess;
     }
     public String createReservationId(String hotel_name){
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -217,8 +258,6 @@ public class GuestRequestReservationPayActivity extends AppCompatActivity {
 
         String reservationId = hotel_name.toLowerCase() +"_"+ dateSplit1[1] + dateSplit1[2].substring(0,2)+ dateSplit1[0].substring(2)+
                 "_"+ dateSplit2[0].substring(dateSplit2[0].length()-2)+dateSplit2[1];
-        System.out.println("dateString= "+ dateString);
-        System.out.println("reservationId= "+ reservationId);
         return reservationId;
     }
     @Override
@@ -238,27 +277,35 @@ public class GuestRequestReservationPayActivity extends AppCompatActivity {
         } else if (id == android.R.id.home) {
             Intent intent = new Intent(this, GuestRequestReservationDetailsActivity.class);
 
-                intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_HOTEL_NAME, search_hotel_name );
-                intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_IN_DATE, check_in_date );
-                intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_START_TIME, start_time );
-                intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_OUT_DATE, check_out_date);
-                intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_ADULT_AND_CHLD , num_of_adult_and_child);
-                intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_TYPE_STANDARD , search_room_type_standard  );
-                intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_DELUXE , search_room_type_deluxe );
-                intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_SUITE , search_room_type_suite );
-                intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_OF_ROOMS, num_of_rooms);
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_HOTEL_NAME, search_hotel_name );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_IN_DATE, check_in_date );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_START_TIME, start_time );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_OUT_DATE, check_out_date);
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_ADULT_AND_CHLD , num_of_adult_and_child);
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_TYPE_STANDARD , search_room_type_standard  );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_DELUXE , search_room_type_deluxe );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_SUITE , search_room_type_suite );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_OF_ROOMS, num_of_rooms);
 
-                intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_HOTEL_NAME, selectedHotelName);
-                intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TYPE, selectedRoomType);
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_HOTEL_NAME, selectedHotelName);
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TYPE, selectedRoomType);
 
-                intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_NUM_OF_NIGHTS , numOfNights );
-                intent.putExtra(ConstantUtils.GUEST_REQ_RESV_TOTAL_PRICE , totalPrice );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_NUM_OF_NIGHTS , numOfNights );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_TOTAL_PRICE , totalPrice );
 
-                intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_TYPE   , cardType );
-                intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_NUM  , cardNum );
-                intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_EXPIRY_DT  , cardExpiryDate  );
-                intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_CVV  , cardCvvNum );
-                intent.putExtra(ConstantUtils.GUEST_REQ_RESV_RESERVID   , joint_room_reservation_id );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_TYPE   , cardType );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_NUM  , cardNum );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_EXPIRY_DT  , cardExpiryDate  );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_CVV  , cardCvvNum );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_RESERVID   , joint_room_reservation_id );
+
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TAX   , selectedRoomTax );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_GUEST_USER_NAME   , guest_user_name  );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_GUEST_FIRST_NAME   , guest_first_name );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_GUEST_LAST_NAME    , guest_last_name  );
+
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_DAY    , selected_room_price_weekDay  );
+            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_END     , selectedRoomPriceWeekend   );
 
             startActivity(intent);
             return true;

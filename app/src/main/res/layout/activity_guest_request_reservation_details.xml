@@ -28,12 +28,13 @@
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/ic_room_details" />
 
+
         <TextView
             android:id="@+id/tvGuestReqResvDetailsHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Pending Reservation Details"
+            android:text="Selected Item Details"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="17sp" />
 
@@ -176,6 +177,49 @@
                     style="@style/text_style"
                     android:paddingLeft="10dp"
                     android:text="" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Tax: "
+                    android:textColor="@color/colorGrey" />
+
+                <TextView
+                    android:id="@+id/tvGuestReqResvDetailsTax"
+                    style="@style/edit_text_style"
+                    android:text="" />
+
+
+            </LinearLayout>
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Room Price Per day (WeekDay): "
+                    android:textColor="@color/colorGrey" />
+
+                <TextView
+                    android:id="@+id/tvGuestReqResvDetailsRPWeDay"
+                    style="@style/edit_text_style"
+                    android:text="" />
+
+
+            </LinearLayout>
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Room Price Per day (WeekEnd): "
+                    android:textColor="@color/colorGrey" />
+
+                <TextView
+                    android:id="@+id/tvGuestReqResvDetailsRPWeEnd"
+                    style="@style/edit_text_style"
+                    android:text="" />
+
 
             </LinearLayout>
 

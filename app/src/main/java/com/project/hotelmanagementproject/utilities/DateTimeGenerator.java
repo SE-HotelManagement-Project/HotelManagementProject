@@ -25,10 +25,10 @@ public class DateTimeGenerator {
     public static String getDefaultTimeForReservRoom() {
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
-        cal.set(Calendar.HOUR_OF_DAY,12);
-        cal.set(Calendar.MINUTE,00);
-        cal.set(Calendar.SECOND,0);
-        cal.set(Calendar.MILLISECOND,0);
+//        cal.set(Calendar.HOUR_OF_DAY,12);
+//        cal.set(Calendar.MINUTE,00);
+//        cal.set(Calendar.SECOND,0);
+//        cal.set(Calendar.MILLISECOND,0);
         Date date = cal.getTime();
         return new SimpleDateFormat("HH:mm").format(date);
     }
@@ -54,7 +54,7 @@ public class DateTimeGenerator {
         catch(Exception e){
             e.printStackTrace();
         }
-        System.out.println(date1);
+//        System.out.println(date1);
         return date1;
     }
 
