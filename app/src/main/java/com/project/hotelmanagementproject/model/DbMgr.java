@@ -617,13 +617,16 @@ public class DbMgr extends SQLiteOpenHelper {
         query1= query1 + UtilityFunctions.appendStringWithListAndCol(roomTypesList, COL_ROOM_TYPE);
 
         String query2 = " and hotel_room_id not in ( select reservation_room_id from hm_reservation_data where ";
-        String query3 = " ( (check_in_date between"+ " '"+checkInDate+"' "+" and  +'"+ checkOutDate + "' ) or (check_out_date between '" +checkInDate +"' and  '"+checkOutDate+"') ) ";
+//        String query3 = " ( (check_in_date between"+ " '"+checkInDate+"' "+" and  +'"+ checkOutDate + "' ) or (check_out_date between '" +checkInDate +"' and  '"+checkOutDate+"') ) ";
+        String query3 =  "(((check_in_date between '"+ checkInDate +"'  and  '"+ checkOutDate +"' ) and (check_out_date between '"+ checkInDate +"' and  '"+ checkOutDate +"')) or (check_in_date <= '"+ checkInDate +"'  and   (check_out_date  between '"+ checkInDate +"'  and  '"+ checkOutDate +"' )) or  ((check_in_date between '"+ checkInDate +"'  and  '"+checkOutDate +"' ) and  check_out_date  >='"+ checkOutDate +"') or ((check_in_date <='"+ checkInDate+"'  ) and  check_out_date  >='"+ checkOutDate+"') )";
         query3 = query3 + UtilityFunctions.appendStringWithListAndCol(hotelNameList, COL_RESERV_HOTEL_NAME);
+
         query3 = query3 + UtilityFunctions.appendStringWithListAndCol(roomTypesList, COL_ROOM_TYPE);
         String query4 ="  ) group by hotel_name , " +
                 "room_type , room_price_per_night_weekday , room_price_per_night_weekend , available_status order by room_price_per_night_weekday";
 
 String searchRoomGroupBy = query1+ query2 + query3 + query4;
+Log.i("0809L627","searchRoomGroupBy"+searchRoomGroupBy);
 
 //        StringBuffer searchRoomGroupBy = new StringBuffer("SELECT count(*) as room_count , "+ COL_HOTEL_NAME +" , "+  COL_HOTEL_ROOM_TYPE+ " , " + COL_PRICE_WEEKDAY+ " ," + COL_PRICE_WEEKEND
 //                +" , "+ COL_AVAILABILITY_STATUS + " , "+ COL_TAX
@@ -726,13 +729,15 @@ String searchRoomGroupBy = query1+ query2 + query3 + query4;
 
 
         String query2 = "' and hotel_room_id not in ( select reservation_room_id from hm_reservation_data where ";
-        String query3 = " ( (check_in_date between"+ " '"+checkInDate+"'  and  +'"+ checkOutDate + "' ) or (check_out_date between '" +checkInDate +"' and  '"+checkOutDate+"') ) ";
+        String query3 =  "(((check_in_date between '"+ checkInDate +"'  and  '"+ checkOutDate +"' ) and (check_out_date between '"+ checkInDate +"' and  '"+ checkOutDate +"')) or (check_in_date <= '"+ checkInDate +"'  and   (check_out_date  between '"+ checkInDate +"'  and  '"+ checkOutDate +"' )) or  ((check_in_date between '"+ checkInDate +"'  and  '"+checkOutDate +"' ) and  check_out_date  >='"+ checkOutDate +"') or ((check_in_date <='"+ checkInDate+"'  ) and  check_out_date  >='"+ checkOutDate+"') )";
         query3 = query3 + "and "+COL_RESERV_HOTEL_NAME+" = '"+selectedHotelName+"' and "+ COL_ROOM_TYPE+" ='" + selectedRoomType;
         String query4 ="'  ) order by "+COL_ROOM_NUM;
 
         String searchRoomGroupBy = query1+ query2 + query3 + query4;
         Log.i("0809 Dbmgr", "L736"+ searchRoomGroupBy);
         HotelRoom hotelRoom =null;
+
+
 
         String roomType ,  hotelName ,roomNum,  hotel_room_id ,  floorNum, roomWkDayPricePerNight, roomWkEndPricePerNight, availableStatus, tax;
         try {
