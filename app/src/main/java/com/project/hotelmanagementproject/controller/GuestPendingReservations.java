@@ -30,7 +30,7 @@ public class GuestPendingReservations extends AppCompatActivity {
 
     private User userinfo;
     private DbMgr DbManager;
-    String search_hotel_name , check_in_date , start_time , check_out_date , num_of_adult_and_child , num_of_rooms ;
+    String search_hotel_name , check_in_date , start_time , check_out_date , num_of_adult_and_child , num_of_rooms ,selectedRoomTax,selected_room_price_weekDay,selectedRoomPriceWeekend;
     ArrayList<HotelRoom> pendingReservationList;
     ListView lvToPendingReservationList;
     GuestPendingResevationAdapter guestPendingResevationAdapter;
@@ -71,6 +71,9 @@ public class GuestPendingReservations extends AppCompatActivity {
                 selectedHotelName = selectedHotelRoom.getHotelName();
                 selectedRoomType = selectedHotelRoom.getRoomType();
                 num_of_adult_and_child = selectedHotelRoom.getNumOfAdultChildren();
+                selectedRoomTax= selectedHotelRoom.getHotelTax();
+                selected_room_price_weekDay = selectedHotelRoom.getRoomPriceWeekDay();
+                selectedRoomPriceWeekend = selectedHotelRoom.getRoomPriceWeekend();
 
                 totalPrice = UtilityFunctions.calculateTotalReservationPrice( check_in_date, start_time, check_out_date, ConstantUtils.GUEST_REQ_RESV_SEARCH_END_TIME_VALUE  ,
                         selectedHotelRoom.getRoomPriceWeekDay(),selectedHotelRoom.getRoomPriceWeekend(),
@@ -92,6 +95,11 @@ public class GuestPendingReservations extends AppCompatActivity {
                 reqResvDetailsIntent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TYPE, selectedRoomType);
                 reqResvDetailsIntent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_NUM_OF_NIGHTS , numOfNights );
                 reqResvDetailsIntent.putExtra(ConstantUtils.GUEST_REQ_RESV_TOTAL_PRICE , totalPrice );
+                reqResvDetailsIntent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TAX   , selectedRoomTax );
+
+
+                reqResvDetailsIntent.putExtra(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_DAY    , selected_room_price_weekDay  );
+                reqResvDetailsIntent.putExtra(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_END     , selectedRoomPriceWeekend   );
                 startActivity(reqResvDetailsIntent);
             }
         });

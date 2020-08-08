@@ -44,8 +44,7 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
     Button btnReq_Resv_GuestPayReservation, btnReq_Resv_GuestViewPendingRsv;
 
 
-    TextView tvGuestReqResvDetailsNumOfNights, tvGuestReqResvDetailsRoomType, tvGuestReqResvDetailsRoomPrice, tvGuestReqResvDetailsNumAdultAndChild;
-    ImageView ivGuestReqResvDetailsIcon;
+
     DbMgr DbManager;
     User userInfo;
 
