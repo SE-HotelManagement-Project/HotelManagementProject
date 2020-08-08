@@ -67,12 +67,16 @@
                 style="@style/text_style"
                 android:text="Check In Date:" />
 
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/edit_text_style"
+                android:hint="yyyy-MM-dd format">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etGuestRrCheckInFrom"
                 style="@style/edit_text_style"
-                android:hint=""
+                android:hint="yyyy-MM-dd format"
                 android:text="" />
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
         <LinearLayout style="@style/horz_linear_layout_style">
@@ -81,10 +85,15 @@
                 android:text="Start Time:" />
 
 
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/edit_text_style"
+                android:hint="HH:MM (24 Hour Format)">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etStartTime"
                 style="@style/edit_text_style"
                 android:text="" />
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout style="@style/horz_linear_layout_style">
@@ -93,12 +102,16 @@
                 style="@style/text_style"
                 android:text="Check Out Date:" />
 
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/edit_text_style"
+                android:hint="yyyy-MM-dd format">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etGuestRrCheckOutDateTo"
                 style="@style/edit_text_style"
-                android:hint =""/>
+                android:hint="yyyy-MM-dd format"
                 android:text =""/>
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 

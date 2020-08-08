@@ -59,7 +59,7 @@
                     android:id="@+id/tvGuestReqResPayConfDetailReservId"
                     style="@style/text_style"
                     android:paddingLeft="10dp"
-                    android:text="HM-6582" />
+                    android:text="" />
 
             </LinearLayout>
 
@@ -175,6 +175,49 @@
                     style="@style/text_style"
                     android:paddingLeft="10dp"
                     android:text="$200" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Tax: "
+                    android:textColor="@color/colorGrey" />
+
+                <TextView
+                    android:id="@+id/tvGuestReqResPayTax"
+                    style="@style/edit_text_style"
+                    android:text="" />
+
+
+            </LinearLayout>
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Room Price Per day (WeekDay): "
+                    android:textColor="@color/colorGrey" />
+
+                <TextView
+                    android:id="@+id/tvGuestReqResPayRPWeDay"
+                    style="@style/edit_text_style"
+                    android:text="" />
+
+
+            </LinearLayout>
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Room Price Per day (WeekEnd): "
+                    android:textColor="@color/colorGrey" />
+
+                <TextView
+                    android:id="@+id/tvGuestReqResPayRPWeEnd"
+                    style="@style/edit_text_style"
+                    android:text="" />
+
 
             </LinearLayout>
 

@@ -17,6 +17,27 @@ public class HotelRoom {
     String startTime;
     int countOfavailableRooms;
 	 String NumOfRooms;
+    String totalPrice;
+
+    public String getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(String totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+
+
+    public String getNumOfNights() {
+        return numOfNights;
+    }
+
+    public void setNumOfNights(String numOfNights) {
+        this.numOfNights = numOfNights;
+    }
+
+    String numOfNights;
 
 //    public String getCheckInDate() {
 //        return checkInDate;

@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.project.hotelmanagementproject.utilities.ConstantUtils;
 import com.project.hotelmanagementproject.utilities.UtilityFunctions;
 
 import java.util.ArrayList;
@@ -609,30 +610,57 @@ public class DbMgr extends SQLiteOpenHelper {
         List<HotelRoom> hotelRoomsList = new ArrayList<HotelRoom>();
         SQLiteDatabase sqldb = this.getReadableDatabase();
 
-        StringBuffer searchRoomGroupBy = new StringBuffer("SELECT count(*) as room_count , "+ COL_HOTEL_NAME +" , "+  COL_HOTEL_ROOM_TYPE+ " , " + COL_PRICE_WEEKDAY+ " ," + COL_PRICE_WEEKEND
-                +" , "+ COL_AVAILABILITY_STATUS + " , "+ COL_TAX
-                +" from  " + TABLE_HOTEL_DATA + " where " + COL_AVAILABILITY_STATUS + " = 'Yes' " );
+        String query1= "SELECT count(*) as room_count , hotel_name , room_type , room_price_per_night_weekday , " +
+                "room_price_per_night_weekend , available_status , " +
+                "tax from  hm_hotel_data where available_status = 'Yes'  ";
+        query1= query1 + UtilityFunctions.appendStringWithListAndCol(hotelNameList, COL_HOTEL_NAME);
+        query1= query1 + UtilityFunctions.appendStringWithListAndCol(roomTypesList, COL_ROOM_TYPE);
 
+        String query2 = " and hotel_room_id not in ( select reservation_room_id from hm_reservation_data where ";
+        String query3 = " ( (check_in_date between"+ " '"+checkInDate+"' "+" and  +'"+ checkOutDate + "' ) or (check_out_date between '" +checkInDate +"' and  '"+checkOutDate+"') ) ";
+        query3 = query3 + UtilityFunctions.appendStringWithListAndCol(hotelNameList, COL_RESERV_HOTEL_NAME);
+        query3 = query3 + UtilityFunctions.appendStringWithListAndCol(roomTypesList, COL_ROOM_TYPE);
+        String query4 ="  ) group by hotel_name , " +
+                "room_type , room_price_per_night_weekday , room_price_per_night_weekend , available_status order by room_price_per_night_weekday";
 
-        searchRoomGroupBy.append(UtilityFunctions.appendHotelNameToStringBuffer(hotelNameList));
+String searchRoomGroupBy = query1+ query2 + query3 + query4;
 
-        searchRoomGroupBy.append(UtilityFunctions.appendRoomTypesToStringBuffer(roomTypesList));
+//        StringBuffer searchRoomGroupBy = new StringBuffer("SELECT count(*) as room_count , "+ COL_HOTEL_NAME +" , "+  COL_HOTEL_ROOM_TYPE+ " , " + COL_PRICE_WEEKDAY+ " ," + COL_PRICE_WEEKEND
+//                +" , "+ COL_AVAILABILITY_STATUS + " , "+ COL_TAX
+//                +" from  " + TABLE_HOTEL_DATA + " where " + COL_AVAILABILITY_STATUS + " = 'Yes' " );
+//
+//
+//        searchRoomGroupBy.append(UtilityFunctions.appendHotelNameToStringBuffer(hotelNameList));
+//
+//        if(!ConstantUtils.EMPTY.equals(UtilityFunctions.appendRoomTypesToStringBuffer(roomTypesList).toString())){
+//            searchRoomGroupBy.append(UtilityFunctions.appendRoomTypesToStringBuffer(roomTypesList));
+//        }
+//        else{
+//            searchRoomGroupBy.append(UtilityFunctions.appendRoomTypesToStringBufferForEmpty(roomTypesList));
+//        }
+//
+//        searchRoomGroupBy.append(" and "+ COL_HOTEL_ROOM_ID + " not in ");
+//
+//        searchRoomGroupBy.append("( select ").append(COL_RESERV_ROOM_ID).append(" from ").append(TABLE_RESERV_DATA). append(" where ")
+//                .append(" ( ").append(COL_CHECKIN_DATE).append(" >= ").append("'").append(checkInDate).append("'").append( " and ").append(COL_CHECKIN_DATE).append( " <= ").append("'").append(checkOutDate).append("'")
+//                .append(" or ").append(COL_CHECKOUT_DATE).append(" >= ").append("'").append(checkInDate).append("'").append( " and ").append(COL_CHECKOUT_DATE).append( " <= ").append("'").append(checkOutDate).append("'").append(" ) ");
+//
+//        searchRoomGroupBy.append(UtilityFunctions.appendHotelNameToStringBuffer(hotelNameList));
+//
+////        searchRoomGroupBy.append(UtilityFunctions.appendRoomTypesToStringBuffer(roomTypesList));
+//
+//        if(!ConstantUtils.EMPTY.equals(UtilityFunctions.appendRoomTypesToStringBuffer(roomTypesList).toString())){
+//            searchRoomGroupBy.append(UtilityFunctions.appendRoomTypesToStringBuffer(roomTypesList));
+//        }
+//        else{
+//            searchRoomGroupBy.append(UtilityFunctions.appendRoomTypesToStringBufferForEmpty(roomTypesList));
+//        }
+//        searchRoomGroupBy.append(" )");
+//        searchRoomGroupBy.append(" group by "+ COL_HOTEL_NAME +" , "+ COL_HOTEL_ROOM_TYPE + " , "+ COL_PRICE_WEEKDAY + " , "+ COL_PRICE_WEEKEND + " , " + COL_AVAILABILITY_STATUS)
+//        .append(" order by ").append(COL_PRICE_WEEKDAY);
+//        Log.i("DBMgr L 634", "0809630DBMgrL634  "+ searchRoomGroupBy.toString());
+//        Log.i("DBMgr L 634", "0809630DBMgrL634  "+ searchRoomGroupBy.toString());
 
-
-        searchRoomGroupBy.append(" and "+ COL_HOTEL_ROOM_ID + " not in ");
-
-        searchRoomGroupBy.append("( select ").append(COL_RESERV_ROOM_ID).append(" from ").append(TABLE_RESERV_DATA). append(" where ").append(COL_CHECKIN_DATE).append(" >= ")
-        .append("'").append(checkInDate).append("'").append(" and ").append(COL_CHECKOUT_DATE).append(" <= ").append("'").append(checkOutDate).append("'").append(" and ")
-                .append(COL_START_TIME).append(" >= ").append("'").append(startTime).append("'");
-
-        searchRoomGroupBy.append(UtilityFunctions.appendHotelNameToStringBuffer(hotelNameList));
-
-        searchRoomGroupBy.append(UtilityFunctions.appendRoomTypesToStringBuffer(roomTypesList));
-
-        searchRoomGroupBy.append(" )");
-        searchRoomGroupBy.append(" group by "+ COL_HOTEL_NAME +" , "+ COL_HOTEL_ROOM_TYPE + " , "+ COL_PRICE_WEEKDAY + " , "+ COL_PRICE_WEEKEND + " , " + COL_AVAILABILITY_STATUS)
-        .append(" order by ").append(COL_PRICE_WEEKDAY);
-//        Log.i("DBMgr L 634", "0809 630  "+ searchRoomGroupBy.toString());
 
         HotelRoom hotelRoom =null;
         int countOfavailableRooms=-1;
@@ -640,7 +668,7 @@ public class DbMgr extends SQLiteOpenHelper {
         try {
             Cursor c = sqldb.rawQuery(searchRoomGroupBy.toString(), null);
             if (c.getCount() == 0) {
-                Log.e(APP_TAG, "0809 L642 searchRoomGroupBy Query Err: No data");
+                Log.e(APP_TAG, "searchRoomGroupBy Query Err: No data");
             } else {
                 while (c.moveToNext()) {
                     countOfavailableRooms = c.getInt(c.getColumnIndex("room_count"));
@@ -657,8 +685,7 @@ public class DbMgr extends SQLiteOpenHelper {
                         hotelRoom.setCountOfavailableRooms(new Integer(countOfavailableRooms));
                         hotelRoom.setNumOfRooms(numOfRooms);
                         hotelRoom.setStartDate(checkInDate);
-//                    hotelRoom.setCheckInDate(checkInDate);
-                        Log.i("0809 L659","checking hotel name attribute not coming "+  hotelName.toString());
+
                         hotelRoomsList.add(hotelRoom);
                     }
 
@@ -667,7 +694,7 @@ public class DbMgr extends SQLiteOpenHelper {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.i("0809 L658", "roomlist.size ="+ hotelRoomsList.size());
+        Log.i("0809L658", "0809L658roomlist.size ="+ hotelRoomsList.size());
         return hotelRoomsList;
     }
 
@@ -677,33 +704,41 @@ public class DbMgr extends SQLiteOpenHelper {
         List<HotelRoom> hotelRoomsList = new ArrayList<HotelRoom>();
         SQLiteDatabase sqldb = this.getReadableDatabase();
 
-        StringBuffer searchRoomGroupBy = new StringBuffer("SELECT * from  " + TABLE_HOTEL_DATA + " where " + COL_AVAILABILITY_STATUS + " = 'Yes' " );
+//        StringBuffer searchRoomGroupBy = new StringBuffer("SELECT * from  " + TABLE_HOTEL_DATA + " where " + COL_AVAILABILITY_STATUS + " = 'Yes' " );
+//
+//
+//        searchRoomGroupBy.append(" and "+ COL_HOTEL_NAME +" = "+ "'"+selectedHotelName+"'");
+//        searchRoomGroupBy.append(" and "+ COL_HOTEL_ROOM_TYPE +" = "+ "'"+ selectedRoomType+"'");
+//
+//        searchRoomGroupBy.append(" and "+ COL_HOTEL_ROOM_ID + " not in ");
+//
+//        searchRoomGroupBy.append("( select ").append(COL_RESERV_ROOM_ID).append(" from ").append(TABLE_RESERV_DATA). append(" where ")
+//                .append(" ( ").append(COL_CHECKIN_DATE).append(" >= ").append("'").append(checkInDate).append("'").append( " and ").append(COL_CHECKIN_DATE).append( " <= ").append("'").append(checkOutDate).append("'")
+//                .append(" or ").append(COL_CHECKOUT_DATE).append(" >= ").append("'").append(checkInDate).append("'").append( " and ").append(COL_CHECKOUT_DATE).append( " <= ").append("'").append(checkOutDate).append("'").append(" ) ");
+//
+//        searchRoomGroupBy.append(" and "+  COL_RESERV_HOTEL_NAME+" = "+ "'"+selectedHotelName+"'");
+//
+//        searchRoomGroupBy.append(" and "+  COL_ROOM_TYPE +" = "+ "'"+ selectedRoomType+"'");
+//
+//        searchRoomGroupBy.append(" )");
+//        searchRoomGroupBy.append(" order by ").append(COL_ROOM_NUM);
+        String query1= "SELECT * from  hm_hotel_data where available_status = 'Yes'  and "+COL_HOTEL_NAME+" = '"+selectedHotelName+"' and "+ COL_ROOM_TYPE+" ='" + selectedRoomType;
 
 
-        searchRoomGroupBy.append(" and "+ COL_HOTEL_NAME +" = "+ "'"+selectedHotelName+"'");
-        searchRoomGroupBy.append(" and "+ COL_HOTEL_ROOM_TYPE +" = "+ "'"+ selectedRoomType+"'");
+        String query2 = "' and hotel_room_id not in ( select reservation_room_id from hm_reservation_data where ";
+        String query3 = " ( (check_in_date between"+ " '"+checkInDate+"'  and  +'"+ checkOutDate + "' ) or (check_out_date between '" +checkInDate +"' and  '"+checkOutDate+"') ) ";
+        query3 = query3 + "and "+COL_RESERV_HOTEL_NAME+" = '"+selectedHotelName+"' and "+ COL_ROOM_TYPE+" ='" + selectedRoomType;
+        String query4 ="'  ) order by "+COL_ROOM_NUM;
 
-        searchRoomGroupBy.append(" and "+ COL_HOTEL_ROOM_ID + " not in ");
-
-        searchRoomGroupBy.append("( select ").append(COL_RESERV_ROOM_ID).append(" from ").append(TABLE_RESERV_DATA). append(" where ").append(COL_CHECKIN_DATE).append(" >= ")
-                .append("'").append(checkInDate).append("'").append(" and ").append(COL_CHECKOUT_DATE).append(" <= ").append("'").append(checkOutDate).append("'").append(" and ")
-                .append(COL_START_TIME).append(" >= ").append("'").append(startTime).append("'");
-
-        searchRoomGroupBy.append(" and "+  COL_RESERV_HOTEL_NAME+" = "+ "'"+selectedHotelName+"'");
-
-        searchRoomGroupBy.append(" and "+  COL_ROOM_TYPE +" = "+ "'"+ selectedRoomType+"'");
-
-        searchRoomGroupBy.append(" )");
-        searchRoomGroupBy.append(" order by ").append(COL_ROOM_NUM);
-        Log.i("DBMgr L 695", "0809 695 query 1 for reserve "+ searchRoomGroupBy.toString());
-
+        String searchRoomGroupBy = query1+ query2 + query3 + query4;
+        Log.i("0809 Dbmgr", "L736"+ searchRoomGroupBy);
         HotelRoom hotelRoom =null;
 
         String roomType ,  hotelName ,roomNum,  hotel_room_id ,  floorNum, roomWkDayPricePerNight, roomWkEndPricePerNight, availableStatus, tax;
         try {
             Cursor c = sqldb.rawQuery(searchRoomGroupBy.toString(), null);
             if (c.getCount() == 0) {
-                Log.e(APP_TAG, "0809 L642 searchRoomGroupBy Query Err: No data");
+                Log.e(APP_TAG, "searchRoomGroupBy Query Err: No data");
             } else {
                 while (c.moveToNext()) {
                     hotelName = c.getString(c.getColumnIndex(COL_HOTEL_NAME));
@@ -731,197 +766,7 @@ public class DbMgr extends SQLiteOpenHelper {
         return hotelRoomsList;
     }
 
-//    public List<HotelRoom> getRoomsAvailableForReqResvAndGrouped2( List<String> hotelNameList , List<String> roomTypesList) {
-//    List<HotelRoom> hotelRoomsList = new ArrayList<HotelRoom>();
-//        SQLiteDatabase sqldb = this.getReadableDatabase();
-//        //select count(*) as room_count, room_type, hotel_name from  hm_hotel_data where available_status='y' group by room_type, hotel_name
-//        StringBuffer searchRoomGroupBy = new StringBuffer("select count(*) as room_count, "+ COL_HOTEL_ROOM_TYPE +" ,"+ COL_HOTEL_NAME + " ," + COL_PRICE_WEEKDAY+ " ," + COL_PRICE_WEEKEND
-//                +" from  " + TABLE_HOTEL_DATA + " where " + COL_AVAILABILITY_STATUS + " = 'Yes' " );
-//
-//
-//        if(roomTypesList!= null && !roomTypesList.isEmpty()){
-//            int size = roomTypesList.size();
-//            searchRoomGroupBy.append(" and "+ COL_HOTEL_ROOM_TYPE + "in (");
-//            for(int i=0; i < size; i++){
-//                searchRoomGroupBy.append("'").append(roomTypesList.get(i)).append("' ");
-//                if(i  < (size -1)){
-//                    searchRoomGroupBy.append(",");
-//                }
-//            }
-//            searchRoomGroupBy.append(")");
-//        }
-//
-//        if(hotelNameList!= null && !hotelNameList.isEmpty()){
-//            int size = hotelNameList.size();
-//            searchRoomGroupBy.append(" and "+ COL_HOTEL_NAME + "in (");
-//            for(int i=0; i< size; i++){
-//                searchRoomGroupBy.append("'").append(hotelNameList.get(i)).append("' ");
-//                if(i  < (size -1)){
-//                    searchRoomGroupBy.append(",");
-//                }
-//            }
-//            searchRoomGroupBy.append(")");
-//        }
-//
-//        searchRoomGroupBy.append(" group by "+ COL_HOTEL_ROOM_TYPE+" , "+ TABLE_HOTEL_DATA);
-//        Log.i("DBMgr L 315", "0809 searchRoomGroupBy "+ searchRoomGroupBy.toString());
-//
-//        HotelRoom hotelRoom =null;
-//        int roomCount=-1;
-//        String roomType ,  hotelName , roomPricePerNightWeekday ,  roomPricePerNightWeekend, availabilityStatus="";
-//        try {
-//            Cursor c = sqldb.rawQuery(searchRoomGroupBy.toString(), null);
-//            if (c.getCount() == 0) {
-//                Log.e(APP_TAG, "0809 searchRoomGroupBy Query Err: No data");
-//            } else {
-//                while (c.moveToNext()) {
-//                     roomCount = c.getInt(c.getColumnIndex("room_count"));
-//                     roomType = c.getString(c.getColumnIndex(COL_HOTEL_ROOM_TYPE));
-//                     hotelName = c.getString(c.getColumnIndex(COL_HOTEL_NAME));
-//                     roomPricePerNightWeekday = c.getString(c.getColumnIndex(COL_PRICE_WEEKDAY));
-//                     roomPricePerNightWeekend = c.getString(c.getColumnIndex(COL_PRICE_WEEKEND));
-//                     availabilityStatus = c.getString(c.getColumnIndex(COL_AVAILABILITY_STATUS));
-//                    hotelRoom = new HotelRoom(null, hotelName, null, roomType, null, roomPricePerNightWeekday,
-//                            roomPricePerNightWeekend, null, availabilityStatus
-//                            , null, null, null, null);
-//                    hotelRoom.setCountOfavailableRooms(roomCount);
-//                    hotelRoomsList.add(hotelRoom);
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return hotelRoomsList;
-//    }
 
-//    public List<HotelRoom> getAllAvailableRoomsForReqReservation( List<String> hotelNameList , List<String> roomTypesList ) {
-//        List<HotelRoom> hotelRoomsList = new ArrayList<HotelRoom>();
-//        SQLiteDatabase sqldb = this.getReadableDatabase();
-//        //select count(*) as room_count, room_type, hotel_name from  hm_hotel_data where available_status='y' group by room_type, hotel_name
-//        StringBuffer searchRoomGroupBy = new StringBuffer("select * from "+ TABLE_HOTEL_DATA + " where "+  COL_AVAILABILITY_STATUS + " = 'Yes' " );
-//
-//        if(roomTypesList!= null && !roomTypesList.isEmpty()){
-//            int size = roomTypesList.size();
-//            searchRoomGroupBy.append(" and "+ COL_HOTEL_ROOM_TYPE + " in ( ");
-//            for(int i=0; i < size; i++){
-//                searchRoomGroupBy.append("'").append(roomTypesList.get(i)).append("' ");
-//                if(i  < (size -1)){
-//                    searchRoomGroupBy.append(",");
-//                }
-//            }
-//            searchRoomGroupBy.append(" ) ");
-//        }
-//
-//        if(hotelNameList!= null && !hotelNameList.isEmpty()){
-//            int size = hotelNameList.size();
-//            searchRoomGroupBy.append(" and "+ COL_HOTEL_NAME + " in ( ");
-//            for(int i=0; i< size; i++){
-//                searchRoomGroupBy.append("'").append(hotelNameList.get(i)).append("' ");
-//                if(i  < (size -1)){
-//                    searchRoomGroupBy.append(",");
-//                }
-//            }
-//            searchRoomGroupBy.append(")");
-//        }
-//        searchRoomGroupBy.append(" order by "+ COL_HOTEL_ROOM_ID);
-//        Log.i("DBMgr L374", "0809 searchRoomGroupBy :"+ searchRoomGroupBy.toString());
-//
-//        HotelRoom hotelRoom =null;
-//
-//        String roomType ,  hotelName , roomPricePerNightWeekday ,  roomPricePerNightWeekend, availabilityStatus="";
-//        try {
-//            Cursor c = sqldb.rawQuery(searchRoomGroupBy.toString(), null);
-//            if (c.getCount() == 0) {
-//                Log.e(APP_TAG, "searchRoomGroupBy Query Err: No data");
-//            } else {
-//                while (c.moveToNext()) {
-//                    hotelRoom = new HotelRoom();
-//                    hotelRoom.setHotelName(c.getString(c.getColumnIndex(COL_HOTEL_NAME)));
-//                    hotelRoom.setRoomNum(c.getString(c.getColumnIndex(COL_ROOM_NUM)));
-//                    hotelRoom.setHotelRoomId(c.getString(c.getColumnIndex(COL_HOTEL_ROOM_ID)));
-//                    hotelRoom.setRoomPriceWeekDay(c.getString(c.getColumnIndex(COL_PRICE_WEEKDAY)));
-//                    hotelRoom.setRoomPriceWeekend(c.getString(c.getColumnIndex(COL_PRICE_WEEKEND)));
-//                    hotelRoom.setRoomType(c.getString(c.getColumnIndex(COL_ROOM_TYPE)));
-//                    hotelRoom.setAvailabilityStatus(c.getString(c.getColumnIndex(COL_AVAILABILITY_STATUS)));
-//                    hotelRoom.setFloorNum(c.getString(c.getColumnIndex(COL_FLOOR_NUM)));
-//                    hotelRoom.setHotelTax(c.getString(c.getColumnIndex(COL_TAX)));
-////                    hotelRoom.setNumOfRooms(numOfRooms);
-//                    hotelRoomsList.add(hotelRoom);
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        Log.i("0809 L 403 ", "0809 hotelRoomsList size "+ hotelRoomsList.size());
-//        return hotelRoomsList;
-//    }
-//
-//    public List<Reservation> getReservedRoomsForStartAndEndDate( List<String> hotelNameList , List<String> roomTypesList , String checkInDate, String checkOutDate, String startTime, String numOfRooms) {
-//        List<Reservation> reservationsList = new ArrayList<Reservation>();
-//        SQLiteDatabase sqldb = this.getReadableDatabase();
-//        //select count(*) as room_count, room_type, hotel_name from  hm_hotel_data where available_status='y' group by room_type, hotel_name
-//        StringBuffer searchReservations = new StringBuffer("select * from "+ TABLE_RESERV_DATA + " where " + COL_CHECKIN_DATE + " >= '" + checkInDate+ "'"  + "and "
-//        + COL_CHECKOUT_DATE + " <= '" + checkOutDate + "'");
-//        if(roomTypesList!= null && !roomTypesList.isEmpty()){
-//            int size = roomTypesList.size();
-//            searchReservations.append(" and "+ COL_HOTEL_ROOM_TYPE + " in (");
-//            for(int i=0; i < size; i++){
-//                searchReservations.append("'").append(roomTypesList.get(i)).append("' ");
-//                if(i  < (size -1)){
-//                    searchReservations.append(",");
-//                }
-//            }
-//            searchReservations.append(")");
-//        }
-//
-//        if(hotelNameList!= null && !hotelNameList.isEmpty()){
-//            int size = hotelNameList.size();
-//            searchReservations.append(" and "+ COL_RESERV_HOTEL_NAME + " in (");
-//            for(int i=0; i< size; i++){
-//                searchReservations.append("'").append(hotelNameList.get(i)).append("' ");
-//                if(i  < (size -1)){
-//                    searchReservations.append(",");
-//                }
-//            }
-//            searchReservations.append(")");
-//        }
-//        searchReservations.append(" order by "+ COL_CHECKIN_DATE + "," + COL_START_TIME);
-//
-//        Log.i("DBMgr L 436", " 0809 searchReservations:"+ searchReservations.toString());
-//
-//        Reservation reservation =null;
-//        String roomType ,  hotelName , roomPricePerNightWeekday ,  roomPricePerNightWeekend, availabilityStatus="";
-//        try {
-//            Cursor c = sqldb.rawQuery(searchReservations.toString(), null);
-//            if (c.getCount() == 0) {
-//                Log.e(APP_TAG, "searchRoomGroupBy Query Err: No data");
-//            } else {
-//                while (c.moveToNext()) {
-//                    reservation.setReservationId(c.getString(c.getColumnIndex("COL_RESERV_ID")));
-//                    reservation = new Reservation();
-//                    reservation.setResvUserName(c.getString(c.getColumnIndex("COL_GUEST_USER_NAME")));
-//                    reservation.setResvFirstName(c.getString(c.getColumnIndex("COL_GUEST_FIRST_NAME")));
-//                    reservation.setResvLastName(c.getString(c.getColumnIndex("COL_GUEST_LAST_NAME")));
-//
-//                    reservation.setResvHotelName(c.getString(c.getColumnIndex("COL_RESERV_HOTEL_NAME")));
-//                    reservation.setResvRoomType(c.getString(c.getColumnIndex("COL_ROOM_TYPE")));
-//                    reservation.setResvNumOfRooms(c.getString(c.getColumnIndex("COL_NUM_OF_ROOMS")));
-//                    reservation.setTotalPrice(c.getString(c.getColumnIndex("COL_TOTAL_PRICE")));
-//                    reservation.setResvCheckInDate(c.getString(c.getColumnIndex("COL_CHECKIN_DATE")));
-//                    reservation.setResevCheckOutDate(c.getString(c.getColumnIndex("COL_CHECKOUT_DATE")));
-//                    reservation.setResvStartTime(c.getString(c.getColumnIndex("COL_START_TIME")));
-//                    reservation.setResvNumAdultsChildren(c.getString(c.getColumnIndex("COL_NUM_OF_ADULTS_AND_CHILDREN")));
-//                    reservation.setResvNumNights(c.getString(c.getColumnIndex("COL_NUM_OF_NIGHTS")));
-//
-//                    reservationsList.add(reservation);
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        Log.i("0809 L 469 ", "0809 reservationsList size "+ reservationsList.size());
-//        return reservationsList;
-//    }
     //Ankit changes for request reservation ends
 
 

@@ -20,7 +20,7 @@ public class UtilityFunctions {
     }
 
     public static boolean isNotNullAndEmpty(String str) {
-        return (str != null &&  !ConstantUtils.EMPTY.equals(str)) ? true : false;
+        return (str != null &&  !ConstantUtils.EMPTY.equals(str.trim())) ? true : false;
     }
 
     public static boolean isNotNullAndEmpty(List list) {
@@ -43,6 +43,7 @@ public class UtilityFunctions {
         return searchRoomGroupBy;
     }
 
+
     public static StringBuffer appendHotelNameToStringBuffer(List<String> hotelNameList){
         StringBuffer searchRoomGroupBy = new StringBuffer("");
         if(isNotNullAndEmpty(hotelNameList)){
@@ -56,6 +57,22 @@ public class UtilityFunctions {
             }
             searchRoomGroupBy.append(")");
         }
+        return searchRoomGroupBy;
+    }
+
+
+    public static StringBuffer appendStringWithListAndCol(List<String> list, String colName){
+        StringBuffer searchRoomGroupBy = new StringBuffer("");
+
+            int size = list.size();
+            searchRoomGroupBy.append(" and "+ colName + " in (");
+            for(int i=0; i< size; i++){
+                searchRoomGroupBy.append("'").append(list.get(i)).append("' ");
+                if(i  < (size -1)){
+                    searchRoomGroupBy.append(",");
+                }
+            }
+            searchRoomGroupBy.append(")");
         return searchRoomGroupBy;
     }
 //    public static String getNumOfDaysForStartAndEndDate(String startDate, String startTime, String endDate,String endTime){
@@ -93,15 +110,9 @@ public class UtilityFunctions {
 
         DecimalFormat df = new DecimalFormat("#.##");
         String formattedPrice = df.format(total_priceDouble);
-        System.out.println("formatted ="  + formattedPrice);
+
         String total_price = "$ "+ formattedPrice;
-//        String[] total_price_split = total_price.split(".");
-//        if(total_price_split.length==2 && total_price_split[1].length()>1){
-//            total_price ="$ "+  total_price_split[0]+"."+ total_price_split[1].substring(0,2);
-//        }
-//        else{
-//            total_price ="$ "+total_price;
-//        }
+//
         return total_price;
     }
 
@@ -131,6 +142,7 @@ public class UtilityFunctions {
         if( UtilityFunctions.isNotNullAndEmpty(search_room_type_suite)){
             roomTypesList.add(search_room_type_suite);
         }
+
         return roomTypesList;
     }
 }

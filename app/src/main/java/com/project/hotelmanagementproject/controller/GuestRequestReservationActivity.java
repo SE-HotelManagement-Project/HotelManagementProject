@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -87,7 +88,15 @@ public class GuestRequestReservationActivity extends AppCompatActivity {
         btnGuestRrSearchRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                performOperationForSearchButtonClicked();
+//                if(!ConstantUtils.EMPTY.equals(validateInputFields())){
+//                    Intent intent = new Intent(GuestRequestReservationActivity.this, GuestRequestReservationActivity.class);
+//                    startActivity(intent);
+//                    Toast.makeText(GuestRequestReservationActivity.this, " Please enter valid values for form fields", Toast.LENGTH_LONG).show();
+//                }
+//                else{
+                    performOperationForSearchButtonClicked();
+//                }
+
 
     }});
 
@@ -120,6 +129,10 @@ public class GuestRequestReservationActivity extends AppCompatActivity {
     }
 
     public void performPageLoadParametersSetOperations(){
+
+
+
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             search_hotel_name  = extras.getString(ConstantUtils.GUEST_REQ_RESV_SEARCH_HOTEL_NAME);
@@ -169,6 +182,29 @@ public class GuestRequestReservationActivity extends AppCompatActivity {
         }
     }
 
+    public String validateInputFields(){
+        String alertMessage="";
+
+            if (ConstantUtils.EMPTY.equals(etGuestRrCheckInFrom.getText())) {
+                alertMessage = "Please select a valid check in date";
+            }
+            if (ConstantUtils.EMPTY.equals(etStartTime.getText())) {
+                alertMessage = "Please select a valid start time";
+            }
+            if (ConstantUtils.EMPTY.equals(etGuestRrCheckOutDateTo.getText())) {
+                alertMessage = "Please select a valid check out date";
+            }
+            if (ConstantUtils.EMPTY.equals(etnumAdultAndChild.getText())) {
+                alertMessage = "Please select a valid number for number of adults and child";
+            }
+            if (ConstantUtils.EMPTY.equals(etGuestRrtNumberOfRoom.getText())) {
+                alertMessage = "Please select a valid number of room";
+            }
+            if ((!cbGuestRrStandard.isChecked() && !cbGuestRrSuite.isChecked() && !cbGuestRrDeluxe.isChecked())) {
+                alertMessage = "Please select a valid room type";
+            }
+        return alertMessage;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

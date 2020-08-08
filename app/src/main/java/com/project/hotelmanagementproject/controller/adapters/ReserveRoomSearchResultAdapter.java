@@ -47,20 +47,24 @@ public class ReserveRoomSearchResultAdapter extends BaseAdapter {
 
         TextView tvgrrrrlHotelName = view.findViewById(R.id.tvgrrrrlHotelName);
         TextView tvgrrrrlNumOfRooms = view.findViewById(R.id.tvgrrrrlNumOfRooms);
-        TextView tvgrrrrlPricePerNightWkDay = view.findViewById(R.id.tvgrrrrlPricePerNightWkDay);
+//        TextView tvgrrrrlPricePerNightWkDay = view.findViewById(R.id.tvgrrrrlPricePerNightWkDay);
 //        TextView tvgrrrrlPricePerNightWkEnd = view.findViewById(R.id.tvgrrrrlPricePerNightWkEnd);
         TextView tvgrrrrlRoomType = view.findViewById(R.id.tvgrrrrlRoomType);
         TextView tvgrrrrlCheckInDate = view.findViewById(R.id.tvgrrrrlCheckInDate);
         ImageView ivgrrrrlHotelIcon = view.findViewById(R.id.ivgrrrrlHotelIcon);
+        TextView tvgrrrrlNumOfNights= view.findViewById(R.id.tvgrrrrlNumOfNights);
+        TextView tvgrrrrlRoomPrice= view.findViewById(R.id.tvgrrrrlRoomPrice);
 
         HotelRoom hrGuestReqResHotelRoom = roomList.get(i);
 
-        Log.i(APP_TAG, "hotelName: " + hrGuestReqResHotelRoom.getHotelName() + "    ||||||  roomId: " + hrGuestReqResHotelRoom.getHotelRoomId());
+//        Log.i(APP_TAG, "hotelName: " + hrGuestReqResHotelRoom.getHotelName() + "    ||||||  roomId: " + hrGuestReqResHotelRoom.getHotelRoomId());
         tvgrrrrlHotelName.setText(hrGuestReqResHotelRoom.getHotelName());
         tvgrrrrlNumOfRooms.setText(hrGuestReqResHotelRoom.getNumOfRooms());
         tvgrrrrlRoomType.setText(hrGuestReqResHotelRoom.getRoomType());
-        tvgrrrrlPricePerNightWkDay.setText(hrGuestReqResHotelRoom.getRoomPriceWeekDay());
+//        tvgrrrrlPricePerNightWkDay.setText(hrGuestReqResHotelRoom.getRoomPriceWeekDay());
         tvgrrrrlCheckInDate.setText(hrGuestReqResHotelRoom.getStartDate());
+        tvgrrrrlNumOfNights.setText(hrGuestReqResHotelRoom.getNumOfNights());
+        tvgrrrrlRoomPrice.setText(hrGuestReqResHotelRoom.getTotalPrice());
 
         if (hrGuestReqResHotelRoom.getHotelName().equalsIgnoreCase(ConstantUtils.HM_MAVERICK)) {
             ivgrrrrlHotelIcon.setImageResource(R.drawable.ic_hotel_maverick);

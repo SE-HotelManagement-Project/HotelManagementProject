@@ -115,6 +115,7 @@ public class ConstantUtils {
 public static final String ALL="ALL";
     public static final String EMPTY="";
     public static final String PAID="PAID";
+    public static final String GUEST_REQ_RESV_SELECTED_RESERV_DETAILS_TEXT = "Selected Reservation Details";
 //    intent constanats for request reservation flow
     public static final String GUEST_REQ_RESV_SEARCH_HOTEL_NAME = "search_hotel_name";
     public static final String GUEST_REQ_RESV_SEARCH_CHECK_IN_DATE = "check_in_date";
@@ -131,8 +132,8 @@ public static final String ALL="ALL";
 
     public static final String GUEST_REQ_RESV_SELECTED_HOTEL_NAME = "selected_hotel_name";
     public static final String GUEST_REQ_RESV_SELECTED_ROOM_TYPE ="selected_room_type";
-    public static final String GUEST_REQ_RESV_PRICE_WK_DAY = "selected_room_type";
-    public static final String GUEST_REQ_RESV_PRICE_WK_END = "selected_room_type";
+    public static final String GUEST_REQ_RESV_PRICE_WK_DAY = "selected_room_PriceWkDay";
+    public static final String GUEST_REQ_RESV_PRICE_WK_END = "selected_room_priceWkEnd";
     public static final String GUEST_REQ_RESV_SELECTED_NUM_OF_NIGHTS = "num_of_nights";
     public static final String GUEST_REQ_RESV_TOTAL_PRICE = "total_price";
     public static final String GUEST_REQ_RESV_CARD_TYPE = "card_type";
@@ -140,6 +141,10 @@ public static final String ALL="ALL";
     public static final String GUEST_REQ_RESV_CARD_EXPIRY_DT = "card_expiry_dt";
     public static final String GUEST_REQ_RESV_CARD_CVV = "card_cvv";
     public static final String GUEST_REQ_RESV_RESERVID = "reserv_id";
+    public static final String GUEST_REQ_RESV_SELECTED_ROOM_TAX = "selectedRoomTax";
+    public static final String GUEST_REQ_RESV_GUEST_USER_NAME = "guestUserName";
+    public static final String GUEST_REQ_RESV_GUEST_FIRST_NAME = "guestFirstName";
+    public static final String GUEST_REQ_RESV_GUEST_LAST_NAME = "guestLastName";
 
 
 
