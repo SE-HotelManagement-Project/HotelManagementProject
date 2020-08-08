@@ -33,6 +33,9 @@ public class Reservation {
 
 
 
+    String resvPaymentStatus;
+
+
 
     public Reservation() {
 
@@ -40,7 +43,7 @@ public class Reservation {
 
     public Reservation(String reservationId, String resvRoomId, String resvRoomNum, String resvUserName, String resvFirstName, String resvLastName,
                        String resvHotelName, String resvRoomType, String resvNumAdultsChildren, String resvNumNights, String resvNumOfRooms,
-                       String totalPrice, String resvCheckInDate, String resevCheckOutDate, String resvStartTime, String startDate) {
+                       String totalPrice, String resvCheckInDate, String resevCheckOutDate, String resvStartTime, String startDate,String resvPaymentStatus) {
         this.reservationId = reservationId;
 
         this.resvRoomId = resvRoomId;
@@ -58,6 +61,7 @@ public class Reservation {
         this.resvCheckInDate = resvCheckInDate;
         this.resevCheckOutDate = resevCheckOutDate;
         this.resvStartTime = resvStartTime;
+        this.resvPaymentStatus = resvPaymentStatus;
     }
 
     public String getResvRoomNum() {
@@ -197,5 +201,8 @@ public class Reservation {
         // return (startTime.contains("AM") || startTime.contains("PM")) && startTime.contains(":") && !startTime.matches("[0-9]");
     }
 
+    public String getResvPaymentStatus() {
+        return resvPaymentStatus;
+    }
 
 }

@@ -54,6 +54,7 @@ public class GuestReservationSummaryAdapter extends BaseAdapter {
         Reservation reservation = reservationList.get(i);
 
 
+
 //        Log.i(APP_TAG, "Username: " + reservation.getResvHotelName() + "    ||||||  UserLastName: " + reservation.getResvHotelName() );
         tvGstSumNoOfRooms.setText(reservation.getResvNumOfRooms());
         tvGstSumCheckInDate.setText(reservation.getResvCheckInDate());
