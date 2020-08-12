@@ -31,6 +31,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.GUEST_RESV_ID;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.GUEST_RESV_START_DATE;
+
 public class GuestRequestReservationPayActivity extends AppCompatActivity {
 
 
@@ -162,7 +165,7 @@ public class GuestRequestReservationPayActivity extends AppCompatActivity {
     public void makeReservation() {
         boolean makeReserveSucess = reserveRoom(guest_user_name, guest_first_name, guest_last_name);
         Bundle extras = getIntent().getExtras();
-        Intent intent = new Intent(GuestRequestReservationPayActivity.this, GuestReqResvPayConfirmRoomDetailsActivity.class);
+        Intent intent = new Intent(GuestRequestReservationPayActivity.this, GuestReservationDetailsActivity.class);
         if (extras != null) {
             intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_HOTEL_NAME, search_hotel_name);
             intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_IN_DATE, check_in_date);
@@ -193,6 +196,8 @@ public class GuestRequestReservationPayActivity extends AppCompatActivity {
 
             intent.putExtra(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_DAY, selected_room_price_weekDay);
             intent.putExtra(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_END, selectedRoomPriceWeekend);
+            intent.putExtra(ConstantUtils.GUEST_RESV_ID, joint_room_reservation_id);
+            intent.putExtra(ConstantUtils.GUEST_RESV_START_DATE, check_in_date);
 
             if (makeReserveSucess) {
                 startActivity(intent);
