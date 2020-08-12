@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +21,7 @@ import com.project.hotelmanagementproject.model.Reservation;
 import com.project.hotelmanagementproject.model.Session;
 
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ACTIVITY_RETURN_STATE;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.ACTIVITY_RETURN_STATE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_AVLBL_ROOM_ACTIVITY;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_END_DATE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOTEL_NAME;
@@ -64,7 +65,7 @@ public class MgrRoomDetailsActivity extends AppCompatActivity {
             endDate = bundle.getString(MGR_END_DATE);
             startTime = bundle.getString(MGR_START_TIME);
             occupiedStatus = bundle.getString(MGR_OCCUPIED_STATUS);
-            returnIntent = bundle.getString(MGR_ACTIVITY_RETURN_STATE);
+            returnIntent = bundle.getString(ACTIVITY_RETURN_STATE);
             if (returnIntent.equalsIgnoreCase(MGR_SEARCH_ROOM_ACTIVITY)) {
                 searchRoomIp = bundle.getString(MGR_SEARCH_ROOM_IP);
             } else if (returnIntent.equalsIgnoreCase(MGR_AVLBL_ROOM_ACTIVITY)) {
@@ -148,7 +149,7 @@ public class MgrRoomDetailsActivity extends AppCompatActivity {
         mgrModifyRoomIntent.putExtra(MGR_END_DATE, endDate);
         mgrModifyRoomIntent.putExtra(MGR_START_TIME, startTime);
         mgrModifyRoomIntent.putExtra(MGR_OCCUPIED_STATUS, occupiedStatus);
-        mgrModifyRoomIntent.putExtra(MGR_ACTIVITY_RETURN_STATE, returnIntent);
+        mgrModifyRoomIntent.putExtra(ACTIVITY_RETURN_STATE, returnIntent);
         if (returnIntent.equalsIgnoreCase(MGR_AVLBL_ROOM_ACTIVITY)) {
             mgrModifyRoomIntent.putExtra(MGR_ROOM_STD, stdRoom);
             mgrModifyRoomIntent.putExtra(MGR_ROOM_DELUXE, deluxeRoom);
@@ -197,12 +198,13 @@ public class MgrRoomDetailsActivity extends AppCompatActivity {
         backIntent.putExtra(MGR_START_DATE, startDate);
         backIntent.putExtra(MGR_END_DATE, endDate);
         backIntent.putExtra(MGR_START_TIME, startTime);
-        backIntent.putExtra(MGR_ACTIVITY_RETURN_STATE, returnIntent);
+        backIntent.putExtra(ACTIVITY_RETURN_STATE, returnIntent);
         startActivity(backIntent);
     }
 
     public void logout() {
         Intent i = new Intent(MgrRoomDetailsActivity.this, LoginActivity.class);
+        Toast.makeText(getApplicationContext(), "Logout successful", Toast.LENGTH_LONG).show();
         new Session(getApplicationContext()).setLoginStatus(false);
         startActivity(i);
     }

@@ -25,7 +25,6 @@
         <activity android:name=".controller.AdminEditUserDetails" />
         <activity android:name=".controller.AdminViewUserDetails" />
         <activity android:name=".controller.GuestRequestReservationActivity" />
-        <activity android:name=".controller.GuestRequestHotelDetailsActivity" />
         <activity android:name=".controller.UpdateProfileActivity" />
         <activity android:name=".controller.ViewProfileActivity" />
         <activity android:name=".controller.GuestModifyReservationActivity" />

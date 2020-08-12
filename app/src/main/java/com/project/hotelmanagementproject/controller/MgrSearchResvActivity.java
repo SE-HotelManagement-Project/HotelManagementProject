@@ -11,8 +11,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.project.hotelmanagementproject.R;
 import com.project.hotelmanagementproject.controller.adapters.ManagerResvListAdapter;
-import com.project.hotelmanagementproject.controller.adapters.ManagerRoomListAdpater;
 import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.Reservation;
 import com.project.hotelmanagementproject.model.Session;
@@ -30,18 +29,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.ACTIVITY_RETURN_STATE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.DELUXE_ROOM;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ACTIVITY_RETURN_STATE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOME_ACTIVITY;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOTEL_NAME;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_RESV_ID;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_RESV_LIST_ACTIVITY;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_SEARCH_ROOM_ACTIVITY;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_START_DATE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_START_TIME;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.STANDARD_ROOM;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.SUITE_ROOM;
 
 public class MgrSearchResvActivity extends AppCompatActivity {
     Button btnMgrSrRsvSearch;
@@ -71,7 +66,7 @@ public class MgrSearchResvActivity extends AppCompatActivity {
     private void getReturnState() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            returnIntent = bundle.getString(MGR_ACTIVITY_RETURN_STATE);
+            returnIntent = bundle.getString(ACTIVITY_RETURN_STATE);
             if (!returnIntent.equalsIgnoreCase(MGR_HOME_ACTIVITY)) {
                 hotelName = bundle.getString(MGR_HOTEL_NAME);
                 startDate = bundle.getString(MGR_START_DATE);
@@ -103,9 +98,21 @@ public class MgrSearchResvActivity extends AppCompatActivity {
         btnMgrSrRsvSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewDataInList();
-                llSearchResvIp.setVisibility(View.GONE);
-                llSearchResvOp.setVisibility(View.VISIBLE);
+                startDate = etStartDate.getText().toString();
+                startTime = etStartTime.getText().toString();
+
+                Log.i(APP_TAG, startDate + "; valid: " + Reservation.isValidDate(startDate));
+                Log.i(APP_TAG, startTime + "; valid: " + Reservation.isValidStartTime(startTime));
+
+                if (Reservation.isValidStartTime(startTime) && Reservation.isValidDate(startDate)) {
+                    viewDataInList();
+                    llSearchResvIp.setVisibility(View.GONE);
+                    llSearchResvOp.setVisibility(View.VISIBLE);
+                } else {
+                    if (!Reservation.isValidDate(startDate)) etStartDate.setError("Invalid date");
+                    if (!Reservation.isValidStartTime(startTime))
+                        etStartTime.setError("Invalid time");
+                }
             }
         });
 
@@ -119,7 +126,7 @@ public class MgrSearchResvActivity extends AppCompatActivity {
                 roomDetailsIntent.putExtra(MGR_HOTEL_NAME, item.getResvHotelName());
                 roomDetailsIntent.putExtra(MGR_START_DATE, item.getStartDate());
                 roomDetailsIntent.putExtra(MGR_START_TIME, item.getResvStartTime());
-                roomDetailsIntent.putExtra(MGR_ACTIVITY_RETURN_STATE, MGR_RESV_LIST_ACTIVITY);
+                roomDetailsIntent.putExtra(ACTIVITY_RETURN_STATE, MGR_RESV_LIST_ACTIVITY);
                 startActivity(roomDetailsIntent);
             }
         });
@@ -135,28 +142,18 @@ public class MgrSearchResvActivity extends AppCompatActivity {
         etStartTime.setText(startTime);
         tvRsvHotel.setText(hotelName);
 
-        Log.i(APP_TAG, "time format: " + new Reservation().isValidStartTime(startTime));
+        Log.i(APP_TAG, "time format: " + Reservation.isValidStartTime(startTime));
         Log.i(APP_TAG, "time format: " + startTime);
         Log.i(APP_TAG, "ci format: " + startDate);
         Log.i(APP_TAG, "hotel assigned: " + new Session(getApplicationContext()).getHotelAssigned());
     }
 
-    private void getInputData() {
-        if (llSearchResvIp.getVisibility() == View.VISIBLE) {
-            startDate = etStartDate.getText().toString();
-            startTime = etStartTime.getText().toString();
-        }
-    }
-
     private void viewDataInList() {
         DbMgr resvDbMgr = DbMgr.getInstance(getApplicationContext());
-        getInputData();
-
         resvList = resvDbMgr.mgrGetReservationList(hotelName, startDate, startTime);
         resvListAdapter = new ManagerResvListAdapter(this, resvList);
         lvResvList.setAdapter(resvListAdapter);
         resvListAdapter.notifyDataSetChanged();
-
     }
 
     @Override
@@ -187,6 +184,7 @@ public class MgrSearchResvActivity extends AppCompatActivity {
 
     public void logout() {
         Intent i = new Intent(MgrSearchResvActivity.this, LoginActivity.class);
+        Toast.makeText(getApplicationContext(), "Logout successful", Toast.LENGTH_LONG).show();
         new Session(getApplicationContext()).setLoginStatus(false);
         startActivity(i);
     }

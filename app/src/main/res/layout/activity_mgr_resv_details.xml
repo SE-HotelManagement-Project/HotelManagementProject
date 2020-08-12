@@ -263,6 +263,7 @@
         android:id="@+id/btnMgrRsvDDone"
         style="@style/btn_style2"
         android:drawableRight="@drawable/ic_tick"
+        android:visibility="gone"
         android:text="Done" />
 
     <!--    <LinearLayout-->

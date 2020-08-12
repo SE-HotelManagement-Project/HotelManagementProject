@@ -110,6 +110,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     public void logout() {
         Intent i = new Intent(this, LoginActivity.class);
+        Toast.makeText(getApplicationContext(), "Logout successful", Toast.LENGTH_LONG).show();
         session.setLoginStatus(false);
         startActivity(i);
     }

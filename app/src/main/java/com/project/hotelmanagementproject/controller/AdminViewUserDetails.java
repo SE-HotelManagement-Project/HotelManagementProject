@@ -20,19 +20,6 @@ import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.Session;
 import com.project.hotelmanagementproject.model.User;
 
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ACTIVITY_RETURN_STATE;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_AVLBL_ROOM_ACTIVITY;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_END_DATE;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOTEL_NAME;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_OCCUPIED_STATUS;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ROOM_DELUXE;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ROOM_ID;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ROOM_STD;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ROOM_SUITE;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_SEARCH_ROOM_IP;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_START_DATE;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_START_TIME;
-
 
 public class AdminViewUserDetails  extends AppCompatActivity {
     TextView tvAvpUserName, tvAvpRole, tvAvpLastName, tvAvpFirstName, tvAvpPhone, tvAvpEmail;
@@ -144,6 +131,7 @@ public class AdminViewUserDetails  extends AppCompatActivity {
             return true;
         } else if (id == android.R.id.home) {
             Intent backIntent = new Intent(AdminViewUserDetails.this, AdminSearchUserActivity.class);
+            backIntent.putExtra(ADM_EDIT_USER, userName);
             startActivity(backIntent);
             return true;
         }
@@ -152,6 +140,7 @@ public class AdminViewUserDetails  extends AppCompatActivity {
 
     public void logout() {
         Intent i = new Intent(AdminViewUserDetails.this, LoginActivity.class);
+        Toast.makeText(getApplicationContext(), "Logout successful", Toast.LENGTH_LONG).show();
         new Session(getApplicationContext()).setLoginStatus(false);
         startActivity(i);
     }

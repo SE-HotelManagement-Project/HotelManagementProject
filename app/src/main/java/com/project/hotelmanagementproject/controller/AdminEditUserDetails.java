@@ -4,16 +4,12 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,20 +21,6 @@ import com.project.hotelmanagementproject.R;
 import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.Session;
 import com.project.hotelmanagementproject.model.User;
-
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ACTIVITY_RETURN_STATE;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_AVLBL_ROOM_ACTIVITY;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_END_DATE;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOTEL_NAME;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_OCCUPIED_STATUS;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ROOM_DELUXE;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ROOM_ID;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ROOM_STD;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ROOM_SUITE;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_SEARCH_ROOM_IP;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_START_DATE;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_START_TIME;
 
 public class AdminEditUserDetails extends AppCompatActivity {
 
@@ -176,6 +158,7 @@ public class AdminEditUserDetails extends AppCompatActivity {
 
     public void logout() {
         Intent i = new Intent(AdminEditUserDetails.this, LoginActivity.class);
+        Toast.makeText(getApplicationContext(), "Logout successful", Toast.LENGTH_LONG).show();
         new Session(getApplicationContext()).setLoginStatus(false);
         startActivity(i);
     }

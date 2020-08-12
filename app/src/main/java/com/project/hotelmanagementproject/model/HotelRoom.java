@@ -1,5 +1,9 @@
 package com.project.hotelmanagementproject.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class HotelRoom {
 
     String hotelRoomId;
@@ -203,5 +207,43 @@ public int getCountOfavailableRooms() {
         this.startTime = startTime;
     }
 
-    
+    public static boolean isValidRange(String checkin, String checkout) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date date1 = sdf.parse(checkin);
+            Date date2 = sdf.parse(checkout);
+            if (date1.before(date2)) {
+                System.out.println("Date1 is before Date2");
+                return true;
+            } else {
+                return false;
+            }
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+
+    public static boolean isValidStartTime(String startTime) {
+        return ((!isNullorEmpty(startTime)) && (startTime.matches("(?:[0-1][0-9]|2[0-4]):[0-5]\\d")));
+    }
+
+    public static boolean isValidDate(String text) {
+        if (text == null || !text.matches("\\d{4}-[01]\\d-[0-3]\\d"))
+            return false;
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        df.setLenient(false);
+        try {
+            df.parse(text);
+            return true;
+        } catch (ParseException ex) {
+            return false;
+        }
+    }
+
+    public static boolean isNullorEmpty(String ip) {
+        return ip.equalsIgnoreCase(null) || ip.equalsIgnoreCase("")
+                || ip.equalsIgnoreCase(" ") || ip.isEmpty();
+    }
+
+
 }

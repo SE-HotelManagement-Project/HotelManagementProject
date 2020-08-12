@@ -53,15 +53,10 @@ public class GuestReservationSummaryAdapter extends BaseAdapter {
         TextView tvCheckInDate = view.findViewById(R.id.tvLvGstSRsvLCheckInDate);
         ImageView ivHotelName = view.findViewById(R.id.ivLvGstSRsvLHotel);
 
-
         Reservation reservation = reservationList.get(i);
-
-
-
 //        Log.i(APP_TAG, "Username: " + reservation.getResvHotelName() + "    ||||||  UserLastName: " + reservation.getResvHotelName() );
-
-
         //  Log.i(APP_TAG, "hotelName: " + hrSrl.getHotelName() + "    ||||||  roomId: " + hrSrl.getHotelRoomId());
+
         tvHotelName.setText(reservation.getResvHotelName());
         tvNumRooms.setText(reservation.getResvNumOfRooms());
         tvNumNights.setText(reservation.getResvNumNights());

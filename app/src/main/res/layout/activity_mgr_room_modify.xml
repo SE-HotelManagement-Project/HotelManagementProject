@@ -230,6 +230,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etMgrRdRoomPriceWeekday"
                     style="@style/edit_text_style"
+                    android:inputType="number"
                     android:hint="$100" />
 
             </LinearLayout>
@@ -251,6 +252,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etMgrMRdPriceWeekend"
                     style="@style/edit_text_style"
+                    android:inputType="number"
                     android:hint="$150" />
 
             </LinearLayout>
@@ -272,6 +274,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etMgrMRdRoomTax"
                     style="@style/edit_text_style"
+                    android:inputType="numberDecimal"
                     android:hint="8.25%" />
 
             </LinearLayout>

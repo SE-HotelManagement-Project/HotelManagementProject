@@ -60,6 +60,7 @@ public class ConstantUtils {
     public static final String COL_HOTEL_ROOM_ID = "hotel_room_id";
 
     //INTENT_TAGS
+    public static final String MGR_RESV_ID = "mgr_resv_id";
     public static final String MGR_ROOM_ID = "mgr_room_id";
     public static final String MGR_SEARCH_ROOM_IP = "mgr_search_room_ip";
     public static final String MGR_HOTEL_NAME = "mgr_hotel_name";
@@ -67,13 +68,19 @@ public class ConstantUtils {
     public static final String MGR_START_TIME = "mgr_start_time";
     public static final String MGR_END_DATE = "mgr_end_date";
     public static final String MGR_OCCUPIED_STATUS = "mgr_occupied_status";
-    public static final String MGR_ACTIVITY_RETURN_STATE = "mgr_activity_return_status";
+
+    public static final String ACTIVITY_RETURN_STATE = "activity_return_status";
 
     public static final String MGR_ROOM_STD = "mgr_room_std";
     public static final String MGR_ROOM_DELUXE = "mgr_room_deluxe";
     public static final String MGR_ROOM_SUITE = "mgr_room_suite";
 
-    public static final String MGR_RESV_ID = "mgr_resv_id";
+    //Intent_guest_tags
+    public static final String GUEST_RESV_ID = "guest_resv_id";
+    public static final String GUEST_RESV_START_DATE = "guest_resv_start_date";
+    public static final String GUEST_RESV_START_TIME = "guest_resv_start_time";
+    public static final String GUEST_ACTIVITY_RETURN_STATE = "guest_activity_return_status";
+
 
     //ACTIVITY RETURN STATE
     public static final String MGR_AVLBL_ROOM_ACTIVITY = "mgr_avlbl_room_state";

@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ACTIVITY_RETURN_STATE;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.ACTIVITY_RETURN_STATE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_END_DATE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOME_ACTIVITY;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOTEL_NAME;
@@ -69,7 +69,7 @@ public class MgrSearchRoomActivity extends AppCompatActivity {
     private void getReturnState() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            returnIntent = bundle.getString(MGR_ACTIVITY_RETURN_STATE);
+            returnIntent = bundle.getString(ACTIVITY_RETURN_STATE);
             if (!returnIntent.equalsIgnoreCase(MGR_HOME_ACTIVITY)) {
                 searchRoomIp = bundle.getString(MGR_SEARCH_ROOM_IP);
                 hotelName = bundle.getString(MGR_HOTEL_NAME);
@@ -129,7 +129,7 @@ public class MgrSearchRoomActivity extends AppCompatActivity {
                 roomDetailsIntent.putExtra(MGR_END_DATE, item.getEndDate());
                 roomDetailsIntent.putExtra(MGR_START_TIME, item.getStartTime());
                 roomDetailsIntent.putExtra(MGR_OCCUPIED_STATUS, OCCUPANCY_NOT_CHECKED);
-                roomDetailsIntent.putExtra(MGR_ACTIVITY_RETURN_STATE, MGR_SEARCH_ROOM_ACTIVITY);
+                roomDetailsIntent.putExtra(ACTIVITY_RETURN_STATE, MGR_SEARCH_ROOM_ACTIVITY);
                 startActivity(roomDetailsIntent);
             }
         });
@@ -180,6 +180,7 @@ public class MgrSearchRoomActivity extends AppCompatActivity {
 
     public void logout() {
         Intent i = new Intent(MgrSearchRoomActivity.this, LoginActivity.class);
+        Toast.makeText(getApplicationContext(), "Logout successful", Toast.LENGTH_LONG).show();
         new Session(getApplicationContext()).setLoginStatus(false);
         startActivity(i);
     }

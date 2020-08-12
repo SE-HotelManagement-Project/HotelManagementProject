@@ -19,7 +19,7 @@ import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.Session;
 import com.project.hotelmanagementproject.model.User;
 
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ACTIVITY_RETURN_STATE;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.ACTIVITY_RETURN_STATE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOME_ACTIVITY;
 
 public class HomeActivity extends AppCompatActivity {
@@ -133,7 +133,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(HomeActivity.this, MgrAvlblRoomsActivity.class);
-                i.putExtra(MGR_ACTIVITY_RETURN_STATE, MGR_HOME_ACTIVITY);
+                i.putExtra(ACTIVITY_RETURN_STATE, MGR_HOME_ACTIVITY);
                 startActivity(i);
 
             }
@@ -142,7 +142,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(HomeActivity.this, MgrSearchResvActivity.class);
-                i.putExtra(MGR_ACTIVITY_RETURN_STATE, MGR_HOME_ACTIVITY);
+                i.putExtra(ACTIVITY_RETURN_STATE, MGR_HOME_ACTIVITY);
                 startActivity(i);
 
             }
@@ -151,7 +151,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(HomeActivity.this, MgrSearchRoomActivity.class);
-                i.putExtra(MGR_ACTIVITY_RETURN_STATE, MGR_HOME_ACTIVITY);
+                i.putExtra(ACTIVITY_RETURN_STATE, MGR_HOME_ACTIVITY);
                 startActivity(i);
             }
         });
@@ -193,6 +193,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void logout() {
         Intent i = new Intent(HomeActivity.this, LoginActivity.class);
+        Toast.makeText(getApplicationContext(), "Logout successful", Toast.LENGTH_LONG).show();
         session.setLoginStatus(false);
         startActivity(i);
     }

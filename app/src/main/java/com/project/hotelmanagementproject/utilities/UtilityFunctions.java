@@ -12,23 +12,23 @@ import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_HOT
 
 public class UtilityFunctions {
     public static boolean isNullOrEmpty(String str) {
-        return (str != null || !ConstantUtils.EMPTY.equals(str)) ? false : true;
+        return str == null && ConstantUtils.EMPTY.equals(str);
     }
 
     public static boolean isNullOrEmpty(List list) {
-        return (list != null || !list.isEmpty()) ?  false : true;
+        return list == null && list.isEmpty();
     }
 
     public static boolean isNotNullAndEmpty(String str) {
-        return (str != null &&  !ConstantUtils.EMPTY.equals(str.trim())) ? true : false;
+        return str != null && !ConstantUtils.EMPTY.equals(str.trim());
     }
 
     public static boolean isNotNullAndEmpty(List list) {
-        return (list != null && !list.isEmpty()) ?  true : false;
+        return list != null && !list.isEmpty();
     }
 
     public static StringBuffer appendRoomTypesToStringBuffer(List<String> roomTypesList){
-        StringBuffer searchRoomGroupBy = new StringBuffer("");
+        StringBuffer searchRoomGroupBy = new StringBuffer();
         if(isNotNullAndEmpty(roomTypesList)){
             int size = roomTypesList.size();
             searchRoomGroupBy.append(" and "+ COL_HOTEL_ROOM_TYPE + " in (");
@@ -43,9 +43,8 @@ public class UtilityFunctions {
         return searchRoomGroupBy;
     }
 
-
     public static StringBuffer appendHotelNameToStringBuffer(List<String> hotelNameList){
-        StringBuffer searchRoomGroupBy = new StringBuffer("");
+        StringBuffer searchRoomGroupBy = new StringBuffer();
         if(isNotNullAndEmpty(hotelNameList)){
             int size = hotelNameList.size();
             searchRoomGroupBy.append(" and "+ COL_HOTEL_NAME + " in (");
@@ -60,9 +59,8 @@ public class UtilityFunctions {
         return searchRoomGroupBy;
     }
 
-
     public static StringBuffer appendStringWithListAndCol(List<String> list, String colName){
-        StringBuffer searchRoomGroupBy = new StringBuffer("");
+        StringBuffer searchRoomGroupBy = new StringBuffer();
 
             int size = list.size();
             searchRoomGroupBy.append(" and "+ colName + " in (");
@@ -83,8 +81,8 @@ public class UtilityFunctions {
 //        return numOfDays;
 //    }
 
-    public static String calculateTotalReservationPrice( String startDate, String startTime, String endDate,
-                                  String endTime, String weekDayPricePerDay, String WeekednPricePerDay ,String taxPercent , String numOfRooms){
+    public static String calculateTotalReservationPrice(String startDate, String startTime, String endDate,
+                                                        String endTime, String weekDayPricePerDay, String WeekednPricePerDay, String taxPercent, String numOfRooms) {
         double totalReservationPrice = 0;
 //        TO DO the computation of total room price
         Date date1 = DateTimeGenerator.getDateWithTimeForDateString(startDate, startTime);
@@ -94,7 +92,7 @@ public class UtilityFunctions {
         Calendar c = Calendar.getInstance();
         c.setTime(date1);
 //        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-        for(int i=0 ; i< diffCeil; i++){
+        for (int i = 0; i < diffCeil; i++) {
 
             int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
             if(dayOfWeek ==1 || dayOfWeek ==7){
@@ -145,4 +143,5 @@ public class UtilityFunctions {
 
         return roomTypesList;
     }
+
 }

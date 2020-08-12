@@ -76,7 +76,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
         llCCN = findViewById(R.id.llUpCCN);
         llCCExp = findViewById(R.id.llUpCCEx);
-        llCCType = findViewById(R.id.llVpCCType);
+        llCCType = findViewById(R.id.llUpCCType);
 
         etCreditCardExpiry = findViewById(R.id.etUpCreditCardExpiry);
         etCreditCardNum = findViewById(R.id.etUpCreditCardNumber);
@@ -200,11 +200,14 @@ public class UpdateProfileActivity extends AppCompatActivity {
     public void logout() {
         Intent i = new Intent(UpdateProfileActivity.this, LoginActivity.class);
         new Session(getApplicationContext()).setLoginStatus(false);
+        Toast.makeText(getApplicationContext(), "Logout successful", Toast.LENGTH_LONG).show();
         startActivity(i);
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        Intent intent = new Intent(this, ViewProfileActivity.class);
+        startActivity(intent);
+        // super.onBackPressed();
     }
 }

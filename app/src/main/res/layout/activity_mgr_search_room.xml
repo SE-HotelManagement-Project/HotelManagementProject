@@ -73,6 +73,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etMgrSrRoomNum"
                 style="@style/edit_text_style"
+                android:inputType="number"
                 android:hint="Enter Room Number" />
 
         </LinearLayout>

@@ -75,9 +75,9 @@ public class GuestRequestReservationActivity extends AppCompatActivity {
         etnumAdultAndChild = findViewById(R.id.etnumAdultAndChild);
         etnumAdultAndChild.setText("2");
 
-        cbGuestRrStandard = (CheckBox) findViewById(R.id.cbGuestRrStandard);
-        cbGuestRrDeluxe = (CheckBox) findViewById(R.id.cbGuestRrDeluxe);
-        cbGuestRrSuite = (CheckBox) findViewById(R.id.cbGuestRrSuite);
+        cbGuestRrStandard = findViewById(R.id.cbGuestRrStandard);
+        cbGuestRrDeluxe = findViewById(R.id.cbGuestRrDeluxe);
+        cbGuestRrSuite = findViewById(R.id.cbGuestRrSuite);
         etGuestRrtNumberOfRoom = findViewById(R.id.etGuestRrtNumberOfRoom);
         etGuestRrtNumberOfRoom.setText("1");
         btnGuestRrSearchRoom = findViewById(R.id.btnGuestRrSearchRoom);
@@ -230,11 +230,14 @@ public class GuestRequestReservationActivity extends AppCompatActivity {
     }
     public void logout() {
         Intent i = new Intent(GuestRequestReservationActivity.this, LoginActivity.class);
+        Toast.makeText(getApplicationContext(), "Logout successful", Toast.LENGTH_LONG).show();
         new Session(getApplicationContext()).setLoginStatus(false);
         startActivity(i);
     }
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        //super.onBackPressed();
     }
 }
