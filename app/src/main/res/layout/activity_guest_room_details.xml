@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginLeft="25dp"
     android:layout_marginRight="25dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".controller.GuestRequestHotelDetailsActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -30,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Room Details"
+            android:text="View Room Details Summary"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="17sp" />
 
@@ -54,6 +55,7 @@
                     android:textColor="@color/colorGrey" />
 
                 <TextView
+                    android:id="@+id/tvGuestRmDHotel"
                     style="@style/text_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -70,7 +72,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvDateFrom"
+                    android:id="@+id/tvGuestRmDDateFrom"
                     style="@style/edit_text_style"
                     android:text="07/14/2020" />
 
@@ -85,7 +87,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvDateTo"
+                    android:id="@+id/tvGuestRmDDateTo"
                     style="@style/edit_text_style"
                     android:text="07/15/2020" />
 
@@ -100,7 +102,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvStartTime"
+                    android:id="@+id/tvGuestRmDStartTime"
                     style="@style/edit_text_style"
                     android:text="12:03" />
 
@@ -114,7 +116,7 @@
                     android:textColor="@color/colorGrey" />
 
                 <TextView
-                    android:id="@+id/tvRoomType"
+                    android:id="@+id/tvGuestRmDRoomType"
                     style="@style/edit_text_style"
                     android:text="Standard" />
 
@@ -129,7 +131,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvRoomNumRd"
+                    android:id="@+id/tvGuestRmDRoomNumRd"
                     style="@style/edit_text_style"
                     android:text="1" />
 
@@ -139,14 +141,28 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Room price per night:"
+                    android:text="Room price per night(Weekday):"
                     android:textColor="@color/colorGrey" />
 
 
                 <TextView
-                    android:id="@+id/tvRoomPriceRd"
+                    android:id="@+id/tvGuestRmDRoomPriceRd"
                     style="@style/edit_text_style"
                     android:text="$135" />
+
+            </LinearLayout>
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Room price per night(Weekend):"
+                    android:textColor="@color/colorGrey" />
+
+
+                <TextView
+                    android:id="@+id/tvGuestRmDRoomPriceWeekend"
+                    style="@style/edit_text_style"
+                    android:text="$185" />
 
             </LinearLayout>
 
@@ -159,7 +175,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvFloorNumRd"
+                    android:id="@+id/tvGuestRmDFloorNumRd"
                     style="@style/text_style"
                     android:layout_width="match_parent"
                     android:paddingLeft="10dp"
@@ -172,14 +188,29 @@
 
                 <TextView
                     style="@style/text_style"
+                    android:text="Tax - 8.2% : "
+                    android:textColor="@color/colorGrey" />
+
+
+                <TextView
+                    android:id="@+id/tvGuestTax"
+                    style="@style/edit_text_style"
+                    android:text="$11.07" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
                     android:text="Total Price:"
                     android:textColor="@color/colorGrey" />
 
 
                 <TextView
-                    android:id="@+id/tvOccupiedStatus"
+                    android:id="@+id/tvGuestRmTotalPrice"
                     style="@style/edit_text_style"
-                    android:text="$135" />
+                    android:text="$146.07" />
 
             </LinearLayout>
 
@@ -188,7 +219,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/btnGuestContinue"
+        android:id="@+id/btnGuestRmDContinue"
         style="@style/btn_style"
         android:text="Continue"
         android:visibility="visible" />

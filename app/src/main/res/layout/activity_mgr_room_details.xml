@@ -7,7 +7,7 @@
     android:layout_marginLeft="25dp"
     android:layout_marginRight="25dp"
     android:orientation="vertical"
-    tools:context=".view.MgrRoomDetailsActivity">
+    tools:context=".controller.MgrRoomDetailsActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -55,6 +55,7 @@
                     android:textColor="@color/colorGrey" />
 
                 <TextView
+                    android:id="@+id/tvMgrRmDHotel"
                     style="@style/text_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -62,18 +63,33 @@
 
             </LinearLayout>
 
+            <!--            <LinearLayout style="@style/horz_linear_layout_style">-->
+
+            <!--                <TextView-->
+            <!--                    style="@style/text_style"-->
+            <!--                    android:text="Start Date:"-->
+            <!--                    android:textColor="@color/colorGrey" />-->
+
+
+            <!--                <TextView-->
+            <!--                    android:id="@+id/tvMgrRmDStartDate"-->
+            <!--                    style="@style/edit_text_style"-->
+            <!--                    android:text="2020-08-05" />-->
+
+            <!--            </LinearLayout>-->
+
             <LinearLayout style="@style/horz_linear_layout_style">
 
                 <TextView
                     style="@style/text_style"
-                    android:text="start date:"
+                    android:text="Start Date:"
                     android:textColor="@color/colorGrey" />
 
 
                 <TextView
-                    android:id="@+id/tvDateFrom"
+                    android:id="@+id/tvMgrRmDDateFrom"
                     style="@style/edit_text_style"
-                    android:text="07/14/2020" />
+                    android:text="2020-08-05" />
 
             </LinearLayout>
 
@@ -81,14 +97,14 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="end date:"
+                    android:text="End Date:"
                     android:textColor="@color/colorGrey" />
 
 
                 <TextView
-                    android:id="@+id/tvDateTo"
+                    android:id="@+id/tvMgrRmDDateTo"
                     style="@style/edit_text_style"
-                    android:text="07/15/2020" />
+                    android:text="2020-08-06" />
 
             </LinearLayout>
 
@@ -96,12 +112,12 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="start time:"
+                    android:text="Start Time(24-Hour Format):"
                     android:textColor="@color/colorGrey" />
 
 
                 <TextView
-                    android:id="@+id/tvStartTime"
+                    android:id="@+id/tvMgrRmDStartTime"
                     style="@style/edit_text_style"
                     android:text="12:03" />
 
@@ -111,11 +127,11 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="room type:"
+                    android:text="Room Type:"
                     android:textColor="@color/colorGrey" />
 
                 <TextView
-                    android:id="@+id/tvRoomType"
+                    android:id="@+id/tvMgrRmDRoomType"
                     style="@style/edit_text_style"
                     android:text="Standard" />
 
@@ -130,9 +146,9 @@
 
 
                 <TextView
-                    android:id="@+id/tvRoomNumRd"
+                    android:id="@+id/tvMgrRmDRoomNumRd"
                     style="@style/edit_text_style"
-                    android:text="21" />
+                    android:text="121" />
 
             </LinearLayout>
 
@@ -140,14 +156,44 @@
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Room price per night:"
+                    android:text="Room price per night(Weekday):"
                     android:textColor="@color/colorGrey" />
 
 
                 <TextView
-                    android:id="@+id/tvRoomPriceRd"
+                    android:id="@+id/tvMgrRmDRoomPriceWeekday"
                     style="@style/edit_text_style"
                     android:text="$100" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Room price per night(Weekend):"
+                    android:textColor="@color/colorGrey" />
+
+
+                <TextView
+                    android:id="@+id/tvMgrRmDRoomPriceWeekend"
+                    style="@style/edit_text_style"
+                    android:text="$150" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Tax(percent):"
+                    android:textColor="@color/colorGrey" />
+
+
+                <TextView
+                    android:id="@+id/tvMgrRmDRoomTax"
+                    style="@style/edit_text_style"
+                    android:text="8.25%" />
 
             </LinearLayout>
 
@@ -160,7 +206,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvFloorNumRd"
+                    android:id="@+id/tvMgrRmDFloorNumRd"
                     style="@style/text_style"
                     android:layout_width="match_parent"
                     android:paddingLeft="10dp"
@@ -178,7 +224,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvOccupiedStatus"
+                    android:id="@+id/tvMgrRmDOccupiedStatus"
                     style="@style/edit_text_style"
                     android:text="No" />
 
@@ -193,7 +239,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvAvailabilityStatus"
+                    android:id="@+id/tvMgrRmDAvailabilityStatus"
                     style="@style/edit_text_style"
                     android:text="Yes" />
             </LinearLayout>
@@ -203,9 +249,10 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/btnEditRd"
-        style="@style/btn_style"
+        android:id="@+id/btnMgrRmDEdit"
+        style="@style/btn_style2"
         android:text="Modify Room Details"
+        android:drawableRight="@drawable/ic_edit"
         android:visibility="visible" />
 
 </LinearLayout>

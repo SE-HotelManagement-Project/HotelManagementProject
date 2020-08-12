@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.LoginActivity">
+    tools:context=".controller.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,12 +19,12 @@
         <ImageView
             android:id="@+id/ivAppIcon"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="1"
-            android:paddingTop="50dp"
-            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="15dp"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/ic_hotel" />
+            app:srcCompat="@drawable/hotel" />
 
         <TextView
             android:id="@+id/tvAppName"
@@ -71,19 +71,16 @@
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
+                android:inputType="textWebPassword"
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@color/colorPrimary"
-            android:text="@string/btn_login"
-            android:textColor="@color/colorWhite"
-            android:textSize="18sp" />
+            style="@style/btn_style2"
+            android:layout_marginTop="35dp"
+            android:drawableRight="@drawable/ic_login"
+            android:text="@string/btn_login" />
 
         <TextView
             android:id="@+id/tvRegister"

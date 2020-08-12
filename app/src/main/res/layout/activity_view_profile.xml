@@ -7,7 +7,7 @@
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
     android:orientation="vertical"
-    tools:context=".view.ViewProfileActivity">
+    tools:context=".controller.ViewProfileActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -54,10 +54,8 @@
                     android:text="User Name:" />
 
                 <TextView
-                    android:id="@+id/tvAdminVpUserId"
-                    style="@style/text_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/tvVpUserId"
+                    style="@style/edit_text_style"
                     android:text=" samar_admin" />
 
             </LinearLayout>
@@ -70,8 +68,8 @@
 
 
                 <TextView
-                    android:id="@+id/tvAdminVpPassword"
-                    style="@style/text_style"
+                    android:id="@+id/tvVpPassword"
+                    style="@style/edit_text_style"
                     android:text=" admin123" />
 
             </LinearLayout>
@@ -84,8 +82,8 @@
 
 
                 <TextView
-                    android:id="@+id/tvAdminVpRole"
-                    style="@style/text_style"
+                    android:id="@+id/tvVpRole"
+                    style="@style/edit_text_style"
                     android:text=" Admin" />
 
             </LinearLayout>
@@ -98,8 +96,8 @@
 
 
                 <TextView
-                    android:id="@+id/tvAdminVpLastName"
-                    style="@style/text_style"
+                    android:id="@+id/tvVpLastName"
+                    style="@style/edit_text_style"
                     android:text=" Hills" />
 
             </LinearLayout>
@@ -112,7 +110,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvAdminVpFirstName"
+                    android:id="@+id/tvVpFirstName"
                     style="@style/edit_text_style"
                     android:text="Samar" />
 
@@ -126,7 +124,7 @@
                     android:text="Phone:" />
 
                 <TextView
-                    android:id="@+id/tvAdminVpPhone"
+                    android:id="@+id/tvVpPhone"
                     style="@style/edit_text_style"
                     android:text="8088290912" />
 
@@ -141,7 +139,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvAdminVpEmail"
+                    android:id="@+id/tvVpEmail"
                     style="@style/edit_text_style"
                     android:text="sagargearsup@gmail.com" />
 
@@ -155,7 +153,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvAdminVpStrAddr"
+                    android:id="@+id/tvVpStreetAddress"
                     style="@style/edit_text_style"
                     android:text="Vintage Pad" />
 
@@ -169,7 +167,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvAdminVpCity"
+                    android:id="@+id/tvVpCity"
                     style="@style/edit_text_style"
                     android:text="Arlington" />
 
@@ -183,7 +181,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvAdminVpState"
+                    android:id="@+id/tvVpState"
                     style="@style/edit_text_style"
                     android:text="Texas" />
 
@@ -197,13 +195,15 @@
 
 
                 <TextView
-                    android:id="@+id/tcAdminVpZip"
+                    android:id="@+id/tvVpZip"
                     style="@style/edit_text_style"
                     android:text="76010" />
 
             </LinearLayout>
 
-            <LinearLayout style="@style/horz_linear_layout_style">
+            <LinearLayout
+                android:id="@+id/llVpCCN"
+                style="@style/horz_linear_layout_style">
 
                 <TextView
                     style="@style/text_style"
@@ -211,7 +211,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvCrCdNumVp"
+                    android:id="@+id/tvVpCreditCarddNum"
                     style="@style/edit_text_style"
                     android:inputType="number"
                     android:maxLength="16"
@@ -219,16 +219,33 @@
 
             </LinearLayout>
 
-            <LinearLayout style="@style/horz_linear_layout_style">
+            <LinearLayout
+                android:id="@+id/llVpCCEx"
+                style="@style/horz_linear_layout_style">
 
                 <TextView
                     style="@style/text_style"
-                    android:text="Card Expiry Number:" />
+                    android:text="Card Expiry Date:" />
 
                 <TextView
-                    android:id="@+id/etRoomPriceRd"
+                    android:id="@+id/tvVpCardExpiryDate"
                     style="@style/edit_text_style"
                     android:text="02/24" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llVpCCType"
+                style="@style/horz_linear_layout_style">
+
+                <TextView
+                    style="@style/text_style"
+                    android:text="Credit Card Type:" />
+
+                <TextView
+                    android:id="@+id/tvVpCardType"
+                    style="@style/edit_text_style"
+                    android:text="VISA" />
 
             </LinearLayout>
 
@@ -237,10 +254,14 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/btnAdminVpModify"
+        android:id="@+id/btnVpModify"
         style="@style/btn_style"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginBottom="10dp"
         android:text="Update Profile"
+        android:drawableRight="@drawable/ic_edit"
         android:textSize="15sp"
         android:visibility="visible" />
 

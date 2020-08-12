@@ -9,7 +9,7 @@
     <color name="colorSecondary">#FFB229</color>
     <color name="colorAccent2">@color/colorLightPrimary</color>
     <color name="colorGrey">#5c5c5c</color>
-    <color name="color_light_accent">#FBB9B3</color>
+    <color name="color_light_accent">#F5FDC7C2</color>
     <color name="colorLightPrimary">#CDE6FF</color>
 
 </resources>
