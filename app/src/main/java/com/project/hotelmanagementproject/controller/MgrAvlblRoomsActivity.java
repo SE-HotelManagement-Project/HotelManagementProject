@@ -37,7 +37,7 @@ import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.DELUXE_ROOM;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_AVLBL_ROOM_ACTIVITY;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_END_DATE;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOME_ACTIVITY;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.HOME_ACTIVITY;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOTEL_NAME;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_OCCUPIED_STATUS;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ROOM_DELUXE;
@@ -85,7 +85,7 @@ public class MgrAvlblRoomsActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             returnIntent = bundle.getString(ACTIVITY_RETURN_STATE);
-            if (!returnIntent.equalsIgnoreCase(MGR_HOME_ACTIVITY)) {
+            if (!returnIntent.equalsIgnoreCase(HOME_ACTIVITY)) {
                 hotelName = bundle.getString(MGR_HOTEL_NAME);
                 startDate = bundle.getString(MGR_START_DATE);
                 endDate = bundle.getString(MGR_END_DATE);

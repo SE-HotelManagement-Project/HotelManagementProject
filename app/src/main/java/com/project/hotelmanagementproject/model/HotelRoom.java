@@ -21,7 +21,7 @@ public class HotelRoom {
     String startTime;
     int countOfavailableRooms;
 
-	 String NumOfRooms;
+    String NumOfRooms;
     String totalPrice;
 
     public String getTotalPrice() {
@@ -31,7 +31,6 @@ public class HotelRoom {
     public void setTotalPrice(String totalPrice) {
         this.totalPrice = totalPrice;
     }
-
 
 
     public String getNumOfNights() {
@@ -44,11 +43,11 @@ public class HotelRoom {
 
     String numOfNights;
 
-    
-	String numOfAdultChildren;
+
+    String numOfAdultChildren;
 
 
-//    public String getCheckInDate() {
+    //    public String getCheckInDate() {
 //        return checkInDate;
 //    }
 //
@@ -72,17 +71,17 @@ public class HotelRoom {
     public void setNumOfAdultChildren(String numOfAdultChildren) {
         this.numOfAdultChildren = numOfAdultChildren;
     }
-   
-public int getCountOfavailableRooms() {
+
+    public int getCountOfavailableRooms() {
         return countOfavailableRooms;
     }
+
     public void setCountOfavailableRooms(int countOfavailableRooms) {
         this.countOfavailableRooms = countOfavailableRooms;
     }
 
     public HotelRoom() {
     }
-
 
     public HotelRoom(String hotelRoomId, String hotelName,
                      String roomNum, String roomType, String floorNum,

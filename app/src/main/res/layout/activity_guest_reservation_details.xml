@@ -218,27 +218,21 @@
 
         <Button
             android:id="@+id/btnGuestCancelReservation"
-            style="@style/btn_style"
-            android:layout_margin="10dp"
+            style="@style/btn_style2"
+            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="10dp"
+            android:drawableRight="@drawable/ic_delete"
             android:text="Cancel Reservation"
             android:textSize="15sp" />
 
 
         <Button
             android:id="@+id/btnGuestModifyReservation"
-            style="@style/btn_style"
-            android:layout_margin="10dp"
+            style="@style/btn_style2"
+            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="10dp"
             android:text="Modify Reservation"
+            android:drawableRight="@drawable/ic_edit"
             android:textSize="15sp" />
 
     </LinearLayout>

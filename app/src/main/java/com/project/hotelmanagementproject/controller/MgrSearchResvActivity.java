@@ -31,7 +31,7 @@ import java.util.Locale;
 
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.ACTIVITY_RETURN_STATE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOME_ACTIVITY;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.HOME_ACTIVITY;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOTEL_NAME;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_RESV_ID;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_RESV_LIST_ACTIVITY;
@@ -67,7 +67,7 @@ public class MgrSearchResvActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             returnIntent = bundle.getString(ACTIVITY_RETURN_STATE);
-            if (!returnIntent.equalsIgnoreCase(MGR_HOME_ACTIVITY)) {
+            if (!returnIntent.equalsIgnoreCase(HOME_ACTIVITY)) {
                 hotelName = bundle.getString(MGR_HOTEL_NAME);
                 startDate = bundle.getString(MGR_START_DATE);
                 startTime = bundle.getString(MGR_START_TIME);

@@ -53,6 +53,7 @@ public class GuestModifyReservationActivity extends AppCompatActivity {
     private String roomType, numAdults, numNights, numRooms, totalPrice;
     private String roomId;
     private DbMgr dbMgr;
+    private String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,7 @@ public class GuestModifyReservationActivity extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         retainActivityState();
+        dbMgr = DbMgr.getInstance(getApplicationContext());
         init();
     }
 
@@ -76,6 +78,7 @@ public class GuestModifyReservationActivity extends AppCompatActivity {
     }
 
     public void init() {
+        userName = new Session(getApplicationContext()).getUserName();
         tvResvId = findViewById(R.id.tvGuestMrResvId);
         tvStartDate = findViewById(R.id.tvGuestMrStartDate);
         tvHotelName = findViewById(R.id.tvGuestMrHotel);
@@ -102,16 +105,35 @@ public class GuestModifyReservationActivity extends AppCompatActivity {
     }
 
     private void onSaveClick() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(GuestModifyReservationActivity.this);
-        builder.setTitle("Update Reservation")
-                .setMessage("Are you sure you want modify the reservation?" +
-                        "The new price will be modified from your credit card.")
-                .setNegativeButton("No", null)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        getModifiedReservation();
-                    }
-                }).create().show();
+        String newCheckinDate = upCheckInDate.getText().toString();
+        String newCheckoutDate = upCheckOutDate.getText().toString();
+        startTime = upStartTime.getText().toString();
+        numRooms = upNumOfRooms.getText().toString();
+        //   numNights = up.getText().toString();
+        numAdults = upNumOfAdultsandChildren.getText().toString();
+
+
+        if (Reservation.isValidDate(newCheckinDate) && Reservation.isValidDate(newCheckoutDate)
+                && Reservation.isValidRange(newCheckinDate, newCheckoutDate) && Reservation.isValidStartTime(startTime)
+                && Reservation.isValidNumAdults(numAdults) && Reservation.isValidNumRooms(numRooms)) {
+
+            getModifiedReservation(newCheckinDate, newCheckoutDate);
+
+        } else {
+            if (!Reservation.isValidNumRooms(numRooms))
+                upNumOfRooms.setError("invalid Number of Rooms");
+            if (!Reservation.isValidNumAdults(numAdults))
+                upNumOfAdultsandChildren.setError("invalid Number of Adults & Children");
+            if (!Reservation.isValidStartTime(startTime))
+                upStartTime.setError("invalid start time");
+            if (!Reservation.isValidDate(newCheckinDate))
+                upCheckInDate.setError("invalid checkin date");
+            if (!Reservation.isValidDate(newCheckoutDate))
+                upCheckOutDate.setError("invalid checkout date");
+            if (!Reservation.isValidRange(newCheckinDate, newCheckoutDate))
+                Toast.makeText(getApplicationContext(), "invalid date range", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void PopulateUI() {
@@ -171,20 +193,22 @@ public class GuestModifyReservationActivity extends AppCompatActivity {
         });
     }
 
-    public void getModifiedReservation() {
-        String newCheckinDate = upCheckInDate.getText().toString();
-        String newCheckoutDate = upCheckOutDate.getText().toString();
-        startTime = upStartTime.getText().toString();
-        numRooms = upNumOfRooms.getText().toString();
-        //   numNights = up.getText().toString();
-        numAdults = upNumOfAdultsandChildren.getText().toString();
-        String userName = new Session(getApplicationContext()).getUserName();
+    public void getModifiedReservation(final String newCheckinDate, final String newCheckoutDate) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(GuestModifyReservationActivity.this);
+        builder.setTitle("Update Reservation")
+                .setMessage("Are you sure you want modify the reservation?" +
+                        "The new price will be modified from your credit card.")
+                .setNegativeButton("No", null)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        modifyReservation(newCheckinDate, newCheckoutDate);
+                    }
+                }).create().show();
 
         Log.i(APP_TAG, hotelName + userName + newRoomType);
-        //Log.i(APP_TAG, hotelName + userName  + newRoomType );
+    }
 
-        dbMgr = DbMgr.getInstance(getApplicationContext());
-
+    private void modifyReservation(String newCheckinDate, String newCheckoutDate) {
         if (newCheckinDate != checkinDate || newCheckoutDate != checkoutDate || roomType != newRoomType) {
             HotelRoom hr = dbMgr.getRoomTypePrices(newRoomType, hotelName);
 
@@ -192,9 +216,7 @@ public class GuestModifyReservationActivity extends AppCompatActivity {
                     startTime, hr.getRoomPriceWeekDay(), hr.getRoomPriceWeekend(), hr.getHotelTax(), numRooms);
 
             numNights = getNumOfNights(newCheckinDate, newCheckoutDate);
-
             Log.i(APP_TAG, numNights + " <- nights");
-
             Reservation reservation = new Reservation(null, null, userName,
                     hotelName, newRoomType, numAdults, numNights,
                     numRooms, totalPrice, newCheckinDate, newCheckoutDate, startTime, startDate, PAID);
@@ -204,14 +226,12 @@ public class GuestModifyReservationActivity extends AppCompatActivity {
 
             if (newResv != null) {
                 Log.i(APP_TAG, "complex db change");
-
                 dbMgr.deleteReservation(reservationId);
                 // move to new Resv details page
                 Intent i = new Intent(GuestModifyReservationActivity.this, GuestReservationDetailsActivity.class);
                 i.putExtra(GUEST_RESV_ID, newResv.getReservationId());
                 i.putExtra(GUEST_RESV_START_DATE, startDate);
                 startActivity(i);
-
             } else {
                 Toast.makeText(getApplicationContext(), "Requested Modification is not possible due to unavailability", Toast.LENGTH_LONG).show();
             }

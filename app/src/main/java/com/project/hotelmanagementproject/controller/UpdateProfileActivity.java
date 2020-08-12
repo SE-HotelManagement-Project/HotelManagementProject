@@ -40,6 +40,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
     String userName, password, role, lastName, firstName, phone, email;
     String streetAddress, city, state, zipcode;
     String ccn, ccexp, cctype;
+    String hotelAssigned;
     LinearLayout llCCN, llCCExp, llCCType;
 
     DbMgr userDbMgr;
@@ -111,6 +112,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
         etCity.setText(user.getCity());
         etZipcode.setText(user.getZipCode());
 
+        hotelAssigned = new Session(getApplicationContext()).getHotelAssigned();
+
         Log.i("Role: ", user.getUserRole());
 
         if (user.getUserRole().equalsIgnoreCase("Guest")) {
@@ -126,35 +129,16 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
         btnSave = findViewById(R.id.btnUpSave);
 
-        final String hotelAssigned = new Session(getApplicationContext()).getHotelAssigned();
-
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateProfileActivity.this);
-                builder.setTitle("Update Profile!")
-                        .setMessage("Are you sure you want to update?")
-                        .setNegativeButton("No", null)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-
-                            public void onClick(DialogInterface arg0, int arg1) {
-                                getUpdatedUserData();
-                                user = new User(userName, firstName, lastName, password, role, hotelAssigned, email, phone, streetAddress, city, state, zipcode, ccn, ccexp, cctype);
-                                boolean isUpdated = userDbMgr.updateProfile(user);
-                                if (isUpdated) {
-                                    Toast.makeText(getApplicationContext(), "profile Updated Successfully!", Toast.LENGTH_LONG).show();
-                                    startActivity(new Intent(UpdateProfileActivity.this, ViewProfileActivity.class));
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "Update Failed", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        }).create().show();
-
+                getUpdatedUserData();
             }
         });
     }
 
     public void getUpdatedUserData() {
+        Boolean isCommonValuesValid = false, isGuestValuesValid = false;
         firstName = etFirstName.getText().toString();
         lastName = etLastName.getText().toString();
         password = etPassword.getText().toString();
@@ -169,10 +153,68 @@ public class UpdateProfileActivity extends AppCompatActivity {
             ccn = etCreditCardNum.getText().toString();
             ccexp = etCreditCardExpiry.getText().toString();
             cctype = spnrCCType.getSelectedItem().toString();
-            Log.i(APP_TAG, "role: notGuest; " + cctype);
+            if (User.isNullorEmpty(ccn) || User.isNullorEmpty(ccexp)
+                    || (!User.isValidExpiryDate(ccexp)) || ccexp.length() != 5 || ccn.length() != 16) {
+                if (User.isNullorEmpty(ccn) || ccn.length() != 16)
+                    etCreditCardNum.setError("invalid Credit Card");
+                if (User.isNullorEmpty(ccexp) || ccexp.length() != 5 || (!User.isValidExpiryDate(ccexp)))
+                    etCreditCardExpiry.setError("invalid expiry date");
+                isGuestValuesValid = false;
+            } else {
+                isGuestValuesValid = true;
+            }
+            Log.i(APP_TAG, "role: Guest; " + cctype);
         } else {
+            isGuestValuesValid = true;
             Log.i(APP_TAG, "role: notGuest; " + role);
         }
+        if (User.isNullorEmpty(password) || User.isNullorEmpty(phone) || (phone.length() != 10)
+                || User.isNullorEmpty(email) || (!User.isValidEmail(email))
+                || User.isNullorEmpty(streetAddress) || User.isNullorEmpty(city)
+                || User.isNullorEmpty(state) || User.isNullorEmpty(zipcode) || zipcode.length() != 5) {
+
+            Toast.makeText(getApplicationContext(), "Fields cannot be empty", Toast.LENGTH_SHORT).show();
+            if (User.isNullorEmpty(password)) etPassword.setError("invalid password");
+            if (User.isNullorEmpty(email) || (!User.isValidEmail(email)))
+                etEmail.setError("invalid email id");
+            if (User.isNullorEmpty(phone) || phone.length() != 10)
+                etPhone.setError("invalid phone number");
+            if (User.isNullorEmpty(streetAddress))
+                etStreetAddress.setError("invalid street address");
+            if (User.isNullorEmpty(state)) etState.setError("invalid state");
+            if (User.isNullorEmpty(firstName)) etFirstName.setError("invalid firstname");
+            if (User.isNullorEmpty(lastName)) etLastName.setError("invalid lastname");
+            if (User.isNullorEmpty(city)) etCity.setError("invalid city");
+            if (User.isNullorEmpty(zipcode) || zipcode.length() != 5)
+                etZipcode.setError("invalid zipcode");
+            isCommonValuesValid = false;
+        } else {
+            isCommonValuesValid = true;
+        }
+
+        if (isCommonValuesValid && isGuestValuesValid) {
+            modifyUserProfile();
+        }
+    }
+
+    private void modifyUserProfile() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(UpdateProfileActivity.this);
+        builder.setTitle("Update Profile!")
+                .setMessage("Are you sure you want to update?")
+                .setNegativeButton("No", null)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        user = new User(userName, firstName, lastName, password, role, hotelAssigned, email, phone, streetAddress, city, state, zipcode, ccn, ccexp, cctype);
+                        boolean isUpdated = userDbMgr.updateProfile(user);
+                        if (isUpdated) {
+                            Toast.makeText(getApplicationContext(), "profile Updated Successfully!", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(UpdateProfileActivity.this, ViewProfileActivity.class));
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Update Failed", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }).create().show();
     }
 
     @Override

@@ -65,6 +65,7 @@ public class GuestPendingReservations extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent reqResvDetailsIntent = new Intent(GuestPendingReservations.this, GuestRequestReservationDetailsActivity.class);
                 HotelRoom selectedHotelRoom = (HotelRoom) adapterView.getItemAtPosition(i);
+                search_hotel_name = selectedHotelRoom.getHotelName();
                 check_in_date = selectedHotelRoom.getStartDate();
                 start_time = selectedHotelRoom.getStartTime();
                 check_out_date = selectedHotelRoom.getEndDate();
@@ -97,7 +98,6 @@ public class GuestPendingReservations extends AppCompatActivity {
                 reqResvDetailsIntent.putExtra(ConstantUtils.GUEST_REQ_RESV_TOTAL_PRICE , totalPrice );
                 reqResvDetailsIntent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TAX   , selectedRoomTax );
 
-
                 reqResvDetailsIntent.putExtra(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_DAY    , selected_room_price_weekDay  );
                 reqResvDetailsIntent.putExtra(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_END     , selectedRoomPriceWeekend   );
                 startActivity(reqResvDetailsIntent);
@@ -129,6 +129,12 @@ public class GuestPendingReservations extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        onBackClick();
         //super.onBackPressed();
     }
+
+    private void onBackClick() {
+
+    }
+
 }

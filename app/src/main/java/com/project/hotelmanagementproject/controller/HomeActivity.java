@@ -20,7 +20,7 @@ import com.project.hotelmanagementproject.model.Session;
 import com.project.hotelmanagementproject.model.User;
 
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.ACTIVITY_RETURN_STATE;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOME_ACTIVITY;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.HOME_ACTIVITY;
 
 public class HomeActivity extends AppCompatActivity {
     LinearLayout gvBookHotel, gvChangePw, gvViewReservation, gvViewProfile;
@@ -80,7 +80,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //  showToastMessage("Feature Under Construction");
-                startActivity(new Intent(HomeActivity.this, AdminSearchUserActivity.class));
+                Intent i = new Intent(HomeActivity.this, AdminSearchUserActivity.class);
+                i.putExtra(ACTIVITY_RETURN_STATE, HOME_ACTIVITY);
+                startActivity(i);
             }
         });
         avViewProfile.setOnClickListener(new View.OnClickListener() {
@@ -102,21 +104,26 @@ public class HomeActivity extends AppCompatActivity {
         gvBookHotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HomeActivity.this, GuestRequestReservationActivity.class));
+                Intent i = new Intent(HomeActivity.this, GuestRequestReservationActivity.class);
+                i.putExtra(ACTIVITY_RETURN_STATE, HOME_ACTIVITY);
+                startActivity(i);
             }
         });
         gvViewReservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HomeActivity.this, GuestReservationSummActivity.class));
+                Intent i = new Intent(HomeActivity.this, GuestReservationSummActivity.class);
+                i.putExtra(ACTIVITY_RETURN_STATE, HOME_ACTIVITY);
+                startActivity(i);
 
             }
         });
         gvViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HomeActivity.this, ViewProfileActivity.class));
-
+                Intent i = new Intent(HomeActivity.this, ViewProfileActivity.class);
+                i.putExtra(ACTIVITY_RETURN_STATE, HOME_ACTIVITY);
+                startActivity(i);
             }
         });
 
@@ -133,7 +140,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(HomeActivity.this, MgrAvlblRoomsActivity.class);
-                i.putExtra(ACTIVITY_RETURN_STATE, MGR_HOME_ACTIVITY);
+                i.putExtra(ACTIVITY_RETURN_STATE, HOME_ACTIVITY);
                 startActivity(i);
 
             }
@@ -142,7 +149,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(HomeActivity.this, MgrSearchResvActivity.class);
-                i.putExtra(ACTIVITY_RETURN_STATE, MGR_HOME_ACTIVITY);
+                i.putExtra(ACTIVITY_RETURN_STATE, HOME_ACTIVITY);
                 startActivity(i);
 
             }
@@ -151,7 +158,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(HomeActivity.this, MgrSearchRoomActivity.class);
-                i.putExtra(ACTIVITY_RETURN_STATE, MGR_HOME_ACTIVITY);
+                i.putExtra(ACTIVITY_RETURN_STATE, HOME_ACTIVITY);
                 startActivity(i);
             }
         });

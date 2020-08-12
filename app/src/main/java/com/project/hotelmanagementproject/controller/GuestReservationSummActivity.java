@@ -60,7 +60,6 @@ public class GuestReservationSummActivity extends AppCompatActivity {
         setContentView(R.layout.activity_guest_reservation_summary);
         actionBarHandler();
         init();
-
     }
 
     public void init() {
@@ -96,26 +95,21 @@ public class GuestReservationSummActivity extends AppCompatActivity {
     }
 
     public void searchGuestReservation() {
-
-//        String etGuestRsStartDateStr = etGuestRsStartDate.getText().toString();
-//        String etGuestRsStartTimeStr =
-
         startDate = etGuestRsStartDate.getText().toString();
         startTime = etGuestRsStartTime.getText().toString();
 
-        if (null == startDate || startDate.isEmpty() || startDate.equalsIgnoreCase("")) {
-            etGuestRsStartDate.setError("enter valid input");
-            Toast.makeText(getApplicationContext(), "invalid start date", Toast.LENGTH_LONG).show();
-        } else if (null == startTime || startTime.isEmpty() || startTime.equalsIgnoreCase("")) {
-            etGuestRsStartDate.setError("enter valid input");
-            Toast.makeText(getApplicationContext(), "invalid start time", Toast.LENGTH_LONG).show();
-        } else {
+        if (Reservation.isValidDate(startDate) && Reservation.isValidStartTime(startTime)) {
             llGuestRsIp.setVisibility(View.GONE);
             llGuestRsOp.setVisibility(View.VISIBLE);
             reservationList = DbManager.guestGetReservationSummaryList(userName, startDate, startTime);
             guestReservationSummaryAdapter = new GuestReservationSummaryAdapter(this, reservationList);
             lvReservationList.setAdapter(guestReservationSummaryAdapter);
             guestReservationSummaryAdapter.notifyDataSetChanged();
+        } else {
+            if (!Reservation.isValidStartTime(startTime))
+                etGuestRsStartTime.setError("invalid start time");
+            if (!Reservation.isValidDate(startTime))
+                etGuestRsStartDate.setError("invalid start date");
         }
 
         lvReservationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -134,7 +128,6 @@ public class GuestReservationSummActivity extends AppCompatActivity {
     public void actionBarHandler() {
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-        actionBar.setIcon(R.drawable.ic_baseline_lock_24);
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
     }

@@ -1,16 +1,9 @@
 package com.project.hotelmanagementproject.utilities;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.widget.Toast;
-
-import com.project.hotelmanagementproject.controller.GuestReqResvPayConfirmRoomDetailsActivity;
-import com.project.hotelmanagementproject.controller.GuestRequestReservationPayActivity;
 import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.HotelRoom;
 import com.project.hotelmanagementproject.model.Reservation;
-import com.project.hotelmanagementproject.model.User;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

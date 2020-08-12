@@ -26,6 +26,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:background="@color/colorLightPrimary"
                 android:orientation="vertical">
 
                 <ImageView
@@ -33,7 +34,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:padding="5dp"
+                    android:padding="12dp"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_hotel_maverick" />
 
@@ -41,9 +42,9 @@
                     android:id="@+id/tvgrrrrlHotelName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp"
-                    android:text=""
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="Maverick Hotel"
                     android:paddingBottom="5dp"
                     android:textColor="@color/colorPrimaryDark" />
 
@@ -105,31 +106,6 @@
 
                 </LinearLayout>
 
-                <!--<LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/text_style"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Price Per Night (WkDay)" />
-
-                    <TextView
-                        android:id="@+id/tvgrrrrlPricePerNightWkDay"
-                        style="@style/text_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:text=""
-                        android:textSize="16sp" />
-
-                </LinearLayout>-->
-
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -153,7 +129,10 @@
                         android:textSize="16sp" />
 
                 </LinearLayout>
-                <LinearLayout style="@style/horz_linear_layout_style">
+
+                <LinearLayout
+                    style="@style/horz_linear_layout_style"
+                    android:layout_marginLeft="10dp">
 
                     <TextView
                         style="@style/text_style"
@@ -166,7 +145,9 @@
                         android:text="" />
                 </LinearLayout>
 
-                <LinearLayout style="@style/horz_linear_layout_style">
+                <LinearLayout
+                    style="@style/horz_linear_layout_style"
+                    android:layout_marginLeft="10dp">
 
                     <TextView
                         style="@style/text_style"

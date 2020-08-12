@@ -147,7 +147,6 @@ public class GuestReservationDetailsActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

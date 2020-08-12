@@ -1,5 +1,8 @@
 package com.project.hotelmanagementproject.model;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class User {
     String userName;
     String firstName;
@@ -153,6 +156,45 @@ public class User {
 
     public void setCreditCardtype(String creditCardtype) {
         this.creditCardtype = creditCardtype;
+    }
+
+//    public static boolean isValidEmail(String email) {
+//        if(!isNullorEmpty(email)){
+//            Pattern pattern;
+//            Matcher matcher;
+//            final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+//            pattern = Pattern.compile(EMAIL_PATTERN);
+//            matcher = pattern.matcher(email);
+//            return matcher.matches();
+//        }else{
+//            return false;
+//        }
+//    }
+
+//    public static boolean isValidEmail(String email) {
+//        if(!isNullorEmpty(email)){
+//            Pattern pattern;
+//            Matcher matcher;
+//            final String EMAIL_PATTERN = "[a-zA-Z0-9._-]+@[a-zA-Z0-9.]";
+//            pattern = Pattern.compile(EMAIL_PATTERN);
+//            matcher = pattern.matcher(email);
+//            return matcher.matches();
+//        }else{
+//            return false;
+//        }
+//    }
+
+    public static boolean isValidEmail(String email) {
+        return email.contains("@") && email.contains(".");
+    }
+
+    public static boolean isNullorEmpty(String ip) {
+        return ip.equalsIgnoreCase(null) || ip.equalsIgnoreCase("")
+                || ip.equalsIgnoreCase(" ") || ip.isEmpty();
+    }
+
+    public static boolean isValidExpiryDate(String expiryDate) {
+        return ((!isNullorEmpty(expiryDate)) && expiryDate.matches("(?:0[1-9]|1[0-2])/[0-9]{2}"));
     }
 
 

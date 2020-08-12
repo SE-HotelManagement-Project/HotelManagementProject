@@ -16,7 +16,6 @@
         <activity android:name=".controller.GuestRequestReservationDetailsActivity" />
         <activity android:name=".controller.GuestRequestReservationResultActivity" />
         <activity android:name=".controller.GuestRequestReservationPayActivity"/>
-        <activity android:name=".controller.GuestReqResvPayConfirmRoomDetailsActivity" />
         <activity android:name=".controller.GuestPendingReservations" />
         <!--Ankt changes ends-->
         <activity android:name=".controller.MgrResvDetailsActivity"></activity>

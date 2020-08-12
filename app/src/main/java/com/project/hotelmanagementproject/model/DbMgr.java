@@ -718,8 +718,8 @@ public class DbMgr extends SQLiteOpenHelper {
                         roomPricePerNightWeekend = c.getString(c.getColumnIndex(COL_PRICE_WEEKEND));
                         availabilityStatus = c.getString(c.getColumnIndex(COL_AVAILABILITY_STATUS));
                         tax = c.getString(c.getColumnIndex(COL_TAX));
-                        hotelRoom = new HotelRoom(null, hotelName, null, roomType, null, roomPricePerNightWeekday,
-                                roomPricePerNightWeekend, tax, availabilityStatus
+                        hotelRoom = new HotelRoom(null, hotelName, null, roomType, null,
+                                roomPricePerNightWeekday, roomPricePerNightWeekend, tax, availabilityStatus
                                 , null, null, null, null);
                         hotelRoom.setCountOfavailableRooms(new Integer(countOfavailableRooms));
                         hotelRoom.setNumOfRooms(numOfRooms);

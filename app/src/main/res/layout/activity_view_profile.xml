@@ -255,14 +255,9 @@
 
     <Button
         android:id="@+id/btnVpModify"
-        style="@style/btn_style"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="35dp"
-        android:layout_marginBottom="10dp"
+        style="@style/btn_style2"
         android:text="Update Profile"
         android:drawableRight="@drawable/ic_edit"
-        android:textSize="15sp"
         android:visibility="visible" />
 
 </LinearLayout>

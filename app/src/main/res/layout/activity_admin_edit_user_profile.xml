@@ -301,7 +301,7 @@
                         style="@style/edit_text_style"
                         android:hint="76010"
                         android:inputType="number"
-                        android:maxLength="6" />
+                        android:maxLength="5" />
 
                 </LinearLayout>
 

@@ -14,8 +14,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="8dp"
-        android:layout_weight="1"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
         android:orientation="horizontal"
         android:visibility="visible">
 
@@ -38,11 +38,6 @@
             android:textSize="20sp" />
 
     </LinearLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -112,24 +107,19 @@
 
         </LinearLayout>
 
-    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnGuestReqRsvPayReservation"
-            style="@style/btn_style"
-            android:layout_margin="10dp"
+            style="@style/btn_style2"
+            android:drawableRight="@drawable/ic_payment"
             android:layout_weight="1"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp"
-            android:text="Pay Reservation"
-            android:textSize="15sp" />
+            android:text="Pay Reservation" />
 
 
     </LinearLayout>
