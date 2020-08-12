@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".controller.GuestRequestReservationResultActivity">
-
+    tools:context=".controller.guestController.GuestRequestReservationListActivity">
 
 
     <LinearLayout
@@ -35,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:paddingRight="15dp"
-                android:text="Reservation Search Result"
+                android:text="Requested Reservation Summmary List"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp" />
 

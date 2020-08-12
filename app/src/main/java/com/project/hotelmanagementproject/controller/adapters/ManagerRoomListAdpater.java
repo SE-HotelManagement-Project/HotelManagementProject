@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.project.hotelmanagementproject.R;
-import com.project.hotelmanagementproject.model.HotelRoom;
+import com.project.hotelmanagementproject.model.DAO.HotelRoom;
 
 import java.util.ArrayList;
 

@@ -1,18 +1,15 @@
 package com.project.hotelmanagementproject.controller.adapters;
 
 import android.content.Context;
-import android.renderscript.ScriptIntrinsicYuvToRGB;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.project.hotelmanagementproject.R;
-import com.project.hotelmanagementproject.model.HotelRoom;
-import com.project.hotelmanagementproject.model.User;
+import com.project.hotelmanagementproject.model.DAO.User;
 
 import java.util.ArrayList;
 

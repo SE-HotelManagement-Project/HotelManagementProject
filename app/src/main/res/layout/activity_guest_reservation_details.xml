@@ -7,7 +7,7 @@
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
     android:orientation="vertical"
-    tools:context=".controller.GuestReservationDetailsActivity">
+    tools:context=".controller.guestController.GuestReservationDetailsActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Reservation Details"
+            android:text="My Reservation Details"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="17sp" />
 

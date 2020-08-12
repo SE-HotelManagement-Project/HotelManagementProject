@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#e3e3e3"
     android:orientation="vertical"
-    tools:context=".controller.HomeActivity">
+    tools:context=".controller.systemAccessController.HomeActivity">
 
     <LinearLayout
         android:id="@+id/GuestView"

@@ -1,7 +1,6 @@
 package com.project.hotelmanagementproject.controller.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.project.hotelmanagementproject.R;
-import com.project.hotelmanagementproject.model.Reservation;
-import com.project.hotelmanagementproject.model.User;
+import com.project.hotelmanagementproject.model.DAO.Reservation;
 
 import java.util.ArrayList;
-
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
 
 public class GuestReservationSummaryAdapter extends BaseAdapter {
     Context context;

@@ -7,7 +7,7 @@
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
     android:orientation="vertical"
-    tools:context=".controller.GuestRequestReservationPayActivity">
+    tools:context=".controller.guestController.GuestRequestReservationPayActivity">
 
 
     <LinearLayout
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Hotel Payment"
+            android:text="Reservation Payment"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp" />
 

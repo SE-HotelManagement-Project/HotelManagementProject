@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context=".controller.AdminSearchUserActivity">
+    tools:context=".controller.adminController.AdminSearchUserActivity">
 
     <LinearLayout
         android:id="@+id/adminSearchUser"

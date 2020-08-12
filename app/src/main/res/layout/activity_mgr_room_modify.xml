@@ -7,7 +7,7 @@
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
     android:orientation="vertical"
-    tools:context=".controller.MgrModifyRoomActivity">
+    tools:context=".controller.managerController.MgrModifyRoomActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"

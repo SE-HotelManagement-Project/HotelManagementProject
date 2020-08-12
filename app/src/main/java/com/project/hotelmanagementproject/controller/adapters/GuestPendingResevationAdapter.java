@@ -10,11 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.project.hotelmanagementproject.R;
-import com.project.hotelmanagementproject.model.HotelRoom;
+import com.project.hotelmanagementproject.model.DAO.HotelRoom;
 import com.project.hotelmanagementproject.utilities.ConstantUtils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
 
