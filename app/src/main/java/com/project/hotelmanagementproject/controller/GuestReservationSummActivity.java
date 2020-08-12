@@ -2,6 +2,7 @@ package com.project.hotelmanagementproject.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.GUEST_RESV_ID;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.GUEST_RESV_START_DATE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.GUEST_RESV_START_TIME;
@@ -60,7 +62,6 @@ public class GuestReservationSummActivity extends AppCompatActivity {
         setContentView(R.layout.activity_guest_reservation_summary);
         actionBarHandler();
         init();
-
     }
 
     public void init() {
@@ -84,39 +85,6 @@ public class GuestReservationSummActivity extends AppCompatActivity {
                 searchGuestReservation();
             }
         });
-    }
-
-    public void populateDetaultSearchValues() {
-        Date startDateFormat = new Date(System.currentTimeMillis());
-        startDate = new SimpleDateFormat("yyyy-MM-dd").format(startDateFormat);
-        startTime = new SimpleDateFormat("hh:mm", Locale.US).format(startDateFormat);
-
-        etGuestRsStartDate.setText(startDate);
-        etGuestRsStartTime.setText(startTime);
-    }
-
-    public void searchGuestReservation() {
-
-//        String etGuestRsStartDateStr = etGuestRsStartDate.getText().toString();
-//        String etGuestRsStartTimeStr =
-
-        startDate = etGuestRsStartDate.getText().toString();
-        startTime = etGuestRsStartTime.getText().toString();
-
-        if (null == startDate || startDate.isEmpty() || startDate.equalsIgnoreCase("")) {
-            etGuestRsStartDate.setError("enter valid input");
-            Toast.makeText(getApplicationContext(), "invalid start date", Toast.LENGTH_LONG).show();
-        } else if (null == startTime || startTime.isEmpty() || startTime.equalsIgnoreCase("")) {
-            etGuestRsStartDate.setError("enter valid input");
-            Toast.makeText(getApplicationContext(), "invalid start time", Toast.LENGTH_LONG).show();
-        } else {
-            llGuestRsIp.setVisibility(View.GONE);
-            llGuestRsOp.setVisibility(View.VISIBLE);
-            reservationList = DbManager.guestGetReservationSummaryList(userName, startDate, startTime);
-            guestReservationSummaryAdapter = new GuestReservationSummaryAdapter(this, reservationList);
-            lvReservationList.setAdapter(guestReservationSummaryAdapter);
-            guestReservationSummaryAdapter.notifyDataSetChanged();
-        }
 
         lvReservationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -131,10 +99,39 @@ public class GuestReservationSummActivity extends AppCompatActivity {
         });
     }
 
+    public void populateDetaultSearchValues() {
+        Date startDateFormat = new Date(System.currentTimeMillis());
+        startDate = new SimpleDateFormat("yyyy-MM-dd").format(startDateFormat);
+        startTime = new SimpleDateFormat("hh:mm", Locale.US).format(startDateFormat);
+
+        etGuestRsStartDate.setText(startDate);
+        etGuestRsStartTime.setText(startTime);
+    }
+
+    public void searchGuestReservation() {
+        startDate = etGuestRsStartDate.getText().toString();
+        startTime = etGuestRsStartTime.getText().toString();
+
+        if (Reservation.isValidDate(startDate) && Reservation.isValidStartTime(startTime)) {
+            llGuestRsIp.setVisibility(View.GONE);
+            llGuestRsOp.setVisibility(View.VISIBLE);
+            reservationList = DbManager.guestGetReservationSummaryList(userName, startDate, startTime);
+            guestReservationSummaryAdapter = new GuestReservationSummaryAdapter(this, reservationList);
+            lvReservationList.setAdapter(guestReservationSummaryAdapter);
+            guestReservationSummaryAdapter.notifyDataSetChanged();
+        } else {
+            if (!Reservation.isValidStartTime(startTime)) {
+                etGuestRsStartTime.setError("invalid start time");
+            }
+            if (!Reservation.isValidDate(startDate)) {
+                etGuestRsStartDate.setError("invalid start date");
+            }
+        }
+    }
+
     public void actionBarHandler() {
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-        actionBar.setIcon(R.drawable.ic_baseline_lock_24);
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
@@ -167,12 +164,19 @@ public class GuestReservationSummActivity extends AppCompatActivity {
 
     public void logout() {
         Intent i = new Intent(GuestReservationSummActivity.this, LoginActivity.class);
+        Toast.makeText(getApplicationContext(), "Logout successful", Toast.LENGTH_LONG).show();
         new Session(getApplicationContext()).setLoginStatus(false);
         startActivity(i);
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        if (llGuestRsOp.getVisibility() == View.VISIBLE) {
+            llGuestRsIp.setVisibility(View.VISIBLE);
+            llGuestRsOp.setVisibility(View.GONE);
+        } else {
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+        }
     }
 }

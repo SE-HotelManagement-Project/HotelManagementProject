@@ -146,7 +146,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etGuestMrDateTo"
                     style="@style/edit_text_style"
-                    android:hint="07/15/2020" />
+                    android:hint="2020-08-06" />
 
             </LinearLayout>
 
@@ -228,7 +228,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:paddingRight="15dp"
-                    app:srcCompat="@drawable/ic_baseline_edit" />
+                    app:srcCompat="@drawable/ic_baseline_lock_24" />
 
                 <TextView
                     style="@style/text_style"
@@ -336,15 +336,9 @@
 
         <Button
             android:id="@+id/btnGuestModifyReservation"
-            style="@style/btn_style"
-            android:layout_margin="15dp"
-            android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:paddingTop="15dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="15dp"
-            android:text="Save"
-            android:textSize="15sp" />
+            style="@style/btn_style2"
+            android:drawableRight="@drawable/ic_tick"
+            android:text="Save" />
 
     </LinearLayout>
 

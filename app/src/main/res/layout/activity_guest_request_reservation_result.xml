@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:paddingRight="15dp"
-                android:text="Reservation Search Result"
+                android:text="Requested Reservation Summmary List"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp" />
 
@@ -76,6 +76,7 @@
                 android:padding="5dp"
                 android:text="sort"
                 android:textAllCaps="false"
+                android:visibility="gone"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="13dp" />
 
@@ -88,7 +89,7 @@
                 android:drawableTop="@drawable/ic_sort_ad"
                 android:drawablePadding="2dp"
                 android:padding="5dp"
-                android:text="direction"
+                android:text="sort"
                 android:textAllCaps="false"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="13dp" />

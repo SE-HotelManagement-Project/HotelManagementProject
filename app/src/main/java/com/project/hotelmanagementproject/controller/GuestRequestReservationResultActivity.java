@@ -27,11 +27,8 @@ import com.project.hotelmanagementproject.utilities.ConstantUtils;
 import com.project.hotelmanagementproject.utilities.DateTimeGenerator;
 import com.project.hotelmanagementproject.utilities.UtilityFunctions;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
 
 public class GuestRequestReservationResultActivity extends AppCompatActivity {
 
@@ -75,7 +72,7 @@ public class GuestRequestReservationResultActivity extends AppCompatActivity {
         lvToReserveRoomList = findViewById(R.id.lvToReserveRoomList);
         ivGuestRrImageHeaderIcon = findViewById(R.id.ivGuestRrImageHeaderIcon);
 //        ivGuestRrImageHeaderIcon.setImageResource(R.drawable.hotel);
-        tvGuestReqResvDetailsHeader = (TextView) findViewById(R.id.tvGuestReqResvDetailsHeader);
+        tvGuestReqResvDetailsHeader = findViewById(R.id.tvGuestReqResvDetailsHeader);
 //        tvGuestReqResvDetailsHeader.setText(ConstantUtils.GUEST_REQ_RESV_SELECTED_RESERV_DETAILS_TEXT);
         List<String> hotelNamesList = new ArrayList<String>();
         List<String> roomTypesList = new ArrayList<String>();
@@ -123,8 +120,6 @@ public class GuestRequestReservationResultActivity extends AppCompatActivity {
             roomsAvailableForReqResvAndGrouped = populateOtherDetails( roomsAvailableForReqResvAndGrouped,  check_in_date,
                     start_time,  check_out_date, num_of_rooms , numOfNights);
             if(UtilityFunctions.isNotNullAndEmpty(roomsAvailableForReqResvAndGrouped)){
-
-
                 reserveRoomSearchResultAdapter = new ReserveRoomSearchResultAdapter(this, roomsAvailableForReqResvAndGrouped);
                 lvToReserveRoomList.setAdapter(reserveRoomSearchResultAdapter);
                 reserveRoomSearchResultAdapter.notifyDataSetChanged();
@@ -136,7 +131,7 @@ public class GuestRequestReservationResultActivity extends AppCompatActivity {
             lvToReserveRoomList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Intent intent = new Intent(GuestRequestReservationResultActivity.this, GuestRequestReservationDetailsActivity.class);
+                    Intent intent = new Intent(GuestRequestReservationResultActivity.this, GuestPendingReservationDetailsActivity.class);
                     HotelRoom selectedHotelRoom = (HotelRoom) adapterView.getItemAtPosition(i);
                     totalPrice = UtilityFunctions.calculateTotalReservationPrice( check_in_date, start_time, check_out_date, ConstantUtils.GUEST_REQ_RESV_SEARCH_END_TIME_VALUE  ,
                                                                         selectedHotelRoom.getRoomPriceWeekDay(),selectedHotelRoom.getRoomPriceWeekend(),
@@ -251,49 +246,57 @@ public boolean onCreateOptionsMenu(Menu menu) {
             logout();
             return true;
         } else if (id == android.R.id.home) {
-            Intent intent = new Intent(this, GuestRequestReservationActivity.class);
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_HOTEL_NAME, search_hotel_name );
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_IN_DATE, check_in_date );
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_START_TIME, start_time );
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_OUT_DATE, check_out_date);
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_ADULT_AND_CHLD , num_of_adult_and_child);
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_TYPE_STANDARD , search_room_type_standard  );
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_DELUXE , search_room_type_deluxe );
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_SUITE , search_room_type_suite );
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_OF_ROOMS, num_of_rooms);
-
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_HOTEL_NAME, selectedHotelName);
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TYPE, selectedRoomType);
-
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_NUM_OF_NIGHTS , numOfNights );
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_TOTAL_PRICE , totalPrice );
-
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_TYPE   , cardType );
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_NUM  , cardNum );
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_EXPIRY_DT  , cardExpiryDate  );
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_CVV  , cardCvvNum );
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_RESERVID   , joint_room_reservation_id );
-
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TAX   , selectedRoomTax );
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_GUEST_USER_NAME   , guest_user_name  );
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_GUEST_FIRST_NAME   , guest_first_name );
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_GUEST_LAST_NAME    , guest_last_name  );
-
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_DAY    , selected_room_price_weekDay  );
-            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_END     , selectedRoomPriceWeekend   );
-            startActivity(intent);
+            onBackClick();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
     public void logout() {
         Intent i = new Intent(GuestRequestReservationResultActivity.this, LoginActivity.class);
+        Toast.makeText(getApplicationContext(), "Logout successful", Toast.LENGTH_LONG).show();
         new Session(getApplicationContext()).setLoginStatus(false);
         startActivity(i);
     }
+
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        onBackClick();
+        //    super.onBackPressed();
+    }
+
+    private void onBackClick() {
+        Intent intent = new Intent(this, GuestRequestReservationActivity.class);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_HOTEL_NAME, search_hotel_name);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_IN_DATE, check_in_date);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_START_TIME, start_time);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_OUT_DATE, check_out_date);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_ADULT_AND_CHLD, num_of_adult_and_child);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_TYPE_STANDARD, search_room_type_standard);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_DELUXE, search_room_type_deluxe);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_SUITE, search_room_type_suite);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_OF_ROOMS, num_of_rooms);
+
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_HOTEL_NAME, selectedHotelName);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TYPE, selectedRoomType);
+
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_NUM_OF_NIGHTS, numOfNights);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_TOTAL_PRICE, totalPrice);
+
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_TYPE, cardType);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_NUM, cardNum);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_EXPIRY_DT, cardExpiryDate);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_CVV, cardCvvNum);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_RESERVID, joint_room_reservation_id);
+
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TAX, selectedRoomTax);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_GUEST_USER_NAME, guest_user_name);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_GUEST_FIRST_NAME, guest_first_name);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_GUEST_LAST_NAME, guest_last_name);
+
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_DAY, selected_room_price_weekDay);
+        intent.putExtra(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_END, selectedRoomPriceWeekend);
+        startActivity(intent);
     }
 
 }

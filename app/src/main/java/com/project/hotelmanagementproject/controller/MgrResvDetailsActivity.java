@@ -1,8 +1,5 @@
 package com.project.hotelmanagementproject.controller;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,17 +9,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.hotelmanagementproject.R;
 import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.Reservation;
 import com.project.hotelmanagementproject.model.Session;
+import com.project.hotelmanagementproject.model.User;
 
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.ACTIVITY_RETURN_STATE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ACTIVITY_RETURN_STATE;
-
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOTEL_NAME;
-
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_RESV_ID;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_START_DATE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_START_TIME;
@@ -56,7 +56,7 @@ public class MgrResvDetailsActivity extends AppCompatActivity {
             hotelName = bundle.getString(MGR_HOTEL_NAME);
             startDate = bundle.getString(MGR_START_DATE);
             startTime = bundle.getString(MGR_START_TIME);
-            returnIntent = bundle.getString(MGR_ACTIVITY_RETURN_STATE);
+            returnIntent = bundle.getString(ACTIVITY_RETURN_STATE);
             Log.i(APP_TAG, resvId + ", " + hotelName + ", " + startDate + ", " + returnIntent);
         }
     }
@@ -95,13 +95,15 @@ public class MgrResvDetailsActivity extends AppCompatActivity {
         Reservation reservation;
         DbMgr dbMgr = DbMgr.getInstance(getApplicationContext());
         reservation = dbMgr.mgrGetResvDetails(hotelName, startDate, resvId);
+        User user = dbMgr.getUserDetails(reservation.getResvUserName());
+        Log.i(APP_TAG, reservation.getResvUserName() + user.getFirstName());
 
         tvHotelName.setText(reservation.getResvHotelName());
         tvResvId.setText(reservation.getReservationId());
 
         tvUserName.setText(reservation.getResvUserName());
-        tvFirstName.setText(reservation.getResvFirstName());
-        tvLastName.setText(reservation.getResvLastName());
+        tvFirstName.setText(user.getFirstName());
+        tvLastName.setText(user.getLastName());
 
         tvRoomType.setText(reservation.getResvRoomType());
         tvTotalPrice.setText(reservation.getTotalPrice());
@@ -141,12 +143,13 @@ public class MgrResvDetailsActivity extends AppCompatActivity {
         backIntent.putExtra(MGR_HOTEL_NAME, hotelName);
         backIntent.putExtra(MGR_START_DATE, startDate);
         backIntent.putExtra(MGR_START_TIME, startTime);
-        backIntent.putExtra(MGR_ACTIVITY_RETURN_STATE, returnIntent);
+        backIntent.putExtra(ACTIVITY_RETURN_STATE, returnIntent);
         startActivity(backIntent);
     }
 
     public void logout() {
         Intent i = new Intent(MgrResvDetailsActivity.this, LoginActivity.class);
+        Toast.makeText(getApplicationContext(), "Logout successful", Toast.LENGTH_LONG).show();
         new Session(getApplicationContext()).setLoginStatus(false);
         startActivity(i);
     }

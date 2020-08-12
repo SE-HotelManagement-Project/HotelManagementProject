@@ -1,12 +1,15 @@
 package com.project.hotelmanagementproject.model;
 
+import android.content.Intent;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Reservation {
     String reservationId;
-    String resvRoomNum;
     String resvRoomId;
     String resvUserName;
-    String resvFirstName;
-    String resvLastName;
 
     String resvHotelName;
     String resvRoomType;
@@ -14,43 +17,22 @@ public class Reservation {
     String resvNumNights;
 
     String resvNumOfRooms;
-
     String totalPrice;
-
     String startDate;
     String resvCheckInDate;
     String resevCheckOutDate;
     String resvStartTime;
-    String paymentStatus;
-    public String getPaymentStatus() {
-        return paymentStatus;
-    }
-
-    public void setPaymentStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
-
-
-
-
     String resvPaymentStatus;
 
+    public Reservation(String reservationId, String resvRoomId, String resvUserName,
+                       String resvHotelName, String resvRoomType, String resvNumAdultsChildren,
+                       String resvNumNights, String resvNumOfRooms,
+                       String totalPrice, String resvCheckInDate, String resevCheckOutDate,
+                       String resvStartTime, String startDate, String resvPaymentStatus) {
 
-
-    public Reservation() {
-
-    }
-
-    public Reservation(String reservationId, String resvRoomId, String resvRoomNum, String resvUserName, String resvFirstName, String resvLastName,
-                       String resvHotelName, String resvRoomType, String resvNumAdultsChildren, String resvNumNights, String resvNumOfRooms,
-                       String totalPrice, String resvCheckInDate, String resevCheckOutDate, String resvStartTime, String startDate,String resvPaymentStatus) {
         this.reservationId = reservationId;
-
         this.resvRoomId = resvRoomId;
-        this.resvRoomNum = resvRoomNum;
         this.resvUserName = resvUserName;
-        this.resvFirstName = resvFirstName;
-        this.resvLastName = resvLastName;
         this.resvHotelName = resvHotelName;
         this.resvRoomType = resvRoomType;
         this.resvNumAdultsChildren = resvNumAdultsChildren;
@@ -64,12 +46,7 @@ public class Reservation {
         this.resvPaymentStatus = resvPaymentStatus;
     }
 
-    public String getResvRoomNum() {
-        return resvRoomNum;
-    }
-
-    public void setResvRoomNum(String resvRoomNum) {
-        this.resvRoomNum = resvRoomNum;
+    public Reservation() {
     }
 
     public String getResvRoomId() {
@@ -94,22 +71,6 @@ public class Reservation {
 
     public void setResvUserName(String resvUserName) {
         this.resvUserName = resvUserName;
-    }
-
-    public String getResvFirstName() {
-        return resvFirstName;
-    }
-
-    public void setResvFirstName(String resvFirstName) {
-        this.resvFirstName = resvFirstName;
-    }
-
-    public String getResvLastName() {
-        return resvLastName;
-    }
-
-    public void setResvLastName(String resvLastName) {
-        this.resvLastName = resvLastName;
     }
 
     public String getResvHotelName() {
@@ -192,17 +153,65 @@ public class Reservation {
         this.resvNumOfRooms = resvNumOfRooms;
     }
 
-
-    public boolean isValidStartTime(String startTime) {
-        return (startTime.contains(":") && !startTime.matches("[0-9]"));
-    }
-
-    public void areDatesValid(String startDate, String endDate) {
-        // return (startTime.contains("AM") || startTime.contains("PM")) && startTime.contains(":") && !startTime.matches("[0-9]");
-    }
-
     public String getResvPaymentStatus() {
         return resvPaymentStatus;
     }
 
+    public void setResvPaymentStatus(String resvPaymentStatus) {
+        this.resvPaymentStatus = resvPaymentStatus;
+    }
+
+    public static boolean isNullorEmpty(String ip) {
+        return ip.equalsIgnoreCase(null) || ip.equalsIgnoreCase("")
+                || ip.equalsIgnoreCase(" ") || ip.isEmpty();
+    }
+
+
+    public static boolean isValidStartTime(String startTime) {
+        return ((!isNullorEmpty(startTime)) && (startTime.matches("(?:[0-1][0-9]|2[0-4]):[0-5]\\d")));
+    }
+
+    public static boolean isValidDate(String text) {
+        if (text == null || !text.matches("\\d{4}-[01]\\d-[0-3]\\d"))
+            return false;
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        df.setLenient(false);
+        try {
+            df.parse(text);
+            return true;
+        } catch (ParseException ex) {
+            return false;
+        }
+    }
+
+    public static boolean isValidRange(String checkin, String checkout) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date date1 = sdf.parse(checkin);
+            Date date2 = sdf.parse(checkout);
+            if (date1.before(date2)) {
+                System.out.println("Date1 is before Date2");
+                return true;
+            } else {
+                return false;
+            }
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+
+    public static boolean isValidNumRooms(String resvNumOfRooms) {
+        return !isNullorEmpty(resvNumOfRooms) && resvNumOfRooms.length() == 1
+                && Integer.parseInt(resvNumOfRooms) <= 4 && Integer.parseInt(resvNumOfRooms) >= 1;
+    }
+
+    public static boolean isValidNumAdults(String resvNumAdultsChildren) {
+        return !isNullorEmpty(resvNumAdultsChildren) && (resvNumAdultsChildren.length() < 3 && resvNumAdultsChildren.length() > 0)
+                && Integer.parseInt(resvNumAdultsChildren) <= 16 && Integer.parseInt(resvNumAdultsChildren) >= 1;
+    }
+
+    public static boolean isValidNumNights(String resvNumNights) {
+        return !isNullorEmpty(resvNumNights) && (resvNumNights.length() < 3 && resvNumNights.length() > 0)
+                && Integer.parseInt(resvNumNights) <= 30 && Integer.parseInt(resvNumNights) >= 1;
+    }
 }

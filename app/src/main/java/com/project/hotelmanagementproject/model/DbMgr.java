@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.project.hotelmanagementproject.utilities.ConstantUtils;
 import com.project.hotelmanagementproject.utilities.UtilityFunctions;
 
 import java.util.ArrayList;
@@ -57,6 +56,7 @@ import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_TOT
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_USER_NAME;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_USER_ROLE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_ZIP_CODE;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.PAID;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.TABLE_HOTEL_DATA;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.TABLE_RESERV_DATA;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.TABLE_USER_DATA;
@@ -237,8 +237,6 @@ public class DbMgr extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put(COL_RESERV_ID, reservation.getReservationId());
         cv.put(COL_GUEST_USER_NAME, reservation.getResvUserName());
-        cv.put(COL_GUEST_FIRST_NAME, reservation.getResvFirstName());
-        cv.put(COL_GUEST_LAST_NAME, reservation.getResvLastName());
         cv.put(COL_RESERV_HOTEL_NAME, reservation.getResvHotelName());
         cv.put(COL_ROOM_TYPE, reservation.getResvRoomType());
         cv.put(COL_NUM_OF_ROOMS, reservation.getResvNumOfRooms());
@@ -249,7 +247,7 @@ public class DbMgr extends SQLiteOpenHelper {
         cv.put(COL_START_TIME, reservation.getResvStartTime());
         cv.put(COL_TOTAL_PRICE, reservation.getTotalPrice());
         cv.put(COL_RESERV_ROOM_ID, reservation.getResvRoomId());
-        cv.put(COL_PAYMENT_STATUS, reservation.getPaymentStatus());
+        cv.put(COL_PAYMENT_STATUS, reservation.getResvPaymentStatus());
         long res = db.insert(TABLE_RESERV_DATA, null, cv);
 
         return res != -1;
@@ -312,10 +310,9 @@ public class DbMgr extends SQLiteOpenHelper {
                     String resvHotelName = c.getString(c.getColumnIndex(COL_RESERV_HOTEL_NAME));
                     String resvPaymentStatus = c.getString(c.getColumnIndex(COL_RESERV_HOTEL_NAME));
 
-                    hotelResv = new Reservation(resvId, resvRoomId, resvRoomId, null,
-                            null, null, resvHotelName, null,
+                    hotelResv = new Reservation(resvId, resvRoomId, null, resvHotelName, null,
                             null, null, null,
-                            resvPrice, resvCheckInDate, resvCheckOutDate, resvTime, startDate,resvPaymentStatus);
+                            resvPrice, resvCheckInDate, resvCheckOutDate, resvTime, startDate, resvPaymentStatus);
 
                     Log.i(APP_TAG, "hotelResv: " + hotelResv.toString() + " "
                             + hotelResv.getResvCheckInDate() + " " + hotelResv.getResvRoomId());
@@ -493,8 +490,8 @@ public class DbMgr extends SQLiteOpenHelper {
                     String resvPaymentStatus = c.getString(c.getColumnIndex(COL_RESERV_HOTEL_NAME));
                     if (!resvIdList.containsKey(resvId)) {
                         resvIdList.put(resvId, 1);
-                        Reservation reservation = new Reservation(resvId, null, null, null, null, null, hotelName, roomType,
-                                null, numOfNights, numOfRooms, null, checkInDate, null, resvStartTime, startDate,resvPaymentStatus);
+                        Reservation reservation = new Reservation(resvId, null, null, hotelName, roomType,
+                                null, numOfNights, numOfRooms, null, checkInDate, null, resvStartTime, startDate, resvPaymentStatus);
                         resvList.add(reservation);
                     }
                 }
@@ -522,8 +519,6 @@ public class DbMgr extends SQLiteOpenHelper {
                     String resvCheckInDate = c.getString(c.getColumnIndex(COL_CHECKIN_DATE));
                     String resvCheckOutDate = c.getString(c.getColumnIndex(COL_CHECKOUT_DATE));
                     String userName = c.getString(c.getColumnIndex(COL_GUEST_USER_NAME));
-                    String firstName = c.getString(c.getColumnIndex(COL_GUEST_FIRST_NAME));
-                    String lastName = c.getString(c.getColumnIndex(COL_GUEST_LAST_NAME));
                     String roomType = c.getString(c.getColumnIndex(COL_ROOM_TYPE));
                     String numAdults = c.getString(c.getColumnIndex(COL_NUM_OF_ADULTS_AND_CHILDREN));
                     String numRooms = c.getString(c.getColumnIndex(COL_NUM_OF_ROOMS));
@@ -536,10 +531,9 @@ public class DbMgr extends SQLiteOpenHelper {
                     String resvHotelName = c.getString(c.getColumnIndex(COL_RESERV_HOTEL_NAME));
                     String resvPaymentStatus = c.getString(c.getColumnIndex(COL_RESERV_HOTEL_NAME));
 
-                    return new Reservation(reservationId, null, resvRoomId, userName,
-                            firstName, lastName, resvHotelName, roomType,
+                    return new Reservation(reservationId, resvRoomId, userName, resvHotelName, roomType,
                             numAdults, numNights, numRooms, resvPrice,
-                            resvCheckInDate, resvCheckOutDate, resvTime, startDate,resvPaymentStatus);
+                            resvCheckInDate, resvCheckOutDate, resvTime, startDate, resvPaymentStatus);
 
                 }
             }
@@ -579,8 +573,8 @@ public class DbMgr extends SQLiteOpenHelper {
                     String resvPaymentStatus = c.getString(c.getColumnIndex(COL_RESERV_HOTEL_NAME));
                     if (!resvIdList.containsKey(resvId)) {
                         resvIdList.put(resvId, 1);
-                        Reservation reservation = new Reservation(resvId, null, null, null, null, null, hotelName, roomType,
-                                null, numOfNights, numOfRooms, null, checkInDate, null, resvStartTime, startDate,resvPaymentStatus);
+                        Reservation reservation = new Reservation(resvId, null, null, hotelName, roomType,
+                                null, numOfNights, numOfRooms, null, checkInDate, null, resvStartTime, startDate, resvPaymentStatus);
                         resvList.add(reservation);
                     }
                 }
@@ -591,10 +585,10 @@ public class DbMgr extends SQLiteOpenHelper {
         }
         return resvList;
     }
-	
-	//Ankit changes for request reservation starts
 
-//    SELECT count(*) as room_count , hotel_name,  room_type , room_price_per_night_weekday, room_price_per_night_weekend
+    //Ankit changes for request reservation starts
+
+    //    SELECT count(*) as room_count , hotel_name,  room_type , room_price_per_night_weekday, room_price_per_night_weekend
 //from hm_hotel_data where  available_status ='Yes'  and hotel_name in ('WILLIAMS', 'SHARD', 'RANGER','LIBERTY','MAVERICK' )
 //and room_type in ('Standard','Deluxe', 'Suite')
 // and hotel_room_id not in
@@ -607,73 +601,71 @@ public class DbMgr extends SQLiteOpenHelper {
 //
 //group by hotel_name, room_type,
 // room_price_per_night_weekday, room_price_per_night_weekend , available_status  order by room_price_per_night_weekday
-public Reservation guestGetResvDetails(String resvId, String startDate) {
-    Reservation hotelResv = null;
-    SQLiteDatabase sqldb = this.getReadableDatabase();
-    String searchRoom = "Select * from " + TABLE_RESERV_DATA
-            + " where " + COL_RESERV_ID + " = '" + resvId + "'";
+    public Reservation guestGetResvDetails(String resvId, String startDate) {
+        Reservation hotelResv = null;
+        SQLiteDatabase sqldb = this.getReadableDatabase();
+        String searchRoom = "Select * from " + TABLE_RESERV_DATA
+                + " where " + COL_RESERV_ID + " = '" + resvId + "'";
 
-    Log.i(APP_TAG, "search Dates exist Query : " + searchRoom);
-    try {
-        Cursor c = sqldb.rawQuery(searchRoom, null);
-        if (c.getCount() == 0) {
-            Log.e(APP_TAG, "search room Query Err: No data");
-        } else {
-            while (c.moveToNext()) {
-                String resvCheckInDate = c.getString(c.getColumnIndex(COL_CHECKIN_DATE));
-                String resvCheckOutDate = c.getString(c.getColumnIndex(COL_CHECKOUT_DATE));
-                String userName = c.getString(c.getColumnIndex(COL_GUEST_USER_NAME));
-                String firstName = c.getString(c.getColumnIndex(COL_GUEST_FIRST_NAME));
-                String lastName = c.getString(c.getColumnIndex(COL_GUEST_LAST_NAME));
-                String roomType = c.getString(c.getColumnIndex(COL_ROOM_TYPE));
-                String numAdults = c.getString(c.getColumnIndex(COL_NUM_OF_ADULTS_AND_CHILDREN));
-                String numRooms = c.getString(c.getColumnIndex(COL_NUM_OF_ROOMS));
-                String numNights = c.getString(c.getColumnIndex(COL_NUM_OF_NIGHTS));
+        Log.i(APP_TAG, "search Dates exist Query : " + searchRoom);
+        try {
+            Cursor c = sqldb.rawQuery(searchRoom, null);
+            if (c.getCount() == 0) {
+                Log.e(APP_TAG, "search room Query Err: No data");
+            } else {
+                while (c.moveToNext()) {
+                    String resvCheckInDate = c.getString(c.getColumnIndex(COL_CHECKIN_DATE));
+                    String resvCheckOutDate = c.getString(c.getColumnIndex(COL_CHECKOUT_DATE));
+                    String userName = c.getString(c.getColumnIndex(COL_GUEST_USER_NAME));
+                    String roomType = c.getString(c.getColumnIndex(COL_ROOM_TYPE));
+                    String numAdults = c.getString(c.getColumnIndex(COL_NUM_OF_ADULTS_AND_CHILDREN));
+                    String numRooms = c.getString(c.getColumnIndex(COL_NUM_OF_ROOMS));
+                    String numNights = c.getString(c.getColumnIndex(COL_NUM_OF_NIGHTS));
 
-                String reservationId = c.getString(c.getColumnIndex(COL_RESERV_ID));
-                String resvPrice = c.getString(c.getColumnIndex(COL_TOTAL_PRICE));
-                String resvTime = c.getString(c.getColumnIndex(COL_START_TIME));
-                String resvRoomId = c.getString(c.getColumnIndex(COL_RESERV_ROOM_ID));
-                String resvHotelName = c.getString(c.getColumnIndex(COL_RESERV_HOTEL_NAME));
-                String resvPaymentStatus = c.getString(c.getColumnIndex(COL_RESERV_HOTEL_NAME));
+                    String reservationId = c.getString(c.getColumnIndex(COL_RESERV_ID));
+                    String resvPrice = c.getString(c.getColumnIndex(COL_TOTAL_PRICE));
+                    String resvTime = c.getString(c.getColumnIndex(COL_START_TIME));
+                    String resvRoomId = c.getString(c.getColumnIndex(COL_RESERV_ROOM_ID));
+                    String resvHotelName = c.getString(c.getColumnIndex(COL_RESERV_HOTEL_NAME));
+                    String resvPaymentStatus = c.getString(c.getColumnIndex(COL_RESERV_HOTEL_NAME));
 
-                return new Reservation(reservationId, null, resvRoomId, userName,
-                        firstName, lastName, resvHotelName, roomType,
-                        numAdults, numNights, numRooms, resvPrice,
-                        resvCheckInDate, resvCheckOutDate, resvTime, startDate, resvPaymentStatus);
+                    return new Reservation(reservationId, resvRoomId, userName,
+                            resvHotelName, roomType,
+                            numAdults, numNights, numRooms, resvPrice,
+                            resvCheckInDate, resvCheckOutDate, resvTime, startDate, resvPaymentStatus);
 
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    } catch (Exception e) {
-        e.printStackTrace();
+
+        return hotelResv;
     }
 
-    return hotelResv;
-}
-
-    public List<HotelRoom> getRoomsAvailableForReqResvAndGrouped(List<String> hotelNameList ,
-                    List<String> roomTypesList, String checkInDate,
-                    String checkOutDate, String startTime , String numOfRooms) {
+    public List<HotelRoom> getRoomsAvailableForReqResvAndGrouped(List<String> hotelNameList,
+                                                                 List<String> roomTypesList, String checkInDate,
+                                                                 String checkOutDate, String startTime, String numOfRooms) {
         List<HotelRoom> hotelRoomsList = new ArrayList<HotelRoom>();
         SQLiteDatabase sqldb = this.getReadableDatabase();
 
-        String query1= "SELECT count(*) as room_count , hotel_name , room_type , room_price_per_night_weekday , " +
+        String query1 = "SELECT count(*) as room_count , hotel_name , room_type , room_price_per_night_weekday , " +
                 "room_price_per_night_weekend , available_status , " +
                 "tax from  hm_hotel_data where available_status = 'Yes'  ";
-        query1= query1 + UtilityFunctions.appendStringWithListAndCol(hotelNameList, COL_HOTEL_NAME);
-        query1= query1 + UtilityFunctions.appendStringWithListAndCol(roomTypesList, COL_ROOM_TYPE);
+        query1 = query1 + UtilityFunctions.appendStringWithListAndCol(hotelNameList, COL_HOTEL_NAME);
+        query1 = query1 + UtilityFunctions.appendStringWithListAndCol(roomTypesList, COL_ROOM_TYPE);
 
         String query2 = " and hotel_room_id not in ( select reservation_room_id from hm_reservation_data where ";
 //        String query3 = " ( (check_in_date between"+ " '"+checkInDate+"' "+" and  +'"+ checkOutDate + "' ) or (check_out_date between '" +checkInDate +"' and  '"+checkOutDate+"') ) ";
-        String query3 =  "(((check_in_date between '"+ checkInDate +"'  and  '"+ checkOutDate +"' ) and (check_out_date between '"+ checkInDate +"' and  '"+ checkOutDate +"')) or (check_in_date <= '"+ checkInDate +"'  and   (check_out_date  between '"+ checkInDate +"'  and  '"+ checkOutDate +"' )) or  ((check_in_date between '"+ checkInDate +"'  and  '"+checkOutDate +"' ) and  check_out_date  >='"+ checkOutDate +"') or ((check_in_date <='"+ checkInDate+"'  ) and  check_out_date  >='"+ checkOutDate+"') )";
+        String query3 = "(((check_in_date between '" + checkInDate + "'  and  '" + checkOutDate + "' ) and (check_out_date between '" + checkInDate + "' and  '" + checkOutDate + "')) or (check_in_date <= '" + checkInDate + "'  and   (check_out_date  between '" + checkInDate + "'  and  '" + checkOutDate + "' )) or  ((check_in_date between '" + checkInDate + "'  and  '" + checkOutDate + "' ) and  check_out_date  >='" + checkOutDate + "') or ((check_in_date <='" + checkInDate + "'  ) and  check_out_date  >='" + checkOutDate + "') )";
         query3 = query3 + UtilityFunctions.appendStringWithListAndCol(hotelNameList, COL_RESERV_HOTEL_NAME);
 
         query3 = query3 + UtilityFunctions.appendStringWithListAndCol(roomTypesList, COL_ROOM_TYPE);
-        String query4 ="  ) group by hotel_name , " +
+        String query4 = "  ) group by hotel_name , " +
                 "room_type , room_price_per_night_weekday , room_price_per_night_weekend , available_status order by room_price_per_night_weekday";
 
-String searchRoomGroupBy = query1+ query2 + query3 + query4;
-Log.i("0809L627","searchRoomGroupBy"+searchRoomGroupBy);
+        String searchRoomGroupBy = query1 + query2 + query3 + query4;
+        Log.i("0809L627", "searchRoomGroupBy" + searchRoomGroupBy);
 
 //        StringBuffer searchRoomGroupBy = new StringBuffer("SELECT count(*) as room_count , "+ COL_HOTEL_NAME +" , "+  COL_HOTEL_ROOM_TYPE+ " , " + COL_PRICE_WEEKDAY+ " ," + COL_PRICE_WEEKEND
 //                +" , "+ COL_AVAILABILITY_STATUS + " , "+ COL_TAX
@@ -710,10 +702,9 @@ Log.i("0809L627","searchRoomGroupBy"+searchRoomGroupBy);
 //        .append(" order by ").append(COL_PRICE_WEEKDAY);
 //        Log.i("DBMgr L 634", "0809630DBMgrL634  "+ searchRoomGroupBy.toString());
 //        Log.i("DBMgr L 634", "0809630DBMgrL634  "+ searchRoomGroupBy.toString());
-
-        HotelRoom hotelRoom =null;
-        int countOfavailableRooms=-1;
-        String roomType ,  hotelName , roomPricePerNightWeekday ,  roomPricePerNightWeekend, availabilityStatus="" , tax ="";
+        HotelRoom hotelRoom = null;
+        int countOfavailableRooms = -1;
+        String roomType, hotelName, roomPricePerNightWeekday, roomPricePerNightWeekend, availabilityStatus = "", tax = "";
         try {
             Cursor c = sqldb.rawQuery(searchRoomGroupBy, null);
             if (c.getCount() == 0) {
@@ -721,15 +712,15 @@ Log.i("0809L627","searchRoomGroupBy"+searchRoomGroupBy);
             } else {
                 while (c.moveToNext()) {
                     countOfavailableRooms = c.getInt(c.getColumnIndex("room_count"));
-                    if(countOfavailableRooms >= Integer.parseInt(numOfRooms)){
+                    if (countOfavailableRooms >= Integer.parseInt(numOfRooms)) {
                         roomType = c.getString(c.getColumnIndex(COL_HOTEL_ROOM_TYPE));
                         hotelName = c.getString(c.getColumnIndex(COL_HOTEL_NAME));
                         roomPricePerNightWeekday = c.getString(c.getColumnIndex(COL_PRICE_WEEKDAY));
                         roomPricePerNightWeekend = c.getString(c.getColumnIndex(COL_PRICE_WEEKEND));
                         availabilityStatus = c.getString(c.getColumnIndex(COL_AVAILABILITY_STATUS));
                         tax = c.getString(c.getColumnIndex(COL_TAX));
-                        hotelRoom = new HotelRoom(null, hotelName, null, roomType, null, roomPricePerNightWeekday,
-                                roomPricePerNightWeekend, tax, availabilityStatus
+                        hotelRoom = new HotelRoom(null, hotelName, null, roomType, null,
+                                roomPricePerNightWeekday, roomPricePerNightWeekend, tax, availabilityStatus
                                 , null, null, null, null);
                         hotelRoom.setCountOfavailableRooms(new Integer(countOfavailableRooms));
                         hotelRoom.setNumOfRooms(numOfRooms);
@@ -743,13 +734,13 @@ Log.i("0809L627","searchRoomGroupBy"+searchRoomGroupBy);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.i("0809L658", "0809L658roomlist.size ="+ hotelRoomsList.size());
+        Log.i("0809L658", "0809L658roomlist.size =" + hotelRoomsList.size());
         return hotelRoomsList;
     }
 
-    public List<HotelRoom> getRoomsForReqResv(String  selectedHotelName ,
-                                                                 String selectedRoomType, String checkInDate,
-                                                                 String checkOutDate, String startTime ) {
+    public List<HotelRoom> getRoomsForReqResv(String selectedHotelName,
+                                              String selectedRoomType, String checkInDate,
+                                              String checkOutDate, String startTime) {
         List<HotelRoom> hotelRoomsList = new ArrayList<HotelRoom>();
         SQLiteDatabase sqldb = this.getReadableDatabase();
 
@@ -771,21 +762,20 @@ Log.i("0809L627","searchRoomGroupBy"+searchRoomGroupBy);
 //
 //        searchRoomGroupBy.append(" )");
 //        searchRoomGroupBy.append(" order by ").append(COL_ROOM_NUM);
-        String query1= "SELECT * from  hm_hotel_data where available_status = 'Yes'  and "+COL_HOTEL_NAME+" = '"+selectedHotelName+"' and "+ COL_ROOM_TYPE+" ='" + selectedRoomType;
+        String query1 = "SELECT * from  hm_hotel_data where available_status = 'Yes'  and " + COL_HOTEL_NAME + " = '" + selectedHotelName + "' and " + COL_ROOM_TYPE + " ='" + selectedRoomType;
 
 
         String query2 = "' and hotel_room_id not in ( select reservation_room_id from hm_reservation_data where ";
-        String query3 =  "(((check_in_date between '"+ checkInDate +"'  and  '"+ checkOutDate +"' ) and (check_out_date between '"+ checkInDate +"' and  '"+ checkOutDate +"')) or (check_in_date <= '"+ checkInDate +"'  and   (check_out_date  between '"+ checkInDate +"'  and  '"+ checkOutDate +"' )) or  ((check_in_date between '"+ checkInDate +"'  and  '"+checkOutDate +"' ) and  check_out_date  >='"+ checkOutDate +"') or ((check_in_date <='"+ checkInDate+"'  ) and  check_out_date  >='"+ checkOutDate+"') )";
-        query3 = query3 + "and "+COL_RESERV_HOTEL_NAME+" = '"+selectedHotelName+"' and "+ COL_ROOM_TYPE+" ='" + selectedRoomType;
-        String query4 ="'  ) order by "+COL_ROOM_NUM;
+        String query3 = "(((check_in_date between '" + checkInDate + "'  and  '" + checkOutDate + "' ) and (check_out_date between '" + checkInDate + "' and  '" + checkOutDate + "')) or (check_in_date <= '" + checkInDate + "'  and   (check_out_date  between '" + checkInDate + "'  and  '" + checkOutDate + "' )) or  ((check_in_date between '" + checkInDate + "'  and  '" + checkOutDate + "' ) and  check_out_date  >='" + checkOutDate + "') or ((check_in_date <='" + checkInDate + "'  ) and  check_out_date  >='" + checkOutDate + "') )";
+        query3 = query3 + "and " + COL_RESERV_HOTEL_NAME + " = '" + selectedHotelName + "' and " + COL_ROOM_TYPE + " ='" + selectedRoomType;
+        String query4 = "'  ) order by " + COL_ROOM_NUM;
 
-        String searchRoomGroupBy = query1+ query2 + query3 + query4;
-        Log.i("0809 Dbmgr", "L736"+ searchRoomGroupBy);
-        HotelRoom hotelRoom =null;
+        String searchRoomGroupBy = query1 + query2 + query3 + query4;
+        Log.i("0809 Dbmgr", "L736" + searchRoomGroupBy);
+        HotelRoom hotelRoom = null;
 
 
-
-        String roomType ,  hotelName ,roomNum,  hotel_room_id ,  floorNum, roomWkDayPricePerNight, roomWkEndPricePerNight, availableStatus, tax;
+        String roomType, hotelName, roomNum, hotel_room_id, floorNum, roomWkDayPricePerNight, roomWkEndPricePerNight, availableStatus, tax;
         try {
             Cursor c = sqldb.rawQuery(searchRoomGroupBy, null);
             if (c.getCount() == 0) {
@@ -813,14 +803,14 @@ Log.i("0809L627","searchRoomGroupBy"+searchRoomGroupBy);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.i("0809 727", "roomlist.size ="+ hotelRoomsList.size());
+        Log.i("0809 727", "roomlist.size =" + hotelRoomsList.size());
         return hotelRoomsList;
     }
 
-    public ArrayList<HotelRoom> getGuestPendingResevationList(String userName){
+    public ArrayList<HotelRoom> getGuestPendingResevationList(String userName) {
         ArrayList<HotelRoom> pendingRsvHotelRoom = new ArrayList<HotelRoom>();
         SQLiteDatabase sqldb = this.getReadableDatabase();
-        String qry = "select a.* , b.* from "  + TABLE_RESERV_DATA +  " as a inner JOIN " + TABLE_HOTEL_DATA + " as b on a.reservation_room_id = b.hotel_room_id \n" +
+        String qry = "select a.* , b.* from " + TABLE_RESERV_DATA + " as a inner JOIN " + TABLE_HOTEL_DATA + " as b on a.reservation_room_id = b.hotel_room_id \n" +
                 " where a.guest_user_name ='" + userName + "' and  a.payment_status ='PENDING' group by a.reservation_id  order by a.check_in_date";
 
         Log.i(APP_TAG, "search pending reservation Query: " + qry);
@@ -904,7 +894,17 @@ Log.i("0809L627","searchRoomGroupBy"+searchRoomGroupBy);
         cv.put(COL_CHECKOUT_DATE, reservation.getResevCheckOutDate());
         cv.put(COL_START_TIME, reservation.getResvStartTime());
 
-        int update = db.update(TABLE_HOTEL_DATA, cv, COL_RESERV_ID + " = '" + reservation.getReservationId() + "'", null);
+        int update = db.update(TABLE_RESERV_DATA, cv, COL_RESERV_ID + " = '" + reservation.getReservationId() + "'", null);
+        return update == 1;
+    }
+
+    public boolean updateResvPaid(String reservationId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COL_PAYMENT_STATUS, PAID);
+
+        int update = db.update(TABLE_RESERV_DATA, cv, COL_RESERV_ID + " = '" + reservationId + "'", null);
+
         return update == 1;
     }
 }

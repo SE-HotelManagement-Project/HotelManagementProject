@@ -7,7 +7,7 @@
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
     android:orientation="vertical"
-    tools:context=".controller.GuestRequestReservationDetailsActivity">
+    tools:context=".controller.GuestPendingReservationDetailsActivity">
 
 
     <LinearLayout
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Selected Item Details"
+            android:text="Pending Reservation"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="17sp" />
 
@@ -233,30 +233,21 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnReq_Resv_GuestPayReservation"
-            style="@style/btn_style"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp"
-            android:singleLine="false"
-            android:text="Proceed                    To Pay"
-            android:textSize="15sp" />
-
-        <Button
+            android:visibility="gone"
             android:id="@+id/btnReq_Resv_GuestViewPendingRsv"
-            style="@style/btn_style"
-            android:layout_margin="10dp"
+            style="@style/btn_style2"
+            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp"
+            android:drawableRight="@drawable/ic_pending_resv"
             android:text="View Pending Reservation"
             android:textSize="15sp" />
 
+        <Button
+            android:id="@+id/btnReq_Resv_GuestPayReservation"
+            style="@style/btn_style2"
+            android:drawableRight="@drawable/ic_payment"
+            android:singleLine="false"
+            android:text="Proceed To Pay" />
 
 <!--        <Button-->
 <!--            android:id="@+id/btnGuestModifyReservation"-->

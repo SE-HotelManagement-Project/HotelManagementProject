@@ -19,6 +19,7 @@ import androidx.cardview.widget.CardView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.project.hotelmanagementproject.R;
+import com.project.hotelmanagementproject.model.Reservation;
 import com.project.hotelmanagementproject.model.Session;
 import com.project.hotelmanagementproject.utilities.ConstantUtils;
 import com.project.hotelmanagementproject.utilities.DateTimeGenerator;
@@ -75,9 +76,9 @@ public class GuestRequestReservationActivity extends AppCompatActivity {
         etnumAdultAndChild = findViewById(R.id.etnumAdultAndChild);
         etnumAdultAndChild.setText("2");
 
-        cbGuestRrStandard = (CheckBox) findViewById(R.id.cbGuestRrStandard);
-        cbGuestRrDeluxe = (CheckBox) findViewById(R.id.cbGuestRrDeluxe);
-        cbGuestRrSuite = (CheckBox) findViewById(R.id.cbGuestRrSuite);
+        cbGuestRrStandard = findViewById(R.id.cbGuestRrStandard);
+        cbGuestRrDeluxe = findViewById(R.id.cbGuestRrDeluxe);
+        cbGuestRrSuite = findViewById(R.id.cbGuestRrSuite);
         etGuestRrtNumberOfRoom = findViewById(R.id.etGuestRrtNumberOfRoom);
         etGuestRrtNumberOfRoom.setText("1");
         btnGuestRrSearchRoom = findViewById(R.id.btnGuestRrSearchRoom);
@@ -105,26 +106,44 @@ public class GuestRequestReservationActivity extends AppCompatActivity {
     public void performOperationForSearchButtonClicked() {
 
         search_hotel_name = spnrGuestSrHotelName.getSelectedItem().toString().toUpperCase();
-        check_in_date  = etGuestRrCheckInFrom.getText().toString();
+        check_in_date = etGuestRrCheckInFrom.getText().toString();
         start_time = etStartTime.getText().toString();
         check_out_date = etGuestRrCheckOutDateTo.getText().toString();
         num_of_adult_and_child = etnumAdultAndChild.getText().toString();
-        search_room_type_standard = cbGuestRrStandard.isChecked()? ConstantUtils.STANDARD_ROOM: ConstantUtils.EMPTY;
-        search_room_type_deluxe  = cbGuestRrDeluxe.isChecked()? ConstantUtils.DELUXE_ROOM: ConstantUtils.EMPTY;
-        search_room_type_suite  = cbGuestRrSuite.isChecked()? ConstantUtils.SUITE_ROOM: ConstantUtils.EMPTY;
+        search_room_type_standard = cbGuestRrStandard.isChecked() ? ConstantUtils.STANDARD_ROOM : ConstantUtils.EMPTY;
+        search_room_type_deluxe = cbGuestRrDeluxe.isChecked() ? ConstantUtils.DELUXE_ROOM : ConstantUtils.EMPTY;
+        search_room_type_suite = cbGuestRrSuite.isChecked() ? ConstantUtils.SUITE_ROOM : ConstantUtils.EMPTY;
         num_of_rooms = etGuestRrtNumberOfRoom.getText().toString();
 
-        Intent i = new Intent(GuestRequestReservationActivity.this, GuestRequestReservationResultActivity.class);
-        i.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_HOTEL_NAME, search_hotel_name );
-        i.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_IN_DATE, check_in_date );
-        i.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_START_TIME, start_time );
-        i.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_OUT_DATE, check_out_date);
-        i.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_ADULT_AND_CHLD , num_of_adult_and_child);
-        i.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_TYPE_STANDARD , search_room_type_standard  );
-        i.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_DELUXE , search_room_type_deluxe );
-        i.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_SUITE , search_room_type_suite );
-        i.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_OF_ROOMS, num_of_rooms);
-        startActivity(i);
+        if (Reservation.isValidDate(check_in_date) && Reservation.isValidDate(check_out_date)
+                && Reservation.isValidStartTime(start_time) && Reservation.isValidRange(check_in_date, check_out_date)
+                && Reservation.isValidNumAdults(num_of_adult_and_child) && Reservation.isValidNumRooms(num_of_rooms)) {
+            Intent i = new Intent(GuestRequestReservationActivity.this, GuestRequestReservationResultActivity.class);
+            i.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_HOTEL_NAME, search_hotel_name);
+            i.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_IN_DATE, check_in_date);
+            i.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_START_TIME, start_time);
+            i.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_OUT_DATE, check_out_date);
+            i.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_ADULT_AND_CHLD, num_of_adult_and_child);
+            i.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_TYPE_STANDARD, search_room_type_standard);
+            i.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_DELUXE, search_room_type_deluxe);
+            i.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_SUITE, search_room_type_suite);
+            i.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_OF_ROOMS, num_of_rooms);
+            startActivity(i);
+        } else {
+            if (!Reservation.isValidNumRooms(num_of_rooms))
+                etGuestRrtNumberOfRoom.setError("invalid Number of Rooms");
+            if (!Reservation.isValidNumAdults(num_of_adult_and_child))
+                etnumAdultAndChild.setError("invalid Number of Adults & Children");
+            if (!Reservation.isValidStartTime(start_time))
+                etStartTime.setError("invalid start time");
+            if (!Reservation.isValidDate(check_in_date))
+                etGuestRrCheckInFrom.setError("invalid checkin date");
+            if (!Reservation.isValidDate(check_out_date))
+                etGuestRrCheckOutDateTo.setError("invalid checkout date");
+            if (!Reservation.isValidRange(check_in_date, check_out_date))
+                Toast.makeText(getApplicationContext(), "invalid date range", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 
@@ -230,11 +249,14 @@ public class GuestRequestReservationActivity extends AppCompatActivity {
     }
     public void logout() {
         Intent i = new Intent(GuestRequestReservationActivity.this, LoginActivity.class);
+        Toast.makeText(getApplicationContext(), "Logout successful", Toast.LENGTH_LONG).show();
         new Session(getApplicationContext()).setLoginStatus(false);
         startActivity(i);
     }
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        //super.onBackPressed();
     }
 }

@@ -7,16 +7,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.hotelmanagementproject.R;
 import com.project.hotelmanagementproject.controller.adapters.GuestPendingResevationAdapter;
-import com.project.hotelmanagementproject.controller.adapters.GuestReservationSummaryAdapter;
 import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.HotelRoom;
-import com.project.hotelmanagementproject.model.Reservation;
 import com.project.hotelmanagementproject.model.Session;
 import com.project.hotelmanagementproject.model.User;
 import com.project.hotelmanagementproject.utilities.ConstantUtils;
@@ -62,7 +61,7 @@ public class GuestPendingReservations extends AppCompatActivity {
         lvToPendingReservationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent reqResvDetailsIntent = new Intent(GuestPendingReservations.this, GuestRequestReservationDetailsActivity.class);
+                Intent reqResvDetailsIntent = new Intent(GuestPendingReservations.this, GuestPendingReservationDetailsActivity.class);
                 HotelRoom selectedHotelRoom = (HotelRoom) adapterView.getItemAtPosition(i);
                 search_hotel_name = selectedHotelRoom.getHotelName();
                 check_in_date = selectedHotelRoom.getStartDate();
@@ -81,7 +80,6 @@ public class GuestPendingReservations extends AppCompatActivity {
                         selectedHotelRoom.getHotelTax(), num_of_rooms );
                 Log.i(APP_TAG,"RoomID: "+selectedHotelRoom.getHotelRoomId());
 
-
                 reqResvDetailsIntent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_HOTEL_NAME, search_hotel_name );
                 reqResvDetailsIntent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_IN_DATE, check_in_date );
                 reqResvDetailsIntent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_START_TIME, start_time );
@@ -98,7 +96,6 @@ public class GuestPendingReservations extends AppCompatActivity {
                 reqResvDetailsIntent.putExtra(ConstantUtils.GUEST_REQ_RESV_TOTAL_PRICE , totalPrice );
                 reqResvDetailsIntent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TAX   , selectedRoomTax );
 
-
                 reqResvDetailsIntent.putExtra(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_DAY    , selected_room_price_weekDay  );
                 reqResvDetailsIntent.putExtra(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_END     , selectedRoomPriceWeekend   );
                 startActivity(reqResvDetailsIntent);
@@ -114,6 +111,7 @@ public class GuestPendingReservations extends AppCompatActivity {
             logout();
             return true;
         } else if (id == android.R.id.home) {
+            //Where is it going from here ?? on back pressed
             this.onBackPressed();
             return true;
         }
@@ -123,7 +121,18 @@ public class GuestPendingReservations extends AppCompatActivity {
     public void logout() {
         Intent i = new Intent(GuestPendingReservations.this, LoginActivity.class);
         new Session(getApplicationContext()).setLoginStatus(false);
+        Toast.makeText(getApplicationContext(), "Logout successful", Toast.LENGTH_LONG).show();
         startActivity(i);
+    }
+
+    @Override
+    public void onBackPressed() {
+        onBackClick();
+        //super.onBackPressed();
+    }
+
+    private void onBackClick() {
+
     }
 
 }

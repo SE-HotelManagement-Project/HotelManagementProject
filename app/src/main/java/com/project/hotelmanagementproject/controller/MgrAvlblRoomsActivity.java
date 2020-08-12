@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.project.hotelmanagementproject.R;
 import com.project.hotelmanagementproject.controller.adapters.ManagerRoomListAdpater;
@@ -31,12 +32,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.ACTIVITY_RETURN_STATE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.DELUXE_ROOM;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ACTIVITY_RETURN_STATE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_AVLBL_ROOM_ACTIVITY;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_END_DATE;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOME_ACTIVITY;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.HOME_ACTIVITY;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOTEL_NAME;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_OCCUPIED_STATUS;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ROOM_DELUXE;
@@ -65,12 +66,13 @@ public class MgrAvlblRoomsActivity extends AppCompatActivity {
     private TextInputEditText etStartDate, etEndDate, etStartTime;
     private CheckBox cbStandard, cbDeluxe, cbSuite;
     private TextView tvHotelName;
+    private View parentLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mgr_avlbl_rooms);
-        reservation = new Reservation();
+        parentLayout = findViewById(android.R.id.content);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setHomeButtonEnabled(true);
@@ -82,8 +84,8 @@ public class MgrAvlblRoomsActivity extends AppCompatActivity {
     private void retainActivityState() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            returnIntent = bundle.getString(MGR_ACTIVITY_RETURN_STATE);
-            if (!returnIntent.equalsIgnoreCase(MGR_HOME_ACTIVITY)) {
+            returnIntent = bundle.getString(ACTIVITY_RETURN_STATE);
+            if (!returnIntent.equalsIgnoreCase(HOME_ACTIVITY)) {
                 hotelName = bundle.getString(MGR_HOTEL_NAME);
                 startDate = bundle.getString(MGR_START_DATE);
                 endDate = bundle.getString(MGR_END_DATE);
@@ -92,7 +94,6 @@ public class MgrAvlblRoomsActivity extends AppCompatActivity {
                 deluxeRoom = bundle.getString(MGR_ROOM_DELUXE);
                 suiteRoom = bundle.getString(MGR_ROOM_SUITE);
                 Log.i(APP_TAG, "return state: " + returnIntent + deluxeRoom + startDate + startTime);
-
                 viewDataInList();
                 llAvlblRoomIp.setVisibility(View.GONE);
                 llAvlblRoomOp.setVisibility(View.VISIBLE);
@@ -126,12 +127,25 @@ public class MgrAvlblRoomsActivity extends AppCompatActivity {
         btnMgrArSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!reservation.isValidStartTime(startTime)) {
-                    Toast.makeText(getApplicationContext(), "Invalid Search Params", Toast.LENGTH_LONG).show();
+                getInputData();
+
+                if (HotelRoom.isValidDate(startDate) && HotelRoom.isValidDate(endDate) && HotelRoom.isValidStartTime(startTime) && (cbDeluxe.isChecked() || cbStandard.isChecked() || cbSuite.isChecked())) {
+                    if (!HotelRoom.isValidRange(startDate, endDate)) {
+                        Snackbar.make(parentLayout, "Invalid date range", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        viewDataInList();
+                        llAvlblRoomIp.setVisibility(View.GONE);
+                        llAvlblRoomOp.setVisibility(View.VISIBLE);
+                    }
                 } else {
-                    viewDataInList();
-                    llAvlblRoomIp.setVisibility(View.GONE);
-                    llAvlblRoomOp.setVisibility(View.VISIBLE);
+                    //     Toast.makeText(getApplicationContext(), "Invalid Search Params", Toast.LENGTH_LONG).show();
+                    if (!HotelRoom.isValidDate(startDate)) etStartDate.setError("Invalid date");
+                    if (!HotelRoom.isValidDate(endDate)) etEndDate.setError("Invalid date");
+                    if (!HotelRoom.isValidStartTime(startTime))
+                        etStartTime.setError("Invalid Time");
+                    if (!cbDeluxe.isChecked() && !cbStandard.isChecked() && !cbSuite.isChecked()) {
+                        Snackbar.make(parentLayout, "Select at least one room type", Snackbar.LENGTH_LONG).show();
+                    }
                 }
             }
         });
@@ -160,7 +174,7 @@ public class MgrAvlblRoomsActivity extends AppCompatActivity {
         roomDetailsIntent.putExtra(MGR_ROOM_SUITE, suiteRoom);
 
         roomDetailsIntent.putExtra(MGR_OCCUPIED_STATUS, ROOM_NOT_OCCUPIED);
-        roomDetailsIntent.putExtra(MGR_ACTIVITY_RETURN_STATE, MGR_AVLBL_ROOM_ACTIVITY);
+        roomDetailsIntent.putExtra(ACTIVITY_RETURN_STATE, MGR_AVLBL_ROOM_ACTIVITY);
         startActivity(roomDetailsIntent);
     }
 
@@ -176,8 +190,6 @@ public class MgrAvlblRoomsActivity extends AppCompatActivity {
         etStartTime.setText(startTime);
         hotelName = new Session(getApplicationContext()).getHotelAssigned();
         tvHotelName.setText(hotelName);
-
-        Log.i(APP_TAG, "time format: " + new Reservation().isValidStartTime(startTime));
         Log.i(APP_TAG, "time format: " + startTime);
         Log.i(APP_TAG, "ci format: " + startDate);
         Log.i(APP_TAG, "co format: " + endDate);
@@ -248,6 +260,7 @@ public class MgrAvlblRoomsActivity extends AppCompatActivity {
 
     public void logout() {
         Intent i = new Intent(MgrAvlblRoomsActivity.this, LoginActivity.class);
+        Toast.makeText(getApplicationContext(), "Logout successful", Toast.LENGTH_LONG).show();
         new Session(getApplicationContext()).setLoginStatus(false);
         startActivity(i);
     }

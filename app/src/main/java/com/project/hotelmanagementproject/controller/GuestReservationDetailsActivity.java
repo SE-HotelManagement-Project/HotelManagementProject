@@ -147,7 +147,6 @@ public class GuestReservationDetailsActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -164,6 +163,7 @@ public class GuestReservationDetailsActivity extends AppCompatActivity {
 
     public void logout() {
         Intent i = new Intent(this, LoginActivity.class);
+        Toast.makeText(getApplicationContext(), "Logout successful", Toast.LENGTH_LONG).show();
         new Session(getApplicationContext()).setLoginStatus(false);
         startActivity(i);
     }

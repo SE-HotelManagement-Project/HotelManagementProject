@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,48 +21,45 @@ import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.Session;
 import com.project.hotelmanagementproject.model.User;
 
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ACTIVITY_RETURN_STATE;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_AVLBL_ROOM_ACTIVITY;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_END_DATE;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_HOTEL_NAME;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_OCCUPIED_STATUS;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ROOM_DELUXE;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ROOM_ID;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ROOM_STD;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_ROOM_SUITE;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.ACTIVITY_RETURN_STATE;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.ADMIN_IP_NAME;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.ADMIN_SEARCH_USER_ACTIVITY;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.ADMIN_USER_NAME;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.HOME_ACTIVITY;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_SEARCH_ROOM_IP;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_START_DATE;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.MGR_START_TIME;
 
 
-public class AdminViewUserDetails  extends AppCompatActivity {
+public class AdminViewUserDetails extends AppCompatActivity {
     TextView tvAvpUserName, tvAvpRole, tvAvpLastName, tvAvpFirstName, tvAvpPhone, tvAvpEmail;
     TextView tvAvpStreetAddress, tvAvpCity, tvAvpState, tvAvpZipCode;
     Button btnAvpRemoveProfile, btnAvpUpdateProfile;
     DbMgr DbManager;
-
-
     User userDetails;
-
     String userName, role, lastName, firstName, phone, email, streetAddress, city, state, zipCode;
-    String ADM_EDIT_USER= "adm_edit_user";
+    String returnIntent, lastNameIp;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_user_details);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
-        Bundle bundle = getIntent().getExtras();
-        if(bundle != null){
-            userName = bundle.getString(ADM_EDIT_USER);
-        }
-
-         DbManager =  DbMgr.getInstance(getApplicationContext());
-
+        getIntentData();
+        DbManager = DbMgr.getInstance(getApplicationContext());
         userDetails = DbManager.getUserDetails(userName);
         initUi();
+    }
+
+    private void getIntentData() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            returnIntent = bundle.getString(ACTIVITY_RETURN_STATE);
+            lastNameIp = bundle.getString(ADMIN_IP_NAME);
+            userName = bundle.getString(ADMIN_USER_NAME);
+        }
+        Log.i(APP_TAG, "return state: " + returnIntent);
     }
 
     private void initUi() {
@@ -91,11 +89,11 @@ public class AdminViewUserDetails  extends AppCompatActivity {
 
         btnAvpUpdateProfile.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view){
-
+            public void onClick(View view) {
                 Intent userNameIntent = new Intent(AdminViewUserDetails.this, AdminEditUserDetails.class);
-                userNameIntent.putExtra(ADM_EDIT_USER,userName);
-
+                userNameIntent.putExtra(ADMIN_USER_NAME, userName);
+                userNameIntent.putExtra(ADMIN_IP_NAME, lastNameIp);
+                userNameIntent.putExtra(ACTIVITY_RETURN_STATE, ADMIN_SEARCH_USER_ACTIVITY);
                 startActivity(userNameIntent);
 
             }
@@ -106,11 +104,8 @@ public class AdminViewUserDetails  extends AppCompatActivity {
         btnAvpRemoveProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(AdminViewUserDetails.this);
-
-                builder
-                        .setTitle("Remove Profile")
+                builder.setTitle("Remove Profile")
                         .setMessage("Are you sure you want to remove profile?")
                         .setNegativeButton("No", null)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -118,11 +113,20 @@ public class AdminViewUserDetails  extends AppCompatActivity {
                             public void onClick(DialogInterface arg0, int arg1) {
                                 int delete = DbManager.deleteUserProfile(tvAvpUserName.getText().toString());
                                 if (delete == 1) {
-                                    Toast.makeText(getApplicationContext(), "Profile Deleted Successfully", Toast.LENGTH_LONG ).show();
-                                } else{
+                                    Toast.makeText(getApplicationContext(), "Profile Deleted Successfully", Toast.LENGTH_LONG).show();
+                                } else {
                                     Toast.makeText(getApplicationContext(), "Profile Delete Failed", Toast.LENGTH_LONG).show();
                                 }
-                                startActivity(new Intent(AdminViewUserDetails.this, AdminSearchUserActivity.class));
+
+//                                Intent i = new Intent(AdminViewUserDetails.this, AdminSearchUserActivity.class);
+//                                i.putExtra(ACTIVITY_RETURN_STATE,HOME_ACTIVITY);
+//                                startActivity(i);
+
+                                Intent backIntent = new Intent(AdminViewUserDetails.this, AdminSearchUserActivity.class);
+                                backIntent.putExtra(ADMIN_USER_NAME, userName);
+                                backIntent.putExtra(ADMIN_IP_NAME, lastNameIp);
+                                backIntent.putExtra(ACTIVITY_RETURN_STATE, ADMIN_SEARCH_USER_ACTIVITY);
+                                startActivity(backIntent);
                             }
                         }).create().show();
             }
@@ -144,6 +148,9 @@ public class AdminViewUserDetails  extends AppCompatActivity {
             return true;
         } else if (id == android.R.id.home) {
             Intent backIntent = new Intent(AdminViewUserDetails.this, AdminSearchUserActivity.class);
+            backIntent.putExtra(ADMIN_USER_NAME, userName);
+            backIntent.putExtra(ADMIN_IP_NAME, lastNameIp);
+            backIntent.putExtra(ACTIVITY_RETURN_STATE, ADMIN_SEARCH_USER_ACTIVITY);
             startActivity(backIntent);
             return true;
         }
@@ -152,6 +159,7 @@ public class AdminViewUserDetails  extends AppCompatActivity {
 
     public void logout() {
         Intent i = new Intent(AdminViewUserDetails.this, LoginActivity.class);
+        Toast.makeText(getApplicationContext(), "Logout successful", Toast.LENGTH_LONG).show();
         new Session(getApplicationContext()).setLoginStatus(false);
         startActivity(i);
     }
@@ -159,7 +167,9 @@ public class AdminViewUserDetails  extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent backIntent = new Intent(AdminViewUserDetails.this, AdminSearchUserActivity.class);
-        backIntent.putExtra(ADM_EDIT_USER, userName);
+        backIntent.putExtra(ADMIN_USER_NAME, userName);
+        backIntent.putExtra(ADMIN_IP_NAME, lastNameIp);
+        backIntent.putExtra(ACTIVITY_RETURN_STATE, ADMIN_SEARCH_USER_ACTIVITY);
         startActivity(backIntent);
     }
 }
