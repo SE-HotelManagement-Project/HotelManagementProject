@@ -7,7 +7,7 @@
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
     android:orientation="vertical"
-    tools:context=".controller.GuestRequestReservationDetailsActivity">
+    tools:context=".controller.GuestPendingReservationDetailsActivity">
 
 
     <LinearLayout
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Selected Item Details"
+            android:text="Pending Reservation"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="17sp" />
 
@@ -233,6 +233,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:visibility="gone"
             android:id="@+id/btnReq_Resv_GuestViewPendingRsv"
             style="@style/btn_style2"
             android:layout_margin="5dp"
@@ -244,12 +245,9 @@
         <Button
             android:id="@+id/btnReq_Resv_GuestPayReservation"
             style="@style/btn_style2"
-            android:layout_margin="5dp"
             android:drawableRight="@drawable/ic_payment"
-            android:layout_weight="1"
             android:singleLine="false"
-            android:text="Proceed                    To Pay"
-            android:textSize="15sp" />
+            android:text="Proceed To Pay" />
 
 <!--        <Button-->
 <!--            android:id="@+id/btnGuestModifyReservation"-->

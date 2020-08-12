@@ -56,6 +56,7 @@ import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_TOT
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_USER_NAME;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_USER_ROLE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_ZIP_CODE;
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.PAID;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.TABLE_HOTEL_DATA;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.TABLE_RESERV_DATA;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.TABLE_USER_DATA;
@@ -893,7 +894,17 @@ public class DbMgr extends SQLiteOpenHelper {
         cv.put(COL_CHECKOUT_DATE, reservation.getResevCheckOutDate());
         cv.put(COL_START_TIME, reservation.getResvStartTime());
 
-        int update = db.update(TABLE_HOTEL_DATA, cv, COL_RESERV_ID + " = '" + reservation.getReservationId() + "'", null);
+        int update = db.update(TABLE_RESERV_DATA, cv, COL_RESERV_ID + " = '" + reservation.getReservationId() + "'", null);
+        return update == 1;
+    }
+
+    public boolean updateResvPaid(String reservationId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COL_PAYMENT_STATUS, PAID);
+
+        int update = db.update(TABLE_RESERV_DATA, cv, COL_RESERV_ID + " = '" + reservationId + "'", null);
+
         return update == 1;
     }
 }

@@ -163,50 +163,62 @@ public class GuestRequestReservationPayActivity extends AppCompatActivity {
     }
 
     public void makeReservation() {
-        boolean makeReserveSucess = reserveRoom(guest_user_name);
-        Bundle extras = getIntent().getExtras();
-        Intent intent = new Intent(GuestRequestReservationPayActivity.this, GuestReservationDetailsActivity.class);
-        if (extras != null) {
+        DbMgr dbMgr = DbMgr.getInstance(getApplication());
+        boolean b = dbMgr.updateResvPaid(joint_room_reservation_id);
+        if (b) {
+            Toast.makeText(GuestRequestReservationPayActivity.this, "Reservation created sucessfully ", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(GuestRequestReservationPayActivity.this, GuestReservationDetailsActivity.class);
             intent.putExtra(GUEST_RESV_START_DATE, check_in_date);
             intent.putExtra(GUEST_RESV_ID, joint_room_reservation_id);
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_HOTEL_NAME, search_hotel_name);
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_IN_DATE, check_in_date);
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_START_TIME, start_time);
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_OUT_DATE, check_out_date);
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_ADULT_AND_CHLD, num_of_adult_and_child);
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_TYPE_STANDARD, search_room_type_standard);
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_DELUXE, search_room_type_deluxe);
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_SUITE, search_room_type_suite);
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_OF_ROOMS, num_of_rooms);
-//
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_HOTEL_NAME, selectedHotelName);
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TYPE, selectedRoomType);
-//
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_NUM_OF_NIGHTS, numOfNights);
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_TOTAL_PRICE, totalPrice);
-//
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_TYPE, cardType);
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_NUM, cardNum);
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_EXPIRY_DT, cardExpiryDate);
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_CVV, cardCvvNum);
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_RESERVID, joint_room_reservation_id);
-//
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TAX, selectedRoomTax);
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_GUEST_USER_NAME, guest_user_name);
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_GUEST_FIRST_NAME, guest_first_name);
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_GUEST_LAST_NAME, guest_last_name);
-//
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_DAY, selected_room_price_weekDay);
-//            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_END, selectedRoomPriceWeekend);
-//            intent.putExtra(ConstantUtils.GUEST_RESV_ID, joint_room_reservation_id);
-//            intent.putExtra(ConstantUtils.GUEST_RESV_START_DATE, check_in_date);
-            if (makeReserveSucess) {
-                startActivity(intent);
-                Toast.makeText(GuestRequestReservationPayActivity.this, "Reservation created sucessfully ", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(GuestRequestReservationPayActivity.this, "Failed To create reservation", Toast.LENGTH_SHORT).show();
-            }
+            startActivity(intent);
+        } else {
+            Toast.makeText(GuestRequestReservationPayActivity.this, "Reservation creation failed ", Toast.LENGTH_LONG).show();
         }
+
+//        boolean makeReserveSucess = reserveRoom(guest_user_name);
+//        Bundle extras = getIntent().getExtras();
+//        Intent intent = new Intent(GuestRequestReservationPayActivity.this, GuestReservationDetailsActivity.class);
+//        if (extras != null) {
+//            intent.putExtra(GUEST_RESV_START_DATE, check_in_date);
+//            intent.putExtra(GUEST_RESV_ID, joint_room_reservation_id);
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_HOTEL_NAME, search_hotel_name);
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_IN_DATE, check_in_date);
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_START_TIME, start_time);
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_OUT_DATE, check_out_date);
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_ADULT_AND_CHLD, num_of_adult_and_child);
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_TYPE_STANDARD, search_room_type_standard);
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_DELUXE, search_room_type_deluxe);
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_ROOM_TYPE_SUITE, search_room_type_suite);
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_NUM_OF_ROOMS, num_of_rooms);
+////
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_HOTEL_NAME, selectedHotelName);
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TYPE, selectedRoomType);
+////
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_NUM_OF_NIGHTS, numOfNights);
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_TOTAL_PRICE, totalPrice);
+////
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_TYPE, cardType);
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_NUM, cardNum);
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_EXPIRY_DT, cardExpiryDate);
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_CARD_CVV, cardCvvNum);
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_RESERVID, joint_room_reservation_id);
+////
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TAX, selectedRoomTax);
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_GUEST_USER_NAME, guest_user_name);
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_GUEST_FIRST_NAME, guest_first_name);
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_GUEST_LAST_NAME, guest_last_name);
+////
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_DAY, selected_room_price_weekDay);
+////            intent.putExtra(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_END, selectedRoomPriceWeekend);
+////            intent.putExtra(ConstantUtils.GUEST_RESV_ID, joint_room_reservation_id);
+////            intent.putExtra(ConstantUtils.GUEST_RESV_START_DATE, check_in_date);
+//            if (makeReserveSucess) {
+//                startActivity(intent);
+//                Toast.makeText(GuestRequestReservationPayActivity.this, "Reservation created sucessfully ", Toast.LENGTH_LONG).show();
+//            } else {
+//                Toast.makeText(GuestRequestReservationPayActivity.this, "Failed To create reservation", Toast.LENGTH_SHORT).show();
+//            }
+//        }
     }
 
     public boolean reserveRoom(String guestUserName) {
@@ -297,7 +309,7 @@ public class GuestRequestReservationPayActivity extends AppCompatActivity {
     }
 
     private void onBackClick() {
-        Intent intent = new Intent(this, GuestRequestReservationDetailsActivity.class);
+        Intent intent = new Intent(this, GuestPendingReservationDetailsActivity.class);
 
         intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_HOTEL_NAME, search_hotel_name);
         intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_IN_DATE, check_in_date);

@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
         <!--Ankt changes starts-->
-        <activity android:name=".controller.GuestRequestReservationDetailsActivity" />
+        <activity android:name=".controller.GuestPendingReservationDetailsActivity" />
         <activity android:name=".controller.GuestRequestReservationResultActivity" />
         <activity android:name=".controller.GuestRequestReservationPayActivity"/>
         <activity android:name=".controller.GuestPendingReservations" />

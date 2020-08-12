@@ -1,7 +1,5 @@
 package com.project.hotelmanagementproject.controller;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,13 +28,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
+
+public class GuestPendingReservationDetailsActivity extends AppCompatActivity {
 
 
-    TextView tvGuestReqResvDetailsHeader, tvGuestReqResvDetailsHotelName , tvGuestReqResvDetailsCheckIn ;
-    TextView tvGuestReqResvDetailsCheckOut , tvGuestReqResvDetailsStartTime ,tvGuestReqResvDetailsNumRooms ;
-    TextView tvGuestReqResvDetailsNumOfNights,tvGuestReqResvDetailsRoomType , tvGuestReqResvDetailsRoomPrice,
-            tvGuestReqResvDetailsNumAdultAndChild ,tvGuestReqResvDetailsTax, tvGuestReqResvDetailsRPWeDay,
+    TextView tvGuestReqResvDetailsHeader, tvGuestReqResvDetailsHotelName, tvGuestReqResvDetailsCheckIn;
+    TextView tvGuestReqResvDetailsCheckOut, tvGuestReqResvDetailsStartTime, tvGuestReqResvDetailsNumRooms;
+    TextView tvGuestReqResvDetailsNumOfNights, tvGuestReqResvDetailsRoomType, tvGuestReqResvDetailsRoomPrice,
+            tvGuestReqResvDetailsNumAdultAndChild, tvGuestReqResvDetailsTax, tvGuestReqResvDetailsRPWeDay,
             tvGuestReqResvDetailsRPWeEnd;
 
     ImageView ivGuestReqResvDetailsIcon;
@@ -70,6 +70,7 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+
         tvGuestReqResvDetailsHotelName = findViewById(R.id.tvGuestReqResvDetailsHotelName);
         tvGuestReqResvDetailsCheckIn = findViewById(R.id.tvGuestReqResvDetailsCheckIn);
         tvGuestReqResvDetailsCheckOut = findViewById(R.id.tvGuestReqResvDetailsCheckOut);
@@ -82,8 +83,6 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
         ivGuestReqResvDetailsIcon = findViewById(R.id.ivGuestReqResvDetailsIcon);
         tvGuestReqResvDetailsNumAdultAndChild = findViewById(R.id.tvGuestReqResvDetailsNumAdultAndChild);
         btnReq_Resv_GuestPayReservation = findViewById(R.id.btnReq_Resv_GuestPayReservation);
-
-
         tvGuestReqResvDetailsTax = findViewById(R.id.tvGuestReqResvDetailsTax);
         tvGuestReqResvDetailsRPWeDay = findViewById(R.id.tvGuestReqResvDetailsRPWeDay);
         tvGuestReqResvDetailsRPWeEnd = findViewById(R.id.tvGuestReqResvDetailsRPWeEnd);
@@ -123,6 +122,7 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
 
             selectedRoomTax = extras.getString(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TAX   );
             guest_user_name  = extras.getString(ConstantUtils.GUEST_REQ_RESV_GUEST_USER_NAME   );
+
             guest_first_name  = extras.getString(ConstantUtils.GUEST_REQ_RESV_GUEST_FIRST_NAME    );
             guest_last_name  = extras.getString(ConstantUtils.GUEST_REQ_RESV_GUEST_LAST_NAME    );
             selected_room_price_weekDay = extras.getString(ConstantUtils.GUEST_REQ_RESV_PRICE_WK_DAY    );
@@ -179,10 +179,14 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
             }
         }
 
+        joint_room_reservation_id = reserveRoom(userInfo.getUserName());
+
         btnReq_Resv_GuestPayReservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(GuestRequestReservationDetailsActivity.this, GuestRequestReservationPayActivity.class);
+                //  joint_room_reservation_id  = reserveRoom( userInfo.getUserName());
+
+                Intent intent = new Intent(GuestPendingReservationDetailsActivity.this, GuestRequestReservationPayActivity.class);
                 intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_HOTEL_NAME, search_hotel_name);
                 intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_IN_DATE, check_in_date);
                 intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_START_TIME, start_time);
@@ -195,7 +199,6 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
 
                 intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_HOTEL_NAME, selectedHotelName);
                 intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_ROOM_TYPE, selectedRoomType);
-
 
                 intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SELECTED_NUM_OF_NIGHTS , numOfNights );
                 intent.putExtra(ConstantUtils.GUEST_REQ_RESV_TOTAL_PRICE , totalPrice );
@@ -222,12 +225,13 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
         btnReq_Resv_GuestViewPendingRsv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent userNameIntent = new Intent(GuestRequestReservationDetailsActivity.this, GuestPendingReservations.class);
-                startActivity(userNameIntent);
+                //   Intent userNameIntent = new Intent(GuestPendingReservationDetailsActivity.this, GuestPendingReservations.class);
+                //  startActivity(userNameIntent);
 
             }
         });
+
+
     }
 
 
@@ -247,23 +251,8 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
             logout();
             return true;
         } else if (id == android.R.id.home) {
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(GuestRequestReservationDetailsActivity.this);
-            builder.setTitle("")
-                    .setMessage("Do you want to save transaction for future?")
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface arg0, int arg1) {
-                           onBackClick();
-                        }
-                    })
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-
-                        public void onClick(DialogInterface arg0, int arg1) {
-                            addToPendingReservation();
-                        }
-                    }).create().show();
-
-
+            //Delete Reservation
+            onBackClick();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -274,26 +263,26 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
         cardCvvNum = "";
         cardExpiryDate  = "";
         cardCvvNum = "";
-        joint_room_reservation_id  = reserveRoom( userInfo.getUserName(),  userInfo.getFirstName(),  userInfo.getLastName());
+        joint_room_reservation_id = reserveRoom(userInfo.getUserName());
         if(joint_room_reservation_id!= null){
             Toast.makeText(getApplicationContext(), "Transaction saved for future!", Toast.LENGTH_LONG).show();
-            Intent userNameIntent = new Intent(GuestRequestReservationDetailsActivity.this, GuestRequestReservationActivity.class);
+            Intent userNameIntent = new Intent(GuestPendingReservationDetailsActivity.this, GuestRequestReservationActivity.class);
 
             startActivity(userNameIntent);
         }
 
     }
 
-    public String reserveRoom(String guestUserName, String guestFirstName, String guestLastName){
-        List<HotelRoom> hotelRoomsList = DbManager.getRoomsForReqResv( selectedHotelName ,  selectedRoomType,  check_in_date,  check_out_date,  start_time) ;
+    public String reserveRoom(String guestUserName) {
+        List<HotelRoom> hotelRoomsList = DbManager.getRoomsForReqResv(selectedHotelName, selectedRoomType, check_in_date, check_out_date, start_time);
         Reservation reservation;
         HotelRoom hotelRoom;
         String reservationId = ConstantUtils.EMPTY;
         int numOfRoomsInt = Integer.parseInt(num_of_rooms);
-        Log.i("0809 161 PayActivity", "hotelRoomsList.size()="+ hotelRoomsList.size());
-        Log.i("0809 161 PayActivity", "numOfrooms ="+ num_of_rooms);
-        if(UtilityFunctions.isNotNullAndEmpty(hotelRoomsList) && numOfRoomsInt <= hotelRoomsList.size()){
-            for(int i = 0;i < numOfRoomsInt; i++){
+        Log.i("0809 161 PayActivity", "hotelRoomsList.size()=" + hotelRoomsList.size());
+        Log.i("0809 161 PayActivity", "numOfrooms =" + num_of_rooms);
+        if (UtilityFunctions.isNotNullAndEmpty(hotelRoomsList) && numOfRoomsInt <= hotelRoomsList.size()) {
+            for (int i = 0; i < numOfRoomsInt; i++) {
                 hotelRoom = hotelRoomsList.get(i);
 //                reservationId = createReservationId(selectedHotelName);
                 if(ConstantUtils.EMPTY.equals(reservationId)){
@@ -336,7 +325,7 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
     }
 
     public void logout() {
-        Intent i = new Intent(GuestRequestReservationDetailsActivity.this, LoginActivity.class);
+        Intent i = new Intent(GuestPendingReservationDetailsActivity.this, LoginActivity.class);
         Toast.makeText(getApplicationContext(), "Logout successful", Toast.LENGTH_LONG).show();
         new Session(getApplicationContext()).setLoginStatus(false);
         startActivity(i);
@@ -349,7 +338,15 @@ public class GuestRequestReservationDetailsActivity extends AppCompatActivity {
     }
 
     private void onBackClick() {
-        Intent intent = new Intent(GuestRequestReservationDetailsActivity.this, GuestRequestReservationResultActivity.class);
+        //DeleteReservation
+        int delres = DbManager.deleteReservation(joint_room_reservation_id);
+        if (delres == 1) {
+            Log.i(APP_TAG, "Reservation Cancelled Successfully");
+        } else {
+            Log.i(APP_TAG, "Reservation not cancelled");
+        }
+        //Back to last activity
+        Intent intent = new Intent(GuestPendingReservationDetailsActivity.this, GuestRequestReservationResultActivity.class);
         intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_HOTEL_NAME, search_hotel_name);
         intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_CHECK_IN_DATE, check_in_date);
         intent.putExtra(ConstantUtils.GUEST_REQ_RESV_SEARCH_START_TIME, start_time);

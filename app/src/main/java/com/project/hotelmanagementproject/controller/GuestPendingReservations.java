@@ -14,10 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.hotelmanagementproject.R;
 import com.project.hotelmanagementproject.controller.adapters.GuestPendingResevationAdapter;
-import com.project.hotelmanagementproject.controller.adapters.GuestReservationSummaryAdapter;
 import com.project.hotelmanagementproject.model.DbMgr;
 import com.project.hotelmanagementproject.model.HotelRoom;
-import com.project.hotelmanagementproject.model.Reservation;
 import com.project.hotelmanagementproject.model.Session;
 import com.project.hotelmanagementproject.model.User;
 import com.project.hotelmanagementproject.utilities.ConstantUtils;
@@ -63,7 +61,7 @@ public class GuestPendingReservations extends AppCompatActivity {
         lvToPendingReservationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent reqResvDetailsIntent = new Intent(GuestPendingReservations.this, GuestRequestReservationDetailsActivity.class);
+                Intent reqResvDetailsIntent = new Intent(GuestPendingReservations.this, GuestPendingReservationDetailsActivity.class);
                 HotelRoom selectedHotelRoom = (HotelRoom) adapterView.getItemAtPosition(i);
                 search_hotel_name = selectedHotelRoom.getHotelName();
                 check_in_date = selectedHotelRoom.getStartDate();

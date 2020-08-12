@@ -2,6 +2,7 @@ package com.project.hotelmanagementproject.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.GUEST_RESV_ID;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.GUEST_RESV_START_DATE;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.GUEST_RESV_START_TIME;
@@ -83,6 +85,18 @@ public class GuestReservationSummActivity extends AppCompatActivity {
                 searchGuestReservation();
             }
         });
+
+        lvReservationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent guestRsvDetailsIntent = new Intent(GuestReservationSummActivity.this, GuestReservationDetailsActivity.class);
+                Reservation item = (Reservation) adapterView.getItemAtPosition(i);
+                guestRsvDetailsIntent.putExtra(GUEST_RESV_ID, item.getReservationId());
+                guestRsvDetailsIntent.putExtra(GUEST_RESV_START_DATE, startDate);
+                //  guestRsvDetailsIntent.putExtra(GUEST_RESV_START_TIME,startTime);
+                startActivity(guestRsvDetailsIntent);
+            }
+        });
     }
 
     public void populateDetaultSearchValues() {
@@ -106,23 +120,13 @@ public class GuestReservationSummActivity extends AppCompatActivity {
             lvReservationList.setAdapter(guestReservationSummaryAdapter);
             guestReservationSummaryAdapter.notifyDataSetChanged();
         } else {
-            if (!Reservation.isValidStartTime(startTime))
+            if (!Reservation.isValidStartTime(startTime)) {
                 etGuestRsStartTime.setError("invalid start time");
-            if (!Reservation.isValidDate(startTime))
-                etGuestRsStartDate.setError("invalid start date");
-        }
-
-        lvReservationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent guestRsvDetailsIntent = new Intent(GuestReservationSummActivity.this, GuestReservationDetailsActivity.class);
-                Reservation item = (Reservation) adapterView.getItemAtPosition(i);
-                guestRsvDetailsIntent.putExtra(GUEST_RESV_ID, item.getReservationId());
-                guestRsvDetailsIntent.putExtra(GUEST_RESV_START_DATE, startDate);
-                //  guestRsvDetailsIntent.putExtra(GUEST_RESV_START_TIME,startTime);
-                startActivity(guestRsvDetailsIntent);
             }
-        });
+            if (!Reservation.isValidDate(startDate)) {
+                etGuestRsStartDate.setError("invalid start date");
+            }
+        }
     }
 
     public void actionBarHandler() {

@@ -27,11 +27,8 @@ import com.project.hotelmanagementproject.utilities.ConstantUtils;
 import com.project.hotelmanagementproject.utilities.DateTimeGenerator;
 import com.project.hotelmanagementproject.utilities.UtilityFunctions;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.APP_TAG;
 
 public class GuestRequestReservationResultActivity extends AppCompatActivity {
 
@@ -134,7 +131,7 @@ public class GuestRequestReservationResultActivity extends AppCompatActivity {
             lvToReserveRoomList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Intent intent = new Intent(GuestRequestReservationResultActivity.this, GuestRequestReservationDetailsActivity.class);
+                    Intent intent = new Intent(GuestRequestReservationResultActivity.this, GuestPendingReservationDetailsActivity.class);
                     HotelRoom selectedHotelRoom = (HotelRoom) adapterView.getItemAtPosition(i);
                     totalPrice = UtilityFunctions.calculateTotalReservationPrice( check_in_date, start_time, check_out_date, ConstantUtils.GUEST_REQ_RESV_SEARCH_END_TIME_VALUE  ,
                                                                         selectedHotelRoom.getRoomPriceWeekDay(),selectedHotelRoom.getRoomPriceWeekend(),
