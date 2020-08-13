@@ -89,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
                     DbMgr userDbMgr = DbMgr.getInstance(getApplicationContext());
                     boolean isDataInserted = userDbMgr.addNewGuest(newUserDetails);
                     if (isDataInserted) {
-                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                        //  startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                         Toast.makeText(RegisterActivity.this, "guest account created succesfully ", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(RegisterActivity.this, "failed to create guest account ", Toast.LENGTH_SHORT).show();
