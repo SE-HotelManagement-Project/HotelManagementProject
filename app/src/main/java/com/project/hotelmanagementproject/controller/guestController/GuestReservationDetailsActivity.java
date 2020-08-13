@@ -102,8 +102,8 @@ public class GuestReservationDetailsActivity extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
                         DbMgr dbMgr = DbMgr.getInstance(getApplicationContext());
-                        int delres = dbMgr.deleteReservation(reservationId);
-                        if (delres == 1) {
+                        boolean b = dbMgr.deleteReservation(reservationId);
+                        if (b) {
                             Toast.makeText(getApplicationContext(), "Reservation Cancelled Successfully", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(getApplicationContext(), "Reservation Cancellation was Unsuccessful", Toast.LENGTH_LONG).show();

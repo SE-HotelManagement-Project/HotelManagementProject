@@ -228,6 +228,7 @@ public class GuestReservationModifyActivity extends AppCompatActivity {
                 Log.i(APP_TAG, "complex db change");
                 dbMgr.deleteReservation(reservationId);
                 // move to new Resv details page
+                Toast.makeText(getApplicationContext(), "Reservation Modified successfully", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(GuestReservationModifyActivity.this, GuestReservationDetailsActivity.class);
                 i.putExtra(GUEST_RESV_ID, newResv.getReservationId());
                 i.putExtra(GUEST_RESV_START_DATE, startDate);

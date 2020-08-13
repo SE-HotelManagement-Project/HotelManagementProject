@@ -119,10 +119,12 @@ public class UpdateProfileActivity extends AppCompatActivity {
         if (user.getUserRole().equalsIgnoreCase("Guest")) {
             llCCExp.setVisibility(View.VISIBLE);
             llCCN.setVisibility(View.VISIBLE);
+            llCCType.setVisibility(View.VISIBLE);
             etCreditCardExpiry.setText(user.getCreditCardExp());
             etCreditCardNum.setText(user.getCreditCardNum());
 
         } else {
+            llCCType.setVisibility(View.GONE);
             llCCN.setVisibility(View.GONE);
             llCCExp.setVisibility(View.GONE);
         }

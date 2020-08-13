@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.project.hotelmanagementproject.model.DAO.User;
 public class RegisterActivity extends AppCompatActivity {
 
     String ccType;
+    ImageView ivReturn;
     private EditText etUserName, etPassword, etEmail, etFirstName, etLastName, etPhone, etStreetAddress, etCity, etState, etZipcode, etCCN, etCCExpiry;
     private Button btnRegister;
     private Spinner spnrCardType;
@@ -43,6 +45,13 @@ public class RegisterActivity extends AppCompatActivity {
         etCCN = findViewById(R.id.etCreditCardNumber);
         etCCExpiry = findViewById(R.id.etCCExpiry);
         spnrCardType = findViewById(R.id.spnrRegCreditCardType);
+        ivReturn = findViewById(R.id.icRegisterBack);
+        ivReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+            }
+        });
         spnrCardType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -94,5 +103,10 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
     }
 }

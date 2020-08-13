@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.hotelmanagementproject.R;
@@ -41,6 +42,11 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_close);
         session = new Session(getApplicationContext());
         DbMgr userDbMgr = DbMgr.getInstance(getApplicationContext());
         User user = userDbMgr.getUserDetails(session.getUserName());
@@ -200,8 +206,29 @@ public class HomeActivity extends AppCompatActivity {
         if (id == R.id.action_logout) {
             logout();
             return true;
+        } else if (id == android.R.id.home) {
+            //Start Tirth Activity From Here
+            onBackClick();
+            return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void onBackClick() {
+        new AlertDialog.Builder((new ContextThemeWrapper(this, R.style.AlertDialog)))
+                .setTitle("Quit App")
+                .setMessage("Are you sure you want to exit?")
+                .setNegativeButton("No", null)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//Change Here
+                        startActivity(intent);
+                        //  finish();
+                    }
+                }).create().show();
     }
 
     public void logout() {
@@ -214,20 +241,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {// code here to show dialog
         // super.onBackPressed();  // optional depending on your needs
+        onBackClick();
 
-        new AlertDialog.Builder((new ContextThemeWrapper(this, R.style.AlertDialog)))
-                .setTitle("Quit App")
-                .setMessage("Are you sure you want to exit?")
-                .setNegativeButton("No", null)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        Intent intent = new Intent(Intent.ACTION_MAIN);
-                        intent.addCategory(Intent.CATEGORY_HOME);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//Change Here
-                        startActivity(intent);
-                        finish();
-                    }
-                }).create().show();
     }
 }

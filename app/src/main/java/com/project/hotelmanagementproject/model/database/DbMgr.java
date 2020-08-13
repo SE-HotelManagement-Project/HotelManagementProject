@@ -29,8 +29,6 @@ import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_CRE
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_EMAIL;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_FIRST_NAME;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_FLOOR_NUM;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_GUEST_FIRST_NAME;
-import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_GUEST_LAST_NAME;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_GUEST_USER_NAME;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_HOTEL_ACCESS;
 import static com.project.hotelmanagementproject.utilities.ConstantUtils.COL_HOTEL_NAME;
@@ -109,8 +107,8 @@ public class DbMgr extends SQLiteOpenHelper {
         db.execSQL(hotelTableQry);
 
         String reservationTblQry = "create table " + TABLE_RESERV_DATA + "(" + COL_RID + " integer primary key autoincrement, "
-                + COL_GUEST_FIRST_NAME + " text, " + COL_GUEST_LAST_NAME + " text," + COL_GUEST_USER_NAME + " text, "
-                + COL_RESERV_ID + " text," + COL_RESERV_HOTEL_NAME + " text," + COL_ROOM_TYPE + " text," + COL_NUM_OF_ROOMS + " text,"
+                + COL_GUEST_USER_NAME + " text, " + COL_RESERV_ID + " text," + COL_RESERV_HOTEL_NAME + " text,"
+                + COL_ROOM_TYPE + " text," + COL_NUM_OF_ROOMS + " text,"
                 + COL_NUM_OF_ADULTS_AND_CHILDREN + " text," + COL_NUM_OF_NIGHTS + " text," + COL_CHECKIN_DATE + " date,"
                 + COL_CHECKOUT_DATE + " date, " + COL_START_TIME + " text," + COL_TOTAL_PRICE + " text, " + COL_RESERV_ROOM_ID + " text, "
                 + COL_PAYMENT_STATUS + " text,"
@@ -145,6 +143,7 @@ public class DbMgr extends SQLiteOpenHelper {
         cv.put(COL_USER_ROLE, "Guest");
 
         long res = db.insert(TABLE_USER_DATA, null, cv);
+        System.out.println("new Guest return code: " + res);
 //        if(res== -1)
 ////            return false;
 ////        else
@@ -199,7 +198,7 @@ public class DbMgr extends SQLiteOpenHelper {
         cv.put(COL_CREDIT_CARD_EXP, user.getCreditCardExp());
         cv.put(COL_CARD_TYPE, user.getCreditCardtype());
         int update = db.update(TABLE_USER_DATA, cv, COL_USER_NAME + " = '" + user.getUserName() + "'", null);
-        return update == 1;
+        return update != -1;
     }
 
     public boolean checkPassword(String username, String password) {
@@ -252,7 +251,7 @@ public class DbMgr extends SQLiteOpenHelper {
         cv.put(COL_RESERV_ROOM_ID, reservation.getResvRoomId());
         cv.put(COL_PAYMENT_STATUS, reservation.getResvPaymentStatus());
         long res = db.insert(TABLE_RESERV_DATA, null, cv);
-
+        System.out.println("new resv return code: " + res);
         return res != -1;
     }
 
@@ -376,7 +375,8 @@ public class DbMgr extends SQLiteOpenHelper {
         cv.put(COL_TAX, hotelRoom.getHotelTax());
         cv.put(COL_AVAILABILITY_STATUS, hotelRoom.getAvailabilityStatus());
         int update = db.update(TABLE_HOTEL_DATA, cv, COL_HOTEL_ROOM_ID + " = '" + hotelRoom.getHotelRoomId() + "'", null);
-        return update == 1;
+        System.out.println("new updateRoom return code: " + update);
+        return update != -1;
     }
 
     public ArrayList<HotelRoom> mgrGetAvailableRoomList(String hotelNameIp, String stdRoom, String deluxeRoom, String suiteRoom,
@@ -455,12 +455,16 @@ public class DbMgr extends SQLiteOpenHelper {
     public int deleteUserProfile(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
         String[] columns = new String[]{COL_USER_NAME};
-        return db.delete(TABLE_USER_DATA, COL_USER_NAME + " = ?", new String[]{username});
+        int delete = db.delete(TABLE_USER_DATA, COL_USER_NAME + " = ?", new String[]{username});
+        System.out.println("new delete user return code: " + delete);
+        return delete;
     }
 
-    public int deleteReservation(String reservationId) {
+    public boolean deleteReservation(String reservationId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_RESERV_DATA, COL_RESERV_ID + " = ?", new String[]{reservationId});
+        int delete = db.delete(TABLE_RESERV_DATA, COL_RESERV_ID + " = ?", new String[]{reservationId});
+        System.out.println("new delete resv return code: " + delete);
+        return delete != -1;
     }
 
     public ArrayList<Reservation> mgrGetReservationList(String hotelNameIp,
@@ -898,16 +902,15 @@ public class DbMgr extends SQLiteOpenHelper {
         cv.put(COL_START_TIME, reservation.getResvStartTime());
 
         int update = db.update(TABLE_RESERV_DATA, cv, COL_RESERV_ID + " = '" + reservation.getReservationId() + "'", null);
-        return update == 1;
+        return update != -1;
     }
 
     public boolean updateResvPaid(String reservationId) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COL_PAYMENT_STATUS, PAID);
-
         int update = db.update(TABLE_RESERV_DATA, cv, COL_RESERV_ID + " = '" + reservationId + "'", null);
-
-        return update == 1;
+        System.out.println("new update user resv code: " + update);
+        return update != -1;
     }
 }
