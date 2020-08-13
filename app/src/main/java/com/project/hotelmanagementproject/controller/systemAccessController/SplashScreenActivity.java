@@ -11,8 +11,6 @@ import com.project.hotelmanagementproject.model.DAO.Session;
 
 import okhttp3.OkHttpClient;
 
-//import com.idescout.sql.SqlScoutServer;
-
 public class SplashScreenActivity extends AppCompatActivity {
 
     @Override
@@ -20,7 +18,6 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // setContentView(R.layout.activity_splash_screen);
         Session session = new Session(getApplicationContext());
-        ///  SqlScoutServer.create(this, getPackageName());
         Stetho.initializeWithDefaults(this);
         new OkHttpClient.Builder()
                 .addNetworkInterceptor(new StethoInterceptor())

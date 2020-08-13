@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.project.hotelmanagementproject.R;
+import com.project.hotelmanagementproject.model.DAO.User;
 import com.project.hotelmanagementproject.model.database.DbMgr;
 import com.project.hotelmanagementproject.model.DAO.Session;
 
@@ -45,29 +46,54 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 boolean isLogin = false;
-                try {
-                    DbMgr userDbMgr = DbMgr.getInstance(getApplicationContext());
-                    isLogin = userDbMgr.checkPassword(etUserName.getText().toString(), etPassword.getText().toString());
+                String userName = etUserName.getText().toString();
+                String password = etPassword.getText().toString();
+                if (User.isNullorEmpty(userName) || User.isNullorEmpty(password)) {
+                    if (User.isNullorEmpty(userName)) etUserName.setError("Invalid UserName");
+                    if (User.isNullorEmpty(password)) etPassword.setError("Invalid Password");
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                if (isLogin) {
-                    Session session = new Session(getApplicationContext());
-                    session.setLoginStatus(true);
-                    session.setUserName(etUserName.getText().toString());
-                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                 } else {
-                    Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_LONG).show();
-                    etPassword.setError("invalid password");
+                    try {
+                        DbMgr userDbMgr = DbMgr.getInstance(getApplicationContext());
+                        isLogin = userDbMgr.checkPassword(userName, password);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    if (isLogin) {
+                        Session session = new Session(getApplicationContext());
+                        session.setLoginStatus(true);
+                        session.setUserName(etUserName.getText().toString());
+                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_LONG).show();
+                        etPassword.setError("invalid password");
+                    }
                 }
+
+            }
+        });
+
+        findViewById(R.id.icLoginBack).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//Change Here
+                startActivity(intent);
             }
         });
     }
 
-    public void validateLogin() {
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//Change Here
+        startActivity(intent);
+        // finish();
     }
 }

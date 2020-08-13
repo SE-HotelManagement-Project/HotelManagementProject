@@ -162,7 +162,7 @@ public class Reservation {
     }
 
     public static boolean isNullorEmpty(String ip) {
-        return ip.equalsIgnoreCase(null) || ip.equalsIgnoreCase("")
+        return null == ip || ip.equalsIgnoreCase("")
                 || ip.equalsIgnoreCase(" ") || ip.isEmpty();
     }
 

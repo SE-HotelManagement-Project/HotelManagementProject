@@ -197,5 +197,8 @@ public class User {
         return ((!isNullorEmpty(expiryDate)) && expiryDate.matches("(?:0[1-9]|1[0-2])/[0-9]{2}"));
     }
 
+    public static boolean isValidCvv(String cvvNum) {
+        return ((!isNullorEmpty(cvvNum)) && cvvNum.length() == 3);
+    }
 
 }

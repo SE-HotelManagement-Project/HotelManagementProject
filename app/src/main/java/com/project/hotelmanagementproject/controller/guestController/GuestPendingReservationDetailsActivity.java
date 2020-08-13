@@ -44,11 +44,8 @@ public class GuestPendingReservationDetailsActivity extends AppCompatActivity {
 
     Button btnReq_Resv_GuestPayReservation, btnReq_Resv_GuestViewPendingRsv;
 
-
-
     DbMgr DbManager;
     User userInfo;
-
 
     String search_hotel_name, check_in_date, start_time, check_out_date, num_of_adult_and_child, num_of_rooms;
     String search_room_type_standard, search_room_type_deluxe, search_room_type_suite;
@@ -340,8 +337,8 @@ public class GuestPendingReservationDetailsActivity extends AppCompatActivity {
 
     private void onBackClick() {
         //DeleteReservation
-        int delres = DbManager.deleteReservation(joint_room_reservation_id);
-        if (delres == 1) {
+        boolean b = DbManager.deleteReservation(joint_room_reservation_id);
+        if (b) {
             Log.i(APP_TAG, "Reservation Cancelled Successfully");
         } else {
             Log.i(APP_TAG, "Reservation not cancelled");
