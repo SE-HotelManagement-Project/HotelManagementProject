@@ -26,6 +26,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:background="@color/colorLightPrimary"
                 android:orientation="vertical">
 
                 <ImageView
@@ -34,6 +35,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="5dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_hotel_maverick" />
 
@@ -43,7 +46,8 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="3dp"
                     android:paddingRight="3dp"
-                    android:text="Maverick Hotel"
+                    android:layout_gravity="center"
+                    android:text="Maverick"
                     android:paddingBottom="5dp"
                     android:textColor="@color/colorPrimaryDark" />
 

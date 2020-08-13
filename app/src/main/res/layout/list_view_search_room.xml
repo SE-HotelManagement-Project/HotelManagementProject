@@ -32,6 +32,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="5dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_hotel_maverick" />
 
@@ -42,7 +44,8 @@
                     android:paddingLeft="3dp"
                     android:paddingRight="3dp"
                     android:paddingBottom="5dp"
-                    android:text="Maverick Hotel"
+                    android:layout_gravity="center"
+                    android:text="Maverick"
                     android:textColor="@color/colorPrimaryDark" />
 
 

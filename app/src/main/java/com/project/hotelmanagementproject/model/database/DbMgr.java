@@ -476,8 +476,7 @@ public class DbMgr extends SQLiteOpenHelper {
         String searchResv = "Select * from " + TABLE_RESERV_DATA
                 + " where " + COL_RESERV_HOTEL_NAME + " = '" + hotelNameIp
                 + "' and " + COL_PAYMENT_STATUS + " = 'PAID'"
-                + " and " + COL_CHECKIN_DATE + " >= '" + startDate
-                + "' and " + COL_START_TIME + " >= '" + startTime + "'";
+                + " and " + COL_CHECKIN_DATE + " >= '" + startDate + "'";
 
         Log.i(APP_TAG, "search resv Query: " + searchResv);
 
@@ -559,10 +558,10 @@ public class DbMgr extends SQLiteOpenHelper {
         String searchResv = "Select * from " + TABLE_RESERV_DATA
                 + " where " + COL_GUEST_USER_NAME + " = '" + userName
                 + "' and " + COL_PAYMENT_STATUS + " = 'PAID'"
-                + " and " + COL_CHECKIN_DATE + " >= '" + startDate
-                + "' and " + COL_START_TIME + " >= '" + startTime + "'";
+                + " and " + COL_CHECKIN_DATE + " >= '" + startDate + "'";
 
         Log.i(APP_TAG, "search resv Query: " + searchResv);
+
 
         try {
             Cursor c = sqldb.rawQuery(searchResv, null);
@@ -580,6 +579,7 @@ public class DbMgr extends SQLiteOpenHelper {
                     String resvPaymentStatus = c.getString(c.getColumnIndex(COL_RESERV_HOTEL_NAME));
                     if (!resvIdList.containsKey(resvId)) {
                         resvIdList.put(resvId, 1);
+                        Log.i(APP_TAG, "search resv Query0: " + resvId);
                         Reservation reservation = new Reservation(resvId, null, null, hotelName, roomType,
                                 null, numOfNights, numOfRooms, null, checkInDate, null, resvStartTime, startDate, resvPaymentStatus);
                         resvList.add(reservation);

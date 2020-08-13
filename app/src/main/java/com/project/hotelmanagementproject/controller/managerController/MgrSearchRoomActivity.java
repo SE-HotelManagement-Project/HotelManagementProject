@@ -146,7 +146,7 @@ public class MgrSearchRoomActivity extends AppCompatActivity {
             endDate = new SimpleDateFormat("yyyy-MM-dd").format(endDateFormat);
         }
         Log.i(APP_TAG, startDate + " to " + endDate);
-        roomList = hotelRoomDbMgr.getSearchRoomList(hotelName, searchRoomIp, startDate, endDate, "12:00 PM");
+        roomList = hotelRoomDbMgr.getSearchRoomList(hotelName, searchRoomIp, startDate, endDate, "12:00");
         searchRoomAdapter = new ManagerRoomListAdpater(this, roomList);
         lvRoomList.setAdapter(searchRoomAdapter);
         searchRoomAdapter.notifyDataSetChanged();
