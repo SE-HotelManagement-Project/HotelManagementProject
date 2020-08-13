@@ -98,7 +98,6 @@ public class RegisterActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     Toast.makeText(RegisterActivity.this, "error creating new guest account", Toast.LENGTH_LONG).show();
                     e.printStackTrace();
-                    //   e.toString();
                 }
             }
         });
