@@ -45,7 +45,7 @@ to Iterations
 
 * Readme.md file  briedfly describes about the requirements gathered
 * UCID function table: [click here to view](UCID.xlsx)
-* Use Case Diagram: [click here to view](Use case diagram.pdf)
+* Use Case Diagram: [click here to view](UseCaseDiagram.pdf)
 * Domain Diagram: [click here to view](DomainDiagram.pdf)
 * UI Prototypes: [click here to view](UIPrototypes.pdf)
 * Expanded UseCase diagram: [click here to view](ExpandedUseCaseDiagram.pdf)
