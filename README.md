@@ -1,5 +1,7 @@
 # Hotel Booking Application Developed with Software Engineering Design Principles
 
+<img src="images/homepage.png" alt="drawing" width="200"/>
+
 ![alt text](images/homepage.png = 100x)![alt text](images/homepage.png)![alt text](https://github.com/SE-HotelManagement-Project/HotelManagementProject/blob/Testing/images/homepage.png)
 
 ## This is the hotel booking system. 
