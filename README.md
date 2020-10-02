@@ -1,10 +1,10 @@
 # Hotel Booking Application Developed with Software Engineering Design Principles
 
-![alt text][https://github.com/SE-HotelManagement-Project/HotelManagementProject/blob/Testing/images/homepage.png]
+![alt text](https://github.com/SE-HotelManagement-Project/HotelManagementProject/blob/Testing/images/homepage.png)
 
-![alt text][https://github.com/SE-HotelManagement-Project/HotelManagementProject/blob/Testing/images/homepage.png]
+![alt text](https://github.com/SE-HotelManagement-Project/HotelManagementProject/blob/Testing/images/homepage.png)
 
-![alt text][https://github.com/SE-HotelManagement-Project/HotelManagementProject/blob/Testing/images/homepage.png]
+![alt text](https://github.com/SE-HotelManagement-Project/HotelManagementProject/blob/Testing/images/homepage.png)
 
 ## This is the hotel booking system. 
 Guests can book hotel rooms. Managers  are responsible for coordinating booking. Admin manages the system.
