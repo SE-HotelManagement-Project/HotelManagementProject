@@ -1,4 +1,4 @@
-# HotelManagementProject_Android_Application
+# Hotel Booking Application Developed with Software Engineering Design Principles
 
 ## This is the hotel booking system. 
 Guests can book hotel rooms. Managers  are responsible for coordinating booking. Admin manages the system.
