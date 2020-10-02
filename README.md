@@ -1,6 +1,6 @@
 # Hotel Booking Application Developed with Software Engineering Design Principles
 
-<img src="images/splashscreen.png" alt="drawing" width="200"/> <img src="images/login.png" alt="drawing" width="200"/> <img src="images/homepage.png" alt="drawing" width="200"/> <img src="images/modify.png" alt="drawing" width="200"/>
+<img src="images/splashscreen.png" alt="drawing" width="210" height="450"/> <img src="images/login.png" alt="drawing" width="200"/> <img src="images/homepage.png" alt="drawing" width="200"/> <img src="images/modify.png" alt="drawing" width="200"/>
 
 ## This is the hotel booking system. 
 Guests can book hotel rooms. Managers  are responsible for coordinating booking. Admin manages the system.
