@@ -45,7 +45,7 @@ to Iterations
 8. Deriving Design Class Diagram
 9.  Test Driven Development, Integration, & Deployment
 
-* **Readme.md file**  briedfly describes about the **requirements** gathered
+* **Readme.md file**  brief description about the application **requirements** 
 * **UCID function table:** [click here to view](UCID.xlsx)
 * **Use Case Diagram:** [click here to view](UseCaseDiagram.pdf)
 * **Domain Model Diagram:** [click here to view](DomainDiagram.pdf)
