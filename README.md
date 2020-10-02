@@ -30,10 +30,10 @@ It takes  into consideration that a single user that has **_multiple roles_**, e
 
 There are **5** Hotels all located in Arlington: **Maverick, Ranger, Williams, Shard, and Liberty**. All hotels have the same number of **rooms (100)** and **layout (4 floors - 1 through 4)**. Guests may book up to 4 rooms per booking - assume each booking is only for rooms of the same type. **Tax** is **8.25%**
 
-###### Project uses
+### Project uses
 * Android Studio
 * SQLite (DB on local Android not on server) 
-#### Software Engineering Techinques/Priciples:
+## Software Engineering Techinques/Priciples:
 1. Acquiring Requirements
 2. Deriving Use Cases from Requirements
 3. Allocating Use Cases & Subsystems
@@ -45,14 +45,14 @@ to Iterations
 8. Deriving Design Class Diagram
 9.  Test Driven Development, Integration, & Deployment
 
-* Readme.md file  briedfly describes about the requirements gathered
-* UCID function table: [click here to view](UCID.xlsx)
-* Use Case Diagram: [click here to view](UseCaseDiagram.pdf)
-* Domain Diagram: [click here to view](DomainDiagram.pdf)
-* UI Prototypes: [click here to view](UIPrototypes.pdf)
-* Expanded UseCase diagram: [click here to view](ExpandedUseCaseDiagram.pdf)
-* Sequence Diagram: [click here to view](SequenceDiagram.pdf)
-* Design Class Diagram: [click here to view](DesignClassDiagram.pdf)
+* *Readme.md* file  briedfly describes about the requirements gathered
+* *UCID* function table: [click here to view](UCID.xlsx)
+* *Use Case* Diagram: [click here to view](UseCaseDiagram.pdf)
+* *Domain Model* Diagram: [click here to view](DomainDiagram.pdf)
+* *UI* Prototypes: [click here to view](UIPrototypes.pdf)
+* *Expanded UseCases* diagram: [click here to view](ExpandedUseCaseDiagram.pdf)
+* *Sequence* Diagram: [click here to view](SequenceDiagram.pdf)
+* *Design Class* Diagram: [click here to view](DesignClassDiagram.pdf)
 
 
 
