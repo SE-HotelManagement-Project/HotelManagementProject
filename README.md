@@ -33,7 +33,7 @@ There are **5** Hotels all located in Arlington: **Maverick, Ranger, Williams, S
 ### Project uses
 * Android Studio
 * SQLite (DB on local Android not on server) 
-## Software Engineering Techinques/Priciples:
+# Software Engineering Techinques/Priciples Applied:
 1. Acquiring Requirements
 2. Deriving Use Cases from Requirements
 3. Allocating Use Cases & Subsystems
@@ -45,14 +45,14 @@ to Iterations
 8. Deriving Design Class Diagram
 9.  Test Driven Development, Integration, & Deployment
 
-* *Readme.md* file  briedfly describes about the requirements gathered
-* *UCID* function table: [click here to view](UCID.xlsx)
-* *Use Case* Diagram: [click here to view](UseCaseDiagram.pdf)
-* *Domain Model* Diagram: [click here to view](DomainDiagram.pdf)
-* *UI* Prototypes: [click here to view](UIPrototypes.pdf)
-* *Expanded UseCases* diagram: [click here to view](ExpandedUseCaseDiagram.pdf)
-* *Sequence* Diagram: [click here to view](SequenceDiagram.pdf)
-* *Design Class* Diagram: [click here to view](DesignClassDiagram.pdf)
+* **Readme.md file  briedfly describes about the requirements gathered
+* **UCID function table: [click here to view](UCID.xlsx)
+* **Use Case Diagram: [click here to view](UseCaseDiagram.pdf)
+* **Domain Model Diagram: [click here to view](DomainDiagram.pdf)
+* **UI Prototypes: [click here to view](UIPrototypes.pdf)
+* **Expanded UseCases diagram: [click here to view](ExpandedUseCaseDiagram.pdf)
+* **Sequence Diagram: [click here to view](SequenceDiagram.pdf)
+* **Design Class Diagram: [click here to view](DesignClassDiagram.pdf)
 
 
 
