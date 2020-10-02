@@ -2,8 +2,8 @@
 
 <img src="images/splashscreen.png" alt="drawing" width="220" height="400"/>   <img src="images/login.png" alt="drawing"  width="220" height="400"/>   <img src="images/homepage.png" alt="drawing"  width="220" height="400"/>   <img src="images/modify.png" alt="drawing"  width="220" height="400"/>
 
-## This is the hotel booking system. 
-Guests can book hotel rooms. Managers  are responsible for coordinating booking. Admin manages the system.
+## Requirements. 
+HotelBookingSystem where Guests can book hotel rooms. Managers are responsible for coordinating booking and Admin manages the system.
 #### Hotel Manager - 
  This application user has the following functions:-
 1. views listing of reservations
