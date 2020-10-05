@@ -2,11 +2,10 @@
 
 <img src="images/splashscreen.png" alt="drawing" width="200" height="380"/>   <img src="images/login.png" alt="drawing"  width="200" height="380"/>   <img src="images/homepage.png" alt="drawing"  width="200" height="380"/>   <img src="images/modify.png" alt="drawing"  width="200" height="380"/>
 
-# Software Engineering Techinques/Priciples Applied:
+# Software Engineering Techinques/Principles Applied:
 1. Acquiring Requirements
 2. Deriving Use Cases from Requirements
-3. Allocating Use Cases & Subsystems
-to Iterations
+3. Allocating Use Cases & Subsystems to Iterations
 4. Producing an Architecture Design
 5. Domain Modeling
 6. Actor-System Interaction Modeling & UI Design
