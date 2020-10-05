@@ -2,6 +2,28 @@
 
 <img src="images/splashscreen.png" alt="drawing" width="200" height="380"/>   <img src="images/login.png" alt="drawing"  width="200" height="380"/>   <img src="images/homepage.png" alt="drawing"  width="200" height="380"/>   <img src="images/modify.png" alt="drawing"  width="200" height="380"/>
 
+# Software Engineering Techinques/Priciples Applied:
+1. Acquiring Requirements
+2. Deriving Use Cases from Requirements
+3. Allocating Use Cases & Subsystems
+to Iterations
+4. Producing an Architecture Design
+5. Domain Modeling
+6. Actor-System Interaction Modeling & UI Design
+7. Behavior Modeling & Responsibility Assignment
+8. Deriving Design Class Diagram
+9.  Test Driven Development, Integration, & Deployment
+
+* **Readme.md file** provides brief description about the application **requirements** 
+* **UCID function table:** [click here to view](UCID.xlsx)
+* **Use Case Diagram:** [click here to view](UseCaseDiagram.pdf)
+* **Domain Model Diagram:** [click here to view](DomainDiagram.pdf)
+* **UI Prototypes:** [click here to view](UIPrototypes.pdf)
+* **Expanded UseCases diagram:** [click here to view](ExpandedUseCaseDiagram.pdf)
+* **Sequence Diagram:** [click here to view](SequenceDiagram.pdf)
+* **Design Class Diagram:** [click here to view](DesignClassDiagram.pdf)
+
+
 ## Requirements. 
 HotelBookingSystem where Guests can book hotel rooms. Managers are responsible for coordinating booking and Admin manages the system.
 #### Hotel Manager - 
@@ -33,26 +55,6 @@ There are **5** Hotels all located in Arlington: **Maverick, Ranger, Williams, S
 ### Project uses
 * Android Studio
 * SQLite (DB on local Android not on server) 
-# Software Engineering Techinques/Priciples Applied:
-1. Acquiring Requirements
-2. Deriving Use Cases from Requirements
-3. Allocating Use Cases & Subsystems
-to Iterations
-4. Producing an Architecture Design
-5. Domain Modeling
-6. Actor-System Interaction Modeling & UI Design
-7. Behavior Modeling & Responsibility Assignment
-8. Deriving Design Class Diagram
-9.  Test Driven Development, Integration, & Deployment
-
-* **Readme.md file** provides brief description about the application **requirements** 
-* **UCID function table:** [click here to view](UCID.xlsx)
-* **Use Case Diagram:** [click here to view](UseCaseDiagram.pdf)
-* **Domain Model Diagram:** [click here to view](DomainDiagram.pdf)
-* **UI Prototypes:** [click here to view](UIPrototypes.pdf)
-* **Expanded UseCases diagram:** [click here to view](ExpandedUseCaseDiagram.pdf)
-* **Sequence Diagram:** [click here to view](SequenceDiagram.pdf)
-* **Design Class Diagram:** [click here to view](DesignClassDiagram.pdf)
 
 
 
